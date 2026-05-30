@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
 import hero from "@/assets/hero.jpg";
 import founder from "@/assets/founder.jpg";
-import about from "@/assets/about.jpg";
+import about from "@/assets/about.png";
 import therapy from "@/assets/therapy.jpg";
 import retreat from "@/assets/retreat.jpg";
 import classes from "@/assets/classes.jpg";
@@ -96,7 +96,7 @@ function Hero() {
       <img
         src={logo}
         alt="Dr Vikram crest watermark"
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[60%] md:-translate-y-1/2 h-[350px] md:h-[600px] opacity-10 object-contain pointer-events-none mix-blend-screen animate-float"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[60%] md:-translate-y-1/2 h-[340px] md:h-[500px] opacity-10 object-contain pointer-events-none mix-blend-screen animate-float"
       />
 
       <div className="relative z-10 text-center max-w-7xl px-6 py-32 mt-10 md:mt-0">
@@ -136,71 +136,71 @@ function Hero() {
 /* ---------------- Welcome ---------------- */
 function Welcome() {
   return (
-    <section className="relative py-32 bg-cream overflow-hidden">
+    <section className="relative py-16 lg:py-20 bg-cream overflow-hidden min-h-[calc(100vh-5rem)] flex items-center">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3" />
       <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-emerald/5 blur-3xl rounded-full translate-y-1/3 -translate-x-1/4" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-6 w-full">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
 
           {/* Left Column: Text Content */}
-          <div className="space-y-8">
+          <div className="space-y-5">
             <div>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-3">
                 <Flower2 className="w-4 h-4 text-gold" />
                 <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">WELCOME</span>
               </div>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-emerald-deep leading-tight text-balance">
+              <h2 className="font-display text-4xl md:text-5xl lg:text-[3.2rem] text-emerald-deep leading-tight text-balance">
                 A holistic <em className="text-gold-gradient not-italic">healing sanctuary</em>.
               </h2>
-              <div className="gold-divider my-6 max-w-[4rem]" />
+              <div className="gold-divider my-5 max-w-[4rem]" />
             </div>
 
-            <div className="text-muted-foreground text-[0.95rem] md:text-base leading-relaxed space-y-6">
-              <p className="text-emerald-deep font-medium text-lg leading-snug">
+            <div className="text-muted-foreground text-[0.9rem] leading-relaxed space-y-3">
+              <p className="text-emerald-deep font-medium text-base leading-snug">
                 Welcome to Dr. Vikram Yoga & Wellness Centre, where traditional yogic wisdom meets modern therapeutic wellness practices.
               </p>
               <p>
-                Located in the serene coastal surroundings of Varkala, Trivandrum, Kerala, India, our centre offers a peaceful environment dedicated to natural healing, mindful living, and complete well-being.
+                Located in the serene coastal surroundings of Varkala, Trivandrum, Kerala, our centre offers a peaceful environment dedicated to natural healing and complete well-being.
               </p>
 
-              {/* Highlight Box */}
-              <div className="p-6 rounded-2xl bg-emerald-deep/5 border border-emerald-deep/10 shadow-soft">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center shadow-[0_4px_15px_rgba(212,175,55,0.3)] shrink-0 mt-1">
-                    <Sparkles className="w-5 h-5 text-emerald-deep" />
+              {/* Highlight Box — clickable, opens About page */}
+              <a href="/about" className="block p-4 rounded-2xl bg-emerald-deep/5 border border-emerald-deep/10 shadow-soft hover:shadow-md hover:bg-emerald-deep/10 hover:-translate-y-1 transition-all duration-300 group">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-full bg-gold-gradient flex items-center justify-center shadow-[0_4px_15px_rgba(212,175,55,0.3)] group-hover:shadow-[0_4px_20px_rgba(212,175,55,0.5)] transition-shadow shrink-0 mt-0.5">
+                    <Sparkles className="w-4 h-4 text-emerald-deep" />
                   </div>
                   <div>
-                    <h4 className="font-display text-xl text-emerald-deep mb-2">Led by Dr. S. Vikram Pandy</h4>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      A naturopathy & yoga physician and internationally recognized teacher. We integrate yoga therapy, meditation, pranayama, naturopathy, and holistic lifestyle guidance to create personalized healing experiences.
+                    <div className="flex items-center justify-between gap-4 mb-1">
+                      <h4 className="font-display text-lg text-emerald-deep group-hover:text-gold transition-colors">Led by Dr. S. Vikram Pandy</h4>
+                      <ArrowRight className="w-4 h-4 text-emerald-deep/40 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0 shrink-0" />
+                    </div>
+                    <p className="text-xs leading-relaxed text-muted-foreground">
+                      A naturopathy & yoga physician and internationally recognized teacher — integrating yoga therapy, meditation, pranayama, and holistic lifestyle guidance.
                     </p>
                   </div>
                 </div>
-              </div>
+              </a>
 
-              <p>
-                Whether you seek physical healing, emotional balance, stress relief, improved mobility, mental clarity, spiritual growth, or transformative wellness retreats, we guide you on a journey toward inner harmony, vitality, and long-term holistic wellness.
-              </p>
-              <p className="border-l-2 border-gold/40 pl-4 mt-6 italic text-emerald-deep/80 text-sm">
-                Our wellness programs and retreats are thoughtfully designed for individuals seeking authentic experiences in a peaceful and rejuvenating atmosphere.
+              <p className="border-l-2 border-gold/40 pl-4 italic text-emerald-deep/80 text-sm">
+                Our wellness programs are designed for individuals seeking authentic experiences in a peaceful and rejuvenating atmosphere.
               </p>
             </div>
 
             {/* CTA action */}
-            <div className="pt-4">
-              <a href="#classes" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-emerald hover:text-gold transition-colors group">
+            <div className="pt-1">
+              <a href="/services" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-emerald hover:text-gold transition-colors group">
                 Discover Our Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
           </div>
 
           {/* Right Column: Imagery Collage */}
-          <div className="relative lg:pl-10 mt-12 lg:mt-0">
+          <div className="relative lg:pl-10 mt-8 lg:mt-0">
             <div className="absolute inset-0 bg-gold/10 blur-[100px] rounded-full" />
 
-            <div className="relative grid grid-cols-2 gap-4 items-center">
+            <div className="relative grid grid-cols-2 gap-3 items-center">
               {/* First Image - Tall */}
               <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-luxury animate-fade-up">
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/50 to-transparent z-10" />
@@ -208,7 +208,7 @@ function Welcome() {
               </div>
 
               {/* Second Column - Two Stacked Images */}
-              <div className="space-y-4 pt-16">
+              <div className="space-y-3 pt-12">
                 <div className="relative aspect-square rounded-[2rem] overflow-hidden shadow-luxury animate-fade-up" style={{ animationDelay: '150ms' }}>
                   <img src={therapy} alt="Therapeutic wellness" className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-1000" loading="lazy" />
                 </div>
@@ -219,8 +219,8 @@ function Welcome() {
             </div>
 
             {/* Floating badge */}
-            <div className="absolute -bottom-6 lg:-left-6 right-6 lg:right-auto glass-dark rounded-2xl p-5 shadow-luxury border border-cream/10 z-20 animate-float hidden md:block">
-              <div className="font-display text-3xl text-gold-gradient mb-1">Authentic</div>
+            <div className="absolute -bottom-4 lg:-left-6 right-6 lg:right-auto glass-dark rounded-2xl p-4 shadow-luxury border border-cream/10 z-20 animate-float hidden md:block">
+              <div className="font-display text-2xl text-gold-gradient mb-0.5">Authentic</div>
               <div className="text-[0.6rem] tracking-[0.3em] uppercase text-cream/70">Healing Experience</div>
             </div>
 

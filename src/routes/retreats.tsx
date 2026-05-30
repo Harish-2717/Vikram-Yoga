@@ -3,7 +3,7 @@ import { useState } from "react";
 import retreatBanner from "@/assets/retreat_banner.png";
 import varkalaBeach from "@/assets/varkala_beach.png";
 import hero from "@/assets/hero.jpg";
-import about from "@/assets/about.jpg";
+import about from "@/assets/about.png";
 import therapy from "@/assets/therapy.jpg";
 import temple1 from "@/assets/temple_1.png";
 import temple2 from "@/assets/temple_2.png";
@@ -40,35 +40,35 @@ function RetreatsSection() {
   const [openRetreat, setOpenRetreat] = useState<string | null>(null);
 
   const retreatsList = [
-    { 
-      t: "7 & 14 Days", 
-      d: "Holistic Wellness", 
-      details: "Our signature holistic wellness retreat designed to fully reset your system. Includes daily yoga, mindful meditation, personalized Ayurvedic meals, and classical naturopathy treatments." 
+    {
+      t: "7 & 14 Days",
+      d: "Holistic Wellness",
+      details: "Our signature holistic wellness retreat designed to fully reset your system. Includes daily yoga, mindful meditation, personalized Ayurvedic meals, and classical naturopathy treatments."
     },
-    { 
-      t: "Meditation", 
-      d: "Soulful Retreat", 
-      details: "A deeply immersive journey focusing on mindfulness, breathwork (pranayama), and guided meditation to find profound inner peace and mental clarity." 
+    {
+      t: "Meditation",
+      d: "Soulful Retreat",
+      details: "A deeply immersive journey focusing on mindfulness, breathwork (pranayama), and guided meditation to find profound inner peace and mental clarity."
     },
-    { 
-      t: "Couples", 
-      d: "Shared Retreat", 
-      details: "A beautiful opportunity for partners to reconnect, relax, and grow together through synchronized yoga practices, couples massage therapies, and shared wellness goals." 
+    {
+      t: "Couples",
+      d: "Shared Retreat",
+      details: "A beautiful opportunity for partners to reconnect, relax, and grow together through synchronized yoga practices, couples massage therapies, and shared wellness goals."
     },
-    { 
-      t: "Detox", 
-      d: "Renewal Retreat", 
-      details: "Cleanse your body and mind with our intensive detox retreat. Features specialized diets, herbal cleansing, lymphatic drainage, and restorative yoga sessions." 
+    {
+      t: "Detox",
+      d: "Renewal Retreat",
+      details: "Cleanse your body and mind with our intensive detox retreat. Features specialized diets, herbal cleansing, lymphatic drainage, and restorative yoga sessions."
     },
-    { 
-      t: "Energy", 
-      d: "Balancing Retreat", 
-      details: "Realign your chakras and boost your life force. This program includes specialized energy balancing therapies like Shiatsu, acupuncture, and dynamic Vinyasa flows." 
+    {
+      t: "Energy",
+      d: "Balancing Retreat",
+      details: "Realign your chakras and boost your life force. This program includes specialized energy balancing therapies like Shiatsu, acupuncture, and dynamic Vinyasa flows."
     },
-    { 
-      t: "Pain Relief", 
-      d: "Therapeutic", 
-      details: "Tailored specifically for individuals managing chronic pain. Utilizes therapeutic bodywork, posture correction, dry needling, and gentle mobility sequences." 
+    {
+      t: "Pain Relief",
+      d: "Therapeutic",
+      details: "Tailored specifically for individuals managing chronic pain. Utilizes therapeutic bodywork, posture correction, dry needling, and gentle mobility sequences."
     }
   ];
 
@@ -87,8 +87,8 @@ function RetreatsSection() {
             {retreatsList.map((r) => {
               const isOpen = openRetreat === r.t;
               return (
-                <div 
-                  key={r.t} 
+                <div
+                  key={r.t}
                   onClick={() => setOpenRetreat(isOpen ? null : r.t)}
                   className="bg-[#6f7062] hover:bg-[#606155] transition-colors rounded-2xl cursor-pointer shadow-soft overflow-hidden text-cream"
                 >
@@ -110,7 +110,7 @@ function RetreatsSection() {
           <a href="/contact" className="mt-10 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold">Reserve Your Retreat <ArrowRight className="w-3.5 h-3.5" /></a>
         </div>
         <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-luxury lg:sticky lg:top-32 hidden lg:block">
-           <img src={hero} alt="Retreat Details" className="absolute inset-0 w-full h-full object-cover" />
+          <img src={hero} alt="Retreat Details" className="absolute inset-0 w-full h-full object-cover" />
         </div>
       </div>
     </section>
@@ -122,15 +122,15 @@ function Excursions() {
     <section className="py-20 bg-[#FDF5EC] text-gray-800">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-10">
-           <span className="text-[#E57624] italic font-semibold text-sm mb-2 block">Dr. Vikram Yoga & Wellness Centre - Excursion</span>
-           <h2 className="text-3xl md:text-4xl font-bold mb-4">Temple Visit & Local Excursion</h2>
-           <div className="flex justify-center items-center">
-             <span className="w-16 h-px bg-gray-400"></span>
-             <span className="px-3"><Flower2 className="w-4 h-4 text-gray-500" /></span>
-             <span className="w-16 h-px bg-gray-400"></span>
-           </div>
+          <span className="text-[#E57624] italic font-semibold text-sm mb-2 block">Dr. Vikram Yoga & Wellness Centre - Excursion</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Temple Visit & Local Excursion</h2>
+          <div className="flex justify-center items-center">
+            <span className="w-16 h-px bg-gray-400"></span>
+            <span className="px-3"><Flower2 className="w-4 h-4 text-gray-500" /></span>
+            <span className="w-16 h-px bg-gray-400"></span>
+          </div>
         </div>
-        
+
         <p className="mb-8 text-sm md:text-base leading-relaxed text-center">
           At <strong>Dr. Vikram Yoga & Wellness Centre</strong>, we believe that the journey of self-discovery through yoga is enhanced by connecting with the rich cultural and spiritual heritage of the region. Our <strong>Temple Visit & Local Excursion</strong> program offers students a unique opportunity to explore the beautiful temples and local attractions in and around Varkala, Kerala.
         </p>
@@ -156,11 +156,11 @@ function Excursions() {
               <span><strong>Meditation and Reflection:</strong> Take part in guided meditation sessions at the temples, allowing you to connect with the spiritual energy of these sacred spaces.</span>
             </li>
           </ul>
-          
+
           <div className="grid grid-cols-3 gap-3 md:gap-4">
-             <img src={temple1} alt="Temple" className="w-full h-32 md:h-64 object-cover rounded-xl" />
-             <img src={temple2} alt="Ritual" className="w-full h-32 md:h-64 object-cover rounded-xl" />
-             <img src={retreatBanner} alt="Meditation" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={temple1} alt="Temple" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={temple2} alt="Ritual" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={retreatBanner} alt="Meditation" className="w-full h-32 md:h-64 object-cover rounded-xl" />
           </div>
         </div>
 
@@ -187,9 +187,9 @@ function Excursions() {
           </ul>
 
           <div className="grid grid-cols-3 gap-3 md:gap-4">
-             <img src={hero} alt="Beach Yoga" className="w-full h-32 md:h-64 object-cover rounded-xl" />
-             <img src={about} alt="Cultural Hug" className="w-full h-32 md:h-64 object-cover rounded-xl" />
-             <img src={therapy} alt="Nature Walk" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={hero} alt="Beach Yoga" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={about} alt="Cultural Hug" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={therapy} alt="Nature Walk" className="w-full h-32 md:h-64 object-cover rounded-xl" />
           </div>
         </div>
       </div>

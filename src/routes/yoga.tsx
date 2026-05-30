@@ -3,7 +3,7 @@ import classes from "@/assets/classes.jpg";
 import hero from "@/assets/hero.jpg";
 import retreat from "@/assets/retreat.jpg";
 import therapy from "@/assets/therapy.jpg";
-import about from "@/assets/about.jpg";
+import about from "@/assets/about.png";
 import { ArrowRight } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
 

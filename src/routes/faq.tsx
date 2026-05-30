@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import about from "@/assets/about.jpg"; // Re-using a nice hero image for FAQ
+import about from "@/assets/about.png"; // Re-using a nice hero image for FAQ
 import { ChevronDown } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
 
@@ -38,9 +38,9 @@ function FAQSection() {
     { q: "Do you conduct retreats?", a: "Yes. We organize yoga and wellness retreats focused on healing, relaxation, mindfulness, and personal transformation." },
     { q: "Do you provide certificate courses?", a: "Yes. We offer wellness and massage certification training programs." },
   ];
-  
+
   const [open, setOpen] = useState<number | null>(0);
-  
+
   return (
     <section className="py-28 bg-cream">
       <div className="max-w-3xl mx-auto px-6">
