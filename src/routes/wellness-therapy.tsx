@@ -45,7 +45,7 @@ function TherapiesGrid() {
   ];
 
   return (
-    <section className="py-28 bg-cream relative overflow-hidden">
+    <section className="relative min-h-screen flex items-center py-28 bg-cream overflow-hidden">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-emerald-deep/5 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -79,7 +79,7 @@ function TherapiesGrid() {
 
 function TherapyCTA() {
   return (
-    <section className="py-20 bg-emerald-gradient text-cream">
+    <section className="min-h-screen flex items-center py-20 bg-emerald-gradient text-cream">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">CONSULTATION</span>
         <h2 className="mt-4 font-display text-3xl md:text-5xl leading-tight text-balance">

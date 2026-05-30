@@ -460,8 +460,9 @@ function Therapies() {
 
 /* ---------------- Retreats ---------------- */
 function Retreats() {
+  const [showDetails, setShowDetails] = useState(false);
   return (
-    <section id="retreats" className="relative py-32 text-cream overflow-hidden">
+    <section id="retreats" className="relative min-h-screen flex items-center py-32 text-cream overflow-hidden">
       <img src={retreatBanner} alt="Wellness retreat" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep via-emerald-deep/80 to-emerald-deep/30" />
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
@@ -472,19 +473,31 @@ function Retreats() {
           <p className="text-cream/80 leading-relaxed max-w-lg">
             Immersive 3, 7, and 14-day retreats in nature — combining daily yoga, naturopathy, ayurvedic cuisine, and silent practice. Designed for deep reset and lasting transformation.
           </p>
-          <div className="mt-10 grid sm:grid-cols-3 gap-4">
-            {[
-              { t: "7 & 14 Days", d: "Holistic Wellness" },
-              { t: "Meditation", d: "Soulful Retreat" },
-              { t: "Couples", d: "Shared Retreat" },
-            ].map((r) => (
-              <div key={r.t} className="glass rounded-2xl p-6 text-center">
-                <div className="font-display text-2xl text-gold">{r.t}</div>
-                <div className="text-[0.65rem] tracking-[0.3em] uppercase text-cream/70 mt-1">{r.d}</div>
-              </div>
-            ))}
+
+          <button
+            onClick={() => setShowDetails(!showDetails)}
+            className="mt-6 flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-gold hover:text-white transition-colors group"
+          >
+            {showDetails ? "Hide Details" : "To know more about Retreats"}
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${showDetails ? "rotate-180" : ""}`} />
+          </button>
+
+          <div className={`overflow-hidden transition-all duration-500 ${showDetails ? "max-h-[500px] opacity-100 mt-8" : "max-h-0 opacity-0"}`}>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {[
+                { t: "7 & 14 Days", d: "Holistic Wellness" },
+                { t: "Meditation", d: "Soulful Retreat" },
+                { t: "Couples", d: "Shared Retreat" },
+              ].map((r) => (
+                <div key={r.t} className="glass rounded-2xl p-6 text-center">
+                  <div className="font-display text-2xl text-gold">{r.t}</div>
+                  <div className="text-[0.65rem] tracking-[0.3em] uppercase text-cream/70 mt-1">{r.d}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <a href="#contact" className="mt-10 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold">Reserve Your Retreat <ArrowRight className="w-3.5 h-3.5" /></a>
+
+          <a href="#contact" className="mt-10 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold transform hover:scale-105 transition-all">Reserve Your Retreat <ArrowRight className="w-3.5 h-3.5" /></a>
         </div>
       </div>
     </section>
@@ -493,6 +506,7 @@ function Retreats() {
 
 /* ---------------- Courses ---------------- */
 function Courses() {
+  const [showDetails, setShowDetails] = useState(false);
   const items = [
     {
       t: "100 Hour Yoga Teacher Training In Kerala",
@@ -529,45 +543,62 @@ function Courses() {
   ];
 
   return (
-    <section id="courses" className="py-20 bg-[#FDF5EC]">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="mb-10 text-sm md:text-base text-gray-800 leading-relaxed space-y-4">
+    <section id="courses" className="min-h-screen flex items-center py-20 bg-[#FDF5EC]">
+      <div className="max-w-4xl mx-auto px-6 w-full">
+        <div className="text-center mb-10">
+          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">CERTIFICATION COURSES</span>
+          <h2 className="mt-4 font-display text-4xl text-emerald-deep">Become a guide.</h2>
+          <div className="gold-divider mt-4 mx-auto" />
+        </div>
+
+        <div className="mb-10 text-sm md:text-base text-gray-800 leading-relaxed text-center max-w-2xl mx-auto">
           <p>
-            Currently at Dr. Vikram Yoga & Wellness Centre we offer 100 hour, 200 hour, and 300 hour Yoga Teacher Training programs as a curriculum for our students. Our lessons are aimed at presenting multiple styles of yoga including Hatha, Ashtanga, Yin, and Restorative Yoga. This diverse training makes you versatile with your understanding of yoga to enable you to effectively train and confidently.
+            Currently at Dr. Vikram Yoga & Wellness Centre we offer 100 hour, 200 hour, and 300 hour Yoga Teacher Training programs as a curriculum for our students.
           </p>
+          <button
+            onClick={() => setShowDetails(!showDetails)}
+            className="mt-4 flex items-center justify-center gap-2 mx-auto text-xs font-semibold tracking-[0.2em] uppercase text-emerald hover:text-gold transition-colors"
+          >
+            {showDetails ? "Hide Additional Info" : "Additional Details of Courses"}
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showDetails ? "rotate-180" : ""}`} />
+          </button>
         </div>
-        <div className="space-y-6 flex flex-col md:w-11/12 mx-auto">
-          {items.map((c, i) => (
-            <div key={i} className="flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm relative group">
-              <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-[1.35rem] font-bold text-gray-800 mb-4">{c.t}</h3>
-                  <hr className="border-gray-200 mb-6" />
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {c.prices.map((p, idx) => (
-                      <span key={idx} className="bg-[#596057] text-white text-xs font-medium px-4 py-2 shrink-0">
-                        {p}
-                      </span>
-                    ))}
+
+        <div className={`overflow-hidden transition-all duration-700 ${showDetails ? "max-h-[2500px] opacity-100" : "max-h-0 opacity-0 invisible"}`}>
+          <div className="space-y-6 flex flex-col md:w-11/12 mx-auto">
+            {items.map((c, i) => (
+              <div key={i} className="flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm relative group">
+                <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-[1.35rem] font-bold text-gray-800 mb-4">{c.t}</h3>
+                    <hr className="border-gray-200 mb-6" />
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {c.prices.map((p, idx) => (
+                        <span key={idx} className="bg-[#596057] text-white text-[0.6rem] md:text-xs font-medium px-3 md:px-4 py-2 shrink-0 rounded-md">
+                          {p}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="space-y-1.5 text-sm text-gray-800">
+                      <p><strong>Days:</strong> {c.days}</p>
+                      <p><strong>Level:</strong> {c.level}</p>
+                      <p><strong>Room Types:</strong> {c.roomTypes}</p>
+                    </div>
                   </div>
-                  <div className="space-y-1.5 text-sm text-gray-800">
-                    <p><strong>Days:</strong> {c.days}</p>
-                    <p><strong>Level:</strong> {c.level}</p>
-                    <p><strong>Room Types:</strong> {c.roomTypes}</p>
+                  <div className="mt-8">
+                    <a href="#contact" className="block w-full text-center bg-[#E57624] hover:bg-[#D56B1E] text-white py-3 rounded-md text-sm font-semibold transition-colors">
+                      Book Now
+                    </a>
                   </div>
                 </div>
-                <div className="mt-8">
-                  <a href="#contact" className="block w-full text-center bg-[#E57624] hover:bg-[#D56B1E] text-white py-3 rounded-md text-sm font-semibold transition-colors">
-                    Read Course Details
-                  </a>
+                <div className="md:w-72 lg:w-[22rem] h-64 md:h-auto relative shrink-0">
+                  <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
                 </div>
               </div>
-              <div className="md:w-72 lg:w-[22rem] h-64 md:h-auto relative shrink-0">
-                <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+
         <div className="mt-12 flex flex-wrap justify-center gap-4">
           <a href="#contact" className="px-7 py-3 bg-[#596057] text-white text-sm font-semibold hover:bg-opacity-90 transition-colors">
             Register Course With Us

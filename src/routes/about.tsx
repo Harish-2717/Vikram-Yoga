@@ -121,13 +121,26 @@ export function Navbar() {
             {links.map((l) => (
               <div key={l.to} className="flex flex-col">
                 {l.sub ? (
-                  <button
-                    onClick={() => setMobileSubMenu(mobileSubMenu === l.label ? null : l.label)}
-                    className={`flex items-center justify-between text-sm tracking-[0.18em] uppercase py-1 ${mobileSubMenu === l.label ? "text-gold" : "text-cream/90"}`}
-                  >
-                    <span>{l.label}</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileSubMenu === l.label ? "rotate-180 text-gold" : "text-cream/50"}`} />
-                  </button>
+                  <div className="flex items-center justify-between py-1">
+                    <Link
+                      to={l.to}
+                      onClick={() => setOpen(false)}
+                      className={`text-sm tracking-[0.18em] uppercase flex-1 ${mobileSubMenu === l.label ? "text-gold" : "text-cream/90"}`}
+                      activeProps={{ className: "text-gold" }}
+                    >
+                      {l.label}
+                    </Link>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setMobileSubMenu(mobileSubMenu === l.label ? null : l.label);
+                      }}
+                      className="p-2 -mr-2"
+                    >
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileSubMenu === l.label ? "rotate-180 text-gold" : "text-cream/50"}`} />
+                    </button>
+                  </div>
                 ) : (
                   <Link
                     to={l.to}
@@ -168,14 +181,16 @@ export function PageHero({ title, subtitle, bg }: { title: string; subtitle: str
   return (
     <section className="relative h-[70vh] min-h-[500px] flex items-end justify-start text-cream overflow-hidden">
       <img src={bg} alt={title} className="absolute inset-0 w-full h-full object-cover brightness-105 saturate-110 object-[25%] md:object-center" />
-      <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep/70 via-emerald-deep/40 to-transparent" />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-16 md:pb-24">
+      {/* Increased overlay for mobile readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/90 via-emerald-deep/40 to-emerald-deep/20 md:bg-gradient-to-r md:from-emerald-deep/70 md:via-emerald-deep/40 md:to-transparent" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-14 md:pb-24">
         <div className="flex items-center gap-3 mb-4 md:mb-6">
           <span className="h-px w-8 md:w-12 bg-gold/60" />
           <span className="font-serif-display text-[0.55rem] md:text-[0.75rem] tracking-[0.3em] md:tracking-[0.4em] text-gold uppercase drop-shadow-sm">Dr. Vikram Yoga & Wellness</span>
         </div>
-        <h1 className="font-display text-4xl md:text-7xl lg:text-[5.5rem] font-medium text-balance leading-[1.1] drop-shadow-xl">{title}</h1>
-        <p className="mt-4 md:mt-8 text-cream max-w-2xl text-base md:text-2xl font-light italic tracking-wide drop-shadow-lg opacity-90">{subtitle}</p>
+        <h1 className="font-display text-4xl md:text-7xl lg:text-[5.5rem] font-medium text-balance leading-[1.1] drop-shadow-2xl">{title}</h1>
+        <p className="mt-4 md:mt-8 text-cream max-w-2xl text-base md:text-2xl font-light italic tracking-wide drop-shadow-lg opacity-95">{subtitle}</p>
       </div>
     </section>
   );
