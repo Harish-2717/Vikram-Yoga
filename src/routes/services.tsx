@@ -4,14 +4,23 @@ import gImg2 from "@/assets/g-img2.jpeg";
 import gImg3 from "@/assets/g-img3.jpeg";
 import gImg4 from "@/assets/g-img4.jpeg";
 import gImg5 from "@/assets/g-img5.jpeg";
-import gImg6 from "@/assets/g-img6.jpeg";
-import gImg7 from "@/assets/g-img7.jpeg";
-import gImg8 from "@/assets/g-img8.jpeg";
 import gImg9 from "@/assets/g-img9.jpeg";
 import gImg10 from "@/assets/g-img10.jpeg";
-import gImg11 from "@/assets/g-img11.jpeg";
+import gImg7 from "@/assets/g-img7.jpeg";
 import { ArrowRight } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
+
+// Therapy Real Images
+import thaiMassage from "@/assets/images/thai-massage.png";
+import shiatsu from "@/assets/images/shiatsu.png";
+import deepTissue from "@/assets/images/deep-tissue.jpg";
+import ayurvedic from "@/assets/images/ayurvedic.jpg";
+import swedish from "@/assets/images/swedish-massage.jpg";
+import reflexology from "@/assets/images/reflexology.jpg";
+import acupuncture from "@/assets/images/acupuncture.jpg";
+import cupping from "@/assets/images/cupping.jpg";
+import iastm from "@/assets/images/iastm.jpg";
+import dornTherapy from "@/assets/images/dorn-therapy.jpg";
 
 export const Route = createFileRoute("/services")({
   component: ServicesPage,
@@ -89,18 +98,6 @@ function ClassesSection() {
   );
 }
 
-// Therapy Real Images
-import thaiMassage from "@/assets/images/thai-massage.png";
-import shiatsu from "@/assets/images/shiatsu.png";
-import deepTissue from "@/assets/images/deep-tissue.jpg";
-import ayurvedic from "@/assets/images/ayurvedic.jpg";
-import swedish from "@/assets/images/swedish-massage.jpg";
-import reflexology from "@/assets/images/reflexology.jpg";
-import acupuncture from "@/assets/images/acupuncture.jpg";
-import cupping from "@/assets/images/cupping.jpg";
-import iastm from "@/assets/images/iastm.jpg";
-import dornTherapy from "@/assets/images/dorn-therapy.jpg";
-
 /* ── Therapies ── */
 function TherapiesSection() {
   const items = [
@@ -120,7 +117,7 @@ function TherapiesSection() {
       <div className="absolute top-0 left-0 w-[40rem] h-[40rem] bg-gold/5 blur-3xl rounded-full -translate-y-1/2 -translate-x-1/3" />
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">MASSAGE & WELLNESS THERAPIES</span>
+          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">MASSAGE &amp; WELLNESS THERAPIES</span>
           <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance leading-tight">Therapeutic touch, <em className="text-gold-gradient not-italic">refined into ritual</em>.</h2>
           <div className="gold-divider mt-8 mx-auto" />
           <p className="mt-6 text-cream/70 leading-relaxed text-sm">
@@ -157,18 +154,20 @@ function TherapiesSection() {
 /* ── Retreats ── */
 function RetreatsSection() {
   return (
-    <section id="retreats" className="relative py-32 text-cream overflow-hidden">
+    <section id="retreats" className="relative py-20 text-cream overflow-hidden">
       <img src={gImg9} alt="Wellness retreat" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-      <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep via-emerald-deep/80 to-emerald-deep/30" />
-      <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
+      <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep/90 via-emerald-deep/70 to-emerald-deep/40" />
+      <div className="relative max-w-7xl mx-auto px-6">
         <div>
           <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">WELLNESS RETREATS</span>
-          <h2 className="mt-4 font-display text-4xl md:text-6xl text-balance leading-[1.05]">Step away. <em className="text-gold-gradient not-italic">Come home</em> to yourself.</h2>
+          <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance leading-[1.1]">Step away. <em className="text-gold-gradient not-italic">Come home</em> to yourself.</h2>
           <div className="gold-divider my-8 max-w-xs" />
-          <p className="text-cream/80 leading-relaxed max-w-lg">
+          <p className="text-cream/80 leading-relaxed max-w-2xl text-base md:text-lg">
             Immersive 3, 7, and 14-day retreats in nature — combining daily yoga, naturopathy, ayurvedic cuisine, and silent practice. Designed for deep reset and lasting transformation.
           </p>
-          <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+          {/* 6 boxes in one row on large screens */}
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
               { t: "7 & 14 Days", d: "Holistic Wellness" },
               { t: "Meditation", d: "Soulful Retreat" },
@@ -177,13 +176,21 @@ function RetreatsSection() {
               { t: "Energy", d: "Balancing Retreat" },
               { t: "Pain Relief", d: "Therapeutic" }
             ].map((r) => (
-              <div key={r.t} className="glass rounded-2xl p-6 text-center">
-                <div className="font-display text-2xl text-gold">{r.t}</div>
-                <div className="text-[0.65rem] tracking-[0.3em] uppercase text-cream/70 mt-1">{r.d}</div>
+              <div key={r.t} className="glass rounded-2xl p-6 text-center border border-white/5 hover:border-gold/20 transition-colors">
+                <div className="font-display text-xl text-gold">{r.t}</div>
+                <div className="text-[0.6rem] tracking-[0.2em] uppercase text-cream/60 mt-2">{r.d}</div>
               </div>
             ))}
           </div>
-          <a href="/contact" className="mt-10 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold">Reserve Your Retreat <ArrowRight className="w-3.5 h-3.5" /></a>
+
+          <div className="mt-12 p-8 glass rounded-3xl border border-white/5 max-w-4xl">
+            <h3 className="font-display text-2xl text-gold mb-4">Additional Details</h3>
+            <p className="text-cream/70 text-sm leading-relaxed">
+              Our retreats are holistic journeys designed to disconnect you from the digital world and reconnect you with your true self. Each stay includes organic vegetarian meals, personalized wellness consultations, and multiple daily yoga/meditation sessions led by Dr. Vikram and his expert team.
+            </p>
+          </div>
+
+          <a href="/contact" className="mt-12 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform">Reserve Your Retreat <ArrowRight className="w-3.5 h-3.5" /></a>
         </div>
       </div>
     </section>
@@ -193,13 +200,13 @@ function RetreatsSection() {
 /* ── Courses ── */
 function CoursesSection() {
   const items = [
-    { t: "Shiatsu Therapy Certification", d: "Japanese bodywork training focused on energy balancing techniques and meridian pathways.", h: "21 Hours • 7–10 Days" },
-    { t: "Thai Yoga Massage Certification", d: "Integrative bodywork combining assisted stretching and acupressure techniques.", h: "21 Hours • 7–10 Days" },
-    { t: "Reflexology Therapy Certification", d: "Holistic reflex-point therapy training for feet and hands.", h: "12 Hours • 7 Days" },
-    { t: "Ayurvedic Wellness Massage Certification", d: "Traditional training inspired by Ayurvedic principles using therapeutic oils.", h: "21 Hours • 10 Days" },
-    { t: "Swedish Massage Certification", d: "Foundational therapeutic massage program focused on relaxation and circulation.", h: "21 Hours • 10 Days" },
-    { t: "Deep Tissue Therapy Certification", d: "Professional soft tissue training focused on deep muscular release and fascia manipulation.", h: "21 Hours • 10 Days" },
-    { t: "Dorn Therapy Certification", d: "Gentle therapeutic wellness training focused on posture awareness and spinal balancing.", h: "12 Hours • 7 Days" },
+    { t: "Shiatsu Therapy Certification", d: "Japanese bodywork training focused on energy balancing techniques and meridian pathways.", h: "21 Hours • 7–10 Days", details: "Includes meridian mapping, tsubo point therapy, and traditional kata techniques." },
+    { t: "Thai Yoga Massage Certification", d: "Integrative bodywork combining assisted stretching and acupressure techniques.", h: "21 Hours • 7–10 Days", details: "Comprehensive training in sen line theory and personalized stretching sequence for clients." },
+    { t: "Reflexology Therapy Certification", d: "Holistic reflex-point therapy training for feet and hands.", h: "12 Hours • 7 Days", details: "Learn precise mapping of internal organs and systems to foot reflex zones." },
+    { t: "Ayurvedic Wellness Massage Certification", d: "Traditional training inspired by Ayurvedic principles using therapeutic oils.", h: "21 Hours • 10 Days", details: "Covers Dosha-specific oil selection and traditional Abhyanga strokes." },
+    { t: "Swedish Massage Certification", d: "Foundational therapeutic massage program focused on relaxation and circulation.", h: "21 Hours • 10 Days", details: "Master the 5 classic strokes: Effleurage, Petrissage, Friction, Tapotement, and Vibration." },
+    { t: "Deep Tissue Therapy Certification", d: "Professional soft tissue training focused on deep muscular release and fascia manipulation.", h: "21 Hours • 10 Days", details: "Advanced techniques for chronic pain management and structural alignment." },
+    { t: "Dorn Therapy Certification", d: "Gentle therapeutic wellness training focused on posture awareness and spinal balancing.", h: "12 Hours • 7 Days", details: "Techniques for mobilization of joints and correction of leg length discrepancies." },
   ];
   return (
     <section className="py-28 bg-cream">
@@ -217,8 +224,12 @@ function CoursesSection() {
                   <span className="font-serif-display text-xs tracking-[0.3em] text-gold">0{i + 1}</span>
                   <span className="text-[0.65rem] tracking-[0.25em] uppercase text-cream/60">{c.h}</span>
                 </div>
-                <h3 className="mt-8 font-display text-3xl">{c.t}</h3>
+                <h3 className="mt-8 font-display text-2xl md:text-3xl">{c.t}</h3>
                 <p className="mt-4 text-sm text-cream/75 leading-relaxed">{c.d}</p>
+                <div className="mt-6 pt-6 border-t border-white/10">
+                  <div className="text-[0.6rem] tracking-[0.2em] uppercase text-gold/80 mb-2 font-semibold">Additional details</div>
+                  <p className="text-[0.8rem] text-cream/60 leading-relaxed italic">{c.details}</p>
+                </div>
                 <a href="/contact" className="mt-8 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-gold hover:gap-3 transition-all">Enroll Now <ArrowRight className="w-3.5 h-3.5" /></a>
               </div>
             </div>
