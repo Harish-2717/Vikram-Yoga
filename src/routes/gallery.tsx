@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { X } from "lucide-react";
 import retreat from "@/assets/retreat.jpg";
 import gImg1 from "@/assets/g-img1.jpg";
 import gImg2 from "@/assets/g-img2.jpeg";
@@ -11,6 +13,14 @@ import gImg8 from "@/assets/g-img8.jpeg";
 import gImg9 from "@/assets/g-img9.jpeg";
 import gImg10 from "@/assets/g-img10.jpeg";
 import gImg11 from "@/assets/g-img11.jpeg";
+import ex1 from "@/assets/images/extra-gallery-1.jpeg";
+import ex2 from "@/assets/images/extra-gallery-2.jpeg";
+import ex3 from "@/assets/images/extra-gallery-3.jpeg";
+import ex4 from "@/assets/images/extra-gallery-4.jpeg";
+import ex5 from "@/assets/images/extra-gallery-5.jpeg";
+import ex6 from "@/assets/images/extra-gallery-6.jpeg";
+import ex7 from "@/assets/images/extra-gallery-7.jpeg";
+
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
 
 export const Route = createFileRoute("/gallery")({
@@ -43,18 +53,12 @@ function GalleryPage() {
 const galleryHero = retreat;
 
 function GallerySection() {
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+
   const imgs = [
-    { src: gImg1, span: "h-64 md:col-span-2 md:row-span-2 md:h-[34rem]" },
-    { src: gImg2, span: "col-span-1 h-64 md:h-[16.5rem]" },
-    { src: gImg3, span: "col-span-1 h-64 md:h-[16.5rem]" },
-    { src: gImg4, span: "col-span-1 h-64 md:h-[16.5rem]" },
-    { src: gImg5, span: "col-span-1 h-64 md:h-[16.5rem]" },
-    { src: gImg6, span: "col-span-1 md:col-span-2 h-64" },
-    { src: gImg7, span: "col-span-1 h-64" },
-    { src: gImg8, span: "col-span-1 h-64" },
-    { src: gImg9, span: "col-span-1 md:col-span-2 h-64" },
-    { src: gImg10, span: "col-span-1 h-64" },
-    { src: gImg11, span: "col-span-1 h-64" },
+    gImg1, gImg2, gImg3, gImg4, gImg5,
+    gImg6, gImg7, gImg8, gImg9, gImg10, gImg11,
+    ex1, ex2, ex3, ex4, ex5, ex6, ex7
   ];
 
   return (
@@ -68,20 +72,46 @@ function GallerySection() {
           <div className="gold-divider mt-8 max-w-sm mx-auto" />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-fr">
-          {imgs.map((img, i) => (
-            <div key={i} className={`relative overflow-hidden rounded-2xl group shadow-soft ${img.span}`}>
+        {/* Uniform Grid Layout */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          {imgs.map((src, i) => (
+            <div
+              key={i}
+              onClick={() => setSelectedImg(src)}
+              className="relative aspect-[4/3] overflow-hidden rounded-2xl group shadow-soft cursor-pointer"
+            >
               <img
-                src={img.src}
+                src={src}
                 alt={`Sanctuary moment ${i + 1}`}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-emerald-deep/0 group-hover:bg-emerald-deep/40 transition-colors" />
+              <div className="absolute inset-0 bg-emerald-deep/0 group-hover:bg-emerald-deep/20 transition-colors" />
             </div>
           ))}
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedImg && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10 bg-black/90 backdrop-blur-sm animate-fade-in"
+          onClick={() => setSelectedImg(null)}
+        >
+          <button
+            className="absolute top-6 right-6 p-2 text-white/50 hover:text-white transition-colors"
+            onClick={() => setSelectedImg(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src={selectedImg}
+            alt="Expanded view"
+            className="max-w-full max-h-full object-contain rounded-xl shadow-2xl animate-fade-up"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }

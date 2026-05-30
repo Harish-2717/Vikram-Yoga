@@ -89,19 +89,31 @@ function ClassesSection() {
   );
 }
 
+// Therapy Real Images
+import thaiMassage from "@/assets/images/thai-massage.png";
+import shiatsu from "@/assets/images/shiatsu.png";
+import deepTissue from "@/assets/images/deep-tissue.jpg";
+import ayurvedic from "@/assets/images/ayurvedic.jpg";
+import swedish from "@/assets/images/swedish-massage.jpg";
+import reflexology from "@/assets/images/reflexology.jpg";
+import acupuncture from "@/assets/images/acupuncture.jpg";
+import cupping from "@/assets/images/cupping.jpg";
+import iastm from "@/assets/images/iastm.jpg";
+import dornTherapy from "@/assets/images/dorn-therapy.jpg";
+
 /* ── Therapies ── */
 function TherapiesSection() {
   const items = [
-    { t: "Thai Yoga Massage", d: "Assisted stretching and rhythmic compressions for flexibility and energy flow.", img: gImg2 },
-    { t: "Shiatsu Therapy", d: "Traditional Japanese pressure-point therapy along the body's energy pathways.", img: gImg3 },
-    { t: "Deep Tissue Therapy", d: "Focused treatment to release chronic muscular tension and fascial restrictions.", img: gImg4 },
-    { t: "Ayurvedic Wellness Massage", d: "Traditional therapy utilizing herbal oils to support circulation and rejuvenation.", img: gImg5 },
-    { t: "Swedish Massage", d: "Gentle and relaxing full-body massage with smooth flowing strokes.", img: gImg6 },
-    { t: "Reflexology Therapy", d: "Pressure-point therapy on hands and feet to harmonize body systems.", img: gImg7 },
-    { t: "Acupuncture-Based Support", d: "Stimulating specific body points for natural energy flow and emotional balance.", img: gImg10 },
-    { t: "Cupping Therapy", d: "Traditional suction cups applied to release muscular tightness and promote recovery.", img: gImg11 },
-    { t: "IASTM", d: "Specialized instruments to treat fascia and optimize movement.", img: gImg8 },
-    { t: "Dorn Therapy", d: "Gentle spinal care technique focused on posture awareness and alignment.", img: gImg9 },
+    { t: "Thai Yoga Massage", d: "Assisted stretching and rhythmic compressions for flexibility and energy flow.", img: thaiMassage },
+    { t: "Shiatsu Therapy", d: "Traditional Japanese pressure-point therapy along the body's energy pathways.", img: shiatsu },
+    { t: "Deep Tissue Therapy", d: "Focused treatment to release chronic muscular tension and fascial restrictions.", img: deepTissue },
+    { t: "Ayurvedic Wellness Massage", d: "Traditional therapy utilizing herbal oils to support circulation and rejuvenation.", img: ayurvedic },
+    { t: "Swedish Massage", d: "Gentle and relaxing full-body massage with smooth flowing strokes.", img: swedish },
+    { t: "Reflexology Therapy", d: "Pressure-point therapy on hands and feet to harmonize body systems.", img: reflexology },
+    { t: "Acupuncture-Based Support", d: "Stimulating specific body points for natural energy flow and emotional balance.", img: acupuncture },
+    { t: "Cupping Therapy", d: "Traditional suction cups applied to release muscular tightness and promote recovery.", img: cupping },
+    { t: "IASTM", d: "Specialized instruments to treat fascia and optimize movement.", img: iastm },
+    { t: "Dorn Therapy", d: "Gentle spinal care technique focused on posture awareness and alignment.", img: dornTherapy },
   ];
   return (
     <section className="relative py-28 bg-emerald-gradient text-cream overflow-hidden">
