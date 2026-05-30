@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
-import about from "@/assets/about.jpg";
+import aboutHero from "@/assets/about.png";
+import about from "@/assets/about 1.jpg";
 import founder from "@/assets/leader.jpeg";
 import {
   Menu, X, Phone, Mail, MapPin, Instagram, Facebook, Youtube,
@@ -26,7 +27,7 @@ function AboutPage() {
       <PageHero
         title="About the Centre"
         subtitle="A sanctuary where ancient wisdom meets refined contemporary care."
-        bg={about}
+        bg={aboutHero}
       />
       <AboutSection />
       <PhilosophySection />
@@ -52,12 +53,14 @@ export function Navbar() {
   const links = [
     { to: "/", label: "Home" },
     { to: "/about", label: "About" },
-    { to: "/services", label: "Services", sub: [
-      { to: "/yoga", label: "Yoga" },
-      { to: "/wellness-therapy", label: "Wellness Therapy" },
-      { to: "/retreats", label: "Retreats" },
-      { to: "/certificate-courses", label: "Certificate Courses" }
-    ]},
+    {
+      to: "/services", label: "Services", sub: [
+        { to: "/yoga", label: "Yoga" },
+        { to: "/wellness-therapy", label: "Wellness Therapy" },
+        { to: "/retreats", label: "Retreats" },
+        { to: "/certificate-courses", label: "Certificate Courses" }
+      ]
+    },
     { to: "/gallery", label: "Gallery" },
     { to: "/faq", label: "FAQ" },
     { to: "/contact", label: "Contact" },
@@ -88,9 +91,9 @@ export function Navbar() {
                 <div className="absolute top-full left-0 mt-0 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                   <div className="bg-emerald-deep shadow-luxury rounded-2xl p-5 border border-cream/10 flex flex-col gap-4">
                     {l.sub.map((s) => (
-                      <Link 
-                        key={s.label} 
-                        to={s.to} 
+                      <Link
+                        key={s.label}
+                        to={s.to}
                         className="text-[0.65rem] tracking-[0.15em] uppercase text-cream/70 hover:text-gold transition-colors block"
                       >
                         {s.label}
@@ -118,7 +121,7 @@ export function Navbar() {
             {links.map((l) => (
               <div key={l.to} className="flex flex-col">
                 {l.sub ? (
-                  <button 
+                  <button
                     onClick={() => setMobileSubMenu(mobileSubMenu === l.label ? null : l.label)}
                     className={`flex items-center justify-between text-sm tracking-[0.18em] uppercase py-1 ${mobileSubMenu === l.label ? "text-gold" : "text-cream/90"}`}
                   >
@@ -139,9 +142,9 @@ export function Navbar() {
                 {l.sub && mobileSubMenu === l.label && (
                   <div className="flex flex-col gap-4 mt-3 mb-2 pl-4 border-l-2 border-gold/20 ml-1.5 animate-fade-up">
                     {l.sub.map((s) => (
-                      <Link 
-                        key={s.label} 
-                        to={s.to} 
+                      <Link
+                        key={s.label}
+                        to={s.to}
                         onClick={() => { setOpen(false); setMobileSubMenu(null); }}
                         className="text-[0.65rem] tracking-[0.15em] uppercase text-cream/60 hover:text-gold transition-colors"
                       >
@@ -164,7 +167,7 @@ export function Navbar() {
 export function PageHero({ title, subtitle, bg }: { title: string; subtitle: string; bg: string }) {
   return (
     <section className="relative h-[70vh] min-h-[500px] flex items-end justify-start text-cream overflow-hidden">
-      <img src={bg} alt={title} className="absolute inset-0 w-full h-full object-cover scale-105" />
+      <img src={bg} alt={title} className="absolute inset-0 w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep/90 via-emerald-deep/70 to-emerald-deep/30" />
       <div className="absolute inset-0 bg-black/40" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-20">
@@ -193,52 +196,66 @@ function AboutSection() {
     "Holistic lifestyle guidance",
   ];
   return (
-    <section className="relative py-28 bg-cream">
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        <div className="relative">
-          <div className="absolute -inset-6 bg-gold-gradient opacity-20 blur-3xl rounded-full" />
-          <img src={about} alt="Serene yoga studio" className="relative rounded-3xl shadow-luxury w-full h-[620px] object-cover" loading="lazy" />
-          <div className="absolute bottom-4 right-4 md:-bottom-8 md:-right-4 lg:-right-12 glass-[rgba(8,18,13,0.9)] rounded-2xl px-8 py-6 shadow-luxury text-cream">
-            <div className="font-display text-4xl text-gold-gradient">15+</div>
-            <div className="text-xs tracking-[0.25em] uppercase text-cream/70 mt-1">Years of Healing</div>
+    <section className="relative py-12 lg:py-16 bg-cream overflow-hidden min-h-[calc(100vh-5rem)] flex items-center">
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3 opacity-60 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-emerald-deep/5 blur-3xl rounded-full translate-y-1/2 -translate-x-1/3 pointer-events-none" />
+
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-12 w-full grid lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
+        <div className="relative lg:col-span-5 order-2 lg:order-1 animate-fade-up">
+          <div className="absolute -inset-5 bg-gold-gradient opacity-20 blur-3xl rounded-[3rem]" />
+          <div className="relative rounded-[2rem] overflow-hidden shadow-luxury border border-gold/15 group">
+            <img src={about} alt="Serene yoga studio" className="w-full h-[400px] sm:h-[450px] lg:h-[480px] xl:h-[520px] object-cover transition-transform duration-[1.5s] group-hover:scale-105" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
           </div>
         </div>
-        <div>
-          <div className="flex items-center gap-3 mb-5">
-            <Flower2 className="w-4 h-4 text-gold" />
-            <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">OUR STORY</span>
+
+        <div className="lg:col-span-7 order-1 lg:order-2">
+          <div className="flex items-center gap-4 mb-4 text-emerald-deep/90">
+            <span className="w-10 h-px bg-gold-gradient" />
+            <span className="font-serif-display text-[0.65rem] tracking-[0.4em] uppercase text-emerald-deep">OUR STORY</span>
+            <span className="w-10 h-px bg-gold-gradient" />
           </div>
-          <h2 className="font-display text-4xl md:text-5xl text-emerald-deep leading-tight text-balance">
-            A sanctuary for <em className="text-gold-gradient not-italic">authentic healing</em> and conscious transformation.
+
+          <h2 className="font-display text-4xl md:text-5xl lg:text-[3.25rem] xl:text-5xl text-emerald-deep leading-[1.05] text-balance mb-4">
+            A sanctuary for <br className="hidden md:block" />
+            <em className="text-gold-gradient not-italic font-medium">authentic healing</em>
+            <br className="hidden lg:block" /> and conscious transformation.
           </h2>
-          <div className="gold-divider my-8" />
-          <div className="space-y-4 text-muted-foreground leading-relaxed text-[0.95rem]">
-            <p>
+
+          <div className="w-16 h-[2px] bg-gold-gradient mb-5 opacity-70" />
+
+          <div className="space-y-3 lg:space-y-4 text-muted-foreground leading-relaxed text-sm lg:text-[0.95rem] font-light">
+            <p className="text-emerald-deep/90 font-medium">
               At Dr. Vikram Yoga & Wellness Centre, we are dedicated to promoting holistic health through the integration of traditional yogic wisdom, natural healing methods, and modern therapeutic wellness practices.
             </p>
             <p>
-              Founded with the vision of creating a peaceful and transformative healing space, our centre supports individuals in restoring balance, improving overall well-being, and experiencing harmony in body, mind, and spirit.
-            </p>
-            <p>
-              Located in the serene coastal surroundings of Varkala, Trivandrum, Kerala, India, our centre offers a rejuvenating environment for individuals seeking healing, relaxation, self-discovery, mindful living, and transformative wellness experiences.
+              Founded with the vision of creating a peaceful and transformative healing space, our centre supports individuals in restoring balance, improving overall well-being, and experiencing harmony in body, mind, and spirit. Located in the serene coastal surroundings of Varkala, Trivandrum, Kerala, India, our centre offers a rejuvenating environment for individuals seeking healing, relaxation, self-discovery, mindful living, and transformative wellness experiences.
             </p>
             <p>
               Led by Dr. S. Vikram Pandy, our centre provides a professional, compassionate, and personalized approach to holistic healing and wellness education.
             </p>
           </div>
-          <div className="mt-8">
-            <h3 className="font-serif-display text-xs tracking-[0.2em] uppercase text-emerald-deep mb-4">We specialize in:</h3>
-            <div className="grid grid-cols-2 gap-3">
-              {specializations.map((s) => (
-                <div key={s} className="flex items-center gap-3">
-                  <span className="text-[0.9rem] shrink-0 leading-none text-gold">ॐ</span>
-                  <span className="text-[0.85rem] text-muted-foreground">{s}</span>
-                </div>
-              ))}
+
+          <div className="mt-8 p-5 lg:p-6 bg-white/50 backdrop-blur-xl rounded-[1.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-gold/10 blur-3xl rounded-full transition-transform duration-700 group-hover:scale-150 group-hover:bg-gold/20" />
+            <div className="relative z-10">
+              <h3 className="font-serif-display text-[0.65rem] tracking-[0.3em] uppercase text-emerald-deep mb-4 flex items-center gap-3">
+                <Flower2 className="w-4 h-4 text-gold" />
+                Our Expertise
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-y-2.5 gap-x-4">
+                {specializations.map((s) => (
+                  <div key={s} className="flex items-center gap-2 group/item">
+                    <span className="text-[0.9rem] shrink-0 leading-none text-gold/70 group-hover/item:text-gold transition-colors font-light mt-px">ॐ</span>
+                    <span className="text-[0.8rem] text-muted-foreground group-hover/item:text-emerald-deep transition-colors leading-[1.2]">{s}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <p className="mt-8 text-emerald-deep font-medium italic">
-            At Dr. Vikram Yoga & Wellness Centre, we believe true wellness is achieved when physical health, mental clarity, emotional well-being, and mindful awareness are brought into balance.
+
+          <p className="mt-6 text-emerald-deep/80 font-medium italic text-sm text-center lg:text-left border-l-[3px] border-gold/40 pl-4 py-0.5">
+            "We believe true wellness is achieved when physical health, mental clarity, emotional well-being, and mindful awareness are brought into balance."
           </p>
         </div>
       </div>
@@ -314,7 +331,7 @@ function FounderSection() {
     "CIASTM (Certified Instrument-Assisted Soft Tissue Mobilization Therapist)",
   ];
   const additional = ["Dorn Therapy", "Su Jok Therapy", "Seed Therapy"];
-  
+
   return (
     <section className="relative py-28 bg-emerald-gradient text-cream overflow-hidden">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
@@ -347,7 +364,7 @@ function FounderSection() {
               He combines traditional healing wisdom with modern therapeutic techniques to support physical well-being, relaxation, mobility, posture correction, pain management, emotional balance, mental clarity, and mind-body harmony.
             </p>
           </div>
-          
+
           <div className="mt-10 grid sm:grid-cols-2 gap-8">
             <div>
               <h3 className="font-serif-display text-xs tracking-[0.2em] uppercase text-gold mb-4">Educational Background</h3>
@@ -370,7 +387,7 @@ function FounderSection() {
               </ul>
             </div>
           </div>
-          
+
           <div className="mt-8">
             <h3 className="font-serif-display text-xs tracking-[0.2em] uppercase text-gold mb-4">Additional Training</h3>
             <div className="flex flex-wrap gap-2">
@@ -410,7 +427,7 @@ function WhyUsSection() {
     <section className="py-28 bg-cream">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto">
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">WHY CHOOSE US</span>
+          <span className="font-serif-display text-[0.9rem] tracking-[0.5em] text-emerald">WHY CHOOSE US</span>
           <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep text-balance">
             A Personalized Approach to <em className="text-gold-gradient not-italic">Holistic Healing & Wellness</em>
           </h2>
@@ -471,7 +488,7 @@ export function Footer() {
           <ul className="mt-6 space-y-4 text-sm text-cream/70">
             <li className="flex gap-3"><Phone className="w-4 h-4 text-gold shrink-0" /> +91 8778639989</li>
             <li className="flex gap-3"><Mail className="w-4 h-4 text-gold shrink-0" /> drvikrampandy@gmail.com</li>
-            <li className="flex gap-3"><MapPin className="w-4 h-4 text-gold shrink-0" /> Dr. Vikram Yoga &amp; Wellness Centre<br/>Varkala, Tamil Nadu, India.</li>
+            <li className="flex gap-3"><MapPin className="w-4 h-4 text-gold shrink-0" /> Dr. Vikram Yoga &amp; Wellness Centre<br />Varkala, Tamil Nadu, India.</li>
           </ul>
         </div>
         <div>
