@@ -7,11 +7,34 @@ import about from "@/assets/about.jpg";
 import therapy from "@/assets/therapy.jpg";
 import retreat from "@/assets/retreat.jpg";
 import classes from "@/assets/classes.jpg";
+import training100h from "@/assets/training_100h.png";
+import training200hStd from "@/assets/training_200h_std.png";
+import training200hLux from "@/assets/training_200h_lux.png";
+import training300h from "@/assets/training_300h.png";
+import gImg1 from "@/assets/g-img1.jpeg";
+import gImg2 from "@/assets/g-img2.jpeg";
+import gImg3 from "@/assets/g-img3.jpeg";
+import gImg4 from "@/assets/g-img4.jpeg";
+import gImg5 from "@/assets/g-img5.jpeg";
+import gImg6 from "@/assets/g-img6.jpeg";
+import gImg7 from "@/assets/g-img7.jpeg";
+import gImg8 from "@/assets/g-img8.jpeg";
+import gImg9 from "@/assets/g-img9.jpeg";
+import gImg10 from "@/assets/g-img10.jpeg";
+import gImg11 from "@/assets/g-img11.jpeg";
+
+import varkalaBeach from "@/assets/varkala_beach.png";
+import yogaLifestyle from "@/assets/yoga_lifestyle.png";
+import retreatBanner from "@/assets/retreat_banner.png";
+import healingAtmosphere from "@/assets/healing_atmosphere.png";
+import testimonialBg from "@/assets/testimonial_bg.png";
+
 import {
-  Menu, X, Phone, Mail, MapPin, Instagram, Facebook, Youtube,
+  Phone, Mail, MapPin, Instagram, Facebook, Youtube,
   MessageCircle, ChevronDown, Flower2, Sparkles, Heart, Leaf,
   Sun, Wind, Hand, Mountain, GraduationCap, Globe, Star, Quote, ArrowRight, Play
 } from "lucide-react";
+import { Navbar, Footer, WhatsAppFloat } from "./about";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -26,120 +49,184 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#classes", label: "Classes" },
-  { href: "#therapies", label: "Therapies" },
-  { href: "#retreats", label: "Retreats" },
-  { href: "#courses", label: "Courses" },
-  { href: "#online", label: "Online" },
-  { href: "#testimonials", label: "Testimonials" },
-  { href: "#contact", label: "Contact" },
-];
-
 function HomePage() {
   return (
     <main className="overflow-x-hidden">
       <Navbar />
       <Hero />
-      <About />
-      <Founder />
+      <Welcome />
       <WhyUs />
-      <Classes />
-      <Therapies />
-      <Retreats />
-      <Courses />
       <Benefits />
       <OnlineSessions />
-      <Testimonials />
-      <FAQ />
-      <Gallery />
-      <WhatsAppCTA />
       <SocialFeed />
-      <Contact />
+      <Testimonials />
       <Footer />
       <WhatsAppFloat />
     </main>
   );
 }
 
-/* ---------------- Navbar ---------------- */
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  return (
-    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "glass-dark py-3" : "py-5"}`}>
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-3">
-          <img src={logo} alt="Dr Vikram Logo" className="h-12 w-auto drop-shadow-[0_2px_10px_rgba(212,175,55,0.4)]" />
-          <div className="hidden sm:block leading-tight">
-            <div className="font-serif-display text-[0.7rem] text-gold tracking-[0.25em]">DR. VIKRAM</div>
-            <div className="text-[0.65rem] text-cream/70 tracking-[0.2em]">YOGA & WELLNESS</div>
-          </div>
-        </a>
-        <nav className="hidden lg:flex items-center gap-7">
-          {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="text-[0.78rem] tracking-[0.18em] uppercase text-cream/80 hover:text-gold transition-colors">{l.label}</a>
-          ))}
-        </nav>
-        <a href="#contact" className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-widest uppercase shadow-gold hover:scale-105 transition-transform">
-          Book Now <ArrowRight className="w-3.5 h-3.5" />
-        </a>
-        <button onClick={() => setOpen(!open)} className="lg:hidden text-cream p-2">
-          {open ? <X /> : <Menu />}
-        </button>
-      </div>
-      {open && (
-        <div className="lg:hidden glass-dark mt-3 mx-6 rounded-2xl p-6 animate-fade-up">
-          <div className="flex flex-col gap-4">
-            {navLinks.map((l) => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-cream/90 text-sm tracking-[0.18em] uppercase">{l.label}</a>
-            ))}
-            <a href="#contact" className="mt-2 text-center px-5 py-3 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-widest uppercase">Book Now</a>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-}
+/* Navbar is now the shared component from ./about */
 
 /* ---------------- Hero ---------------- */
 function Hero() {
+  const words = ["Transform", "Restore", "Awaken", "Flourish"];
+  const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % words.length);
+        setFade(true);
+      }, 500);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center text-cream overflow-hidden">
       <img src={hero} alt="Serene meditation in forest" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1080} />
       <div className="absolute inset-0 bg-hero-overlay" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(8,18,13,0.85)_90%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(8,18,13,0.95)_100%)]" />
+      <div className="absolute inset-0 bg-black/40" />
 
-      <div className="relative z-10 text-center max-w-5xl px-6 py-32">
-        <img src={logo} alt="Dr Vikram crest" className="mx-auto h-28 md:h-36 mb-8 animate-float drop-shadow-[0_8px_30px_rgba(212,175,55,0.45)]" />
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <span className="h-px w-12 bg-gold/60" />
-          <span className="font-serif-display text-[0.7rem] tracking-[0.5em] text-gold">EST. WELLNESS SANCTUARY</span>
-          <span className="h-px w-12 bg-gold/60" />
-        </div>
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-balance leading-[1.05]">
-          Heal <span className="text-gold-gradient italic">·</span> Harmonize <span className="text-gold-gradient italic">·</span> <span className="text-gold-gradient italic">Transform</span>
+      {/* Logo as watermark background */}
+      <img 
+        src={logo} 
+        alt="Dr Vikram crest watermark" 
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[60%] md:-translate-y-1/2 h-[350px] md:h-[600px] opacity-10 object-contain pointer-events-none mix-blend-screen animate-float" 
+      />
+
+      <div className="relative z-10 text-center max-w-7xl px-6 py-32 mt-10 md:mt-0">
+        <h1 className="font-display text-6xl md:text-8xl lg:text-[8.5rem] font-bold text-balance leading-[1.0] drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
+          Dr. Vikram Yoga <br className="hidden md:block" />
+          <span className="text-gold-gradient font-medium italic md:text-[6.5rem]">&amp; Wellness Centre</span>
         </h1>
-        <p className="mt-8 text-base md:text-lg text-cream/80 max-w-2xl mx-auto font-light tracking-wide">
-          Holistic Healing &middot; Therapeutic Wellness &middot; Transformative Retreat Experiences guided by Dr. S. Vikram Pandy.
+        
+        <p className="mt-8 md:mt-12 text-xl md:text-3xl text-cream max-w-4xl mx-auto font-light italic tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+          "A sanctuary where ancient wisdom meets refined contemporary care."
         </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <a href="#classes" className="px-7 py-3.5 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform">Join Our Classes</a>
-          <a href="#contact" className="px-7 py-3.5 rounded-full glass text-cream text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors">Book Consultation</a>
-          <a href="#retreats" className="px-7 py-3.5 rounded-full border border-gold/40 text-gold text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors">Explore Retreats</a>
+
+        <div className="mt-8 md:mt-10 flex items-center justify-center gap-3 md:gap-5 px-4 font-serif-display text-[0.65rem] md:text-[0.8rem] tracking-[0.4em] md:tracking-[0.5em] text-gold uppercase text-center opacity-90 drop-shadow-md">
+          <span className="hidden md:block h-px w-16 bg-gold/60" />
+          Heal <span className="text-[0.7rem] shrink-0 leading-none text-gold mt-1">ॐ</span> Balance <span className="text-[0.7rem] shrink-0 leading-none text-gold mt-1">ॐ</span>{" "}
+          <span className={`inline-block transition-opacity duration-500 ease-in-out ${fade ? "opacity-100" : "opacity-0"}`}>
+            {words[index]}
+          </span>
+          <span className="hidden md:block h-px w-16 bg-gold/60" />
+        </div>
+
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+          <a href="#classes" className="px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform">Join Our Classes</a>
+          <a href="#contact" className="px-8 py-4 rounded-full glass text-cream text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors">Book Consultation</a>
+          <a href="#retreats" className="px-8 py-4 rounded-full border border-gold/40 text-gold text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/15 transition-colors">Explore Retreats</a>
         </div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-cream/60">
         <span className="text-[0.6rem] tracking-[0.4em] uppercase">Scroll</span>
         <ChevronDown className="w-4 h-4 animate-bounce" />
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Welcome ---------------- */
+function Welcome() {
+  return (
+    <section className="relative py-32 bg-cream overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3" />
+      <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-emerald/5 blur-3xl rounded-full translate-y-1/3 -translate-x-1/4" />
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* Left Column: Text Content */}
+          <div className="space-y-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <Flower2 className="w-4 h-4 text-gold" />
+                <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">WELCOME</span>
+              </div>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-emerald-deep leading-tight text-balance">
+                A holistic <em className="text-gold-gradient not-italic">healing sanctuary</em>.
+              </h2>
+              <div className="gold-divider my-6 max-w-[4rem]" />
+            </div>
+
+            <div className="text-muted-foreground text-[0.95rem] md:text-base leading-relaxed space-y-6">
+              <p className="text-emerald-deep font-medium text-lg leading-snug">
+                Welcome to Dr. Vikram Yoga & Wellness Centre, where traditional yogic wisdom meets modern therapeutic wellness practices.
+              </p>
+              <p>
+                Located in the serene coastal surroundings of Varkala, Trivandrum, Kerala, India, our centre offers a peaceful environment dedicated to natural healing, mindful living, and complete well-being.
+              </p>
+
+              {/* Highlight Box */}
+              <div className="p-6 rounded-2xl bg-emerald-deep/5 border border-emerald-deep/10 shadow-soft">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center shadow-[0_4px_15px_rgba(212,175,55,0.3)] shrink-0 mt-1">
+                    <Sparkles className="w-5 h-5 text-emerald-deep" />
+                  </div>
+                  <div>
+                    <h4 className="font-display text-xl text-emerald-deep mb-2">Led by Dr. S. Vikram Pandy</h4>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      A naturopathy & yoga physician and internationally recognized teacher. We integrate yoga therapy, meditation, pranayama, naturopathy, and holistic lifestyle guidance to create personalized healing experiences.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                Whether you seek physical healing, emotional balance, stress relief, improved mobility, mental clarity, spiritual growth, or transformative wellness retreats, we guide you on a journey toward inner harmony, vitality, and long-term holistic wellness.
+              </p>
+              <p className="border-l-2 border-gold/40 pl-4 mt-6 italic text-emerald-deep/80 text-sm">
+                Our wellness programs and retreats are thoughtfully designed for individuals seeking authentic experiences in a peaceful and rejuvenating atmosphere.
+              </p>
+            </div>
+
+            {/* CTA action */}
+            <div className="pt-4">
+              <a href="#classes" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-emerald hover:text-gold transition-colors group">
+                Discover Our Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Imagery Collage */}
+          <div className="relative lg:pl-10 mt-12 lg:mt-0">
+            <div className="absolute inset-0 bg-gold/10 blur-[100px] rounded-full" />
+
+            <div className="relative grid grid-cols-2 gap-4 items-center">
+              {/* First Image - Tall */}
+              <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-luxury animate-fade-up">
+                <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/50 to-transparent z-10" />
+                <img src={varkalaBeach} alt="Varkala Cliff Beach" className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-1000" loading="lazy" />
+              </div>
+
+              {/* Second Column - Two Stacked Images */}
+              <div className="space-y-4 pt-16">
+                <div className="relative aspect-square rounded-[2rem] overflow-hidden shadow-luxury animate-fade-up" style={{ animationDelay: '150ms' }}>
+                  <img src={therapy} alt="Therapeutic wellness" className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-1000" loading="lazy" />
+                </div>
+                <div className="relative aspect-square rounded-[2rem] overflow-hidden shadow-luxury animate-fade-up" style={{ animationDelay: '300ms' }}>
+                  <img src={retreat} alt="Natural healing" className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-1000" loading="lazy" />
+                </div>
+              </div>
+            </div>
+
+            {/* Floating badge */}
+            <div className="absolute -bottom-6 lg:-left-6 right-6 lg:right-auto glass-dark rounded-2xl p-5 shadow-luxury border border-cream/10 z-20 animate-float hidden md:block">
+              <div className="font-display text-3xl text-gold-gradient mb-1">Authentic</div>
+              <div className="text-[0.6rem] tracking-[0.3em] uppercase text-cream/70">Healing Experience</div>
+            </div>
+
+          </div>
+
+        </div>
       </div>
     </section>
   );
@@ -159,7 +246,7 @@ function About() {
         <div className="relative">
           <div className="absolute -inset-6 bg-gold-gradient opacity-20 blur-3xl rounded-full" />
           <img src={about} alt="Serene yoga studio" className="relative rounded-3xl shadow-luxury w-full h-[560px] object-cover" loading="lazy" />
-          <div className="absolute -bottom-8 -right-4 lg:-right-12 glass-dark rounded-2xl px-8 py-6 shadow-luxury text-cream">
+          <div className="absolute bottom-4 right-4 md:-bottom-8 md:-right-4 lg:-right-12 glass-dark rounded-2xl px-8 py-6 shadow-luxury text-cream">
             <div className="font-display text-4xl text-gold-gradient">15+</div>
             <div className="text-xs tracking-[0.25em] uppercase text-cream/70 mt-1">Years of Healing</div>
           </div>
@@ -205,8 +292,8 @@ function Founder() {
             <img src={founder} alt="Dr. S. Vikram Pandy" className="w-full h-[560px] object-cover" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/70 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
-              <div className="font-display text-2xl">Dr. S. Vikram Pandy</div>
-              <div className="text-xs tracking-[0.25em] uppercase text-gold mt-1">Founder &middot; Yoga Therapist</div>
+              <div className="font-display text-3xl md:text-4xl drop-shadow-md">Dr. S. Vikram Pandy</div>
+              <div className="text-[0.8rem] md:text-[0.85rem] tracking-[0.2em] font-medium uppercase text-gold mt-2 drop-shadow-md">Founder &middot; Yoga Therapist</div>
             </div>
           </div>
         </div>
@@ -262,7 +349,7 @@ function WhyUs() {
               </div>
               <h3 className="font-display text-2xl text-emerald-deep">{t}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d}</p>
-              <div className="absolute top-6 right-6 text-gold/30 font-serif-display text-xs tracking-widest">0{items.indexOf({icon: Icon, t, d}) + 1}</div>
+              <div className="absolute top-6 right-6 text-gold/30 font-serif-display text-xs tracking-widest">0{items.indexOf({ icon: Icon, t, d }) + 1}</div>
             </div>
           ))}
         </div>
@@ -274,38 +361,46 @@ function WhyUs() {
 /* ---------------- Classes ---------------- */
 function Classes() {
   const list = [
-    { t: "Hatha & Vinyasa Yoga", d: "Foundational and flowing practices for strength, flexibility, and presence." },
-    { t: "Therapeutic Yoga", d: "Targeted asana sequences to address chronic pain, stress, and recovery." },
-    { t: "Pranayama & Meditation", d: "Breath sciences and stillness practices for clarity and nervous system balance." },
-    { t: "Private 1-on-1 Sessions", d: "Bespoke sessions crafted around your unique goals and constitution." },
+    { t: "Hatha Yoga", d: "A traditional and foundational style focused on classical postures, breath awareness, flexibility, and strength.", time: "Mon, Wed, Fri • 6:00 AM", img: gImg2 },
+    { t: "Hatha Flow", d: "Traditional postures with smooth and mindful transitions between movements.", time: "Tue, Thu • 7:30 AM", img: gImg3 },
+    { t: "Vinyasa Flow", d: "A dynamic and energizing style that synchronizes movement with breath.", time: "Mon, Wed, Fri • 6:00 PM", img: gImg4 },
+    { t: "Yin Yoga", d: "Slow and meditative style focused on deep stretching, relaxation, and inner stillness.", time: "Weekends • 8:00 AM", img: gImg5 },
+    { t: "Pranayama & Meditation", d: "Guided breathing and meditation practices designed to calm the nervous system.", time: "Daily • 5:30 AM", img: gImg10 },
+    { t: "Therapeutic Sessions", d: "Personalized sessions tailored to posture correction, mobility, and stress management.", time: "By Appointment", img: gImg7 },
   ];
   return (
     <section id="classes" className="relative py-28 bg-emerald-gradient text-cream overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        <div>
+      <img src={yogaLifestyle} alt="Yoga lifestyle classes background" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" loading="lazy" />
+      <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/90 via-emerald-deep/60 to-emerald-deep/90" />
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3" />
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">YOGA CLASSES</span>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance leading-tight">Practices for every <em className="text-gold-gradient not-italic">body & breath</em>.</h2>
-          <div className="gold-divider my-8 max-w-xs" />
-          <p className="text-cream/80 leading-relaxed">
+          <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance leading-tight">Practices for every <em className="text-gold-gradient not-italic">body &amp; breath</em>.</h2>
+          <div className="gold-divider mt-8 mx-auto" />
+          <p className="mt-6 text-cream/70 leading-relaxed text-sm">
             From dynamic Vinyasa to deeply restorative therapy sessions, our classes meet you exactly where you are. Each session honours alignment, breath, and intention — guiding you toward sustainable wellbeing.
           </p>
-          <div className="mt-10 space-y-3">
-            {list.map((c, i) => (
-              <div key={c.t} className="group glass rounded-2xl p-5 flex items-start gap-5 hover:bg-gold/5 transition-all">
-                <div className="text-gold font-serif-display text-sm tracking-widest pt-1">0{i+1}</div>
-                <div className="flex-1">
-                  <h3 className="font-display text-xl text-cream">{c.t}</h3>
-                  <p className="text-sm text-cream/70 mt-1">{c.d}</p>
-                </div>
-                <ArrowRight className="w-4 h-4 text-gold opacity-0 group-hover:opacity-100 transition-opacity mt-2" />
-              </div>
-            ))}
-          </div>
         </div>
-        <div className="relative">
-          <div className="absolute -inset-8 bg-gold/15 blur-3xl rounded-full" />
-          <img src={classes} alt="Yoga class" className="relative rounded-3xl shadow-luxury w-full h-[600px] object-cover" loading="lazy" />
-          <div className="absolute top-6 left-6 glass-dark rounded-full px-5 py-2 text-xs tracking-[0.25em] uppercase text-gold">Live Studio</div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {list.map((c, i) => (
+            <div key={c.t} className="group glass rounded-2xl overflow-hidden hover:shadow-luxury transition-all duration-500 hover:-translate-y-1 flex flex-col">
+              <div className="relative aspect-square overflow-hidden">
+                <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                <div className="absolute inset-0 bg-emerald-deep/20 group-hover:bg-transparent transition-colors duration-500" />
+                <div className="absolute top-4 left-4 glass-dark rounded-full px-3 py-1.5 text-[0.65rem] tracking-[0.2em] uppercase text-gold">0{i + 1}</div>
+              </div>
+              <div className="p-6 md:p-8 flex-1 flex flex-col">
+                <h3 className="font-display text-2xl text-cream">{c.t}</h3>
+                <p className="mt-3 text-sm text-cream/70 leading-relaxed flex-1">{c.d}</p>
+                <div className="mt-6 pt-5 border-t border-cream/10 flex items-center justify-between text-[0.65rem] tracking-[0.1em] text-gold/90 uppercase">
+                  <span className="font-semibold">{c.time}</span>
+                  <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:-translate-x-1 duration-300" />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -315,12 +410,12 @@ function Classes() {
 /* ---------------- Therapies ---------------- */
 function Therapies() {
   const items = [
-    { icon: Hand, t: "Thai Yoga Massage", d: "Assisted stretching and rhythmic compressions for whole-body release." },
-    { icon: Wind, t: "Shiatsu Therapy", d: "Meridian-based pressure work that restores energetic flow." },
-    { icon: Mountain, t: "Deep Tissue Therapy", d: "Targeted manipulation to dissolve chronic tension and adhesions." },
-    { icon: Leaf, t: "Ayurvedic Wellness", d: "Warm oil rituals balancing dosha and nourishing the nervous system." },
-    { icon: Sun, t: "Reflexology", d: "Precise foot and hand work to harmonize organ systems." },
-    { icon: Flower2, t: "Cupping Therapy", d: "Traditional decompression to support circulation and detoxification." },
+    { icon: Hand, t: "Thai Yoga Massage", d: "Assisted stretching and rhythmic compressions for flexibility and energy flow." },
+    { icon: Wind, t: "Shiatsu Therapy", d: "Traditional Japanese pressure-point therapy along the body’s energy pathways." },
+    { icon: Mountain, t: "Deep Tissue Therapy", d: "Focused treatment to release chronic muscular tension and fascial restrictions." },
+    { icon: Leaf, t: "Ayurvedic Wellness Massage", d: "Traditional therapy utilizing herbal oils to support circulation and rejuvenation." },
+    { icon: Flower2, t: "Swedish Massage", d: "Gentle and relaxing full-body massage with smooth flowing strokes." },
+    { icon: Sun, t: "Reflexology Therapy", d: "Pressure-point therapy on hands and feet to harmonize body systems." },
   ];
   return (
     <section id="therapies" className="py-28 bg-cream">
@@ -348,7 +443,7 @@ function Therapies() {
           ))}
         </div>
         <div className="mt-16 relative rounded-3xl overflow-hidden h-72">
-          <img src={therapy} alt="Therapy ritual" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <img src={healingAtmosphere} alt="Therapy ritual" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep/90 via-emerald-deep/50 to-transparent" />
           <div className="relative h-full flex items-center px-10 lg:px-16 text-cream max-w-2xl">
             <div>
@@ -366,7 +461,7 @@ function Therapies() {
 function Retreats() {
   return (
     <section id="retreats" className="relative py-32 text-cream overflow-hidden">
-      <img src={retreat} alt="Wellness retreat" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <img src={retreatBanner} alt="Wellness retreat" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep via-emerald-deep/80 to-emerald-deep/30" />
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
         <div>
@@ -378,9 +473,9 @@ function Retreats() {
           </p>
           <div className="mt-10 grid sm:grid-cols-3 gap-4">
             {[
-              { t: "Reset", d: "3 Day" },
-              { t: "Restore", d: "7 Day" },
-              { t: "Awaken", d: "14 Day" },
+              { t: "7 & 14 Days", d: "Holistic Wellness" },
+              { t: "Meditation", d: "Soulful Retreat" },
+              { t: "Couples", d: "Shared Retreat" },
             ].map((r) => (
               <div key={r.t} className="glass rounded-2xl p-6 text-center">
                 <div className="font-display text-2xl text-gold">{r.t}</div>
@@ -398,32 +493,87 @@ function Retreats() {
 /* ---------------- Courses ---------------- */
 function Courses() {
   const items = [
-    { t: "200hr Yoga Teacher Training", d: "Foundational certification for aspiring teachers and dedicated practitioners.", h: "12 Weeks" },
-    { t: "Advanced Yoga Therapy", d: "Therapeutic application of yoga for clinical and wellness settings.", h: "24 Weeks" },
-    { t: "Naturopathy & Lifestyle", d: "Integrative diploma covering nutrition, hydrotherapy, and lifestyle medicine.", h: "16 Weeks" },
+    {
+      t: "100 Hour Yoga Teacher Training In Kerala",
+      prices: ["Shared Room: € 699", "Private Room: € 1099"],
+      days: "15 Days",
+      level: "Beginner Level",
+      roomTypes: "2 Shared, Private Room",
+      img: training100h
+    },
+    {
+      t: "200 Hour Yoga Teacher Training In Kerala",
+      prices: ["Shared Room: € 849", "Private Room: € 1099"],
+      days: "21 Days",
+      level: "Beginner Level",
+      roomTypes: "2 Shared, Private Room",
+      img: training200hStd
+    },
+    {
+      t: "200 Hour Yoga Teacher Training In Kerala",
+      prices: ["Luxury Private Room: € 1500"],
+      days: "21 Days",
+      level: "Beginner Level",
+      roomTypes: "2 Shared, Private Room",
+      img: training200hLux
+    },
+    {
+      t: "300 Hour Yoga Teacher Training In Kerala",
+      prices: ["Shared Room: € 1049", "Private Room: € 1399"],
+      days: "28 Days",
+      level: "Advance Level",
+      roomTypes: "2 Shared, Private Room",
+      img: training300h
+    },
   ];
+
   return (
-    <section id="courses" className="py-28 bg-cream">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-2xl mb-14">
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">CERTIFICATION COURSES</span>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep text-balance leading-tight">Become a guide. <em className="text-gold-gradient not-italic">Carry the wisdom forward</em>.</h2>
+    <section id="courses" className="py-20 bg-[#FDF5EC]">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="mb-10 text-sm md:text-base text-gray-800 leading-relaxed space-y-4">
+          <p>
+            Currently at Dr. Vikram Yoga & Wellness Centre we offer 100 hour, 200 hour, and 300 hour Yoga Teacher Training programs as a curriculum for our students. Our lessons are aimed at presenting multiple styles of yoga including Hatha, Ashtanga, Yin, and Restorative Yoga. This diverse training makes you versatile with your understanding of yoga to enable you to effectively train and confidently.
+          </p>
         </div>
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="space-y-6 flex flex-col md:w-11/12 mx-auto">
           {items.map((c, i) => (
-            <div key={c.t} className="group relative rounded-3xl overflow-hidden bg-emerald-gradient text-cream p-8 shadow-soft hover:shadow-luxury transition-all duration-500 hover:-translate-y-1">
-              <div className="absolute -top-20 -right-20 w-56 h-56 bg-gold/15 rounded-full blur-3xl group-hover:bg-gold/25 transition-colors" />
-              <div className="relative">
-                <div className="flex items-center justify-between">
-                  <span className="font-serif-display text-xs tracking-[0.3em] text-gold">0{i+1}</span>
-                  <span className="text-[0.65rem] tracking-[0.25em] uppercase text-cream/60">{c.h}</span>
+            <div key={i} className="flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm relative group">
+              <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-[1.35rem] font-bold text-gray-800 mb-4">{c.t}</h3>
+                  <hr className="border-gray-200 mb-6" />
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {c.prices.map((p, idx) => (
+                      <span key={idx} className="bg-[#596057] text-white text-xs font-medium px-4 py-2 shrink-0">
+                        {p}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="space-y-1.5 text-sm text-gray-800">
+                    <p><strong>Days:</strong> {c.days}</p>
+                    <p><strong>Level:</strong> {c.level}</p>
+                    <p><strong>Room Types:</strong> {c.roomTypes}</p>
+                  </div>
                 </div>
-                <h3 className="mt-8 font-display text-3xl">{c.t}</h3>
-                <p className="mt-4 text-sm text-cream/75 leading-relaxed">{c.d}</p>
-                <a href="#contact" className="mt-8 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-gold hover:gap-3 transition-all">Enroll Now <ArrowRight className="w-3.5 h-3.5" /></a>
+                <div className="mt-8">
+                  <a href="#contact" className="block w-full text-center bg-[#E57624] hover:bg-[#D56B1E] text-white py-3 rounded-md text-sm font-semibold transition-colors">
+                    Read Course Details
+                  </a>
+                </div>
+              </div>
+              <div className="md:w-72 lg:w-[22rem] h-64 md:h-auto relative shrink-0">
+                <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-12 flex flex-wrap justify-center gap-4">
+          <a href="#contact" className="px-7 py-3 bg-[#596057] text-white text-sm font-semibold hover:bg-opacity-90 transition-colors">
+            Register Course With Us
+          </a>
+          <a href="#contact" className="px-7 py-3 bg-[#E57624] text-white text-sm font-semibold hover:bg-opacity-90 transition-colors">
+            Have A Query For Us?
+          </a>
         </div>
       </div>
     </section>
@@ -432,33 +582,44 @@ function Courses() {
 
 /* ---------------- Benefits ---------------- */
 function Benefits() {
-  const items = [
-    "Restores physical vitality and flexibility",
-    "Calms the nervous system and relieves stress",
-    "Balances hormones and digestive health",
-    "Sharpens focus and emotional clarity",
-    "Improves sleep and energy cycles",
-    "Cultivates lasting inner peace",
+  const categories = [
+    {
+      title: "Physical Wellness",
+      items: ["Improved flexibility & mobility", "Better posture & body alignment", "Enhanced strength, balance & coordination", "Muscular relaxation & recovery support", "Increased body awareness", "Improved circulation & movement efficiency", "Relaxation and physical rejuvenation", "Natural support for overall well-being & vitality"],
+    },
+    {
+      title: "Mental Wellness",
+      items: ["Reduced stress & mental fatigue", "Improved concentration & focus", "Mental calmness & emotional clarity", "Better sleep quality & relaxation", "Improved mindfulness & self-awareness", "Enhanced emotional balance", "Relaxation of the nervous system", "Greater inner peace & mental well-being"],
+    },
+    {
+      title: "Emotional & Spiritual Well-Being",
+      items: ["Emotional balance & relaxation", "Increased self-awareness & mindfulness", "Deeper mind-body connection", "Inner harmony & confidence", "Supportive healing environment", "Greater sense of calmness & clarity", "Enhanced connection with holistic living practices", "Space for personal growth & inner transformation"],
+    },
   ];
   return (
     <section className="py-28 bg-emerald-deep text-cream relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(212,175,55,0.12),transparent_50%)]" />
-      <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14">
-        <div>
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">BENEFITS</span>
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">BENEFITS OF WELLNESS PROGRAMS</span>
           <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance leading-tight">The quiet power of <em className="text-gold-gradient not-italic">consistent practice</em>.</h2>
-          <p className="mt-6 text-cream/75 leading-relaxed max-w-md">
-            Each program is designed to deliver measurable change — physical, mental, and energetic — supporting a life lived with grace and intention.
-          </p>
         </div>
-        <ul className="space-y-4">
-          {items.map((b, i) => (
-            <li key={b} className="flex items-start gap-5 glass rounded-2xl p-5">
-              <span className="font-serif-display text-gold text-sm tracking-widest mt-1">0{i+1}</span>
-              <span className="text-cream/90 text-[0.95rem] leading-relaxed">{b}</span>
-            </li>
+        <div className="grid lg:grid-cols-3 gap-8">
+          {categories.map((cat, i) => (
+            <div key={cat.title} className="glass rounded-3xl p-8 shadow-soft border border-cream/10">
+              <div className="font-serif-display text-gold text-xs tracking-[0.25em] mb-4">0{i + 1}</div>
+              <h3 className="font-display text-2xl text-cream mb-6">{cat.title}</h3>
+              <ul className="space-y-4">
+                {cat.items.map((b) => (
+                  <li key={b} className="flex items-start gap-4">
+                    <span className="text-[0.9rem] shrink-0 leading-none text-gold">ॐ</span>
+                    <span className="text-cream/90 text-sm leading-relaxed">{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
@@ -502,39 +663,99 @@ function OnlineSessions() {
 /* ---------------- Testimonials ---------------- */
 function Testimonials() {
   const list = [
-    { n: "Priya Sharma", r: "Wellness Practitioner", q: "A profound experience — Dr. Vikram's guidance reshaped my understanding of yoga as therapy. The retreats are pure transformation." },
-    { n: "James Whitmore", r: "Entrepreneur, UK", q: "After years of chronic stress, the 7-day retreat gave me my nervous system back. Elegant, authentic, and deeply healing." },
-    { n: "Anika Verma", r: "Yoga Teacher", q: "The teacher training was world-class. Every module felt curated with care — the kind of depth you rarely find elsewhere." },
+    { 
+      n: "Lea Kolbe", 
+      img: "https://i.pravatar.cc/150?img=5", 
+      q: "Magical place and amazing teacher! I'm staying with Dr. Vikram several days now enjoying morning meditations, yoga, treatments and even started to learn shiatsu. He is a very good teacher with many skills and a lot of experience. I highly recommend his school for Yoga. Go there, meet him and improve your mind and body. And when you get the chance stay there for lunch - even the cook is amazing." 
+    },
+    { 
+      n: "Patrick Woods", 
+      img: "https://i.pravatar.cc/150?img=11", 
+      q: "The wellness center is the place to find peace of mind and relax for the soul. The classes with the ocean sound are fantastic. Dr. Vikram is a great professional. I had a great experience. Highly recommended!" 
+    },
+    { 
+      n: "Sarah Jenkins", 
+      img: "https://i.pravatar.cc/150?img=9", 
+      q: "An incredibly peaceful and healing experience. The yoga sessions helped me feel physically stronger and mentally calmer. The therapeutic practices provided deep healing and relaxation." 
+    },
+    { 
+      n: "Michael Chen", 
+      img: "https://i.pravatar.cc/150?img=8", 
+      q: "The retreat environment was beautiful, relaxing, and deeply transformative. Professional guidance, therapeutic wellness practices, and a very supportive atmosphere for growth." 
+    },
   ];
-  const [i, setI] = useState(0);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
   useEffect(() => {
-    const t = setInterval(() => setI((p) => (p + 1) % list.length), 6000);
+    const maxIndex = window.innerWidth >= 768 ? list.length - 2 : list.length - 1;
+    const t = setInterval(() => {
+      setActiveIndex((p) => (p >= maxIndex ? 0 : p + 1));
+    }, 6000);
     return () => clearInterval(t);
   }, [list.length]);
+
   return (
-    <section id="testimonials" className="py-28 bg-emerald-deep text-cream relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(212,175,55,0.10),transparent_60%)]" />
-      <div className="relative max-w-4xl mx-auto px-6 text-center">
-        <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">TESTIMONIALS</span>
-        <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance">Stories of <em className="text-gold-gradient not-italic">transformation</em>.</h2>
-        <div className="gold-divider mt-8" />
-        <div className="mt-14 relative min-h-[260px]">
-          {list.map((t, idx) => (
-            <div key={t.n} className={`absolute inset-0 transition-all duration-700 ${idx === i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}>
-              <Quote className="w-10 h-10 text-gold/60 mx-auto mb-6" />
-              <p className="font-display text-2xl md:text-3xl text-cream/95 italic leading-relaxed text-balance">"{t.q}"</p>
-              <div className="mt-8 flex items-center justify-center gap-1">
-                {Array.from({ length: 5 }).map((_, k) => <Star key={k} className="w-3.5 h-3.5 text-gold" fill="currentColor" />)}
-              </div>
-              <div className="mt-4 font-serif-display text-sm tracking-[0.3em] text-gold">{t.n.toUpperCase()}</div>
-              <div className="text-xs text-cream/60 tracking-[0.2em] uppercase mt-1">{t.r}</div>
-            </div>
-          ))}
+    <section id="testimonials" className="relative py-24 overflow-hidden bg-cream">
+      <img src={testimonialBg} alt="Serene Background" className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-multiply" loading="lazy" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">TESTIMONIALS</span>
+          <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep leading-tight">
+            Words from our <em className="text-gold-gradient not-italic">community</em>
+          </h2>
+          <div className="gold-divider mt-6 mx-auto" />
         </div>
-        <div className="mt-10 flex items-center justify-center gap-3">
-          {list.map((_, idx) => (
-            <button key={idx} onClick={() => setI(idx)} className={`h-1.5 rounded-full transition-all ${idx === i ? "w-10 bg-gold" : "w-2 bg-cream/30"}`} />
-          ))}
+        
+        <div className="overflow-hidden relative testimonials-slider pb-4">
+          <style>{`
+            .testimonials-slider { --t-width: 100%; }
+            @media (min-width: 768px) { .testimonials-slider { --t-width: 50%; } }
+          `}</style>
+          <div 
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateX(calc(-${activeIndex} * var(--t-width)))` }}
+          >
+            {list.map((t, idx) => (
+              <div key={idx} className="w-full md:w-1/2 flex-shrink-0 px-4 md:px-6 py-2">
+                <div className="bg-white rounded-3xl p-8 md:p-12 shadow-soft hover:shadow-luxury transition-shadow duration-500 h-full flex flex-col items-center text-center relative border border-gold/10">
+                  <div className="absolute top-8 text-gold/10">
+                    <Quote size={80} strokeWidth={0.5} className="mx-auto" />
+                  </div>
+                  <img 
+                    src={t.img} 
+                    alt={t.n} 
+                    className="w-20 h-20 rounded-full object-cover mt-4 mb-4 shadow-sm border-2 border-cream relative z-10" 
+                  />
+                  <h3 className="text-xl font-display text-emerald-deep mb-1 relative z-10">{t.n}</h3>
+                  <div className="flex gap-1 mb-6 relative z-10">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 text-gold fill-gold" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground text-sm md:text-[0.95rem] leading-loose font-serif-display italic flex-grow relative z-10">
+                    "{t.q}"
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 flex items-center justify-center gap-3">
+          {list.map((_, idx) => {
+            const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+            if (isDesktop && idx > list.length - 2) return null;
+            
+            return (
+              <button 
+                key={idx} 
+                onClick={() => setActiveIndex(idx)} 
+                className={`transition-all duration-300 rounded-full h-1.5 ${idx === activeIndex ? "w-6 bg-gold" : "w-1.5 bg-emerald/30 hover:bg-emerald/50"}`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
@@ -583,7 +804,7 @@ function FAQ() {
 
 /* ---------------- Gallery ---------------- */
 function Gallery() {
-  const imgs = [classes, therapy, about, retreat, hero, founder];
+  const imgs = [gImg1, gImg2, gImg3, gImg4, gImg5, gImg6];
   return (
     <section className="py-28 bg-emerald-deep text-cream">
       <div className="max-w-7xl mx-auto px-6">
@@ -593,34 +814,11 @@ function Gallery() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {imgs.map((src, i) => (
-            <div key={i} className={`relative overflow-hidden rounded-2xl group ${i === 0 || i === 4 ? "md:row-span-2 md:h-[34rem]" : "h-64"}`}>
-              <img src={src} alt={`Gallery ${i+1}`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+            <div key={i} className={`relative overflow-hidden rounded-2xl group ${i === 0 || i === 4 ? "h-[20rem] md:row-span-2 md:h-[34rem]" : "h-64"}`}>
+              <img src={src} alt={`Gallery ${i + 1}`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- WhatsApp CTA ---------------- */
-function WhatsAppCTA() {
-  return (
-    <section className="py-24 bg-cream">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="relative rounded-[2rem] bg-gold-gradient p-1 shadow-gold">
-          <div className="rounded-[1.85rem] bg-emerald-gradient text-cream p-10 md:p-16 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15),transparent_60%)]" />
-            <div className="relative">
-              <MessageCircle className="w-12 h-12 text-gold mx-auto" strokeWidth={1.4} />
-              <h2 className="mt-6 font-display text-4xl md:text-5xl text-balance">Begin your journey on <em className="text-gold-gradient not-italic">WhatsApp</em>.</h2>
-              <p className="mt-4 text-cream/80 max-w-xl mx-auto">Chat directly with our team for class enrollment, retreat bookings, or a personal wellness consultation.</p>
-              <a href="https://wa.me/911234567890" target="_blank" rel="noreferrer" className="mt-8 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cream text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-luxury hover:scale-105 transition-transform">
-                <MessageCircle className="w-4 h-4" /> Chat With Us
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -645,7 +843,7 @@ function SocialFeed() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {feed.map((src, i) => (
             <div key={i} className="relative aspect-square overflow-hidden rounded-xl group">
-              <img src={src} alt={`Instagram ${i+1}`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+              <img src={src} alt={`Instagram ${i + 1}`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
               <div className="absolute inset-0 bg-emerald-deep/0 group-hover:bg-emerald-deep/60 transition-colors flex items-center justify-center">
                 <Instagram className="w-6 h-6 text-cream opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
@@ -657,8 +855,8 @@ function SocialFeed() {
   );
 }
 
-/* ---------------- Contact ---------------- */
-function Contact() {
+/* ---------------- Contact (homepage quick-contact) ---------------- */
+function ContactSection() {
   return (
     <section id="contact" className="py-28 bg-emerald-gradient text-cream relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
@@ -671,9 +869,9 @@ function Contact() {
           </p>
           <div className="mt-10 space-y-5">
             {[
-              { i: Phone, l: "+91 12345 67890" },
-              { i: Mail, l: "hello@drvikramwellness.com" },
-              { i: MapPin, l: "Wellness Sanctuary, Bengaluru, India" },
+              { i: Phone, l: "+91 8778639989" },
+              { i: Mail, l: "drvikrampandy@gmail.com" },
+              { i: MapPin, l: "Dr. Vikram Yoga & Wellness Centre Varkala, Tamil Nadu, India." },
             ].map(({ i: Icon, l }) => (
               <div key={l} className="flex items-center gap-4">
                 <div className="w-11 h-11 rounded-full glass flex items-center justify-center">
@@ -727,57 +925,4 @@ function Field({ label, type }: { label: string; type: string }) {
   );
 }
 
-/* ---------------- Footer ---------------- */
-function Footer() {
-  return (
-    <footer className="bg-emerald-deep text-cream pt-20 pb-10 relative overflow-hidden">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-        <div>
-          <img src={logo} alt="Dr Vikram" className="h-16" />
-          <p className="mt-6 text-sm text-cream/70 leading-relaxed">
-            A premium sanctuary for holistic healing, therapeutic yoga, and transformative wellness experiences.
-          </p>
-        </div>
-        <div>
-          <h4 className="font-serif-display text-xs tracking-[0.3em] text-gold uppercase">Explore</h4>
-          <ul className="mt-6 space-y-3 text-sm text-cream/70">
-            {navLinks.slice(0, 5).map((l) => <li key={l.href}><a href={l.href} className="hover:text-gold transition-colors">{l.label}</a></li>)}
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-serif-display text-xs tracking-[0.3em] text-gold uppercase">Practice</h4>
-          <ul className="mt-6 space-y-3 text-sm text-cream/70">
-            {["Yoga Therapy", "Meditation", "Pranayama", "Naturopathy", "Online Sessions"].map((l) => <li key={l}><a href="#" className="hover:text-gold transition-colors">{l}</a></li>)}
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-serif-display text-xs tracking-[0.3em] text-gold uppercase">Stay Connected</h4>
-          <p className="mt-6 text-sm text-cream/70">Receive seasonal practices, retreat dates, and wellness rituals.</p>
-          <form className="mt-5 flex">
-            <input type="email" placeholder="Your email" className="flex-1 bg-transparent border border-cream/20 rounded-l-full px-5 py-3 text-sm placeholder:text-cream/40 focus:border-gold focus:outline-none" />
-            <button className="px-5 rounded-r-full bg-gold-gradient text-emerald-deep">
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </form>
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-6 mt-16">
-        <div className="gold-divider" />
-        <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-cream/50 tracking-[0.15em] uppercase">
-          <span>© {new Date().getFullYear()} Dr. Vikram Yoga & Wellness Centre</span>
-          <span>Heal &middot; Harmonize &middot; Transform</span>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-/* ---------------- WhatsApp Float ---------------- */
-function WhatsAppFloat() {
-  return (
-    <a href="https://wa.me/911234567890" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gold-gradient flex items-center justify-center shadow-gold animate-glow hover:scale-110 transition-transform" aria-label="WhatsApp">
-      <MessageCircle className="w-6 h-6 text-emerald-deep" />
-    </a>
-  );
-}
+/* Footer and WhatsAppFloat are now the shared components from ./about */

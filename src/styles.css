@@ -2,14 +2,15 @@
 @source "../src";
 @import "tw-animate-css";
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Outfit:wght@200;300;400;500;600&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: 'Cormorant Garamond', serif;
+  --font-display: 'Playfair Display', serif;
   --font-serif: 'Cinzel', serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-sans: 'Outfit', sans-serif;
+
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -97,10 +98,20 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.01em; }
-  .font-serif-display { font-family: var(--font-serif); letter-spacing: 0.08em; }
+  h1, h2, h3, h4 { 
+    font-family: var(--font-display); 
+    font-weight: 500; 
+    line-height: 1.15;
+    letter-spacing: -0.02em; 
+  }
+  p {
+    font-weight: 300;
+  }
+  .font-serif-display { font-family: var(--font-serif); letter-spacing: 0.12em; font-weight: 500; }
 }
 
 @layer utilities {
