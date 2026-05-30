@@ -167,15 +167,15 @@ export function Navbar() {
 export function PageHero({ title, subtitle, bg }: { title: string; subtitle: string; bg: string }) {
   return (
     <section className="relative h-[70vh] min-h-[500px] flex items-end justify-start text-cream overflow-hidden">
-      <img src={bg} alt={title} className="absolute inset-0 w-full h-full object-cover brightness-105 saturate-110" />
-      <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep/60 via-emerald-deep/30 to-transparent" />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-20">
-        <div className="flex items-center gap-3 mb-5 md:mb-6">
-          <span className="h-px w-12 bg-gold/60" />
-          <span className="font-serif-display text-[0.65rem] md:text-[0.75rem] tracking-[0.4em] text-gold uppercase drop-shadow-sm">Dr. Vikram Yoga & Wellness</span>
+      <img src={bg} alt={title} className="absolute inset-0 w-full h-full object-cover brightness-105 saturate-110 object-[25%] md:object-center" />
+      <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep/70 via-emerald-deep/40 to-transparent" />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-16 md:pb-24">
+        <div className="flex items-center gap-3 mb-4 md:mb-6">
+          <span className="h-px w-8 md:w-12 bg-gold/60" />
+          <span className="font-serif-display text-[0.55rem] md:text-[0.75rem] tracking-[0.3em] md:tracking-[0.4em] text-gold uppercase drop-shadow-sm">Dr. Vikram Yoga & Wellness</span>
         </div>
-        <h1 className="font-display text-6xl md:text-7xl lg:text-[5.5rem] font-medium text-balance leading-[1.05] drop-shadow-xl">{title}</h1>
-        <p className="mt-5 md:mt-8 text-cream max-w-2xl text-xl md:text-2xl font-light italic tracking-wide drop-shadow-lg">{subtitle}</p>
+        <h1 className="font-display text-4xl md:text-7xl lg:text-[5.5rem] font-medium text-balance leading-[1.1] drop-shadow-xl">{title}</h1>
+        <p className="mt-4 md:mt-8 text-cream max-w-2xl text-base md:text-2xl font-light italic tracking-wide drop-shadow-lg opacity-90">{subtitle}</p>
       </div>
     </section>
   );

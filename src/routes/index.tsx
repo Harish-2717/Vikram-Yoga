@@ -87,7 +87,7 @@ function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center text-cream overflow-hidden">
-      <img src={hero} alt="Serene meditation in forest" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1080} />
+      <img src={about} alt="Dr. Vikram Yoga & Wellness Centre exterior" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1080} />
       <div className="absolute inset-0 bg-hero-overlay" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(8,18,13,0.95)_100%)]" />
       <div className="absolute inset-0 bg-black/40" />
@@ -111,7 +111,7 @@ function Hero() {
 
         <div className="mt-8 md:mt-10 flex items-center justify-center gap-3 md:gap-5 px-4 font-serif-display text-[0.65rem] md:text-[0.8rem] tracking-[0.4em] md:tracking-[0.5em] text-gold uppercase text-center opacity-90 drop-shadow-md">
           <span className="hidden md:block h-px w-16 bg-gold/60" />
-          Heal <span className="text-[0.7rem] shrink-0 leading-none text-gold mt-1">ॐ</span> Balance <span className="text-[0.7rem] shrink-0 leading-none text-gold mt-1">ॐ</span>{" "}
+          Heal <span className="text-[0.7rem] shrink-0 leading-none text-gold mt-1">☯</span> Balance <span className="text-[0.7rem] shrink-0 leading-none text-gold mt-1">☯</span>{" "}
           <span className={`inline-block transition-opacity duration-500 ease-in-out ${fade ? "opacity-100" : "opacity-0"}`}>
             {words[index]}
           </span>
@@ -287,9 +287,9 @@ function Founder() {
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
       <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-lotus/10 blur-3xl rounded-full translate-y-1/3 -translate-x-1/3" />
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-5 gap-14 items-center">
-        <div className="lg:col-span-2 relative">
-          <div className="relative rounded-3xl overflow-hidden shadow-luxury max-w-md mx-auto">
-            <img src={founder} alt="Dr. S. Vikram Pandy" className="w-full h-[560px] object-cover" loading="lazy" />
+        <div className="lg:col-span-2 relative h-full flex flex-col justify-center">
+          <div className="relative rounded-3xl overflow-hidden shadow-luxury max-w-md mx-auto aspect-[3/4] lg:h-[80vh]">
+            <img src={founder} alt="Dr. S. Vikram Pandy" className="w-full h-full object-cover" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/70 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
               <div className="font-display text-3xl md:text-4xl drop-shadow-md">Dr. S. Vikram Pandy</div>
@@ -334,7 +334,7 @@ function WhyUs() {
     { icon: Mountain, t: "Transformative Retreats", d: "Curated retreats in nature for deep reset and inner awakening." },
   ];
   return (
-    <section className="py-28 bg-cream">
+    <section className="min-h-screen flex items-center py-28 bg-cream">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto">
           <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">WHY CHOOSE US</span>
@@ -369,7 +369,7 @@ function Classes() {
     { t: "Therapeutic Sessions", d: "Personalized sessions tailored to posture correction, mobility, and stress management.", time: "By Appointment", img: gImg7 },
   ];
   return (
-    <section id="classes" className="relative py-28 bg-emerald-gradient text-cream overflow-hidden">
+    <section id="classes" className="relative min-h-screen flex items-center py-28 bg-emerald-gradient text-cream overflow-hidden">
       <img src={yogaLifestyle} alt="Yoga lifestyle classes background" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" loading="lazy" />
       <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/90 via-emerald-deep/60 to-emerald-deep/90" />
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3" />
@@ -418,7 +418,7 @@ function Therapies() {
     { icon: Sun, t: "Reflexology Therapy", d: "Pressure-point therapy on hands and feet to harmonize body systems." },
   ];
   return (
-    <section id="therapies" className="py-28 bg-cream">
+    <section id="therapies" className="min-h-screen flex items-center py-28 bg-cream">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-3 gap-14 items-end mb-14">
           <div className="lg:col-span-2">
@@ -612,7 +612,7 @@ function Benefits() {
               <ul className="space-y-4">
                 {cat.items.map((b) => (
                   <li key={b} className="flex items-start gap-4">
-                    <span className="text-[0.9rem] shrink-0 leading-none text-gold">ॐ</span>
+                    <span className="text-[0.9rem] shrink-0 leading-none text-gold">☯</span>
                     <span className="text-cream/90 text-sm leading-relaxed">{b}</span>
                   </li>
                 ))}
@@ -665,22 +665,22 @@ function Testimonials() {
   const list = [
     {
       n: "Lea Kolbe",
-      img: "https://i.pravatar.cc/150?img=5",
+      img: gImg1,
       q: "Magical place and amazing teacher! I'm staying with Dr. Vikram several days now enjoying morning meditations, yoga, treatments and even started to learn shiatsu. He is a very good teacher with many skills and a lot of experience. I highly recommend his school for Yoga. Go there, meet him and improve your mind and body. And when you get the chance stay there for lunch - even the cook is amazing."
     },
     {
       n: "Patrick Woods",
-      img: "https://i.pravatar.cc/150?img=11",
+      img: gImg2,
       q: "The wellness center is the place to find peace of mind and relax for the soul. The classes with the ocean sound are fantastic. Dr. Vikram is a great professional. I had a great experience. Highly recommended!"
     },
     {
       n: "Sarah Jenkins",
-      img: "https://i.pravatar.cc/150?img=9",
+      img: gImg3,
       q: "An incredibly peaceful and healing experience. The yoga sessions helped me feel physically stronger and mentally calmer. The therapeutic practices provided deep healing and relaxation."
     },
     {
       n: "Michael Chen",
-      img: "https://i.pravatar.cc/150?img=8",
+      img: gImg4,
       q: "The retreat environment was beautiful, relaxing, and deeply transformative. Professional guidance, therapeutic wellness practices, and a very supportive atmosphere for growth."
     },
   ];
@@ -696,7 +696,7 @@ function Testimonials() {
   }, [list.length]);
 
   return (
-    <section id="testimonials" className="relative py-24 overflow-hidden bg-cream">
+    <section id="testimonials" className="relative min-h-screen flex flex-col justify-center py-24 overflow-hidden bg-cream">
       <img src={testimonialBg} alt="Serene Background" className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-multiply" loading="lazy" />
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
@@ -773,7 +773,7 @@ function FAQ() {
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="py-28 bg-cream">
+    <section className="min-h-screen flex items-center py-28 bg-cream">
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center mb-14">
           <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">FREQUENTLY ASKED</span>
