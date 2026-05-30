@@ -87,29 +87,30 @@ function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center text-cream overflow-hidden">
-      <img src={about} alt="Dr. Vikram Yoga & Wellness Centre exterior" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1080} />
+      <img src={hero} alt="Serene meditation in forest" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1080} />
       <div className="absolute inset-0 bg-hero-overlay" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(8,18,13,0.95)_100%)]" />
       <div className="absolute inset-0 bg-black/40" />
 
-      {/* Logo as watermark background */}
-      <img
-        src={logo}
-        alt="Dr Vikram crest watermark"
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[60%] md:-translate-y-1/2 h-[340px] md:h-[500px] opacity-10 object-contain pointer-events-none mix-blend-screen animate-float"
-      />
+      <div className="relative z-10 text-center max-w-7xl px-6 py-12 md:py-16 mt-4 md:mt-0">
+        <div className="mb-4 md:mb-6 flex justify-center">
+          <img
+            src={logo}
+            alt="Dr Vikram crest"
+            className="h-32 md:h-48 lg:h-56 w-auto animate-float drop-shadow-[0_0_25px_rgba(212,175,55,0.5)]"
+          />
+        </div>
 
-      <div className="relative z-10 text-center max-w-7xl px-6 py-32 mt-10 md:mt-0">
-        <h1 className="font-display text-6xl md:text-8xl lg:text-[8.5rem] font-bold text-balance leading-[1.0] drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
+        <h1 className="font-display text-4xl md:text-6xl lg:text-[5.5rem] font-bold text-balance leading-[1.1] drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
           Dr. Vikram Yoga <br className="hidden md:block" />
-          <span className="text-gold-gradient font-medium italic md:text-[6.5rem]">&amp; Wellness Centre</span>
+          <span className="text-gold-gradient font-medium italic md:text-[4.5rem]">&amp; Wellness Centre</span>
         </h1>
 
-        <p className="mt-8 md:mt-12 text-xl md:text-3xl text-cream max-w-4xl mx-auto font-light italic tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+        <p className="mt-4 md:mt-6 text-lg md:text-2xl text-cream max-w-3xl mx-auto font-light italic tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
           "A sanctuary where ancient wisdom meets refined contemporary care."
         </p>
 
-        <div className="mt-8 md:mt-10 flex items-center justify-center gap-3 md:gap-5 px-4 font-serif-display text-[0.65rem] md:text-[0.8rem] tracking-[0.4em] md:tracking-[0.5em] text-gold uppercase text-center opacity-90 drop-shadow-md">
+        <div className="mt-4 md:mt-6 flex items-center justify-center gap-3 md:gap-5 px-4 font-serif-display text-[0.6rem] md:text-[0.75rem] tracking-[0.35em] md:tracking-[0.45em] text-gold uppercase text-center opacity-90 drop-shadow-md">
           <span className="hidden md:block h-px w-16 bg-gold/60" />
           Heal <span className="text-[0.7rem] shrink-0 leading-none text-gold mt-1">☯</span> Balance <span className="text-[0.7rem] shrink-0 leading-none text-gold mt-1">☯</span>{" "}
           <span className={`inline-block transition-opacity duration-500 ease-in-out ${fade ? "opacity-100" : "opacity-0"}`}>
@@ -118,10 +119,10 @@ function Hero() {
           <span className="hidden md:block h-px w-16 bg-gold/60" />
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-          <a href="#classes" className="px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform">Join Our Classes</a>
-          <a href="#contact" className="px-8 py-4 rounded-full glass text-cream text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors">Book Consultation</a>
-          <a href="#retreats" className="px-8 py-4 rounded-full border border-gold/40 text-gold text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/15 transition-colors">Explore Retreats</a>
+        <div className="mt-8 md:mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
+          <a href="#classes" className="px-6 md:px-8 py-3 md:py-4 rounded-full bg-gold-gradient text-emerald-deep text-[0.65rem] md:text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform">Join Our Classes</a>
+          <a href="#contact" className="px-6 md:px-8 py-3 md:py-4 rounded-full glass text-cream text-[0.65rem] md:text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors">Book Consultation</a>
+          <a href="#retreats" className="px-6 md:px-8 py-3 md:py-4 rounded-full border border-gold/40 text-gold text-[0.65rem] md:text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/15 transition-colors">Explore Retreats</a>
         </div>
       </div>
 

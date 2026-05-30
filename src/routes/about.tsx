@@ -340,11 +340,16 @@ function FounderSection() {
         <div className="lg:col-span-2 relative">
           <div className="relative rounded-2xl overflow-hidden shadow-luxury max-w-[280px] sm:max-w-[320px] lg:max-w-full mx-auto">
             <img src={founder} alt="Dr. S. Vikram Pandy" className="w-full h-[280px] sm:h-[340px] lg:h-[420px] xl:h-[460px] object-cover object-top" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/90 via-emerald-deep/10 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4">
+            <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/90 via-emerald-deep/10 to-transparent lg:block hidden" />
+            <div className="absolute bottom-4 left-4 right-4 hidden lg:block">
               <div className="font-display text-xl md:text-2xl drop-shadow-md">Dr. S. Vikram Pandy</div>
               <div className="text-[0.65rem] tracking-[0.15em] font-medium uppercase text-gold mt-1 drop-shadow-md">BNYS., M.D.(ACU)., E-RYT., CDNT., CDCT., CIASTM.</div>
             </div>
+          </div>
+          {/* Mobile Text (Below Image) */}
+          <div className="mt-6 text-center lg:hidden">
+            <div className="font-display text-2xl drop-shadow-md text-cream">Dr. S. Vikram Pandy</div>
+            <div className="text-[0.65rem] tracking-[0.12em] font-medium uppercase text-gold mt-2 leading-relaxed">BNYS., M.D.(ACU)., E-RYT., CDNT., CDCT., CIASTM.</div>
           </div>
         </div>
 
