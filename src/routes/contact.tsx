@@ -177,7 +177,7 @@ function MapSection() {
         <div className="relative rounded-3xl overflow-hidden shadow-luxury h-96 bg-emerald-deep/10 border border-border">
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-emerald-deep">
             <MapPin className="w-12 h-12 text-gold" strokeWidth={1.2} />
-            <p className="font-display text-2xl text-emerald-deep text-center px-4">Dr. Vikram Yoga & Wellness Centre<br/>Varkala, Tamil Nadu, India.</p>
+            <p className="font-display text-2xl text-emerald-deep text-center px-4">Dr. Vikram Yoga & Wellness Centre<br />Varkala, Tamil Nadu, India.</p>
             <a
               href="https://maps.google.com/?q=Bengaluru,India"
               target="_blank"

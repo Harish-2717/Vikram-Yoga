@@ -54,23 +54,23 @@ function ClassesSection() {
             From dynamic Vinyasa to deeply restorative therapy sessions, our classes meet you exactly where you are. Each session honours alignment, breath, and intention — guiding you toward sustainable wellbeing.
           </p>
         </div>
-        
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {list.map((c, i) => (
             <div key={c.t} className="group glass rounded-2xl overflow-hidden hover:shadow-luxury transition-all duration-500 hover:-translate-y-1 flex flex-col">
-               <div className="relative aspect-square overflow-hidden">
-                 <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-                 <div className="absolute inset-0 bg-emerald-deep/20 group-hover:bg-transparent transition-colors duration-500" />
-                 <div className="absolute top-4 left-4 glass-dark rounded-full px-3 py-1.5 text-[0.65rem] tracking-[0.2em] uppercase text-gold">0{i+1}</div>
-               </div>
-               <div className="p-6 md:p-8 flex-1 flex flex-col">
-                 <h3 className="font-display text-2xl text-cream">{c.t}</h3>
-                 <p className="mt-3 text-sm text-cream/70 leading-relaxed flex-1">{c.d}</p>
-                 <div className="mt-6 pt-5 border-t border-cream/10 flex items-center justify-between text-[0.65rem] tracking-[0.1em] text-gold/90 uppercase">
-                   <span className="font-semibold">{c.time}</span>
-                   <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:-translate-x-1 duration-300" />
-                 </div>
-               </div>
+              <div className="relative aspect-square overflow-hidden">
+                <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                <div className="absolute inset-0 bg-emerald-deep/20 group-hover:bg-transparent transition-colors duration-500" />
+                <div className="absolute top-4 left-4 glass-dark rounded-full px-3 py-1.5 text-[0.65rem] tracking-[0.2em] uppercase text-gold">0{i + 1}</div>
+              </div>
+              <div className="p-6 md:p-8 flex-1 flex flex-col">
+                <h3 className="font-display text-2xl text-cream">{c.t}</h3>
+                <p className="mt-3 text-sm text-cream/70 leading-relaxed flex-1">{c.d}</p>
+                <div className="mt-6 pt-5 border-t border-cream/10 flex items-center justify-between text-[0.65rem] tracking-[0.1em] text-gold/90 uppercase">
+                  <span className="font-semibold">{c.time}</span>
+                  <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:-translate-x-1 duration-300" />
+                </div>
+              </div>
             </div>
           ))}
         </div>

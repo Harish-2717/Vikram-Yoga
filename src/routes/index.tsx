@@ -11,7 +11,7 @@ import training100h from "@/assets/training_100h.png";
 import training200hStd from "@/assets/training_200h_std.png";
 import training200hLux from "@/assets/training_200h_lux.png";
 import training300h from "@/assets/training_300h.png";
-import gImg1 from "@/assets/g-img1.jpeg";
+import gImg1 from "@/assets/g-img1.jpg";
 import gImg2 from "@/assets/g-img2.jpeg";
 import gImg3 from "@/assets/g-img3.jpeg";
 import gImg4 from "@/assets/g-img4.jpeg";
@@ -93,10 +93,10 @@ function Hero() {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Logo as watermark background */}
-      <img 
-        src={logo} 
-        alt="Dr Vikram crest watermark" 
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[60%] md:-translate-y-1/2 h-[350px] md:h-[600px] opacity-10 object-contain pointer-events-none mix-blend-screen animate-float" 
+      <img
+        src={logo}
+        alt="Dr Vikram crest watermark"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[60%] md:-translate-y-1/2 h-[350px] md:h-[600px] opacity-10 object-contain pointer-events-none mix-blend-screen animate-float"
       />
 
       <div className="relative z-10 text-center max-w-7xl px-6 py-32 mt-10 md:mt-0">
@@ -104,7 +104,7 @@ function Hero() {
           Dr. Vikram Yoga <br className="hidden md:block" />
           <span className="text-gold-gradient font-medium italic md:text-[6.5rem]">&amp; Wellness Centre</span>
         </h1>
-        
+
         <p className="mt-8 md:mt-12 text-xl md:text-3xl text-cream max-w-4xl mx-auto font-light italic tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
           "A sanctuary where ancient wisdom meets refined contemporary care."
         </p>
@@ -663,25 +663,25 @@ function OnlineSessions() {
 /* ---------------- Testimonials ---------------- */
 function Testimonials() {
   const list = [
-    { 
-      n: "Lea Kolbe", 
-      img: "https://i.pravatar.cc/150?img=5", 
-      q: "Magical place and amazing teacher! I'm staying with Dr. Vikram several days now enjoying morning meditations, yoga, treatments and even started to learn shiatsu. He is a very good teacher with many skills and a lot of experience. I highly recommend his school for Yoga. Go there, meet him and improve your mind and body. And when you get the chance stay there for lunch - even the cook is amazing." 
+    {
+      n: "Lea Kolbe",
+      img: "https://i.pravatar.cc/150?img=5",
+      q: "Magical place and amazing teacher! I'm staying with Dr. Vikram several days now enjoying morning meditations, yoga, treatments and even started to learn shiatsu. He is a very good teacher with many skills and a lot of experience. I highly recommend his school for Yoga. Go there, meet him and improve your mind and body. And when you get the chance stay there for lunch - even the cook is amazing."
     },
-    { 
-      n: "Patrick Woods", 
-      img: "https://i.pravatar.cc/150?img=11", 
-      q: "The wellness center is the place to find peace of mind and relax for the soul. The classes with the ocean sound are fantastic. Dr. Vikram is a great professional. I had a great experience. Highly recommended!" 
+    {
+      n: "Patrick Woods",
+      img: "https://i.pravatar.cc/150?img=11",
+      q: "The wellness center is the place to find peace of mind and relax for the soul. The classes with the ocean sound are fantastic. Dr. Vikram is a great professional. I had a great experience. Highly recommended!"
     },
-    { 
-      n: "Sarah Jenkins", 
-      img: "https://i.pravatar.cc/150?img=9", 
-      q: "An incredibly peaceful and healing experience. The yoga sessions helped me feel physically stronger and mentally calmer. The therapeutic practices provided deep healing and relaxation." 
+    {
+      n: "Sarah Jenkins",
+      img: "https://i.pravatar.cc/150?img=9",
+      q: "An incredibly peaceful and healing experience. The yoga sessions helped me feel physically stronger and mentally calmer. The therapeutic practices provided deep healing and relaxation."
     },
-    { 
-      n: "Michael Chen", 
-      img: "https://i.pravatar.cc/150?img=8", 
-      q: "The retreat environment was beautiful, relaxing, and deeply transformative. Professional guidance, therapeutic wellness practices, and a very supportive atmosphere for growth." 
+    {
+      n: "Michael Chen",
+      img: "https://i.pravatar.cc/150?img=8",
+      q: "The retreat environment was beautiful, relaxing, and deeply transformative. Professional guidance, therapeutic wellness practices, and a very supportive atmosphere for growth."
     },
   ];
 
@@ -706,13 +706,13 @@ function Testimonials() {
           </h2>
           <div className="gold-divider mt-6 mx-auto" />
         </div>
-        
+
         <div className="overflow-hidden relative testimonials-slider pb-4">
           <style>{`
             .testimonials-slider { --t-width: 100%; }
             @media (min-width: 768px) { .testimonials-slider { --t-width: 50%; } }
           `}</style>
-          <div 
+          <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(calc(-${activeIndex} * var(--t-width)))` }}
           >
@@ -722,10 +722,10 @@ function Testimonials() {
                   <div className="absolute top-8 text-gold/10">
                     <Quote size={80} strokeWidth={0.5} className="mx-auto" />
                   </div>
-                  <img 
-                    src={t.img} 
-                    alt={t.n} 
-                    className="w-20 h-20 rounded-full object-cover mt-4 mb-4 shadow-sm border-2 border-cream relative z-10" 
+                  <img
+                    src={t.img}
+                    alt={t.n}
+                    className="w-20 h-20 rounded-full object-cover mt-4 mb-4 shadow-sm border-2 border-cream relative z-10"
                   />
                   <h3 className="text-xl font-display text-emerald-deep mb-1 relative z-10">{t.n}</h3>
                   <div className="flex gap-1 mb-6 relative z-10">
@@ -746,11 +746,11 @@ function Testimonials() {
           {list.map((_, idx) => {
             const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
             if (isDesktop && idx > list.length - 2) return null;
-            
+
             return (
-              <button 
-                key={idx} 
-                onClick={() => setActiveIndex(idx)} 
+              <button
+                key={idx}
+                onClick={() => setActiveIndex(idx)}
                 className={`transition-all duration-300 rounded-full h-1.5 ${idx === activeIndex ? "w-6 bg-gold" : "w-1.5 bg-emerald/30 hover:bg-emerald/50"}`}
                 aria-label={`Go to slide ${idx + 1}`}
               />

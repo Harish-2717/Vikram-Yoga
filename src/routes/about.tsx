@@ -167,9 +167,8 @@ export function Navbar() {
 export function PageHero({ title, subtitle, bg }: { title: string; subtitle: string; bg: string }) {
   return (
     <section className="relative h-[70vh] min-h-[500px] flex items-end justify-start text-cream overflow-hidden">
-      <img src={bg} alt={title} className="absolute inset-0 w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep/90 via-emerald-deep/70 to-emerald-deep/30" />
-      <div className="absolute inset-0 bg-black/40" />
+      <img src={bg} alt={title} className="absolute inset-0 w-full h-full object-cover brightness-105 saturate-110" />
+      <div className="absolute inset-0 bg-gradient-to-r from-emerald-deep/60 via-emerald-deep/30 to-transparent" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-20">
         <div className="flex items-center gap-3 mb-5 md:mb-6">
           <span className="h-px w-12 bg-gold/60" />
@@ -333,30 +332,33 @@ function FounderSection() {
   const additional = ["Dorn Therapy", "Su Jok Therapy", "Seed Therapy"];
 
   return (
-    <section className="relative py-28 bg-emerald-gradient text-cream overflow-hidden">
+    <section className="relative py-14 lg:py-16 bg-emerald-gradient text-cream overflow-hidden min-h-[calc(100vh-5rem)] flex items-center">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
       <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-lotus/10 blur-3xl rounded-full translate-y-1/3 -translate-x-1/3" />
-      <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-5 gap-14 items-start">
-        <div className="lg:col-span-2 relative lg:sticky lg:top-32">
-          <div className="relative rounded-3xl overflow-hidden shadow-luxury max-w-md mx-auto">
-            <img src={founder} alt="Dr. S. Vikram Pandy" className="w-full h-[560px] object-cover" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/90 via-emerald-deep/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <div className="font-display text-3xl md:text-4xl drop-shadow-md">Dr. S. Vikram Pandy</div>
-              <div className="text-[0.8rem] md:text-[0.85rem] tracking-[0.15em] font-medium leading-relaxed uppercase text-gold mt-2 drop-shadow-md">BNYS., M.D.(ACU)., E-RYT., CDNT., CDCT., CIASTM.</div>
+      <div className="relative max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-5 gap-8 lg:gap-12 items-center">
+        {/* Image column */}
+        <div className="lg:col-span-2 relative">
+          <div className="relative rounded-2xl overflow-hidden shadow-luxury max-w-[280px] sm:max-w-[320px] lg:max-w-full mx-auto">
+            <img src={founder} alt="Dr. S. Vikram Pandy" className="w-full h-[280px] sm:h-[340px] lg:h-[420px] xl:h-[460px] object-cover object-top" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/90 via-emerald-deep/10 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4">
+              <div className="font-display text-xl md:text-2xl drop-shadow-md">Dr. S. Vikram Pandy</div>
+              <div className="text-[0.65rem] tracking-[0.15em] font-medium uppercase text-gold mt-1 drop-shadow-md">BNYS., M.D.(ACU)., E-RYT., CDNT., CDCT., CIASTM.</div>
             </div>
           </div>
         </div>
+
+        {/* Content column */}
         <div className="lg:col-span-3">
-          <div className="flex items-center gap-3 mb-5">
+          <div className="flex items-center gap-3 mb-3">
             <Sparkles className="w-4 h-4 text-gold" />
-            <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">FOUNDER</span>
+            <span className="font-serif-display text-[0.65rem] tracking-[0.4em] text-gold">FOUNDER</span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl leading-tight text-balance">
+          <h2 className="font-display text-3xl md:text-4xl leading-tight text-balance mb-4">
             A lifelong devotion to <em className="text-gold-gradient not-italic">holistic healing</em>.
           </h2>
-          <div className="gold-divider my-8 max-w-xs" />
-          <div className="space-y-4 text-cream/90 leading-relaxed font-light text-[0.95rem]">
+          <div className="w-16 h-px bg-gold/50 mb-5" />
+          <div className="space-y-3 text-cream/90 leading-relaxed font-light text-sm">
             <p>
               Dr. S. Vikram Pandy is a holistic wellness practitioner, naturopathy & yoga physician, internationally recognized yoga teacher, and therapeutic wellness consultant.
             </p>
@@ -365,44 +367,39 @@ function FounderSection() {
             </p>
           </div>
 
-          <div className="mt-10 grid sm:grid-cols-2 gap-8">
+          <div className="mt-6 grid sm:grid-cols-2 gap-5">
             <div>
-              <h3 className="font-serif-display text-xs tracking-[0.2em] uppercase text-gold mb-4">Educational Background</h3>
-              <ul className="space-y-3">
+              <h3 className="font-serif-display text-[0.6rem] tracking-[0.2em] uppercase text-gold mb-3">Educational Background</h3>
+              <ul className="space-y-2">
                 {education.map(e => (
-                  <li key={e} className="flex items-start gap-3 text-sm text-cream/70">
-                    <span className="text-[0.9rem] shrink-0 leading-none text-gold">ॐ</span> {e}
+                  <li key={e} className="flex items-start gap-2 text-xs text-cream/70">
+                    <span className="text-[0.8rem] shrink-0 leading-none text-gold mt-0.5">ॐ</span> {e}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h3 className="font-serif-display text-xs tracking-[0.2em] uppercase text-gold mb-4">International Certifications</h3>
-              <ul className="space-y-3">
+              <h3 className="font-serif-display text-[0.6rem] tracking-[0.2em] uppercase text-gold mb-3">International Certifications</h3>
+              <ul className="space-y-2">
                 {certifications.map(c => (
-                  <li key={c} className="flex items-start gap-3 text-sm text-cream/70">
-                    <span className="text-[0.9rem] shrink-0 leading-none text-gold">ॐ</span> {c}
+                  <li key={c} className="flex items-start gap-2 text-xs text-cream/70">
+                    <span className="text-[0.8rem] shrink-0 leading-none text-gold mt-0.5">ॐ</span> {c}
                   </li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="mt-8">
-            <h3 className="font-serif-display text-xs tracking-[0.2em] uppercase text-gold mb-4">Additional Training</h3>
+          <div className="mt-5">
+            <h3 className="font-serif-display text-[0.6rem] tracking-[0.2em] uppercase text-gold mb-3">Additional Training</h3>
             <div className="flex flex-wrap gap-2">
-              {additional.map(a => <span key={a} className="glass px-3 py-1.5 rounded-md text-xs text-cream/80">{a}</span>)}
+              {additional.map(a => <span key={a} className="glass px-3 py-1 rounded-md text-xs text-cream/80">{a}</span>)}
             </div>
           </div>
 
-          <div className="mt-10 space-y-4 text-cream/90 leading-relaxed font-light text-[0.95rem]">
-            <p>
-              With years of practical teaching and wellness experience, Dr. Vikram integrates yoga therapy, therapeutic bodywork, rehabilitation techniques, mindful movement, breathwork, meditation, and holistic lifestyle guidance.
-            </p>
-            <p>
-              His mission is to guide individuals toward healthier living and long-term wellness through natural and mindful healing approaches.
-            </p>
-          </div>
+          <p className="mt-5 text-cream/80 leading-relaxed font-light text-sm italic border-l-2 border-gold/40 pl-4">
+            His mission is to guide individuals toward healthier living and long-term wellness through natural and mindful healing approaches.
+          </p>
         </div>
       </div>
     </section>
@@ -436,14 +433,17 @@ function WhyUsSection() {
             Every individual is unique, and our approach is designed to provide personalized guidance, therapeutic support, and holistic healing experiences.
           </p>
         </div>
-        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-          {items.map(({ icon: Icon, t, d }, idx) => (
-            <div key={t} className="group relative bg-card rounded-2xl p-6 shadow-soft transition-all duration-500 hover:-translate-y-1 border border-border">
-              <div className="w-12 h-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold mb-5">
-                <Icon className="w-5 h-5 text-emerald-deep" />
+        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6">
+          {items.map(({ icon: Icon, t, d }) => (
+            <div key={t} className="group relative bg-card rounded-2xl p-4 lg:p-6 shadow-soft transition-all duration-500 hover:-translate-y-1 border border-border">
+              {/* Mobile: icon + title on same row. Desktop: stacked */}
+              <div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-0">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold shrink-0 lg:mb-5">
+                  <Icon className="w-4 h-4 lg:w-5 lg:h-5 text-emerald-deep" />
+                </div>
+                <h3 className="font-display text-base lg:text-xl text-emerald-deep">{t}</h3>
               </div>
-              <h3 className="font-display text-xl text-emerald-deep mb-2">{t}</h3>
-              <p className="text-[0.8rem] text-muted-foreground leading-relaxed">{d}</p>
+              <p className="text-[0.78rem] text-muted-foreground leading-relaxed mt-2 lg:mt-0">{d}</p>
             </div>
           ))}
         </div>

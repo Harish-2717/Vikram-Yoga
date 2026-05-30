@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import retreat from "@/assets/retreat.jpg";
-import gImg1 from "@/assets/g-img1.jpeg";
+import gImg1 from "@/assets/g-img1.jpg";
 import gImg2 from "@/assets/g-img2.jpeg";
 import gImg3 from "@/assets/g-img3.jpeg";
 import gImg4 from "@/assets/g-img4.jpeg";

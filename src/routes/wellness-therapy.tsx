@@ -58,7 +58,7 @@ function TherapiesGrid() {
             Each treatment is delivered by certified therapists in serene private rooms, combining classical techniques with our signature standard of care for optimal recovery.
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map(({ icon: Icon, t, d }) => (
             <div key={t} className="group relative overflow-hidden rounded-2xl bg-card border border-border p-8 shadow-soft hover:shadow-luxury transition-all duration-500 hover:-translate-y-1">
