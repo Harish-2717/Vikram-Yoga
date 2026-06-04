@@ -115,7 +115,7 @@ function CoursesSection() {
                   </button>
 
                   {openIdx === i && (
-                    <a href="/contact" className="mt-3 flex items-center justify-center w-full text-center border-2 border-[#E57624] text-[#E57624] hover:bg-[#E57624] hover:text-white py-2.5 rounded-md text-sm font-semibold transition-colors">
+                    <a href="/contact?interest=Certification Course" className="mt-3 flex items-center justify-center w-full text-center border-2 border-[#E57624] text-[#E57624] hover:bg-[#E57624] hover:text-white py-2.5 rounded-md text-sm font-semibold transition-colors">
                       Book This Course
                     </a>
                   )}
@@ -132,10 +132,10 @@ function CoursesSection() {
           ))}
         </div>
         <div className="mt-12 flex flex-wrap justify-center gap-4">
-          <a href="/contact" className="px-7 py-3 bg-[#596057] text-white text-sm font-semibold hover:bg-opacity-90 transition-colors">
+          <a href="/contact?interest=Certification Course" className="px-7 py-3 bg-[#596057] text-white text-sm font-semibold hover:bg-opacity-90 transition-colors">
             Register Course With Us
           </a>
-          <a href="/contact" className="px-7 py-3 bg-[#E57624] text-white text-sm font-semibold hover:bg-opacity-90 transition-colors">
+          <a href="/contact?interest=Certification Course" className="px-7 py-3 bg-[#E57624] text-white text-sm font-semibold hover:bg-opacity-90 transition-colors">
             Have A Query For Us?
           </a>
         </div>

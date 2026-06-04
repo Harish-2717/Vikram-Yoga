@@ -137,7 +137,7 @@ function TherapiesSection() {
                 <h3 className="font-display text-2xl text-cream">{c.t}</h3>
                 <p className="mt-3 text-sm text-cream/70 leading-relaxed flex-1">{c.d}</p>
                 <div className="mt-6 pt-5 border-t border-cream/10 flex items-center justify-between">
-                  <a href="/contact" className="text-[0.65rem] tracking-[0.2em] uppercase text-gold/90 hover:text-gold transition-colors font-semibold">
+                  <a href={`/contact?interest=Wellness Therapy&specific=${encodeURIComponent(c.t)}`} className="text-[0.65rem] tracking-[0.2em] uppercase text-gold/90 hover:text-gold transition-colors font-semibold">
                     Book Session
                   </a>
                   <ArrowRight className="w-4 h-4 text-gold/60 opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:-translate-x-1 duration-300" />
@@ -190,7 +190,7 @@ function RetreatsSection() {
             </p>
           </div>
 
-          <a href="/contact" className="mt-12 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform">Reserve Your Retreat <ArrowRight className="w-3.5 h-3.5" /></a>
+          <a href="/contact?interest=Retreat" className="mt-12 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform">Reserve Your Retreat <ArrowRight className="w-3.5 h-3.5" /></a>
         </div>
       </div>
     </section>
@@ -230,7 +230,7 @@ function CoursesSection() {
                   <div className="text-[0.6rem] tracking-[0.2em] uppercase text-gold/80 mb-2 font-semibold">Additional details</div>
                   <p className="text-[0.8rem] text-cream/60 leading-relaxed italic">{c.details}</p>
                 </div>
-                <a href="/contact" className="mt-8 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-gold hover:gap-3 transition-all">Enroll Now <ArrowRight className="w-3.5 h-3.5" /></a>
+                <a href={`/contact?interest=Certification Course&specific=${encodeURIComponent(c.t)}`} className="mt-8 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-gold hover:gap-3 transition-all">Enroll Now <ArrowRight className="w-3.5 h-3.5" /></a>
               </div>
             </div>
           ))}

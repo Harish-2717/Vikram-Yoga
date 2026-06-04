@@ -5,6 +5,7 @@ import {
   MessageCircle, ArrowRight, Clock, Globe,
 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -34,6 +35,53 @@ function ContactPage() {
 }
 
 function ContactSection() {
+  const [interest, setInterest] = useState("Consultation");
+  const [specificInterest, setSpecificInterest] = useState("");
+
+  const subOptions: Record<string, string[]> = {
+    "Wellness Therapy": [
+      "Select Therapy...",
+      "Thai Yoga Massage", "Shiatsu Therapy", "Deep Tissue Therapy", 
+      "Ayurvedic Wellness Massage", "Swedish Massage", "Reflexology Therapy", 
+      "Acupuncture-Based Wellness Support", "Cupping Therapy", "IASTM", "Dorn Therapy"
+    ],
+    "Certification Course": [
+      "Select Course...",
+      "100 Hour Yoga Teacher Training", "200 Hour Yoga Teacher Training", "300 Hour Yoga Teacher Training"
+    ],
+    "Yoga Classes": [
+      "Select Class...",
+      "Hatha Yoga", "Hatha Flow", "Vinyasa Flow", "Yin Yoga", "Pranayama & Meditation", "Therapeutic Sessions"
+    ],
+    "Retreat": [
+      "Select Retreat...",
+      "7 Days Holistic Wellness", "14 Days Holistic Wellness", "Meditation Retreat", "Couples Retreat"
+    ]
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const intent = params.get("interest");
+    const specific = params.get("specific");
+    
+    if (intent) {
+      const validOptions = ["Yoga Classes", "Wellness Therapy", "Retreat", "Certification Course", "Online Sessions", "Consultation"];
+      if (validOptions.includes(intent)) {
+        setInterest(intent);
+      }
+    }
+    
+    if (specific) {
+      setSpecificInterest(specific);
+    }
+  }, []);
+
+  // Update specific interest if parent category changes to avoid stale selections
+  const handleInterestChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setInterest(e.target.value);
+    setSpecificInterest("");
+  };
+
   return (
     <section className="py-28 bg-emerald-gradient text-cream relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
@@ -52,7 +100,7 @@ function ContactSection() {
           <div className="mt-10 space-y-5">
             {[
               { Icon: Phone, label: "Phone", value: "+91 8778639989", href: "tel:+918778639989" },
-              { Icon: Mail, label: "Email", value: "drvikrampandy@gmail.com", href: "mailto:drvikrampandy@gmail.com" },
+              { Icon: Mail, label: "Email", value: "drvikramyogawellness@gmail.com", href: "mailto:drvikramyogawellness@gmail.com" },
               { Icon: MapPin, label: "Address", value: "Dr. Vikram Yoga & Wellness Centre Varkala, Tamil Nadu, India.", href: "#map" },
               { Icon: Clock, label: "Hours", value: "Mon–Sat: 6am – 8pm  |  Sun: 6am – 8pm", href: null },
               { Icon: Globe, label: "Website", value: "www.drvikramyogawellness.com", href: "https://www.drvikramyogawellness.com/" },
@@ -133,13 +181,34 @@ function ContactSection() {
             </label>
             <select
               id="contact-interest"
+              value={interest}
+              onChange={handleInterestChange}
               className="mt-2 w-full bg-transparent border-b border-cream/30 py-3 text-cream focus:border-gold focus:outline-none"
             >
               {["Yoga Classes", "Wellness Therapy", "Retreat", "Certification Course", "Online Sessions", "Consultation"].map((o) => (
-                <option key={o} className="bg-emerald-deep">{o}</option>
+                <option key={o} value={o} className="bg-emerald-deep">{o}</option>
               ))}
             </select>
           </div>
+          
+          {subOptions[interest] && (
+            <div className="animate-fade-up">
+              <label htmlFor="contact-specific" className="text-[0.7rem] tracking-[0.25em] uppercase text-cream/70">
+                Specific {interest.replace("Classes", "Class").replace("Sessions", "Session").replace("Course", "Course")}
+              </label>
+              <select
+                id="contact-specific"
+                value={specificInterest}
+                onChange={(e) => setSpecificInterest(e.target.value)}
+                className="mt-2 w-full bg-transparent border-b border-cream/30 py-3 text-cream focus:border-gold focus:outline-none"
+              >
+                {subOptions[interest].map((o) => (
+                  <option key={o} value={o === subOptions[interest][0] ? "" : o} className="bg-emerald-deep">{o}</option>
+                ))}
+              </select>
+            </div>
+          )}
+
           <div>
             <label htmlFor="contact-message" className="text-[0.7rem] tracking-[0.25em] uppercase text-cream/70">
               Message

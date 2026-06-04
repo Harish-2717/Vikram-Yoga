@@ -49,12 +49,17 @@
   --radius: 0.75rem;
 
   /* Brand */
-  --emerald: oklch(0.38 0.09 155);          /* #0F5132 deep emerald */
-  --emerald-deep: oklch(0.18 0.04 155);     /* #08120D matte dark */
-  --gold: oklch(0.78 0.13 85);              /* #D4AF37 luxury gold */
+  --emerald: oklch(0.38 0.09 155);
+  /* #0F5132 deep emerald */
+  --emerald-deep: oklch(0.18 0.04 155);
+  /* #08120D matte dark */
+  --gold: oklch(0.78 0.13 85);
+  /* #D4AF37 luxury gold */
   --gold-light: oklch(0.88 0.10 90);
-  --lotus: oklch(0.88 0.06 0);              /* #F7C6D9 soft pink */
-  --cream: oklch(0.97 0.012 80);            /* #F8F5F0 warm white */
+  --lotus: oklch(0.88 0.06 0);
+  /* #F7C6D9 soft pink */
+  --cream: oklch(0.97 0.012 80);
+  /* #F8F5F0 warm white */
 
   --background: oklch(0.97 0.012 80);
   --foreground: oklch(0.18 0.04 155);
@@ -91,8 +96,15 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 18px; /* increased base font size */
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -102,16 +114,26 @@
     letter-spacing: 0.015em;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { 
-    font-family: var(--font-display); 
-    font-weight: 500; 
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
     line-height: 1.15;
-    letter-spacing: -0.02em; 
+    letter-spacing: -0.02em;
   }
+
   p {
     font-weight: 300;
   }
-  .font-serif-display { font-family: var(--font-serif); letter-spacing: 0.12em; font-weight: 500; }
+
+  .font-serif-display {
+    font-family: var(--font-serif);
+    letter-spacing: 0.12em;
+    font-weight: 500;
+  }
 }
 
 @layer utilities {
@@ -122,46 +144,103 @@
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
-  .bg-gold-gradient { background: var(--gradient-gold); }
-  .bg-emerald-gradient { background: var(--gradient-emerald); }
-  .bg-hero-overlay { background: var(--gradient-hero); }
+
+  .bg-gold-gradient {
+    background: var(--gradient-gold);
+  }
+
+  .bg-emerald-gradient {
+    background: var(--gradient-emerald);
+  }
+
+  .bg-hero-overlay {
+    background: var(--gradient-hero);
+  }
+
   .border-gold-gradient {
     border-image: var(--gradient-gold) 1;
   }
-  .shadow-gold { box-shadow: var(--shadow-gold); }
-  .shadow-luxury { box-shadow: var(--shadow-luxury); }
-  .shadow-soft { box-shadow: var(--shadow-soft); }
+
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .shadow-luxury {
+    box-shadow: var(--shadow-luxury);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
   .glass {
     background: oklch(1 0 0 / 0.06);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid oklch(0.78 0.13 85 / 0.18);
   }
+
   .glass-dark {
     background: oklch(0.10 0.03 155 / 0.55);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border: 1px solid oklch(0.78 0.13 85 / 0.20);
   }
+
   .gold-divider {
     height: 1px;
     background: linear-gradient(90deg, transparent, oklch(0.78 0.13 85 / 0.6), transparent);
   }
-  .text-balance { text-wrap: balance; }
-  .animate-float { animation: float 6s ease-in-out infinite; }
-  .animate-fade-up { animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
-  .animate-glow { animation: glow 3s ease-in-out infinite; }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
+
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px oklch(0.78 0.13 85 / 0.2); }
-  50% { box-shadow: 0 0 50px oklch(0.78 0.13 85 / 0.5); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px oklch(0.78 0.13 85 / 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 50px oklch(0.78 0.13 85 / 0.5);
+  }
 }

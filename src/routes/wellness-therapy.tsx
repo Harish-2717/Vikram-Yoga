@@ -66,7 +66,7 @@ function TherapiesGrid() {
               <Icon className="w-10 h-10 text-emerald relative" strokeWidth={1.2} />
               <h3 className="mt-6 font-display text-2xl text-emerald-deep">{t}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d}</p>
-              <a href="/contact" className="mt-6 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-emerald hover:text-gold transition-colors">
+              <a href={`/contact?interest=Wellness Therapy&specific=${encodeURIComponent(t)}`} className="mt-6 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-emerald hover:text-gold transition-colors">
                 Book Session <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -89,7 +89,7 @@ function TherapyCTA() {
           We offer personalized wellness guidance. Contact us to discuss your goals, health conditions, or any discomfort you're experiencing, and we will tailor a treatment plan specifically for you.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <a href="/contact" className="px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform">
+          <a href="/contact?interest=Consultation" className="px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform">
             Book a Consultation
           </a>
           <a href="https://wa.me/918778639989" target="_blank" rel="noreferrer" className="px-8 py-4 rounded-full glass border border-gold/30 text-gold text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors">

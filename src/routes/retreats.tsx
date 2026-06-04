@@ -41,34 +41,154 @@ function RetreatsSection() {
 
   const retreatsList = [
     {
-      t: "7 & 14 Days",
-      d: "Holistic Wellness",
-      details: "Our signature holistic wellness retreat designed to fully reset your system. Includes daily yoga, mindful meditation, personalized Ayurvedic meals, and classical naturopathy treatments."
+      title: "7 DAYS & 14 DAYS HOLISTIC WELLNESS RETREAT",
+      shortDesc: "Holistic Wellness",
+      overview: "A complete wellness immersion designed to restore balance, vitality, relaxation, and inner harmony through yoga, therapeutic wellness sessions, holistic healing practices, and mindful living.",
+      included: [
+        "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
+        "Sunset Yoga Session (Evening Practice – 90 Minutes)",
+        "Daily Pranayama & Meditation Session (60 Minutes)",
+        "Daily Wellness Therapy Session (60 Minutes)",
+        "Doctor Consultation & Wellness Assessment",
+        "Pulse Diagnosis Assessment",
+        "Iris Diagnosis Assessment",
+        "Personalized Wellness Guidance",
+        "Healthy Kerala Cuisine",
+        "Comfortable Accommodation"
+      ],
+      highlights: [
+        "Shiatsu Therapy", "Reflexology", "Thai Yoga Therapy", "Deep Tissue Therapy", "Traditional Ayurvedic Wellness Practices", "Mindful Living Education", "Personalized Wellness Programs"
+      ],
+      idealFor: "Relaxation, rejuvenation, lifestyle balance, recovery, and overall well-being."
     },
     {
-      t: "Meditation",
-      d: "Soulful Retreat",
-      details: "A deeply immersive journey focusing on mindfulness, breathwork (pranayama), and guided meditation to find profound inner peace and mental clarity."
+      title: "YOGA & MEDITATION RETREAT",
+      shortDesc: "Traditional Practice",
+      overview: "A transformative retreat focused on traditional yoga, breathwork, meditation, mindfulness, and self-awareness.",
+      included: [
+        "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
+        "Sunset Yoga Session (Evening Practice – 90 Minutes)",
+        "Daily Pranayama & Meditation Session (60 Minutes)",
+        "Doctor Consultation & Wellness Assessment",
+        "Healthy Kerala Cuisine",
+        "Comfortable Accommodation"
+      ],
+      highlights: [
+        "Guided Meditation Practices", "Breath Awareness Training", "Chanting & Mindfulness Sessions", "Yoga Adjustment Sessions", "Psychic Physiology of Yoga", "Silent Reflection Practices"
+      ],
+      idealFor: "Mental clarity, emotional balance, mindfulness, and spiritual growth."
     },
     {
-      t: "Couples",
-      d: "Shared Retreat",
-      details: "A beautiful opportunity for partners to reconnect, relax, and grow together through synchronized yoga practices, couples massage therapies, and shared wellness goals."
+      title: "COUPLE WELLNESS RETREAT",
+      shortDesc: "Shared Healing",
+      overview: "A rejuvenating retreat designed for couples seeking connection, relaxation, healing, and mindful living together.",
+      included: [
+        "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
+        "Sunset Yoga Session (Evening Practice – 90 Minutes)",
+        "Daily Pranayama & Meditation Session (60 Minutes)",
+        "Wellness Massage Sessions",
+        "Couple Massage Learning Sessions",
+        "Healthy Kerala Cuisine",
+        "Private Accommodation"
+      ],
+      highlights: [
+        "Couple Yoga Practices", "Partner Breathing Exercises", "Relaxation & Mindfulness Activities", "Wellness Therapy Experiences", "Shared Healing Journey"
+      ],
+      idealFor: "Couples seeking relaxation, emotional connection, wellness, and quality time together."
     },
     {
-      t: "Detox",
-      d: "Renewal Retreat",
-      details: "Cleanse your body and mind with our intensive detox retreat. Features specialized diets, herbal cleansing, lymphatic drainage, and restorative yoga sessions."
+      title: "YOGA DETOX & REJUVENATION RETREAT",
+      shortDesc: "Lifestyle Renewal",
+      overview: "A holistic cleansing and lifestyle renewal retreat designed to support detoxification, digestive wellness, energy renewal, and mindful living.",
+      included: [
+        "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
+        "Sunset Yoga Session (Evening Practice – 90 Minutes)",
+        "Daily Pranayama & Meditation Session (60 Minutes)",
+        "Doctor Consultation & Wellness Assessment",
+        "Pulse Diagnosis Assessment",
+        "Iris Diagnosis Assessment",
+        "Healthy Detox Meals & Kerala Cuisine",
+        "Comfortable Accommodation"
+      ],
+      highlights: [
+        "Jala Neti (Yogic Nasal Cleansing)", "Kapalabhati (Yogic Cranial Cleansing Practice)", "Vamana Dhauti (Yogic Stomach Cleansing Practice)", "Yogic Detox Techniques", "Ayurveda-Inspired Lifestyle Guidance", "Digestive Wellness Education"
+      ],
+      idealFor: "Detoxification, energy renewal, digestive support, and healthy lifestyle transformation."
     },
     {
-      t: "Energy",
-      d: "Balancing Retreat",
-      details: "Realign your chakras and boost your life force. This program includes specialized energy balancing therapies like Shiatsu, acupuncture, and dynamic Vinyasa flows."
+      title: "ENERGY BALANCING RETREAT",
+      shortDesc: "Energetic Harmony",
+      overview: "A restorative retreat designed to harmonize physical energy, emotional well-being, and mental calmness through holistic healing practices.",
+      included: [
+        "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
+        "Sunset Yoga Session (Evening Practice – 90 Minutes)",
+        "Daily Pranayama & Meditation Session (60 Minutes)",
+        "Daily Wellness Therapy Session (60 Minutes)",
+        "Doctor Consultation & Wellness Assessment",
+        "Healthy Kerala Cuisine",
+        "Comfortable Accommodation"
+      ],
+      highlights: [
+        "Shiatsu Therapy", "Reflexology", "Reiki Wellness Sessions", "Thai Yoga Therapy", "Acupuncture-Based Wellness Support", "Beach Pranayama & Meditation Sessions", "Energy Awareness Practices"
+      ],
+      idealFor: "Stress relief, emotional balance, relaxation, and energetic harmony."
     },
     {
-      t: "Pain Relief",
-      d: "Therapeutic",
-      details: "Tailored specifically for individuals managing chronic pain. Utilizes therapeutic bodywork, posture correction, dry needling, and gentle mobility sequences."
+      title: "ANTI-AGING & HEALTHY LONGEVITY RETREAT",
+      shortDesc: "Graceful Aging",
+      overview: "A holistic wellness retreat focused on vitality, healthy aging, mobility, stress reduction, and overall well-being.",
+      included: [
+        "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
+        "Sunset Yoga Session (Evening Practice – 90 Minutes)",
+        "Daily Pranayama & Meditation Session (60 Minutes)",
+        "Daily Wellness Therapy Session (60 Minutes)",
+        "Doctor Consultation & Wellness Assessment",
+        "Pulse Diagnosis Assessment",
+        "Iris Diagnosis Assessment",
+        "Healthy Kerala Cuisine",
+        "Comfortable Accommodation"
+      ],
+      highlights: [
+        "Yoga for Healthy Aging", "Breathwork for Vitality", "Wellness Therapies for Circulation & Recovery", "Natural Rejuvenation Practices", "Lifestyle & Longevity Guidance", "Stress Management Techniques", "Healthy Aging Education"
+      ],
+      idealFor: "Vitality, graceful aging, mobility, relaxation, and long-term wellness."
+    },
+    {
+      title: "PAIN MANAGEMENT & THERAPEUTIC WELLNESS RETREAT",
+      shortDesc: "Therapeutic Support",
+      overview: "A therapeutic wellness retreat designed to support mobility, posture, muscular recovery, and overall physical well-being.",
+      included: [
+        "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
+        "Sunset Yoga Session (Evening Practice – 90 Minutes)",
+        "Daily Pranayama & Meditation Session (60 Minutes)",
+        "Daily Wellness Therapy Session (60 Minutes)",
+        "Doctor Consultation & Wellness Assessment",
+        "Personalized Therapeutic Guidance",
+        "Healthy Kerala Cuisine",
+        "Comfortable Accommodation"
+      ],
+      highlights: [
+        "Therapeutic Yoga Practices", "Mobility & Stretching Sessions", "Postural Awareness Training", "Deep Tissue Therapy", "Shiatsu Therapy", "Reflexology", "Relaxation & Recovery Techniques"
+      ],
+      idealFor: "Mobility support, muscular relaxation, posture improvement, and recovery."
+    },
+    {
+      title: "STRESS & INSOMNIA MANAGEMENT RETREAT",
+      shortDesc: "Calm & Balance",
+      overview: "A calming retreat designed to relax the nervous system, improve sleep quality, reduce stress, and restore emotional balance.",
+      included: [
+        "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
+        "Sunset Yoga Session (Evening Practice – 90 Minutes)",
+        "Daily Pranayama & Meditation Session (60 Minutes)",
+        "Daily Wellness Therapy Session (60 Minutes)",
+        "Doctor Consultation & Wellness Assessment",
+        "Healthy Kerala Cuisine",
+        "Comfortable Accommodation"
+      ],
+      highlights: [
+        "Guided Meditation Practices", "Sleep Wellness Education", "Nervous System Relaxation Techniques", "Breathwork & Mindfulness Sessions", "Emotional Wellness Practices", "Relaxation Yoga", "Stress Management Guidance"
+      ],
+      idealFor: "Stress reduction, better sleep, emotional well-being, and mental clarity."
     }
   ];
 
@@ -76,38 +196,74 @@ function RetreatsSection() {
     <section className="py-28 bg-cream relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-emerald-deep/5 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
-        <div>
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">WELLNESS RETREATS</span>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep leading-tight">Immersive healing for <em className="text-gold-gradient not-italic">body and mind</em>.</h2>
+        <div className="lg:max-w-xl">
+          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">WELLNESS RETREATS & TRANSFORMATIONAL PROGRAMS</span>
+          <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep leading-tight">Holistic Healing • Mindful Living • <em className="text-gold-gradient not-italic">Inner Transformation</em>.</h2>
           <div className="gold-divider my-8 max-w-xs" />
           <p className="text-muted-foreground leading-relaxed">
-            Immersive 3, 7, and 14-day retreats in nature — combining daily yoga, naturopathy, ayurvedic cuisine, and silent practice. Designed for deep reset and lasting transformation.
+            At Dr. VIKRAM YOGA & WELLNESS CENTRE, our wellness retreats are thoughtfully designed to support physical well-being, emotional balance, mental clarity, relaxation, and personal transformation. Set in the serene coastal environment of Varkala, Kerala, our retreat experiences combine authentic yoga practices, therapeutic wellness approaches, holistic healing methods, and mindful lifestyle guidance.
+            <br/><br/>
+            Each retreat includes personalized support and a balanced daily schedule designed to nurture the body, calm the mind, and promote complete well-being.
           </p>
           <div className="mt-10 flex flex-col gap-4">
             {retreatsList.map((r) => {
-              const isOpen = openRetreat === r.t;
+              const isOpen = openRetreat === r.title;
               return (
                 <div
-                  key={r.t}
-                  onClick={() => setOpenRetreat(isOpen ? null : r.t)}
+                  key={r.title}
+                  onClick={() => setOpenRetreat(isOpen ? null : r.title)}
                   className="bg-[#6f7062] hover:bg-[#606155] transition-colors rounded-2xl cursor-pointer shadow-soft overflow-hidden text-cream"
                 >
-                  <div className="p-6 text-center flex flex-col items-center relative">
-                    <div className="font-display text-3xl">{r.t}</div>
-                    <div className="text-[0.65rem] tracking-[0.3em] uppercase text-gold mt-1.5">{r.d}</div>
+                  <div className="p-5 sm:p-6 text-center flex flex-col items-center relative">
+                    <div className="font-display text-2xl sm:text-3xl">{r.title}</div>
+                    <div className="text-[0.65rem] tracking-[0.3em] uppercase text-gold mt-1.5">{r.shortDesc}</div>
                   </div>
-                  <div className={`grid transition-all duration-500 bg-[#606155]/50 ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                  <div className={`grid transition-all duration-500 bg-[#53544a] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                     <div className="overflow-hidden">
-                      <p className="px-6 pb-6 pt-2 text-cream/90 text-sm md:text-base leading-relaxed text-center">
-                        {r.details}
-                      </p>
+                      <div className="p-6 text-cream/90 text-sm leading-relaxed space-y-6 text-left">
+                        <div>
+                          <strong className="text-gold tracking-wide uppercase text-xs mb-1 block">Overview</strong>
+                          <p>{r.overview}</p>
+                        </div>
+                        
+                        <div className="grid sm:grid-cols-2 gap-6">
+                          <div>
+                            <strong className="text-gold tracking-wide uppercase text-xs mb-2 block">What's Included</strong>
+                            <ul className="space-y-1.5">
+                              {r.included.map((item, i) => (
+                                <li key={i} className="flex gap-2 text-xs items-start">
+                                  <span className="text-gold mt-0.5">•</span> {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div>
+                            <strong className="text-gold tracking-wide uppercase text-xs mb-2 block">Retreat Highlights</strong>
+                            <ul className="space-y-1.5">
+                              {r.highlights.map((item, i) => (
+                                <li key={i} className="flex gap-2 text-xs items-start">
+                                  <span className="text-gold mt-0.5">•</span> {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div>
+                          <strong className="text-gold tracking-wide uppercase text-xs mb-1 block">Ideal For</strong>
+                          <p>{r.idealFor}</p>
+                        </div>
+                        
+                        <div className="pt-2 text-center">
+                          <a href={`/apply?course=${encodeURIComponent(r.title)}`} className="inline-block px-6 py-2 rounded-full bg-gold-gradient text-emerald-deep font-semibold tracking-wider text-xs hover:opacity-90 transition-opacity">Apply Now</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               );
             })}
           </div>
-          <a href="/contact" className="mt-10 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold">Reserve Your Retreat <ArrowRight className="w-3.5 h-3.5" /></a>
         </div>
         <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-luxury lg:sticky lg:top-32 hidden lg:block">
           <img src={hero} alt="Retreat Details" className="absolute inset-0 w-full h-full object-cover" />
