@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import classes from "@/assets/classes.jpg";
-import hero from "@/assets/hero.jpg";
-import retreat from "@/assets/retreat.jpg";
-import therapy from "@/assets/therapy.jpg";
-import about from "@/assets/about.png";
+import gimg2 from "@/assets/g-img2.jpeg";
+import gimg3 from "@/assets/g-img3.jpeg";
+import gimg4 from "@/assets/g-img4.jpeg";
+import gimg5 from "@/assets/g-img5.jpeg";
+import gimg10 from "@/assets/g-img10.jpeg";
+import gimg7 from "@/assets/g-img7.jpeg";
 import { ArrowRight } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
 
@@ -35,12 +37,12 @@ function YogaPage() {
 
 function ClassesSection() {
   const list = [
-    { t: "Hatha Yoga", d: "A traditional and foundational style focused on classical postures, breath awareness, flexibility, and strength.", time: "Mon, Wed, Fri • 6:00 AM", img: classes },
-    { t: "Hatha Flow", d: "Traditional postures with smooth and mindful transitions between movements.", time: "Tue, Thu • 7:30 AM", img: retreat },
-    { t: "Vinyasa Flow", d: "A dynamic and energizing style that synchronizes movement with breath.", time: "Mon, Wed, Fri • 6:00 PM", img: therapy },
-    { t: "Yin Yoga", d: "Slow and meditative style focused on deep stretching, relaxation, and inner stillness.", time: "Weekends • 8:00 AM", img: about },
-    { t: "Pranayama & Meditation", d: "Guided breathing and meditation practices designed to calm the nervous system.", time: "Daily • 5:30 AM", img: hero },
-    { t: "Therapeutic Sessions", d: "Personalized sessions tailored to posture correction, mobility, and stress management.", time: "By Appointment", img: classes },
+    { t: "Hatha Yoga", d: "A traditional and foundational style focused on classical postures, breath awareness, flexibility, and strength.", time: "Mon, Wed, Fri • 6:00 AM", img: gimg2 },
+    { t: "Hatha Flow", d: "Traditional postures with smooth and mindful transitions between movements.", time: "Tue, Thu • 7:30 AM", img: gimg3 },
+    { t: "Vinyasa Flow", d: "A dynamic and energizing style that synchronizes movement with breath.", time: "Mon, Wed, Fri • 6:00 PM", img: gimg4 },
+    { t: "Yin Yoga", d: "Slow and meditative style focused on deep stretching, relaxation, and inner stillness.", time: "Weekends • 8:00 AM", img: gimg5 },
+    { t: "Pranayama & Meditation", d: "Guided breathing and meditation practices designed to calm the nervous system.", time: "Daily • 5:30 AM", img: gimg10 },
+    { t: "Therapeutic Sessions", d: "Personalized sessions tailored to posture correction, mobility, and stress management.", time: "By Appointment", img: gimg7 },
   ];
   return (
     <section className="relative py-28 bg-emerald-gradient text-cream overflow-hidden">

@@ -7,6 +7,10 @@ import about from "@/assets/about.png";
 import therapy from "@/assets/therapy.jpg";
 import temple1 from "@/assets/temple_1.png";
 import temple2 from "@/assets/temple_2.png";
+import wellnessRetreatImg from "@/assets/Yoga wellness retreat.png";
+import detoxRetreatImg from "@/assets/Yoga Detox & Rejuvenation Retreat.png";
+import meditationRetreatImg from "@/assets/Yoga meditation retreat.png";
+import coupleRetreatImg from "@/assets/Couple Wellness retreat.png";
 import { ArrowRight, Flower2 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
 
@@ -43,6 +47,7 @@ function RetreatsSection() {
     {
       title: "7 DAYS & 14 DAYS HOLISTIC WELLNESS RETREAT",
       shortDesc: "Holistic Wellness",
+      img: wellnessRetreatImg,
       overview: "A complete wellness immersion designed to restore balance, vitality, relaxation, and inner harmony through yoga, therapeutic wellness sessions, holistic healing practices, and mindful living.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
@@ -64,6 +69,7 @@ function RetreatsSection() {
     {
       title: "YOGA & MEDITATION RETREAT",
       shortDesc: "Traditional Practice",
+      img: meditationRetreatImg,
       overview: "A transformative retreat focused on traditional yoga, breathwork, meditation, mindfulness, and self-awareness.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
@@ -81,6 +87,7 @@ function RetreatsSection() {
     {
       title: "COUPLE WELLNESS RETREAT",
       shortDesc: "Shared Healing",
+      img: coupleRetreatImg,
       overview: "A rejuvenating retreat designed for couples seeking connection, relaxation, healing, and mindful living together.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
@@ -99,6 +106,7 @@ function RetreatsSection() {
     {
       title: "YOGA DETOX & REJUVENATION RETREAT",
       shortDesc: "Lifestyle Renewal",
+      img: detoxRetreatImg,
       overview: "A holistic cleansing and lifestyle renewal retreat designed to support detoxification, digestive wellness, energy renewal, and mindful living.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
@@ -118,6 +126,7 @@ function RetreatsSection() {
     {
       title: "ENERGY BALANCING RETREAT",
       shortDesc: "Energetic Harmony",
+      img: varkalaBeach,
       overview: "A restorative retreat designed to harmonize physical energy, emotional well-being, and mental calmness through holistic healing practices.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
@@ -136,6 +145,7 @@ function RetreatsSection() {
     {
       title: "ANTI-AGING & HEALTHY LONGEVITY RETREAT",
       shortDesc: "Graceful Aging",
+      img: retreatBanner,
       overview: "A holistic wellness retreat focused on vitality, healthy aging, mobility, stress reduction, and overall well-being.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
@@ -156,6 +166,7 @@ function RetreatsSection() {
     {
       title: "PAIN MANAGEMENT & THERAPEUTIC WELLNESS RETREAT",
       shortDesc: "Therapeutic Support",
+      img: therapy,
       overview: "A therapeutic wellness retreat designed to support mobility, posture, muscular recovery, and overall physical well-being.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
@@ -175,6 +186,7 @@ function RetreatsSection() {
     {
       title: "STRESS & INSOMNIA MANAGEMENT RETREAT",
       shortDesc: "Calm & Balance",
+      img: about,
       overview: "A calming retreat designed to relax the nervous system, improve sleep quality, reduce stress, and restore emotional balance.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
@@ -202,7 +214,7 @@ function RetreatsSection() {
           <div className="gold-divider my-8 max-w-xs" />
           <p className="text-muted-foreground leading-relaxed">
             At Dr. VIKRAM YOGA & WELLNESS CENTRE, our wellness retreats are thoughtfully designed to support physical well-being, emotional balance, mental clarity, relaxation, and personal transformation. Set in the serene coastal environment of Varkala, Kerala, our retreat experiences combine authentic yoga practices, therapeutic wellness approaches, holistic healing methods, and mindful lifestyle guidance.
-            <br/><br/>
+            <br /><br />
             Each retreat includes personalized support and a balanced daily schedule designed to nurture the body, calm the mind, and promote complete well-being.
           </p>
           <div className="mt-10 flex flex-col gap-4">
@@ -214,9 +226,14 @@ function RetreatsSection() {
                   onClick={() => setOpenRetreat(isOpen ? null : r.title)}
                   className="bg-[#6f7062] hover:bg-[#606155] transition-colors rounded-2xl cursor-pointer shadow-soft overflow-hidden text-cream"
                 >
-                  <div className="p-5 sm:p-6 text-center flex flex-col items-center relative">
-                    <div className="font-display text-2xl sm:text-3xl">{r.title}</div>
-                    <div className="text-[0.65rem] tracking-[0.3em] uppercase text-gold mt-1.5">{r.shortDesc}</div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="md:w-48 h-32 md:h-auto relative overflow-hidden shrink-0">
+                      <img src={r.img} alt={r.title} className="absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                    <div className="p-5 sm:p-6 text-left flex-1 flex flex-col justify-center">
+                      <div className="font-display text-xl sm:text-2xl leading-tight">{r.title}</div>
+                      <div className="text-[0.65rem] tracking-[0.3em] uppercase text-gold mt-1.5">{r.shortDesc}</div>
+                    </div>
                   </div>
                   <div className={`grid transition-all duration-500 bg-[#53544a] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                     <div className="overflow-hidden">
@@ -225,7 +242,7 @@ function RetreatsSection() {
                           <strong className="text-gold tracking-wide uppercase text-xs mb-1 block">Overview</strong>
                           <p>{r.overview}</p>
                         </div>
-                        
+
                         <div className="grid sm:grid-cols-2 gap-6">
                           <div>
                             <strong className="text-gold tracking-wide uppercase text-xs mb-2 block">What's Included</strong>
@@ -253,7 +270,7 @@ function RetreatsSection() {
                           <strong className="text-gold tracking-wide uppercase text-xs mb-1 block">Ideal For</strong>
                           <p>{r.idealFor}</p>
                         </div>
-                        
+
                         <div className="pt-2 text-center">
                           <a href={`/apply?course=${encodeURIComponent(r.title)}`} className="inline-block px-6 py-2 rounded-full bg-gold-gradient text-emerald-deep font-semibold tracking-wider text-xs hover:opacity-90 transition-opacity">Apply Now</a>
                         </div>
@@ -266,7 +283,7 @@ function RetreatsSection() {
           </div>
         </div>
         <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-luxury lg:sticky lg:top-32 hidden lg:block">
-          <img src={hero} alt="Retreat Details" className="absolute inset-0 w-full h-full object-cover" />
+          <img src={wellnessRetreatImg} alt="Retreat Details" className="absolute inset-0 w-full h-full object-cover" />
         </div>
       </div>
     </section>
@@ -314,9 +331,9 @@ function Excursions() {
           </ul>
 
           <div className="grid grid-cols-3 gap-3 md:gap-4">
-            <img src={temple1} alt="Temple" className="w-full h-32 md:h-64 object-cover rounded-xl" />
-            <img src={temple2} alt="Ritual" className="w-full h-32 md:h-64 object-cover rounded-xl" />
-            <img src={retreatBanner} alt="Meditation" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={meditationRetreatImg} alt="Beach Yoga" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={detoxRetreatImg} alt="Cultural Hug" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={coupleRetreatImg} alt="Nature Walk" className="w-full h-32 md:h-64 object-cover rounded-xl" />
           </div>
         </div>
 
@@ -343,9 +360,9 @@ function Excursions() {
           </ul>
 
           <div className="grid grid-cols-3 gap-3 md:gap-4">
-            <img src={hero} alt="Beach Yoga" className="w-full h-32 md:h-64 object-cover rounded-xl" />
-            <img src={about} alt="Cultural Hug" className="w-full h-32 md:h-64 object-cover rounded-xl" />
-            <img src={therapy} alt="Nature Walk" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={meditationRetreatImg} alt="Beach Yoga" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={detoxRetreatImg} alt="Cultural Hug" className="w-full h-32 md:h-64 object-cover rounded-xl" />
+            <img src={coupleRetreatImg} alt="Nature Walk" className="w-full h-32 md:h-64 object-cover rounded-xl" />
           </div>
         </div>
       </div>

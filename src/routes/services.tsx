@@ -11,16 +11,24 @@ import { ArrowRight } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
 
 // Therapy Real Images
-import thaiMassage from "@/assets/images/thai-massage.png";
-import shiatsu from "@/assets/images/shiatsu.png";
-import deepTissue from "@/assets/images/deep-tissue.jpg";
-import ayurvedic from "@/assets/images/ayurvedic.jpg";
-import swedish from "@/assets/images/swedish-massage.jpg";
+import thaiMassage from "@/assets/images/thai-massage.jpeg";
+import shiatsu from "@/assets/images/shiatsu.jpeg";
+import deepTissue from "@/assets/images/deep-tissue.jpeg";
+import ayurvedic from "@/assets/images/Traditional Ayurvedic Massage.jpeg";
+import swedish from "@/assets/images/swedish-massage.jpeg";
 import reflexology from "@/assets/images/reflexology.jpg";
-import acupuncture from "@/assets/images/acupuncture.jpg";
+import acupuncture from "@/assets/images/acupuncture.jpeg";
 import cupping from "@/assets/images/cupping.jpg";
 import iastm from "@/assets/images/iastm.jpg";
 import dornTherapy from "@/assets/images/dorn-therapy.jpg";
+
+// Course Images
+import shiatsuCourse from "@/assets/New folder/Shiatsu massage courses.png";
+import thaiCourse from "@/assets/New folder/Thai yoga massage courses.png";
+import reflexologyCourse from "@/assets/New folder/Reflexology course.png";
+import ayurvedicCourse from "@/assets/New folder/Ayurvedic massage courses.png";
+import swedishCourse from "@/assets/New folder/Swedish massage courses.png";
+import deepTissueCourse from "@/assets/New folder/Deep tissue massage courses.png";
 
 export const Route = createFileRoute("/services")({
   component: ServicesPage,
@@ -200,13 +208,13 @@ function RetreatsSection() {
 /* ── Courses ── */
 function CoursesSection() {
   const items = [
-    { t: "Shiatsu Therapy Certification", d: "Japanese bodywork training focused on energy balancing techniques and meridian pathways.", h: "21 Hours • 7–10 Days", details: "Includes meridian mapping, tsubo point therapy, and traditional kata techniques." },
-    { t: "Thai Yoga Massage Certification", d: "Integrative bodywork combining assisted stretching and acupressure techniques.", h: "21 Hours • 7–10 Days", details: "Comprehensive training in sen line theory and personalized stretching sequence for clients." },
-    { t: "Reflexology Therapy Certification", d: "Holistic reflex-point therapy training for feet and hands.", h: "12 Hours • 7 Days", details: "Learn precise mapping of internal organs and systems to foot reflex zones." },
-    { t: "Ayurvedic Wellness Massage Certification", d: "Traditional training inspired by Ayurvedic principles using therapeutic oils.", h: "21 Hours • 10 Days", details: "Covers Dosha-specific oil selection and traditional Abhyanga strokes." },
-    { t: "Swedish Massage Certification", d: "Foundational therapeutic massage program focused on relaxation and circulation.", h: "21 Hours • 10 Days", details: "Master the 5 classic strokes: Effleurage, Petrissage, Friction, Tapotement, and Vibration." },
-    { t: "Deep Tissue Therapy Certification", d: "Professional soft tissue training focused on deep muscular release and fascia manipulation.", h: "21 Hours • 10 Days", details: "Advanced techniques for chronic pain management and structural alignment." },
-    { t: "Dorn Therapy Certification", d: "Gentle therapeutic wellness training focused on posture awareness and spinal balancing.", h: "12 Hours • 7 Days", details: "Techniques for mobilization of joints and correction of leg length discrepancies." },
+    { t: "Shiatsu Therapy Certification", d: "Japanese bodywork training focused on energy balancing techniques and meridian pathways.", h: "21 Hours • 7–10 Days", details: "Includes meridian mapping, tsubo point therapy, and traditional kata techniques.", img: shiatsuCourse },
+    { t: "Thai Yoga Massage Certification", d: "Integrative bodywork combining assisted stretching and acupressure techniques.", h: "21 Hours • 7–10 Days", details: "Comprehensive training in sen line theory and personalized stretching sequence for clients.", img: thaiCourse },
+    { t: "Reflexology Therapy Certification", d: "Holistic reflex-point therapy training for feet and hands.", h: "12 Hours • 7 Days", details: "Learn precise mapping of internal organs and systems to foot reflex zones.", img: reflexologyCourse },
+    { t: "Ayurvedic Wellness Massage Certification", d: "Traditional training inspired by Ayurvedic principles using therapeutic oils.", h: "21 Hours • 10 Days", details: "Covers Dosha-specific oil selection and traditional Abhyanga strokes.", img: ayurvedicCourse },
+    { t: "Swedish Massage Certification", d: "Foundational therapeutic massage program focused on relaxation and circulation.", h: "21 Hours • 10 Days", details: "Master the 5 classic strokes: Effleurage, Petrissage, Friction, Tapotement, and Vibration.", img: swedishCourse },
+    { t: "Deep Tissue Therapy Certification", d: "Professional soft tissue training focused on deep muscular release and fascia manipulation.", h: "21 Hours • 10 Days", details: "Advanced techniques for chronic pain management and structural alignment.", img: deepTissueCourse },
+    { t: "Dorn Therapy Certification", d: "Gentle therapeutic wellness training focused on posture awareness and spinal balancing.", h: "12 Hours • 7 Days", details: "Techniques for mobilization of joints and correction of leg length discrepancies.", img: dornTherapy },
   ];
   return (
     <section className="py-28 bg-cream">
@@ -217,20 +225,29 @@ function CoursesSection() {
         </div>
         <div className="grid lg:grid-cols-3 gap-6">
           {items.map((c, i) => (
-            <div key={c.t} className="group relative rounded-3xl overflow-hidden bg-emerald-gradient text-cream p-8 shadow-soft hover:shadow-luxury transition-all duration-500 hover:-translate-y-1">
-              <div className="absolute -top-20 -right-20 w-56 h-56 bg-gold/15 rounded-full blur-3xl group-hover:bg-gold/25 transition-colors" />
-              <div className="relative">
-                <div className="flex items-center justify-between">
-                  <span className="font-serif-display text-xs tracking-[0.3em] text-gold">0{i + 1}</span>
-                  <span className="text-[0.65rem] tracking-[0.25em] uppercase text-cream/60">{c.h}</span>
+            <div key={c.t} className="group relative rounded-3xl overflow-hidden bg-emerald-gradient text-cream shadow-soft hover:shadow-luxury transition-all duration-500 hover:-translate-y-1 flex flex-col">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                <div className="absolute inset-0 bg-emerald-deep/20 group-hover:bg-transparent transition-colors duration-500" />
+                <div className="absolute top-4 left-4 glass-dark rounded-full px-3 py-1 text-[0.65rem] tracking-[0.2em] uppercase text-gold">0{i + 1}</div>
+              </div>
+
+              <div className="p-8 relative flex-1 flex flex-col">
+                <div className="absolute -top-20 -right-20 w-56 h-56 bg-gold/15 rounded-full blur-3xl group-hover:bg-gold/25 transition-colors" />
+                <div className="relative flex-1 flex flex-col">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[0.65rem] tracking-[0.25em] uppercase text-gold/80 font-semibold">{c.h}</span>
+                  </div>
+                  <h3 className="mt-4 font-display text-2xl md:text-2xl">{c.t}</h3>
+                  <p className="mt-4 text-sm text-cream/75 leading-relaxed flex-1">{c.d}</p>
+
+                  <div className="mt-6 pt-6 border-t border-white/10">
+                    <div className="text-[0.6rem] tracking-[0.2em] uppercase text-gold/80 mb-2 font-semibold">Additional details</div>
+                    <p className="text-[0.8rem] text-cream/60 leading-relaxed italic line-clamp-2">{c.details}</p>
+                  </div>
+
+                  <a href={`/contact?interest=Certification Course&specific=${encodeURIComponent(c.t)}`} className="mt-8 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-gold hover:gap-3 transition-all font-semibold">Enroll Now <ArrowRight className="w-3.5 h-3.5" /></a>
                 </div>
-                <h3 className="mt-8 font-display text-2xl md:text-3xl">{c.t}</h3>
-                <p className="mt-4 text-sm text-cream/75 leading-relaxed">{c.d}</p>
-                <div className="mt-6 pt-6 border-t border-white/10">
-                  <div className="text-[0.6rem] tracking-[0.2em] uppercase text-gold/80 mb-2 font-semibold">Additional details</div>
-                  <p className="text-[0.8rem] text-cream/60 leading-relaxed italic">{c.details}</p>
-                </div>
-                <a href={`/contact?interest=Certification Course&specific=${encodeURIComponent(c.t)}`} className="mt-8 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-gold hover:gap-3 transition-all">Enroll Now <ArrowRight className="w-3.5 h-3.5" /></a>
               </div>
             </div>
           ))}
