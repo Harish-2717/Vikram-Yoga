@@ -1,0 +1,331 @@
+{
+  "users": [
+    {
+      "id": "admin-id",
+      "username": "admin",
+      "passwordHash": "928655d70ebc7795fbfde8a0ae6a64d87ff7b82ad6bad315005369ed99d69593fbeedbf2b13960755e44feff8c8dfba07c0c89fcb1cf5146fac3e0e1af0f9907",
+      "salt": "453257b7ec06092395674e22dc7244c9"
+    }
+  ],
+  "social_images": [
+    {
+      "id": "img-1",
+      "image": "/src/assets/yoga_classes_slide.png",
+      "social_media_url": "https://www.instagram.com/p/C-example1",
+      "created_at": "2026-06-08T15:15:04.773Z"
+    },
+    {
+      "id": "img-2",
+      "image": "/src/assets/therapy.jpg",
+      "social_media_url": "https://www.instagram.com/p/C-example2",
+      "created_at": "2026-06-08T15:15:04.773Z"
+    },
+    {
+      "id": "img-3",
+      "image": "/src/assets/retreat.jpg",
+      "social_media_url": "https://www.instagram.com/p/C-example3",
+      "created_at": "2026-06-08T15:15:04.773Z"
+    },
+    {
+      "id": "img-4",
+      "image": "/src/assets/about 1.jpg",
+      "social_media_url": "https://www.instagram.com/p/C-example4",
+      "created_at": "2026-06-08T15:15:04.773Z"
+    },
+    {
+      "id": "img-5",
+      "image": "/src/assets/hero.jpg",
+      "social_media_url": "https://www.instagram.com/p/C-example5",
+      "created_at": "2026-06-08T15:15:04.773Z"
+    },
+    {
+      "id": "img-7",
+      "image": "/src/assets/yoga_classes_slide.png",
+      "social_media_url": "https://www.instagram.com/p/C-example7",
+      "created_at": "2026-06-08T15:15:04.773Z"
+    },
+    {
+      "id": "img-8",
+      "image": "/src/assets/therapy.jpg",
+      "social_media_url": "https://www.instagram.com/p/C-example8",
+      "created_at": "2026-06-08T15:15:04.773Z"
+    }
+  ],
+  "applications": [
+    {
+      "id": "app-1780932230070-n8e45ht",
+      "name": "Fahmidha Afra J",
+      "course": "Yoga Drop-In Sessions",
+      "minorOption": "Hatha Yoga",
+      "dateOfCourse": "2026-06-10",
+      "email": "fahmidhaafra@gmail.com",
+      "dob": "2003-10-30",
+      "gender": "Female",
+      "accommodation": "Individual Room",
+      "address": "137,VGP NAGAR",
+      "practisedYoga": "No",
+      "howLong": "no",
+      "whyTeacherTraining": "",
+      "meaningOfYoga": "",
+      "injuries": "",
+      "additionalInfo": "",
+      "status": "Verified",
+      "created_at": "2026-06-08T15:23:50.070Z"
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay-1780932230070-5qvpn8l",
+      "applicantName": "Fahmidha Afra J",
+      "applicationId": "app-1780932230070-n8e45ht",
+      "paymentProofScreenshot": "/uploads/1780932230066-GuviCertification_-_47s4AE906196273d8i__1_.png",
+      "uploadDate": "2026-06-08T15:23:50.070Z",
+      "status": "Verified",
+      "remarks": "Payment matches requirements. Verified."
+    }
+  ],
+  "contact_messages": [
+    {
+      "id": "msg-1780933661123-fhb1vkb",
+      "name": "Brindha",
+      "email": "brindhaselvaraj817@gmail.com",
+      "phone": "877894852",
+      "interest": "Consultation",
+      "specificInterest": "",
+      "message": "interested in joining a course",
+      "replyStatus": "Replied",
+      "replies": [
+        {
+          "id": "rep-1780934147754",
+          "message": "will contact you soon",
+          "sent_at": "2026-06-08T15:55:47.754Z"
+        }
+      ],
+      "created_at": "2026-06-08T15:47:41.123Z"
+    },
+    {
+      "id": "msg-1780934728316-qkbuh90",
+      "name": "Afra",
+      "email": "fahmidhaafraj@gmail.com",
+      "phone": "7598547820",
+      "interest": "Yoga Classes",
+      "specificInterest": "Yin Yoga",
+      "message": "interested in joining yoga.,query about fitness and health",
+      "replyStatus": "Replied",
+      "replies": [
+        {
+          "id": "rep-1780934761633",
+          "message": "done.,",
+          "sent_at": "2026-06-08T16:06:01.633Z"
+        }
+      ],
+      "created_at": "2026-06-08T16:05:28.316Z"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "test-1",
+      "name": "Lea Kolbe",
+      "rating": 5,
+      "role": "Yoga Student",
+      "message": "Magical place and amazing teacher! I'm staying with Dr. Vikram several days now enjoying morning meditations, yoga, treatments and even started to learn shiatsu. He is a very good teacher with many skills and a lot of experience. I highly recommend his school for Yoga. Go there, meet him and improve your mind and body. And when you get the chance stay there for lunch - even the cook is amazing.",
+      "image": "/src/assets/avatar_lea.png",
+      "status": "Approved",
+      "created_at": "2026-06-08T16:16:30.723Z"
+    },
+    {
+      "id": "test-2",
+      "name": "Patrick Woods",
+      "rating": 5,
+      "role": "Therapist Client",
+      "message": "The wellness center is the place to find peace of mind and relax for the soul. The classes with the ocean sound are fantastic. Dr. Vikram is a great professional. I had a great experience. Highly recommended!",
+      "image": "/src/assets/avatar_patrick.png",
+      "status": "Approved",
+      "created_at": "2026-06-08T16:16:30.723Z"
+    },
+    {
+      "id": "test-3",
+      "name": "Sarah Jenkins",
+      "rating": 5,
+      "role": "Yoga Practitioner",
+      "message": "An incredibly peaceful and healing experience. The yoga sessions helped me feel physically stronger and mentally calmer. The therapeutic practices provided deep healing and relaxation.",
+      "image": "/src/assets/avatar_sarah.png",
+      "status": "Approved",
+      "created_at": "2026-06-08T16:16:30.723Z"
+    },
+    {
+      "id": "test-4",
+      "name": "Michael Chen",
+      "rating": 5,
+      "role": "Retreat Guest",
+      "message": "The retreat environment was beautiful, relaxing, and deeply transformative. Professional guidance, therapeutic wellness practices, and a very supportive atmosphere for growth.",
+      "image": "/src/assets/avatar_michael.png",
+      "status": "Approved",
+      "created_at": "2026-06-08T16:16:30.723Z"
+    }
+  ],
+  "gallery_images": [
+    {
+      "id": "gal-1",
+      "name": "Retreat Sanctuary",
+      "image": "/gallery/retreat.jpg",
+      "created_at": "2026-06-08T15:15:00.000Z"
+    },
+    {
+      "id": "gal-2",
+      "name": "Yoga Group Session",
+      "image": "/gallery/g-img1.jpg",
+      "created_at": "2026-06-08T15:15:01.000Z"
+    },
+    {
+      "id": "gal-3",
+      "name": "Sunrise Yoga Practice",
+      "image": "/gallery/g-img2.jpeg",
+      "created_at": "2026-06-08T15:15:02.000Z"
+    },
+    {
+      "id": "gal-4",
+      "name": "Meditation on the Deck",
+      "image": "/gallery/g-img3.jpeg",
+      "created_at": "2026-06-08T15:15:03.000Z"
+    },
+    {
+      "id": "gal-5",
+      "name": "Pranayama Breathing",
+      "image": "/gallery/g-img4.jpeg",
+      "created_at": "2026-06-08T15:15:04.000Z"
+    },
+    {
+      "id": "gal-6",
+      "name": "Sunset Yoga Session",
+      "image": "/gallery/g-img5.jpeg",
+      "created_at": "2026-06-08T15:15:05.000Z"
+    },
+    {
+      "id": "gal-7",
+      "name": "Holistic Healing Space",
+      "image": "/gallery/g-img6.jpeg",
+      "created_at": "2026-06-08T15:15:06.000Z"
+    },
+    {
+      "id": "gal-8",
+      "name": "Ayurvedic Massage Therapy",
+      "image": "/gallery/g-img7.jpeg",
+      "created_at": "2026-06-08T15:15:07.000Z"
+    },
+    {
+      "id": "gal-9",
+      "name": "Shiatsu Treatment",
+      "image": "/gallery/g-img8.jpeg",
+      "created_at": "2026-06-08T15:15:08.000Z"
+    },
+    {
+      "id": "gal-10",
+      "name": "Thai Yoga Massage",
+      "image": "/gallery/g-img9.jpeg",
+      "created_at": "2026-06-08T15:15:09.000Z"
+    },
+    {
+      "id": "gal-11",
+      "name": "Meditation in Nature",
+      "image": "/gallery/g-img10.jpeg",
+      "created_at": "2026-06-08T15:15:10.000Z"
+    },
+    {
+      "id": "gal-12",
+      "name": "Beach Sunset Meditation",
+      "image": "/gallery/g-img11.jpeg",
+      "created_at": "2026-06-08T15:15:11.000Z"
+    },
+    {
+      "id": "gal-13",
+      "name": "Varkala Beach Walk",
+      "image": "/gallery/extra-gallery-1.jpeg",
+      "created_at": "2026-06-08T15:15:12.000Z"
+    },
+    {
+      "id": "gal-14",
+      "name": "Local Cultural Excursion",
+      "image": "/gallery/extra-gallery-2.jpeg",
+      "created_at": "2026-06-08T15:15:13.000Z"
+    },
+    {
+      "id": "gal-15",
+      "name": "Ancient Temple Exploration",
+      "image": "/gallery/extra-gallery-3.jpeg",
+      "created_at": "2026-06-08T15:15:14.000Z"
+    },
+    {
+      "id": "gal-16",
+      "name": "Sunset Gathering",
+      "image": "/gallery/extra-gallery-4.jpeg",
+      "created_at": "2026-06-08T15:15:15.000Z"
+    },
+    {
+      "id": "gal-17",
+      "name": "Traditional Ritual Ceremony",
+      "image": "/gallery/extra-gallery-5.jpeg",
+      "created_at": "2026-06-08T15:15:16.000Z"
+    },
+    {
+      "id": "gal-18",
+      "name": "Mindful Nature Trail",
+      "image": "/gallery/extra-gallery-6.jpeg",
+      "created_at": "2026-06-08T15:15:17.000Z"
+    },
+    {
+      "id": "gal-19",
+      "name": "Sanskrit Chanting Session",
+      "image": "/gallery/extra-gallery-7.jpeg",
+      "created_at": "2026-06-08T15:15:18.000Z"
+    },
+    {
+      "id": "gal-1780991724817-yj7l5dm",
+      "image": "/uploads/1780991724813-varkala_sree_Janardhana_swamy_temple.jpeg",
+      "name": "Varkala Sree Janardhana Swamy temple",
+      "created_at": "2026-06-09T07:55:24.817Z"
+    },
+    {
+      "id": "gal-1780991741000-ml5hjlq",
+      "image": "/uploads/1780991740997-Our_Guide_to_Kannur___The_Most_Beautiful_Beach_in_Kerala______ALONG_DUSTY_ROADS.jpeg",
+      "name": "Kannur Beach",
+      "created_at": "2026-06-09T07:55:41.000Z"
+    },
+    {
+      "id": "gal-1780991752858-x5fuu1v",
+      "image": "/uploads/1780991752856-Kerala_Backwaters_on_a_Budget________3_000_Guide.jpeg",
+      "name": "Kerala Backwaters",
+      "created_at": "2026-06-09T07:55:52.858Z"
+    },
+    {
+      "id": "gal-1780991768201-ydz4qfk",
+      "image": "/uploads/1780991768198-Varkala_Beach_Kerala__Palm_Trees__Waves___Sunset_Views.jpeg",
+      "name": "Varkala Beach",
+      "created_at": "2026-06-09T07:56:08.201Z"
+    },
+    {
+      "id": "gal-1780991784874-pf0imwx",
+      "image": "/uploads/1780991784872-Jatayu_Earth_Center.jpeg",
+      "name": "Jatayu Earcth Centre",
+      "created_at": "2026-06-09T07:56:24.874Z"
+    },
+    {
+      "id": "gal-1780991804172-6j1yvei",
+      "image": "/uploads/1780991804170-Yoga_in_Varkala___Devvrat_Yoga_Sangha.jpeg",
+      "name": "Yoga in Varkala",
+      "created_at": "2026-06-09T07:56:44.172Z"
+    },
+    {
+      "id": "gal-1780991819246-hrwaxng",
+      "image": "/uploads/1780991819244-633e6a98-14b2-4d54-9cae-b24d66ffe012.jpeg",
+      "name": "yoga parctice",
+      "created_at": "2026-06-09T07:56:59.246Z"
+    },
+    {
+      "id": "gal-1780991831853-ud8awul",
+      "image": "/uploads/1780991831850-bfd344e5-f961-49bb-a57f-7d621e954c58.jpeg",
+      "name": "varkala",
+      "created_at": "2026-06-09T07:57:11.853Z"
+    }
+  ]
+}

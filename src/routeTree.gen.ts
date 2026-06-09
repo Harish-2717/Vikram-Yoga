@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as YogaRouteImport } from './routes/yoga'
 import { Route as WellnessTherapyRouteImport } from './routes/wellness-therapy'
+import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RetreatsRouteImport } from './routes/retreats'
 import { Route as GalleryRouteImport } from './routes/gallery'
@@ -18,8 +19,16 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CertificateCoursesRouteImport } from './routes/certificate-courses'
 import { Route as ApplyRouteImport } from './routes/apply'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminTestimonialsRouteImport } from './routes/admin/testimonials'
+import { Route as AdminSocialMediaRouteImport } from './routes/admin/social-media'
+import { Route as AdminPaymentsRouteImport } from './routes/admin/payments'
+import { Route as AdminGalleryRouteImport } from './routes/admin/gallery'
+import { Route as AdminContactMessagesRouteImport } from './routes/admin/contact-messages'
+import { Route as AdminApplicationsRouteImport } from './routes/admin/applications'
 
 const YogaRoute = YogaRouteImport.update({
   id: '/yoga',
@@ -29,6 +38,11 @@ const YogaRoute = YogaRouteImport.update({
 const WellnessTherapyRoute = WellnessTherapyRouteImport.update({
   id: '/wellness-therapy',
   path: '/wellness-therapy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesRoute = ServicesRouteImport.update({
@@ -66,6 +80,11 @@ const ApplyRoute = ApplyRouteImport.update({
   path: '/apply',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -76,10 +95,46 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTestimonialsRoute = AdminTestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSocialMediaRoute = AdminSocialMediaRouteImport.update({
+  id: '/social-media',
+  path: '/social-media',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGalleryRoute = AdminGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminContactMessagesRoute = AdminContactMessagesRouteImport.update({
+  id: '/contact-messages',
+  path: '/contact-messages',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminApplicationsRoute = AdminApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/apply': typeof ApplyRoute
   '/certificate-courses': typeof CertificateCoursesRoute
   '/contact': typeof ContactRoute
@@ -87,8 +142,16 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/retreats': typeof RetreatsRoute
   '/services': typeof ServicesRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/wellness-therapy': typeof WellnessTherapyRoute
   '/yoga': typeof YogaRoute
+  '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/contact-messages': typeof AdminContactMessagesRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/social-media': typeof AdminSocialMediaRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -100,13 +163,22 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/retreats': typeof RetreatsRoute
   '/services': typeof ServicesRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/wellness-therapy': typeof WellnessTherapyRoute
   '/yoga': typeof YogaRoute
+  '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/contact-messages': typeof AdminContactMessagesRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/social-media': typeof AdminSocialMediaRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/apply': typeof ApplyRoute
   '/certificate-courses': typeof CertificateCoursesRoute
   '/contact': typeof ContactRoute
@@ -114,14 +186,23 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/retreats': typeof RetreatsRoute
   '/services': typeof ServicesRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/wellness-therapy': typeof WellnessTherapyRoute
   '/yoga': typeof YogaRoute
+  '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/contact-messages': typeof AdminContactMessagesRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/social-media': typeof AdminSocialMediaRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/apply'
     | '/certificate-courses'
     | '/contact'
@@ -129,8 +210,16 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/retreats'
     | '/services'
+    | '/terms-and-conditions'
     | '/wellness-therapy'
     | '/yoga'
+    | '/admin/applications'
+    | '/admin/contact-messages'
+    | '/admin/gallery'
+    | '/admin/payments'
+    | '/admin/social-media'
+    | '/admin/testimonials'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -142,12 +231,21 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/retreats'
     | '/services'
+    | '/terms-and-conditions'
     | '/wellness-therapy'
     | '/yoga'
+    | '/admin/applications'
+    | '/admin/contact-messages'
+    | '/admin/gallery'
+    | '/admin/payments'
+    | '/admin/social-media'
+    | '/admin/testimonials'
+    | '/admin'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/apply'
     | '/certificate-courses'
     | '/contact'
@@ -155,13 +253,22 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/retreats'
     | '/services'
+    | '/terms-and-conditions'
     | '/wellness-therapy'
     | '/yoga'
+    | '/admin/applications'
+    | '/admin/contact-messages'
+    | '/admin/gallery'
+    | '/admin/payments'
+    | '/admin/social-media'
+    | '/admin/testimonials'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRouteWithChildren
   ApplyRoute: typeof ApplyRoute
   CertificateCoursesRoute: typeof CertificateCoursesRoute
   ContactRoute: typeof ContactRoute
@@ -169,6 +276,7 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRoute
   RetreatsRoute: typeof RetreatsRoute
   ServicesRoute: typeof ServicesRoute
+  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   WellnessTherapyRoute: typeof WellnessTherapyRoute
   YogaRoute: typeof YogaRoute
 }
@@ -187,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/wellness-therapy'
       fullPath: '/wellness-therapy'
       preLoaderRoute: typeof WellnessTherapyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services': {
@@ -238,6 +353,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApplyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -252,12 +374,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/testimonials': {
+      id: '/admin/testimonials'
+      path: '/testimonials'
+      fullPath: '/admin/testimonials'
+      preLoaderRoute: typeof AdminTestimonialsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/social-media': {
+      id: '/admin/social-media'
+      path: '/social-media'
+      fullPath: '/admin/social-media'
+      preLoaderRoute: typeof AdminSocialMediaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/payments': {
+      id: '/admin/payments'
+      path: '/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AdminPaymentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/gallery': {
+      id: '/admin/gallery'
+      path: '/gallery'
+      fullPath: '/admin/gallery'
+      preLoaderRoute: typeof AdminGalleryRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/contact-messages': {
+      id: '/admin/contact-messages'
+      path: '/contact-messages'
+      fullPath: '/admin/contact-messages'
+      preLoaderRoute: typeof AdminContactMessagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/applications': {
+      id: '/admin/applications'
+      path: '/applications'
+      fullPath: '/admin/applications'
+      preLoaderRoute: typeof AdminApplicationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
+
+interface AdminRouteChildren {
+  AdminApplicationsRoute: typeof AdminApplicationsRoute
+  AdminContactMessagesRoute: typeof AdminContactMessagesRoute
+  AdminGalleryRoute: typeof AdminGalleryRoute
+  AdminPaymentsRoute: typeof AdminPaymentsRoute
+  AdminSocialMediaRoute: typeof AdminSocialMediaRoute
+  AdminTestimonialsRoute: typeof AdminTestimonialsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminApplicationsRoute: AdminApplicationsRoute,
+  AdminContactMessagesRoute: AdminContactMessagesRoute,
+  AdminGalleryRoute: AdminGalleryRoute,
+  AdminPaymentsRoute: AdminPaymentsRoute,
+  AdminSocialMediaRoute: AdminSocialMediaRoute,
+  AdminTestimonialsRoute: AdminTestimonialsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRouteWithChildren,
   ApplyRoute: ApplyRoute,
   CertificateCoursesRoute: CertificateCoursesRoute,
   ContactRoute: ContactRoute,
@@ -265,6 +459,7 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRoute,
   RetreatsRoute: RetreatsRoute,
   ServicesRoute: ServicesRoute,
+  TermsAndConditionsRoute: TermsAndConditionsRoute,
   WellnessTherapyRoute: WellnessTherapyRoute,
   YogaRoute: YogaRoute,
 }

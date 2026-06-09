@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import retreat from "@/assets/retreat.jpg";
 import gImg1 from "@/assets/g-img1.jpg";
@@ -28,7 +28,10 @@ export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
       { title: "Gallery — Dr. Vikram Yoga & Wellness Centre" },
-      { name: "description", content: "Explore the visual sanctuary of Dr. Vikram Yoga & Wellness Centre." },
+      {
+        name: "description",
+        content: "Explore the visual sanctuary of Dr. Vikram Yoga & Wellness Centre.",
+      },
     ],
   }),
 });
@@ -54,42 +57,94 @@ const galleryHero = retreat;
 
 function GallerySection() {
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [images, setImages] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-  const imgs = [
-    gImg1, gImg2, gImg3, gImg4, gImg5,
-    gImg6, gImg7, gImg8, gImg9, gImg10, gImg11,
-    ex1, ex2, ex3, ex4, ex5, ex6, ex7
+  useEffect(() => {
+    fetch("/api/gallery-images")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch gallery images");
+        return res.json();
+      })
+      .then((data) => {
+        setImages(data || []);
+      })
+      .catch((err) => {
+        console.error("Error fetching gallery images:", err);
+        setHasError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  const fallbackImgs = [
+    { name: "Retreat Sanctuary", image: retreat },
+    { name: "Yoga Group Session", image: gImg1 },
+    { name: "Sunrise Yoga Practice", image: gImg2 },
+    { name: "Meditation on the Deck", image: gImg3 },
+    { name: "Pranayama Breathing", image: gImg4 },
+    { name: "Sunset Yoga Session", image: gImg5 },
+    { name: "Holistic Healing Space", image: gImg6 },
+    { name: "Ayurvedic Massage Therapy", image: gImg7 },
+    { name: "Shiatsu Treatment", image: gImg8 },
+    { name: "Thai Yoga Massage", image: gImg9 },
+    { name: "Meditation in Nature", image: gImg10 },
+    { name: "Beach Sunset Meditation", image: gImg11 },
+    { name: "Varkala Beach Walk", image: ex1 },
+    { name: "Local Cultural Excursion", image: ex2 },
+    { name: "Ancient Temple Exploration", image: ex3 },
+    { name: "Sunset Gathering", image: ex4 },
+    { name: "Traditional Ritual Ceremony", image: ex5 },
+    { name: "Mindful Nature Trail", image: ex6 },
+    { name: "Sanskrit Chanting Session", image: ex7 },
   ];
+
+  const displayImages = hasError ? fallbackImgs : images;
 
   return (
     <section className="py-28 bg-cream">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-14">
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">GALLERY</span>
+          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">
+            GALLERY
+          </span>
           <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep text-balance">
             Moments from the <em className="text-gold-gradient not-italic">sanctuary</em>.
           </h2>
           <div className="gold-divider mt-8 max-w-sm mx-auto" />
         </div>
 
-        {/* Uniform Grid Layout */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {imgs.map((src, i) => (
-            <div
-              key={i}
-              onClick={() => setSelectedImg(src)}
-              className="relative aspect-[4/3] overflow-hidden rounded-2xl group shadow-soft cursor-pointer"
-            >
-              <img
-                src={src}
-                alt={`Sanctuary moment ${i + 1}`}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-emerald-deep/0 group-hover:bg-emerald-deep/20 transition-colors" />
-            </div>
-          ))}
-        </div>
+        {loading && images.length === 0 ? (
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-deep"></div>
+          </div>
+        ) : (
+          /* Uniform Grid Layout */
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {displayImages.map((item, i) => (
+              <div
+                key={item.id || i}
+                onClick={() => setSelectedImg(item.image)}
+                className="relative aspect-[4/3] overflow-hidden rounded-2xl group shadow-soft cursor-pointer"
+              >
+                <img
+                  src={item.image}
+                  alt={item.name || `Sanctuary moment ${i + 1}`}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
+                />
+                {/* Show the name overlay on hover for better interaction */}
+                <div className="absolute inset-0 bg-[#08120d]/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                  <span className="text-white font-serif-display text-xs tracking-wider translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    {item.name || `Moment ${i + 1}`}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Lightbox Modal */}
