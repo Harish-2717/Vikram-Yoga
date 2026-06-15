@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
 import {
   Check,
   X as XIcon,
@@ -41,7 +42,7 @@ function PaymentsPage() {
   const fetchPayments = async () => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/payments", {
+      const response = await fetch(getApiUrl("admin/payments.php"), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -66,7 +67,7 @@ function PaymentsPage() {
   const handleVerify = async (id: string) => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/payments/status", {
+      const response = await fetch(getApiUrl("admin/payments-status.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +98,7 @@ function PaymentsPage() {
     setRejectLoading(true);
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/payments/status", {
+      const response = await fetch(getApiUrl("admin/payments-status.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

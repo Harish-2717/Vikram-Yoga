@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
 import {
   Upload,
   Trash2,
@@ -40,7 +41,7 @@ function GalleryAdminPage() {
   const fetchImages = async () => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/gallery-images", {
+      const response = await fetch(getApiUrl("admin/gallery-images.php"), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -80,7 +81,7 @@ function GalleryAdminPage() {
 
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/gallery-images/add", {
+      const response = await fetch(getApiUrl("admin/gallery-images-add.php"), {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -113,7 +114,7 @@ function GalleryAdminPage() {
     setEditingLoading(true);
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/gallery-images/edit", {
+      const response = await fetch(getApiUrl("admin/gallery-images-edit.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -147,7 +148,7 @@ function GalleryAdminPage() {
 
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/gallery-images/delete", {
+      const response = await fetch(getApiUrl("admin/gallery-images-delete.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

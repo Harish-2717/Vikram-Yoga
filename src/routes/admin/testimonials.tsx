@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
 import {
   Check,
   X as XIcon,
@@ -39,7 +40,7 @@ function TestimonialsPage() {
   const fetchTestimonials = async () => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/testimonials", {
+      const response = await fetch(getApiUrl("admin/testimonials.php"), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,7 +65,7 @@ function TestimonialsPage() {
   const handleUpdateStatus = async (id: string, status: "Approved" | "Rejected") => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/testimonials/status", {
+      const response = await fetch(getApiUrl("admin/testimonials-status.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +96,7 @@ function TestimonialsPage() {
 
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/testimonials/status", {
+      const response = await fetch(getApiUrl("admin/testimonials-status.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat } from "./about";
 import { ArrowLeft, Upload, Building2, Smartphone, ShieldCheck, Heart, CheckCircle2, Copy, Home, RefreshCw } from "lucide-react";
 
@@ -267,7 +268,7 @@ function ApplyPage() {
     submitData.append("proof", proofFile);
 
     try {
-      const response = await fetch("/api/apply", {
+      const response = await fetch(getApiUrl("apply.php"), {
         method: "POST",
         body: submitData,
       });

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
 import {
   Mail,
   MailOpen,
@@ -43,7 +44,7 @@ function ContactMessagesPage() {
   const fetchMessages = async () => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/contact-messages", {
+      const response = await fetch(getApiUrl("admin/contact-messages.php"), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -78,7 +79,7 @@ function ContactMessagesPage() {
     setSending(true);
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/contact-messages/reply", {
+      const response = await fetch(getApiUrl("admin/contact-messages-reply.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,7 +128,7 @@ function ContactMessagesPage() {
 
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/contact-messages/delete", {
+      const response = await fetch(getApiUrl("admin/contact-messages-delete.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
 import {
   Search,
   Filter,
@@ -45,7 +46,7 @@ function ApplicationsPage() {
   const fetchApps = async () => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/applications", {
+      const response = await fetch(getApiUrl("admin/applications.php"), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -95,13 +96,16 @@ function ApplicationsPage() {
   const handleStatusUpdate = async (id: string, newStatus: "Pending" | "Verified" | "Rejected") => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/applications/status", {
+      const response = await fetch(getApiUrl("admin/applications-status.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ id, status: newStatus }),
+        body: JSON.stringify({
+          id,
+          status: newStatus,
+        }),
       });
       const res = await response.json();
       if (response.ok && res.success) {
@@ -129,13 +133,15 @@ function ApplicationsPage() {
 
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/applications/delete", {
+      const response = await fetch(getApiUrl("admin/applications-delete.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ id }),
+        body: JSON.stringify({
+          id,
+        }),
       });
       const res = await response.json();
       if (response.ok && res.success) {

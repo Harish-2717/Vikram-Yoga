@@ -1,9 +1,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Outlet, Link, createRootRouteWithContext, useRouter, useLocation } from "@tanstack/react-router";
-import { MessageSquarePlus, X, Star, Upload, Heart } from "lucide-react";
+import { MessageSquarePlus, X, Star, Upload, Heart, CheckCircle2 } from "lucide-react";
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
+
 
 function NotFoundComponent() {
   return (
@@ -102,6 +105,12 @@ function FeedbackFloat() {
   const [message, setMessage] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setIsSubmitted(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,7 +130,7 @@ function FeedbackFloat() {
     }
 
     try {
-      const response = await fetch("/api/testimonials", {
+      const response = await fetch(getApiUrl("testimonials.php"), {
         method: "POST",
         body: formData,
       });
@@ -133,7 +142,7 @@ function FeedbackFloat() {
         setRating(5);
         setMessage("");
         setPhoto(null);
-        setIsOpen(false);
+        setIsSubmitted(true);
       } else {
         toast.error("Failed to submit feedback. Please try again.");
       }
@@ -169,122 +178,144 @@ function FeedbackFloat() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               className="absolute top-5 right-5 p-1 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="text-center mb-6">
-              <span className="font-serif-display text-[0.65rem] tracking-[0.3em] text-gold uppercase font-semibold block">
-                Share Experience
-              </span>
-              <h3 className="font-display text-2xl text-emerald-deep mt-1">
-                Your Feedback
-              </h3>
-              <div className="gold-divider mx-auto mt-3" />
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4 text-left">
-              {/* Name field */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Jane Doe"
-                  className="border border-slate-200 focus:border-[#55b9b7] focus:outline-none rounded-xl p-3 text-sm text-slate-800 bg-slate-50/50"
-                />
-              </div>
-
-              {/* Role field */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
-                  Your Role / Title (Optional)
-                </label>
-                <input
-                  type="text"
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                  placeholder="e.g. Yoga Student, Retreat Guest"
-                  className="border border-slate-200 focus:border-[#55b9b7] focus:outline-none rounded-xl p-3 text-sm text-slate-800 bg-slate-50/50"
-                />
-              </div>
-
-              {/* Rating field */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
-                  Rating
-                </label>
-                <div className="flex items-center gap-1.5 py-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => setRating(star)}
-                      onMouseEnter={() => setHoverRating(star)}
-                      onMouseLeave={() => setHoverRating(null)}
-                      className="p-0.5 hover:scale-110 transition-transform"
-                    >
-                      <Star
-                        className={`w-6 h-6 transition-colors ${
-                          star <= (hoverRating ?? rating)
-                            ? "text-gold fill-gold"
-                            : "text-slate-200"
-                        }`}
-                      />
-                    </button>
-                  ))}
+            {isSubmitted ? (
+              <div className="text-center py-6 space-y-5 animate-in fade-in zoom-in-95 duration-300">
+                <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-500 mx-auto border border-emerald-100 shadow-sm">
+                  <CheckCircle2 className="w-8 h-8" />
                 </div>
+                <div className="space-y-2">
+                  <h3 className="font-display text-2xl text-emerald-deep">Review Submitted!</h3>
+                  <p className="text-sm text-slate-500 max-w-xs mx-auto leading-relaxed">
+                    Thank you for sharing your experience. Your feedback will be visible on the home page once verified by our administrative team.
+                  </p>
+                </div>
+                <button
+                  onClick={handleClose}
+                  className="w-full mt-4 py-3 bg-emerald-deep hover:bg-[#0c2a21] text-white text-xs font-semibold uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+                >
+                  Close Window
+                </button>
               </div>
-
-              {/* Message field */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
-                  Review / Testimonial
-                </label>
-                <textarea
-                  required
-                  rows={4}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Tell us about your experience with Dr. Vikram..."
-                  className="border border-slate-200 focus:border-[#55b9b7] focus:outline-none rounded-xl p-3 text-sm text-slate-800 bg-slate-50/50 resize-none"
-                />
-              </div>
-
-              {/* Photo upload field */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
-                  Profile Photo (Optional)
-                </label>
-                <label className="flex items-center gap-3 border border-dashed border-[#55b9b7]/30 rounded-xl p-3 cursor-pointer bg-[#55b9b7]/5 hover:bg-[#55b9b7]/10 transition-colors">
-                  <Upload className="w-4 h-4 text-[#55b9b7]" />
-                  <span className="text-xs text-slate-600 truncate font-medium">
-                    {photo ? photo.name : "Upload your profile photo"}
+            ) : (
+              <>
+                <div className="text-center mb-6">
+                  <span className="font-serif-display text-[0.65rem] tracking-[0.3em] text-gold uppercase font-semibold block">
+                    Share Experience
                   </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => setPhoto(e.target.files?.[0] || null)}
-                  />
-                </label>
-              </div>
+                  <h3 className="font-display text-2xl text-emerald-deep mt-1">
+                    Your Feedback
+                  </h3>
+                  <div className="gold-divider mx-auto mt-3" />
+                </div>
 
-              {/* Submit button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full mt-4 py-3.5 bg-emerald-deep text-white font-semibold text-xs tracking-widest uppercase rounded-xl hover:bg-[#0c2a21] shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-              >
-                {isSubmitting ? "Submitting..." : "Submit Review"} <Heart className="w-4 h-4" />
-              </button>
-            </form>
+                <form onSubmit={handleSubmit} className="space-y-4 text-left">
+                  {/* Name field */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. Jane Doe"
+                      className="border border-slate-200 focus:border-[#55b9b7] focus:outline-none rounded-xl p-3 text-sm text-slate-800 bg-slate-50/50"
+                    />
+                  </div>
+
+                  {/* Role field */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
+                      Your Role / Title (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
+                      placeholder="e.g. Yoga Student, Retreat Guest"
+                      className="border border-slate-200 focus:border-[#55b9b7] focus:outline-none rounded-xl p-3 text-sm text-slate-800 bg-slate-50/50"
+                    />
+                  </div>
+
+                  {/* Rating field */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
+                      Rating
+                    </label>
+                    <div className="flex items-center gap-1.5 py-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setRating(star)}
+                          onMouseEnter={() => setHoverRating(star)}
+                          onMouseLeave={() => setHoverRating(null)}
+                          className="p-0.5 hover:scale-110 transition-transform"
+                        >
+                          <Star
+                            className={`w-6 h-6 transition-colors ${
+                              star <= (hoverRating ?? rating)
+                                ? "text-gold fill-gold"
+                                : "text-slate-200"
+                            }`}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Message field */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
+                      Review / Testimonial
+                    </label>
+                    <textarea
+                      required
+                      rows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="Tell us about your experience with Dr. Vikram..."
+                      className="border border-slate-200 focus:border-[#55b9b7] focus:outline-none rounded-xl p-3 text-sm text-slate-800 bg-slate-50/50 resize-none"
+                    />
+                  </div>
+
+                  {/* Photo upload field */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.7rem] tracking-[0.15em] uppercase text-slate-500 font-semibold">
+                      Profile Photo (Optional)
+                    </label>
+                    <label className="flex items-center gap-3 border border-dashed border-[#55b9b7]/30 rounded-xl p-3 cursor-pointer bg-[#55b9b7]/5 hover:bg-[#55b9b7]/10 transition-colors">
+                      <Upload className="w-4 h-4 text-[#55b9b7]" />
+                      <span className="text-xs text-slate-600 truncate font-medium">
+                        {photo ? photo.name : "Upload your profile photo"}
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => setPhoto(e.target.files?.[0] || null)}
+                      />
+                    </label>
+                  </div>
+
+                  {/* Submit button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full mt-4 py-3.5 bg-emerald-deep text-white font-semibold text-xs tracking-widest uppercase rounded-xl hover:bg-[#0c2a21] shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit Review"} <Heart className="w-4 h-4" />
+                  </button>
+                </form>
+              </>
+            )}
           </div>
         </div>
       )}

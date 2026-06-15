@@ -22,6 +22,7 @@ import ex6 from "@/assets/images/extra-gallery-6.jpeg";
 import ex7 from "@/assets/images/extra-gallery-7.jpeg";
 
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
+import { getApiUrl } from "@/lib/utils";
 
 export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
@@ -62,7 +63,7 @@ function GallerySection() {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    fetch("/api/gallery-images")
+    fetch(getApiUrl("gallery-images.php"))
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch gallery images");
         return res.json();

@@ -1,0 +1,27 @@
+<?php
+require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../auth.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        $_SESSION = array();
+        
+        // Delete the session cookie
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+        
+        session_destroy();
+    }
+    
+    // Also clear session_token cookie set by login
+    setcookie('session_token', '', time() - 3600, '/');
+    
+    sendJson(["success" => true]);
+} else {
+    sendJson(["success" => false, "error" => "Method not allowed"], 405);
+}

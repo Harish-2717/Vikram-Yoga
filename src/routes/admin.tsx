@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 import {
   LayoutDashboard,
@@ -58,7 +59,7 @@ function AdminLayout() {
     }
 
     try {
-      const response = await fetch("/api/admin/check-auth", {
+      const response = await fetch(getApiUrl("admin/check-auth.php"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token }),
@@ -87,7 +88,7 @@ function AdminLayout() {
     setLoginError("");
 
     try {
-      const response = await fetch("/api/admin/login", {
+      const response = await fetch(getApiUrl("admin/login.php"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -114,7 +115,7 @@ function AdminLayout() {
   const handleLogout = async () => {
     const token = getSessionToken();
     try {
-      await fetch("/api/admin/logout", {
+      await fetch(getApiUrl("admin/logout.php"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token }),

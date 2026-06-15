@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { getApiUrl } from "@/lib/utils";
 import { FileSpreadsheet, Clock, CreditCard, Mail, ArrowRight, Layers, Inbox } from "lucide-react";
 
 export const Route = createFileRoute("/admin/")({
@@ -21,7 +22,7 @@ function DashboardPage() {
   const loadData = async () => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/dashboard", {
+      const response = await fetch(getApiUrl("admin/dashboard.php"), {
         headers: {
           Authorization: `Bearer ${token}`,
         },

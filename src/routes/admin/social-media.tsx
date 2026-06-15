@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
 import {
   Upload,
   Trash2,
@@ -41,7 +42,7 @@ function SocialMediaPage() {
   const fetchImages = async () => {
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/social-images", {
+      const response = await fetch(getApiUrl("admin/social-images.php"), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -77,7 +78,7 @@ function SocialMediaPage() {
 
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/social-images/add", {
+      const response = await fetch(getApiUrl("admin/social-images-add.php"), {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -110,7 +111,7 @@ function SocialMediaPage() {
     setEditingLoading(true);
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/social-images/edit", {
+      const response = await fetch(getApiUrl("admin/social-images-edit.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -144,7 +145,7 @@ function SocialMediaPage() {
 
     const token = getSessionToken();
     try {
-      const response = await fetch("/api/admin/social-images/delete", {
+      const response = await fetch(getApiUrl("admin/social-images-delete.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

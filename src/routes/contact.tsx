@@ -15,6 +15,7 @@ import {
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getApiUrl } from "@/lib/utils";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -137,7 +138,7 @@ function ContactSection() {
     };
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(getApiUrl("contact.php"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

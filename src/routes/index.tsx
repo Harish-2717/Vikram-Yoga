@@ -65,6 +65,7 @@ import {
   Play,
 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat } from "./about";
+import { getApiUrl } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -1256,7 +1257,7 @@ function Testimonials() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const response = await fetch("/api/testimonials");
+        const response = await fetch(getApiUrl("testimonials.php"));
         if (response.ok) {
           const res = await response.json();
           // Map seed image path to local import asset variables
@@ -1532,7 +1533,7 @@ function SocialFeed() {
   const [images, setImages] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("/api/social-images")
+    fetch(getApiUrl("social-images.php"))
       .then((res) => res.json())
       .then((res) => {
         setImages(res || []);
