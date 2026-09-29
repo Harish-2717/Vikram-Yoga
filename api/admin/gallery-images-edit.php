@@ -11,14 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $id = $data['id'] ?? '';
         $name = $data['name'] ?? 'Untitled';
+        $category = $data['category'] ?? 'Our Centre';
 
         if (empty($id)) {
             sendJson(["success" => false, "error" => "ID is required"], 400);
         }
 
         $pdo = getDbConnection();
-        $stmt = $pdo->prepare("UPDATE `gallery_images` SET `name` = ? WHERE `id` = ?");
-        $stmt->execute([$name, $id]);
+        $stmt = $pdo->prepare("UPDATE `gallery_images` SET `name` = ?, `category` = ? WHERE `id` = ?");
+        $stmt->execute([$name, $category, $id]);
 
         sendJson(["success" => true]);
     } catch (Exception $e) {

@@ -191,8 +191,8 @@ function ContactSection() {
               {
                 Icon: MapPin,
                 label: "Address",
-                value: "Dr. Vikram Yoga & Wellness Centre Varkala, Tamil Nadu, India.",
-                href: "#map",
+                value: "Dr. Vikram Yoga & Wellness Centre, N Cliff Rd, Varkala, Kerala 695141",
+                href: "https://maps.google.com/?q=Dr.+Vikram+Yoga+%26+Wellness+Centre,+N+Cliff+Rd,+Varkala,+Kerala+695141",
               },
               {
                 Icon: Clock,
@@ -216,7 +216,12 @@ function ContactSection() {
                     {label}
                   </div>
                   {href ? (
-                    <a href={href} className="text-cream/90 hover:text-gold transition-colors">
+                    <a
+                      href={href}
+                      className="text-cream/90 hover:text-gold transition-colors"
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    >
                       {value}
                     </a>
                   ) : (
@@ -238,7 +243,7 @@ function ContactSection() {
             </p>
             <div className="flex gap-3">
               {[
-                { Icon: Instagram, href: "#", label: "Instagram" },
+                { Icon: Instagram, href: "https://www.instagram.com/dr.vikram_yoga_wellness?stkn=MTQ0YnhucG94cXJ1Nw==", label: "Instagram" },
                 { Icon: Facebook, href: "#", label: "Facebook" },
                 { Icon: Youtube, href: "#", label: "YouTube" },
                 { Icon: MessageCircle, href: "https://wa.me/918778639989", label: "WhatsApp" },
@@ -388,24 +393,24 @@ function MapSection() {
           </h2>
         </div>
         {/* Map placeholder with styled embed */}
-        <div className="relative rounded-3xl overflow-hidden shadow-luxury h-96 bg-emerald-deep/10 border border-border">
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-emerald-deep">
-            <MapPin className="w-12 h-12 text-gold" strokeWidth={1.2} />
+        <a 
+          href="https://maps.google.com/?q=Dr.+Vikram+Yoga+%26+Wellness+Centre,+N+Cliff+Rd,+Varkala,+Kerala+695141"
+          target="_blank"
+          rel="noreferrer"
+          className="block relative rounded-3xl overflow-hidden shadow-luxury h-96 bg-emerald-deep/10 border border-border group"
+        >
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-emerald-deep group-hover:bg-emerald-deep/5 transition-colors duration-300">
+            <MapPin className="w-12 h-12 text-gold group-hover:scale-110 transition-transform duration-300" strokeWidth={1.2} />
             <p className="font-display text-2xl text-emerald-deep text-center px-4">
               Dr. Vikram Yoga & Wellness Centre
               <br />
-              Varkala, Tamil Nadu, India.
+              N Cliff Rd, Varkala, Kerala 695141
             </p>
-            <a
-              href="https://maps.google.com/?q=Bengaluru,India"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform"
-            >
+            <div className="mt-2 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold group-hover:scale-105 transition-transform">
               Open in Google Maps <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </section>
   );

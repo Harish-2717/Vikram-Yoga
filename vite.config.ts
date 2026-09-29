@@ -14,8 +14,13 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost/vikram-yoga/emerald-serenity-hub",
+        target: "http://localhost/Vikram%20Yoga/emerald-serenity-hub",
         changeOrigin: true,
+        bypass(req) {
+          // Never proxy requests that look like frontend routes
+          const url = req.url ?? "";
+          if (!url.startsWith("/api/")) return url;
+        },
       },
     },
   },

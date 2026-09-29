@@ -77,6 +77,7 @@ export interface Testimonial {
   message: string;
   image: string;
   status: "Pending" | "Approved" | "Rejected";
+  created_at?: string;
 }
 
 export interface GalleryImage {
@@ -158,7 +159,7 @@ function initDb() {
       { id: "img-5", image: "/src/assets/hero.jpg", url: "https://www.instagram.com/p/C-example5" },
       {
         id: "img-6",
-        image: "/src/assets/leader.jpeg",
+        image: "/src/assets/founder.png",
         url: "https://www.instagram.com/p/C-example6",
       },
       {
@@ -192,7 +193,7 @@ function initDb() {
         rating: 5,
         role: "Yoga Student",
         message: "Magical place and amazing teacher! I'm staying with Dr. Vikram several days now enjoying morning meditations, yoga, treatments and even started to learn shiatsu. He is a very good teacher with many skills and a lot of experience. I highly recommend his school for Yoga. Go there, meet him and improve your mind and body. And when you get the chance stay there for lunch - even the cook is amazing.",
-        image: "/src/assets/avatar_lea.png",
+        image: "/src/assets/New/file_00000000532882118f2edf384a4cc863 (1).png",
         status: "Approved",
         created_at: new Date().toISOString(),
       },
@@ -202,7 +203,7 @@ function initDb() {
         rating: 5,
         role: "Therapist Client",
         message: "The wellness center is the place to find peace of mind and relax for the soul. The classes with the ocean sound are fantastic. Dr. Vikram is a great professional. I had a great experience. Highly recommended!",
-        image: "/src/assets/avatar_patrick.png",
+        image: "/src/assets/New/file_00000000e5448211bcd6ac613aec8e4f.png",
         status: "Approved",
         created_at: new Date().toISOString(),
       },
@@ -212,7 +213,7 @@ function initDb() {
         rating: 5,
         role: "Yoga Practitioner",
         message: "An incredibly peaceful and healing experience. The yoga sessions helped me feel physically stronger and mentally calmer. The therapeutic practices provided deep healing and relaxation.",
-        image: "/src/assets/avatar_sarah.png",
+        image: "/src/assets/New/file_00000000cbc48208b85635741587e067 (1).png",
         status: "Approved",
         created_at: new Date().toISOString(),
       },
@@ -222,7 +223,7 @@ function initDb() {
         rating: 5,
         role: "Retreat Guest",
         message: "The retreat environment was beautiful, relaxing, and deeply transformative. Professional guidance, therapeutic wellness practices, and a very supportive atmosphere for growth.",
-        image: "/src/assets/avatar_michael.png",
+        image: "/src/assets/New/file_00000000d85882119458c3c9987ceaec (1).png",
         status: "Approved",
         created_at: new Date().toISOString(),
       },

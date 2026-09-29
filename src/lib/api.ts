@@ -301,7 +301,7 @@ export async function handleApiRequest(req: any, res: any): Promise<boolean> {
       sendJson(
         res,
         db.testimonials.sort(
-          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          (a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime()
         )
       );
       return true;

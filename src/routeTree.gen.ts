@@ -14,6 +14,7 @@ import { Route as WellnessTherapyRouteImport } from './routes/wellness-therapy'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RetreatsRouteImport } from './routes/retreats'
+import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -53,6 +54,11 @@ const ServicesRoute = ServicesRouteImport.update({
 const RetreatsRoute = RetreatsRouteImport.update({
   id: '/retreats',
   path: '/retreats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentRoute = PaymentRouteImport.update({
+  id: '/payment',
+  path: '/payment',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
+  '/payment': typeof PaymentRoute
   '/retreats': typeof RetreatsRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
+  '/payment': typeof PaymentRoute
   '/retreats': typeof RetreatsRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
+  '/payment': typeof PaymentRoute
   '/retreats': typeof RetreatsRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -208,6 +217,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/gallery'
+    | '/payment'
     | '/retreats'
     | '/services'
     | '/terms-and-conditions'
@@ -229,6 +239,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/gallery'
+    | '/payment'
     | '/retreats'
     | '/services'
     | '/terms-and-conditions'
@@ -251,6 +262,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/gallery'
+    | '/payment'
     | '/retreats'
     | '/services'
     | '/terms-and-conditions'
@@ -274,6 +286,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   GalleryRoute: typeof GalleryRoute
+  PaymentRoute: typeof PaymentRoute
   RetreatsRoute: typeof RetreatsRoute
   ServicesRoute: typeof ServicesRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
@@ -316,6 +329,13 @@ declare module '@tanstack/react-router' {
       path: '/retreats'
       fullPath: '/retreats'
       preLoaderRoute: typeof RetreatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment': {
+      id: '/payment'
+      path: '/payment'
+      fullPath: '/payment'
+      preLoaderRoute: typeof PaymentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -457,6 +477,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   GalleryRoute: GalleryRoute,
+  PaymentRoute: PaymentRoute,
   RetreatsRoute: RetreatsRoute,
   ServicesRoute: ServicesRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,

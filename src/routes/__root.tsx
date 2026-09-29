@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Outlet, Link, createRootRouteWithContext, useRouter, useLocation } from "@tanstack/react-router";
+import { Outlet, Link, createRootRouteWithContext, useRouter, useLocation, ScrollRestoration } from "@tanstack/react-router";
 import { MessageSquarePlus, X, Star, Upload, Heart, CheckCircle2 } from "lucide-react";
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
@@ -328,6 +328,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ScrollRestoration />
       <Outlet />
       <FeedbackFloat />
       <Toaster />

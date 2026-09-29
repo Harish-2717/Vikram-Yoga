@@ -10,43 +10,49 @@
   "social_images": [
     {
       "id": "img-1",
-      "image": "/src/assets/yoga_classes_slide.png",
+      "image": "/src/assets/New/file_00000000e2f48208b353a09b8451f839.png",
       "social_media_url": "https://www.instagram.com/p/C-example1",
       "created_at": "2026-06-08T15:15:04.773Z"
     },
     {
       "id": "img-2",
-      "image": "/src/assets/therapy.jpg",
+      "image": "/src/assets/New/file_0000000027c0820b9a5711022d613771.png",
       "social_media_url": "https://www.instagram.com/p/C-example2",
       "created_at": "2026-06-08T15:15:04.773Z"
     },
     {
       "id": "img-3",
-      "image": "/src/assets/retreat.jpg",
+      "image": "/src/assets/New/IMG_20250516_171414.jpg.jpeg",
       "social_media_url": "https://www.instagram.com/p/C-example3",
       "created_at": "2026-06-08T15:15:04.773Z"
     },
     {
       "id": "img-4",
-      "image": "/src/assets/about 1.jpg",
+      "image": "/src/assets/about.png",
       "social_media_url": "https://www.instagram.com/p/C-example4",
       "created_at": "2026-06-08T15:15:04.773Z"
     },
     {
       "id": "img-5",
-      "image": "/src/assets/hero.jpg",
+      "image": "/src/assets/New/IMG_20250517_083145.jpg.jpeg",
       "social_media_url": "https://www.instagram.com/p/C-example5",
       "created_at": "2026-06-08T15:15:04.773Z"
     },
     {
+      "id": "img-6",
+      "image": "/src/assets/founder.png",
+      "social_media_url": "https://www.instagram.com/p/C-example6",
+      "created_at": "2026-06-08T15:15:04.773Z"
+    },
+    {
       "id": "img-7",
-      "image": "/src/assets/yoga_classes_slide.png",
+      "image": "/src/assets/New/IMG_20250520_092421.jpg.jpeg",
       "social_media_url": "https://www.instagram.com/p/C-example7",
       "created_at": "2026-06-08T15:15:04.773Z"
     },
     {
       "id": "img-8",
-      "image": "/src/assets/therapy.jpg",
+      "image": "/src/assets/New/IMG_20250520_083632.jpg.jpeg",
       "social_media_url": "https://www.instagram.com/p/C-example8",
       "created_at": "2026-06-08T15:15:04.773Z"
     }
@@ -129,7 +135,7 @@
       "rating": 5,
       "role": "Yoga Student",
       "message": "Magical place and amazing teacher! I'm staying with Dr. Vikram several days now enjoying morning meditations, yoga, treatments and even started to learn shiatsu. He is a very good teacher with many skills and a lot of experience. I highly recommend his school for Yoga. Go there, meet him and improve your mind and body. And when you get the chance stay there for lunch - even the cook is amazing.",
-      "image": "/src/assets/avatar_lea.png",
+      "image": "/src/assets/New/file_00000000532882118f2edf384a4cc863 (1).png",
       "status": "Approved",
       "created_at": "2026-06-08T16:16:30.723Z"
     },
@@ -139,7 +145,7 @@
       "rating": 5,
       "role": "Therapist Client",
       "message": "The wellness center is the place to find peace of mind and relax for the soul. The classes with the ocean sound are fantastic. Dr. Vikram is a great professional. I had a great experience. Highly recommended!",
-      "image": "/src/assets/avatar_patrick.png",
+      "image": "/src/assets/New/file_00000000e5448211bcd6ac613aec8e4f.png",
       "status": "Approved",
       "created_at": "2026-06-08T16:16:30.723Z"
     },
@@ -149,7 +155,7 @@
       "rating": 5,
       "role": "Yoga Practitioner",
       "message": "An incredibly peaceful and healing experience. The yoga sessions helped me feel physically stronger and mentally calmer. The therapeutic practices provided deep healing and relaxation.",
-      "image": "/src/assets/avatar_sarah.png",
+      "image": "/src/assets/New/file_00000000cbc48208b85635741587e067 (1).png",
       "status": "Approved",
       "created_at": "2026-06-08T16:16:30.723Z"
     },
@@ -159,7 +165,7 @@
       "rating": 5,
       "role": "Retreat Guest",
       "message": "The retreat environment was beautiful, relaxing, and deeply transformative. Professional guidance, therapeutic wellness practices, and a very supportive atmosphere for growth.",
-      "image": "/src/assets/avatar_michael.png",
+      "image": "/src/assets/New/file_00000000d85882119458c3c9987ceaec (1).png",
       "status": "Approved",
       "created_at": "2026-06-08T16:16:30.723Z"
     }

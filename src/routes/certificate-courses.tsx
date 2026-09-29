@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import {
   ChevronDown,
@@ -8,6 +8,8 @@ import {
   Shield,
   Award,
   Users,
+  User,
+  Flower2,
   Sparkles,
   CheckCircle2,
   Heart,
@@ -46,6 +48,9 @@ function CoursesPage() {
 
       {/* Introduction */}
       <IntroSection />
+
+      {/* Additional Offerings: Short Workshops & Sessions */}
+      <AdditionalOfferings />
 
       {/* 7 Certification Courses */}
       <CoursesShowcase />
@@ -88,12 +93,12 @@ function IntroSection() {
           </h2>
           <div className="w-20 h-[2px] bg-gold-gradient" />
           <div className="space-y-4 text-emerald-deep/90 text-sm md:text-base leading-relaxed">
-            <p className="font-semibold text-lg text-emerald-deep">
+            <p className="font-bold text-lg text-emerald-deep">
               At Dr. VIKRAM YOGA & WELLNESS CENTRE, our professional certification programs are
               designed for individuals seeking practical wellness education, therapeutic bodywork
               training, holistic healing knowledge, and hands-on learning experiences.
             </p>
-            <p>
+            <p className="font-semibold">
               Blending traditional healing wisdom with modern therapeutic wellness approaches, our
               courses provide a supportive, experience-based learning environment focused on body
               awareness, therapeutic understanding, mindful practice, and professional skill
@@ -110,7 +115,7 @@ function IntroSection() {
             <h3 className="font-display text-xl text-emerald-deep font-semibold">
               Guided by Dr. S. Vikram Pandy
             </h3>
-            <p className="text-xs md:text-sm text-emerald-deep/80 leading-relaxed font-light">
+            <p className="text-xs md:text-sm text-emerald-deep/80 leading-relaxed font-semibold">
               All training programs are personally guided by Dr. S. Vikram Pandy and emphasize
               practical application, therapeutic precision, body mechanics, professional ethics,
               client care, and integrative wellness understanding.
@@ -124,6 +129,165 @@ function IntroSection() {
                 Hands-on Practice
               </span>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Short Workshops & Certification Courses Overview ── */
+function AdditionalOfferings() {
+  return (
+    <section className="py-6 px-6 max-w-6xl mx-auto">
+      <div className="bg-[#f7f5ed] rounded-3xl p-6 sm:p-8 md:p-10 relative overflow-hidden shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-[#ede8dd]">
+        {/* Decorative Leaves */}
+        <div className="absolute -left-6 -bottom-3 w-28 h-28 opacity-10 pointer-events-none text-emerald-deep transform -rotate-12">
+          <Leaf className="w-full h-full" strokeWidth={1} />
+        </div>
+        <div className="absolute -right-6 -bottom-3 w-28 h-28 opacity-10 pointer-events-none text-emerald-deep transform rotate-12 scale-x-[-1]">
+          <Leaf className="w-full h-full" strokeWidth={1} />
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-10 relative z-10 items-stretch">
+          {/* Left Card: Short Workshops */}
+          <div className="flex flex-col">
+            <div className="flex items-start gap-3.5 mb-3">
+              <div className="w-12 h-12 rounded-full border border-emerald-deep flex items-center justify-center shrink-0 bg-white shadow-sm">
+                <Users className="w-5 h-5 text-emerald-deep" strokeWidth={1.5} />
+              </div>
+              <div className="pt-0.5">
+                <p className="text-emerald-deep font-serif text-xs mb-0.5 leading-tight">In addition to our certification courses,</p>
+                <h3 className="font-display text-2xl md:text-3xl text-emerald-deep font-bold leading-tight">
+                  Short Workshops
+                </h3>
+                <p className="text-emerald-deep font-serif text-xs mt-0.5 leading-tight">are also available on booking.</p>
+              </div>
+            </div>
+            <p className="text-stone-600 text-sm leading-relaxed mb-6 mt-1 max-w-md lg:ml-16">
+              These focused workshops are designed to give you practical knowledge and hands-on experience in specific topics related to yoga, wellness and holistic therapies.
+            </p>
+            <div className="mt-auto lg:ml-16">
+              <Link
+                to="/apply"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-deep text-emerald-deep font-semibold text-xs tracking-wider uppercase hover:bg-emerald-deep hover:text-cream transition-colors shadow-sm"
+              >
+                View Workshop Topics <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Divider for desktop */}
+          <div className="hidden lg:block absolute left-1/2 top-3 bottom-3 w-px bg-[#ede8dd] -translate-x-1/2" />
+          <div className="lg:hidden w-full h-px bg-[#ede8dd] my-1" />
+
+          {/* Right Card: One-to-One & Group Training */}
+          <div className="flex flex-col lg:pl-6">
+            <div className="flex items-start gap-3.5 mb-3">
+              <div className="w-12 h-12 rounded-full border border-emerald-deep flex items-center justify-center shrink-0 bg-white shadow-sm">
+                <Calendar className="w-5 h-5 text-emerald-deep" strokeWidth={1.5} />
+              </div>
+              <div className="pt-0.5">
+                <h3 className="font-display text-xl md:text-2xl text-emerald-deep font-bold leading-snug">
+                  One-to-One &amp; Group Training<br className="hidden sm:block" /> for Certification Courses
+                </h3>
+              </div>
+            </div>
+            <p className="text-stone-600 text-sm leading-relaxed mb-6 mt-1 max-w-md lg:ml-16">
+              We offer personalized one-to-one mentorship as well as intensive group training sessions for all certification courses, with flexible scheduling tailored to your pace.
+            </p>
+            <div className="mt-auto lg:ml-16">
+              <Link
+                to="/apply"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-deep text-emerald-deep font-semibold text-xs tracking-wider uppercase hover:bg-emerald-deep hover:text-cream transition-colors shadow-sm"
+              >
+                Apply / Enroll Now <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Feature Row */}
+      <div className="mt-5 bg-[#f7f5ed] rounded-2xl py-4 px-4 md:px-8 shadow-[0_2px_15px_rgba(0,0,0,0.02)] border border-[#ede8dd]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 items-center">
+          <Link
+            to="/apply"
+            className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
+          >
+            <Flower2 className="w-5 h-5 text-emerald-deep shrink-0 group-hover:rotate-12 transition-transform duration-300" strokeWidth={1.5} />
+            <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
+              Flexible Scheduling
+            </span>
+          </Link>
+
+          <div className="hidden md:flex justify-center border-l border-[#ede8dd]">
+            <Link
+              to="/services"
+              className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer pl-4"
+            >
+              <User className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
+              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
+                One-to-One Mentorship
+              </span>
+            </Link>
+          </div>
+          <div className="md:hidden">
+            <Link
+              to="/services"
+              className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
+            >
+              <User className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
+              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
+                One-to-One Mentorship
+              </span>
+            </Link>
+          </div>
+
+          <div className="hidden md:flex justify-center border-l border-[#ede8dd]">
+            <Link
+              to="/apply"
+              className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer pl-4"
+            >
+              <Users className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
+              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
+                Group Training Available
+              </span>
+            </Link>
+          </div>
+          <div className="md:hidden">
+            <Link
+              to="/apply"
+              className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
+            >
+              <Users className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
+              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
+                Group Training Available
+              </span>
+            </Link>
+          </div>
+
+          <div className="hidden md:flex justify-center border-l border-[#ede8dd]">
+            <a
+              href="#courses"
+              className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer pl-4"
+            >
+              <Award className="w-5 h-5 text-emerald-deep shrink-0 group-hover:-translate-y-0.5 transition-transform duration-300" strokeWidth={1.5} />
+              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
+                Short Workshops on Booking
+              </span>
+            </a>
+          </div>
+          <div className="md:hidden">
+            <a
+              href="#courses"
+              className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
+            >
+              <Award className="w-5 h-5 text-emerald-deep shrink-0 group-hover:-translate-y-0.5 transition-transform duration-300" strokeWidth={1.5} />
+              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
+                Short Workshops on Booking
+              </span>
+            </a>
           </div>
         </div>
       </div>
@@ -148,7 +312,7 @@ function CoursesShowcase() {
 
   const courses = [
     {
-      title: "SHIATSU THERAPY CERTIFICATION",
+      title: "Shiatsu Massage Certification",
       duration: "Approximately 21 Hours • 7–10 Days",
       subtitle: "Traditional Meridian-Based Bodywork",
       desc: "A traditional Japanese bodywork training program focused on meridian-based therapy, therapeutic pressure application, energy balancing concepts, and mindful healing practices.",
@@ -179,7 +343,7 @@ function CoursesShowcase() {
       ),
     },
     {
-      title: "THAI YOGA MASSAGE CERTIFICATION",
+      title: "Thai Yoga Massage Certification",
       duration: "Approximately 21 Hours • 7–10 Days",
       subtitle: "Integrative Stretching & Acupressure",
       desc: "An integrative therapeutic bodywork program combining assisted stretching, passive yoga movements, acupressure techniques, and mindful body mechanics inspired by traditional Thai healing practices.",
@@ -210,7 +374,7 @@ function CoursesShowcase() {
       ),
     },
     {
-      title: "REFLEXOLOGY THERAPY CERTIFICATION",
+      title: "Reflexology Therapy Certification",
       duration: "Approximately 12 Hours • 7 Days",
       subtitle: "Reflex Zone Point Stimulation",
       desc: "A holistic reflex-point therapy training focused on therapeutic stimulation of specific points on the feet and hands to support relaxation, circulation, and wellness balance.",
@@ -242,7 +406,7 @@ function CoursesShowcase() {
       ),
     },
     {
-      title: "AYURVEDIC WELLNESS MASSAGE CERTIFICATION",
+      title: "Ayurvedic Massage Certification",
       duration: "Approximately 21 Hours • 10 Days",
       subtitle: "Rhythmic Oil Massage & Doshas",
       desc: "A traditional wellness massage training inspired by Ayurvedic principles using therapeutic oil application methods, rhythmic massage techniques, and holistic relaxation approaches.",
@@ -271,7 +435,7 @@ function CoursesShowcase() {
       ),
     },
     {
-      title: "SWEDISH MASSAGE CERTIFICATION",
+      title: "Swedish Massage Certification",
       duration: "Approximately 21 Hours • 10 Days",
       subtitle: "Foundational Classical Massage Flow",
       desc: "A foundational therapeutic massage training program focused on relaxation-based bodywork, circulation support, muscular comfort, and professional massage flow techniques.",
@@ -299,7 +463,7 @@ function CoursesShowcase() {
       ),
     },
     {
-      title: "DEEP TISSUE THERAPY CERTIFICATION",
+      title: "Deep Tissue Massage Certification",
       duration: "Approximately 21 Hours • 10 Days",
       subtitle: "Fascia Release & Trigger Points",
       desc: "A professional soft tissue training program focused on deep muscular release techniques, fascia-focused manipulation methods, mobility support, and therapeutic recovery applications.",
@@ -334,7 +498,7 @@ function CoursesShowcase() {
       ),
     },
     {
-      title: "DORN THERAPY (SPINE CARE) CERTIFICATION",
+      title: "Dorn Therapy Certification (Spain Care Therapy)",
       duration: "Approximately 12 Hours • 7 Days",
       subtitle: "Gentle Spinal Alignment Method",
       desc: "A gentle therapeutic wellness training inspired by the German Dorn Method, focusing on posture awareness, spinal balancing approaches, joint alignment concepts, and mindful corrective movement techniques.",
@@ -372,12 +536,16 @@ function CoursesShowcase() {
   ];
 
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
+    <section id="courses" className="py-20 px-6 max-w-7xl mx-auto">
       <div className="text-center mb-16 space-y-4">
-        <h2 className="font-display text-4xl md:text-5xl text-emerald-deep font-semibold">
-          Available Certifications
+        <span className="font-serif-display text-xs tracking-[0.3em] uppercase text-gold font-bold">
+          PROFESSIONAL WELLNESS TRAINING
+        </span>
+        <h2 className="font-display text-4xl md:text-5xl text-emerald-deep font-bold">
+          Certification Courses
         </h2>
-        <p className="text-emerald-deep/70 max-w-2xl mx-auto font-light text-sm md:text-base">
+        <div className="gold-divider mt-4 mx-auto" />
+        <p className="text-emerald-deep/70 max-w-2xl mx-auto font-medium text-sm md:text-base">
           Explore our professional bodywork and holistic wellness programs. Click on any course to
           view the full syllabus and what you will master.
         </p>
@@ -387,7 +555,9 @@ function CoursesShowcase() {
         {courses.map((course, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-[2rem] border border-gold/15 shadow-soft hover:shadow-luxury hover:-translate-y-1 transition-all duration-500 overflow-hidden flex flex-col justify-between h-full"
+            className={`bg-white rounded-[2rem] border border-gold/15 shadow-soft hover:shadow-luxury hover:-translate-y-1 transition-all duration-500 overflow-hidden flex flex-col justify-between h-full ${
+              idx === 6 ? "md:col-span-2 lg:col-span-1 lg:col-start-2 max-w-md md:max-w-none lg:max-w-none mx-auto w-full" : ""
+            }`}
           >
             <div className="p-8 flex flex-col gap-6 flex-1 justify-between">
               <div className="space-y-5">
@@ -402,7 +572,7 @@ function CoursesShowcase() {
                 </div>
 
                 <div className="space-y-1">
-                  <h3 className="font-serif-display text-base tracking-wider text-emerald-deep uppercase font-bold leading-snug">
+                  <h3 className="font-serif-display text-base tracking-wider text-emerald-deep uppercase font-bold leading-snug min-h-[2.5rem] flex items-center">
                     {course.title}
                   </h3>
                   <p className="text-[10px] tracking-widest text-gold uppercase font-semibold">
@@ -410,7 +580,7 @@ function CoursesShowcase() {
                   </p>
                 </div>
 
-                <p className="text-emerald-deep/80 text-xs md:text-sm leading-relaxed font-light line-clamp-3">
+                <p className="text-emerald-deep/80 text-xs md:text-sm leading-relaxed font-semibold line-clamp-3">
                   {course.desc}
                 </p>
 
@@ -487,7 +657,7 @@ function CoursesShowcase() {
                     </p>
                   </div>
 
-                  <p className="text-emerald-deep/80 text-sm leading-relaxed font-light">
+                  <p className="text-emerald-deep/80 text-sm leading-relaxed font-semibold">
                     {selectedCourse.desc}
                   </p>
 
@@ -508,7 +678,7 @@ function CoursesShowcase() {
                     {selectedCourse.learn.map((item: string, itemIdx: number) => (
                       <li key={itemIdx} className="flex items-start gap-3">
                         <CheckCircle2 className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-                        <span className="text-sm text-emerald-deep/95 leading-relaxed font-light">
+                        <span className="text-sm text-emerald-deep/95 leading-relaxed font-semibold">
                           {item}
                         </span>
                       </li>
@@ -612,7 +782,7 @@ function UniqueFeaturesSection() {
                 <h3 className="font-serif-display text-base tracking-wider text-gold mb-3 uppercase font-bold">
                   {item.title}
                 </h3>
-                <p className="text-xs md:text-sm text-cream/70 leading-relaxed font-light">
+                <p className="text-xs md:text-sm text-cream/70 leading-relaxed font-semibold">
                   {item.desc}
                 </p>
               </div>
@@ -664,7 +834,7 @@ function TrainingFormatSection() {
               How You Will Learn
             </h2>
             <div className="w-16 h-px bg-gold-gradient" />
-            <p className="text-emerald-deep/75 font-light text-sm md:text-base leading-relaxed">
+            <p className="text-emerald-deep/75 font-semibold text-sm md:text-base leading-relaxed">
               Our training programs are suitable for beginners, wellness practitioners, yoga
               teachers, massage therapists, bodywork professionals, healthcare professionals,
               wellness enthusiasts, and individuals interested in holistic healing.
@@ -680,7 +850,7 @@ function TrainingFormatSection() {
                 <h3 className="font-serif-display text-[13px] tracking-widest text-emerald-deep uppercase font-bold mb-2.5">
                   {opt.title}
                 </h3>
-                <p className="text-xs text-emerald-deep/70 leading-relaxed font-light">
+                <p className="text-xs text-emerald-deep/70 leading-relaxed font-semibold">
                   {opt.desc}
                 </p>
               </div>
@@ -695,7 +865,7 @@ function TrainingFormatSection() {
             {infoBullets.map((bullet, idx) => (
               <li key={idx} className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-                <span className="text-xs md:text-sm text-cream/90 font-light leading-relaxed">
+                <span className="text-xs md:text-sm text-cream/90 font-semibold leading-relaxed">
                   {bullet}
                 </span>
               </li>
@@ -752,12 +922,12 @@ function ClosingCTASection() {
           Learn • Practice • Transform
         </span>
 
-        <h2 className="font-display text-4xl md:text-6xl text-white leading-tight font-light">
+        <h2 className="font-display text-4xl md:text-6xl text-white leading-tight font-bold">
           Begin Your Professional <br className="hidden md:block" />
-          <em className="text-gold-gradient not-italic font-medium">Holistic Journey</em> Today
+          <em className="text-gold-gradient not-italic font-bold">Holistic Journey</em> Today
         </h2>
 
-        <p className="text-cream/80 max-w-2xl mx-auto text-sm md:text-base font-light italic leading-relaxed">
+        <p className="text-cream/80 max-w-2xl mx-auto text-sm md:text-base font-semibold italic leading-relaxed">
           "Develop practical therapeutic skills, deepen your understanding of holistic wellness, and
           gain confidence through immersive hands-on training designed for both personal growth and
           professional development."

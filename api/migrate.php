@@ -31,6 +31,7 @@ try {
         `id` VARCHAR(50) PRIMARY KEY,
         `name` VARCHAR(100) DEFAULT 'Untitled',
         `image` VARCHAR(255) NOT NULL,
+        `category` VARCHAR(100) DEFAULT 'Our Centre',
         `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
     echo "Table 'gallery_images' verified.\n";
@@ -172,12 +173,13 @@ try {
 
     // 6. Migrate Gallery Images
     if (isset($dbData['gallery_images']) && is_array($dbData['gallery_images'])) {
-        $stmt = $pdo->prepare("INSERT INTO `gallery_images` (`id`, `name`, `image`, `created_at`) VALUES (?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO `gallery_images` (`id`, `name`, `image`, `category`, `created_at`) VALUES (?, ?, ?, ?, ?)");
         foreach ($dbData['gallery_images'] as $img) {
             $stmt->execute([
                 $img['id'],
                 $img['name'] ?? 'Untitled',
                 $img['image'],
+                $img['category'] ?? 'General',
                 $img['created_at'] ?? date('Y-m-d H:i:s')
             ]);
         }

@@ -7,13 +7,16 @@ import about from "@/assets/about.png";
 import therapy from "@/assets/therapy.jpg";
 import temple1 from "@/assets/temple_1.png";
 import temple2 from "@/assets/temple_2.png";
+import sivagiriMuttImg from "@/assets/sivagiri_mutt.jpg";
+import anjengoFortImg from "@/assets/anjengo_fort.jpg";
+import kappilBackwatersImg from "@/assets/about_hero_veranda.jpg";
 import wellnessRetreatImg from "@/assets/Yoga wellness retreat.png";
 import detoxRetreatImg from "@/assets/Yoga Detox & Rejuvenation Retreat.png";
 import meditationRetreatImg from "@/assets/Yoga meditation retreat.png";
 import coupleRetreatImg from "@/assets/Couple Wellness retreat.png";
 import stressInsomniaRetreatImg from "@/assets/stress_insomnia_retreat.jpg";
 import painManagementRetreatImg from "@/assets/pain_management_retreat.jpg";
-import { ArrowRight, Flower2 } from "lucide-react";
+import { ArrowRight, Flower2, ChevronDown, MapPin } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
 
 export const Route = createFileRoute("/retreats")({
@@ -78,7 +81,7 @@ function RetreatsSection() {
       shortDesc: "Traditional Practice",
       img: meditationRetreatImg,
       overview:
-        "A transformative retreat focused on traditional yoga, breathwork, meditation, mindfulness, and self-awareness.",
+        "A transformative retreat focused on traditional yoga, breathwork, meditation, mindfulness, self-awareness, and inner well-being.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
         "Sunset Yoga Session (Evening Practice – 90 Minutes)",
@@ -91,11 +94,14 @@ function RetreatsSection() {
         "Guided Meditation Practices",
         "Breath Awareness Training",
         "Chanting & Mindfulness Sessions",
-        "Yoga Adjustment Sessions",
-        "Psychic Physiology of Yoga",
-        "Silent Reflection Practices",
+        "Yoga Philosophy & Traditional Wisdom Sessions",
+        "Chakra & Energy Awareness Sessions",
+        "Interactive Yoga Learning & Discussion Sessions",
+        "Yoga Alignment & Adjustment Guidance",
+        "Relaxation Practices",
       ],
-      idealFor: "Mental clarity, emotional balance, mindfulness, and spiritual growth.",
+      idealFor:
+        "Mental clarity, emotional balance, mindfulness, self-awareness, relaxation, and spiritual growth",
     },
     {
       title: "COUPLE WELLNESS RETREAT",
@@ -127,27 +133,28 @@ function RetreatsSection() {
       shortDesc: "Lifestyle Renewal",
       img: detoxRetreatImg,
       overview:
-        "A holistic cleansing and lifestyle renewal retreat designed to support detoxification, digestive wellness, energy renewal, and mindful living.",
+        "A holistic wellness retreat designed to support natural cleansing practices, rejuvenation, relaxation, energy renewal, digestive wellness, and mindful living.",
       included: [
         "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
         "Sunset Yoga Session (Evening Practice – 90 Minutes)",
         "Daily Pranayama & Meditation Session (60 Minutes)",
         "Doctor Consultation & Wellness Assessment",
-        "Pulse Diagnosis Assessment",
-        "Iris Diagnosis Assessment",
-        "Healthy Detox Meals & Kerala Cuisine",
+        "Daily Wellness Therapy Session (60 Minutes)",
+        "Healthy Kerala Cuisine",
         "Comfortable Accommodation",
       ],
       highlights: [
         "Jala Neti (Yogic Nasal Cleansing)",
-        "Kapalabhati (Yogic Cranial Cleansing Practice)",
+        "Kapalabhati (Yogic Cleansing Breathing Practice)",
         "Vamana Dhauti (Yogic Stomach Cleansing Practice)",
-        "Yogic Detox Techniques",
+        "Shiatsu Therapy",
+        "Reflexology",
+        "Fasting Awareness & Guided Learning Sessions",
+        "Aarogya Raksha Panchatantras – Five Principles for Healthy Living Learning Session",
         "Ayurveda-Inspired Lifestyle Guidance",
-        "Digestive Wellness Education",
       ],
       idealFor:
-        "Detoxification, energy renewal, digestive support, and healthy lifestyle transformation.",
+        "Individuals seeking rejuvenation, relaxation, energy renewal, mindful lifestyle practices, digestive wellness support, and a refreshing holistic wellness experience.",
     },
     {
       title: "ENERGY BALANCING RETREAT",
@@ -195,13 +202,16 @@ function RetreatsSection() {
       highlights: [
         "Yoga for Healthy Aging",
         "Breathwork for Vitality",
-        "Wellness Therapies for Circulation & Recovery",
+        "Wellness Therapies for Relaxation & Recovery",
         "Natural Rejuvenation Practices",
-        "Lifestyle & Longevity Guidance",
-        "Stress Management Techniques",
-        "Healthy Aging Education",
+        "Stress Management & Relaxation Techniques",
+        "Healthy Aging Awareness Sessions",
+        "Shiatsu Therapy",
+        "Reflexology",
+        "Dorn Therapy (Spine Care Therapy)",
       ],
-      idealFor: "Vitality, graceful aging, mobility, relaxation, and long-term wellness.",
+      idealFor:
+        "Vitality, graceful aging, improved mobility, relaxation, stress reduction, and long-term wellness.",
     },
     {
       title: "PAIN MANAGEMENT & THERAPEUTIC WELLNESS RETREAT",
@@ -226,9 +236,12 @@ function RetreatsSection() {
         "Deep Tissue Therapy",
         "Shiatsu Therapy",
         "Reflexology",
+        "Cupping Therapy",
+        "Acupuncture-Based Wellness Support",
+        "Dorn Therapy (Spine Care Therapy)",
         "Relaxation & Recovery Techniques",
       ],
-      idealFor: "Mobility support, muscular relaxation, posture improvement, and recovery.",
+      idealFor: "Mobility support, muscular relaxation, posture awareness, relaxation, and overall physical well-being.",
     },
     {
       title: "STRESS & INSOMNIA MANAGEMENT RETREAT",
@@ -237,145 +250,193 @@ function RetreatsSection() {
       overview:
         "A calming retreat designed to relax the nervous system, improve sleep quality, reduce stress, and restore emotional balance.",
       included: [
-        "Sunrise Yoga Session (Morning Practice – 90 Minutes)",
-        "Sunset Yoga Session (Evening Practice – 90 Minutes)",
-        "Daily Pranayama & Meditation Session (60 Minutes)",
+        "Gentle Morning Yoga & Mobility Practice (90 Minutes)",
+        "Evening Relaxation Yoga & Deep Rest Practice (90 Minutes)",
+        "Calming Pranayama & Guided Meditation (60 Minutes)",
         "Daily Wellness Therapy Session (60 Minutes)",
-        "Doctor Consultation & Wellness Assessment",
+        "Personalized Doctor Consultation & Wellness Assessment",
+        "Sleep & Lifestyle Wellness Guidance",
         "Healthy Kerala Cuisine",
         "Comfortable Accommodation",
       ],
       highlights: [
         "Guided Meditation Practices",
-        "Sleep Wellness Education",
-        "Nervous System Relaxation Techniques",
-        "Breathwork & Mindfulness Sessions",
-        "Emotional Wellness Practices",
         "Relaxation Yoga",
+        "Shiatsu Therapy",
+        "Pranayama & Calming Breathwork",
+        "Reflexology",
+        "Nervous System Relaxation Techniques",
+        "Acupuncture-Based Wellness Support",
+        "Sleep Wellness Education",
+        "Guided Deep Relaxation",
+        "Mindfulness Practices",
+        "Emotional Wellness Practices",
         "Stress Management Guidance",
       ],
-      idealFor: "Stress reduction, better sleep, emotional well-being, and mental clarity.",
+      idealFor:
+        "Stress reduction, better sleep, emotional well-being, relaxation, and mental clarity.",
     },
   ];
 
   return (
-    <section className="py-28 bg-cream relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-emerald-deep/5 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
-      <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
-        <div className="lg:max-w-xl">
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">
-            WELLNESS RETREATS & TRANSFORMATIONAL PROGRAMS
-          </span>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep leading-tight">
-            Holistic Healing • Mindful Living •{" "}
-            <em className="text-gold-gradient not-italic">Inner Transformation</em>.
-          </h2>
-          <div className="gold-divider my-8 max-w-xs" />
-          <p className="text-muted-foreground leading-relaxed">
-            At Dr. VIKRAM YOGA & WELLNESS CENTRE, our wellness retreats are thoughtfully designed to
-            support physical well-being, emotional balance, mental clarity, relaxation, and personal
-            transformation. Set in the serene coastal environment of Varkala, Kerala, our retreat
-            experiences combine authentic yoga practices, therapeutic wellness approaches, holistic
-            healing methods, and mindful lifestyle guidance.
-            <br />
-            <br />
-            Each retreat includes personalized support and a balanced daily schedule designed to
-            nurture the body, calm the mind, and promote complete well-being.
-          </p>
-          <div className="mt-10 flex flex-col gap-4">
-            {retreatsList.map((r) => {
-              const isOpen = openRetreat === r.title;
-              return (
+    <section className="py-20 md:py-28 bg-[#fcfaf4] relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-emerald-deep/5 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* ── TOP SECTION: Left Intro Content + Right Main Image ── */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-12 lg:mb-16">
+          {/* Left Side Content */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <span className="font-serif-display text-[0.68rem] md:text-[0.72rem] tracking-[0.3em] text-[#1c382b] uppercase font-semibold">
+              WELLNESS RETREATS &amp; TRANSFORMATIONAL PROGRAMS
+            </span>
+
+            <h2 className="mt-3.5 font-display text-3xl sm:text-4xl lg:text-[2.65rem] text-emerald-deep leading-[1.18] font-bold">
+              Holistic Healing &bull; Mindful Living &bull;{" "}
+              <span className="text-[#c59a3f] italic font-normal">Inner Transformation</span>.
+            </h2>
+
+            <div className="gold-divider my-6 max-w-xs" />
+
+            <p className="text-[#3c5245] text-sm sm:text-base leading-relaxed">
+              At Dr. VIKRAM YOGA &amp; WELLNESS CENTRE, our wellness retreats are thoughtfully designed to
+              support physical well-being, emotional balance, mental clarity, relaxation, and personal
+              transformation. Set in the serene coastal environment of Varkala, Kerala, our retreat
+              experiences combine authentic yoga practices, therapeutic wellness approaches, holistic
+              healing methods, and mindful lifestyle guidance.
+            </p>
+
+            <p className="mt-4 text-[#3c5245] text-sm sm:text-base leading-relaxed">
+              Each retreat includes personalized support and a balanced daily schedule designed to
+              nurture the body, calm the mind, and promote complete well-being.
+            </p>
+          </div>
+
+          {/* Right Side Main Image - Stretches and aligns vertically with the left content */}
+          <div className="lg:col-span-5 relative flex min-h-[360px] sm:min-h-[420px] lg:min-h-0">
+            <div className="w-full h-full rounded-2xl md:rounded-[2rem] overflow-hidden shadow-luxury border border-gold/20">
+              <img
+                src={wellnessRetreatImg}
+                alt="Your Gateway to Holistic Wellness"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ── RETREAT CARDS: Two-Column Alternating Layout ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 items-start">
+          {retreatsList.map((r) => {
+            const isOpen = openRetreat === r.title;
+            // Derive a stable anchor id from the title
+            const anchorId = r.title
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-|-$/g, "");
+            return (
+              <div
+                id={anchorId}
+                key={r.title}
+                className="bg-emerald-deep hover:bg-[#0c2a21] transition-colors rounded-2xl cursor-pointer shadow-soft hover:shadow-luxury overflow-hidden text-cream border border-gold/20"
+              >
+                {/* Card Header Row: Thumbnail on left, Title + Subtitle on right */}
                 <div
-                  key={r.title}
                   onClick={() => setOpenRetreat(isOpen ? null : r.title)}
-                  className="bg-[#6f7062] hover:bg-[#606155] transition-colors rounded-2xl cursor-pointer shadow-soft overflow-hidden text-cream"
+                  className="flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 select-none"
                 >
-                  <div className="flex flex-col md:flex-row">
-                    <div className="md:w-48 h-32 md:h-auto relative overflow-hidden shrink-0">
-                      <img
-                        src={r.img}
-                        alt={r.title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="p-5 sm:p-6 text-left flex-1 flex flex-col justify-center">
-                      <div className="font-display text-xl sm:text-2xl leading-tight">
-                        {r.title}
-                      </div>
-                      <div className="text-[0.65rem] tracking-[0.3em] uppercase text-gold mt-1.5">
-                        {r.shortDesc}
-                      </div>
+                  {/* Thumbnail Image */}
+                  <div className="w-28 sm:w-36 md:w-36 lg:w-44 h-20 sm:h-24 rounded-xl overflow-hidden shrink-0 relative">
+                    <img
+                      src={r.img}
+                      alt={r.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* Title and Category */}
+                  <div className="flex-1 min-w-0 pr-2">
+                    <h3 className="font-display text-xs sm:text-sm lg:text-[0.92rem] font-extrabold leading-snug text-white tracking-wide uppercase line-clamp-2">
+                      {r.title}
+                    </h3>
+                    <div className="text-[0.58rem] sm:text-[0.64rem] tracking-[0.22em] uppercase text-gold font-semibold mt-1">
+                      {r.shortDesc}
                     </div>
                   </div>
-                  <div
-                    className={`grid transition-all duration-500 bg-[#53544a] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
-                  >
-                    <div className="overflow-hidden">
-                      <div className="p-6 text-cream/90 text-sm leading-relaxed space-y-6 text-left">
+
+                  {/* Expand Chevron Icon */}
+                  <div className="shrink-0 pr-2 text-gold/80">
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform duration-300 ${
+                        isOpen ? "rotate-180 text-gold" : ""
+                      }`}
+                    />
+                  </div>
+                </div>
+
+                {/* Expandable Accordion Body */}
+                <div
+                  className={`grid transition-all duration-400 bg-[#0c2a21] ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="p-5 sm:p-6 text-cream/90 text-sm leading-relaxed space-y-5 text-left border-t border-cream/10">
+                      <div>
+                        <strong className="text-gold tracking-widest uppercase text-xs mb-1.5 block font-bold">
+                          Overview
+                        </strong>
+                        <p className="text-xs sm:text-sm text-cream/90 font-medium leading-relaxed">{r.overview}</p>
+                      </div>
+
+                      <div className="grid sm:grid-cols-2 gap-5 pt-1">
                         <div>
-                          <strong className="text-gold tracking-wide uppercase text-xs mb-1 block">
-                            Overview
+                          <strong className="text-gold tracking-widest uppercase text-xs mb-2 block font-bold">
+                            What's Included
                           </strong>
-                          <p>{r.overview}</p>
+                          <ul className="space-y-1.5">
+                            {r.included.map((item, idx) => (
+                              <li key={idx} className="flex gap-2 text-xs text-cream/90 font-medium items-start">
+                                <span className="text-gold shrink-0">•</span> <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-
-                        <div className="grid sm:grid-cols-2 gap-6">
-                          <div>
-                            <strong className="text-gold tracking-wide uppercase text-xs mb-2 block">
-                              What's Included
-                            </strong>
-                            <ul className="space-y-1.5">
-                              {r.included.map((item, i) => (
-                                <li key={i} className="flex gap-2 text-xs items-start">
-                                  <span className="text-gold mt-0.5">•</span> {item}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div>
-                            <strong className="text-gold tracking-wide uppercase text-xs mb-2 block">
-                              Retreat Highlights
-                            </strong>
-                            <ul className="space-y-1.5">
-                              {r.highlights.map((item, i) => (
-                                <li key={i} className="flex gap-2 text-xs items-start">
-                                  <span className="text-gold mt-0.5">•</span> {item}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-
                         <div>
-                          <strong className="text-gold tracking-wide uppercase text-xs mb-1 block">
-                            Ideal For
+                          <strong className="text-gold tracking-widest uppercase text-xs mb-2 block font-bold">
+                            Retreat Highlights
                           </strong>
-                          <p>{r.idealFor}</p>
+                          <ul className="space-y-1.5">
+                            {r.highlights.map((item, idx) => (
+                              <li key={idx} className="flex gap-2 text-xs text-cream/90 font-medium items-start">
+                                <span className="text-gold shrink-0">•</span> <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
+                      </div>
 
-                        <div className="pt-2 text-center">
-                          <a
-                            href={`/apply?category=Retreat-Programs&course=${encodeURIComponent(r.title)}`}
-                            className="inline-block px-6 py-2 rounded-full bg-gold-gradient text-emerald-deep font-semibold tracking-wider text-xs hover:opacity-90 transition-opacity"
-                          >
-                            Apply Now
-                          </a>
-                        </div>
+                      <div>
+                        <strong className="text-gold tracking-widest uppercase text-xs mb-1.5 block font-bold">
+                          Ideal For
+                        </strong>
+                        <p className="text-xs sm:text-sm text-cream/90 font-medium leading-relaxed">{r.idealFor}</p>
+                      </div>
+
+                      <div className="pt-2 flex justify-end">
+                        <a
+                          href={`/apply?category=Retreat-Programs&course=${encodeURIComponent(r.title)}`}
+                          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gold-gradient text-emerald-deep font-semibold tracking-wider text-xs uppercase shadow-md hover:scale-105 transition-transform"
+                        >
+                          Apply Now <ArrowRight className="w-3.5 h-3.5" />
+                        </a>
                       </div>
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-luxury lg:sticky lg:top-32 hidden lg:block">
-          <img
-            src={wellnessRetreatImg}
-            alt="Retreat Details"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -444,21 +505,44 @@ function Excursions() {
           </ul>
 
           <div className="grid grid-cols-3 gap-3 md:gap-4">
-            <img
-              src={meditationRetreatImg}
-              alt="Beach Yoga"
-              className="w-full h-32 md:h-64 object-cover rounded-xl"
-            />
-            <img
-              src={detoxRetreatImg}
-              alt="Cultural Hug"
-              className="w-full h-32 md:h-64 object-cover rounded-xl"
-            />
-            <img
-              src={coupleRetreatImg}
-              alt="Nature Walk"
-              className="w-full h-32 md:h-64 object-cover rounded-xl"
-            />
+            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+              <img
+                src={temple1}
+                alt="Janardhana Swamy Temple"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 md:p-3 pt-6 flex items-center gap-1.5 text-white">
+                <MapPin className="w-3.5 h-3.5 text-[#E57624] shrink-0" />
+                <span className="text-[0.7rem] md:text-xs font-semibold drop-shadow truncate">
+                  Janardhana Swamy Temple, Varkala
+                </span>
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+              <img
+                src={temple2}
+                alt="Sacred Temple Rituals & Pooja"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+
+            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+              <img
+                src={sivagiriMuttImg}
+                alt="Sivagiri Mutt & Ashram"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 md:p-3 pt-6 flex items-center gap-1.5 text-white">
+                <MapPin className="w-3.5 h-3.5 text-[#E57624] shrink-0" />
+                <span className="text-[0.7rem] md:text-xs font-semibold drop-shadow truncate">
+                  Sivagiri Mutt &amp; Ashram, Varkala
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -498,21 +582,50 @@ function Excursions() {
           </ul>
 
           <div className="grid grid-cols-3 gap-3 md:gap-4">
-            <img
-              src={meditationRetreatImg}
-              alt="Beach Yoga"
-              className="w-full h-32 md:h-64 object-cover rounded-xl"
-            />
-            <img
-              src={detoxRetreatImg}
-              alt="Cultural Hug"
-              className="w-full h-32 md:h-64 object-cover rounded-xl"
-            />
-            <img
-              src={coupleRetreatImg}
-              alt="Nature Walk"
-              className="w-full h-32 md:h-64 object-cover rounded-xl"
-            />
+            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+              <img
+                src={varkalaBeach}
+                alt="Varkala Beach (Papanasam Beach)"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 md:p-3 pt-6 flex items-center gap-1.5 text-white">
+                <MapPin className="w-3.5 h-3.5 text-[#E57624] shrink-0" />
+                <span className="text-[0.7rem] md:text-xs font-semibold drop-shadow truncate">
+                  Varkala Beach (Papanasam Beach)
+                </span>
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+              <img
+                src={anjengoFortImg}
+                alt="Anjengo Fort & Historic Lighthouse"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 md:p-3 pt-6 flex items-center gap-1.5 text-white">
+                <MapPin className="w-3.5 h-3.5 text-[#E57624] shrink-0" />
+                <span className="text-[0.7rem] md:text-xs font-semibold drop-shadow truncate">
+                  Anjengo Fort &amp; Lighthouse
+                </span>
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+              <img
+                src={kappilBackwatersImg}
+                alt="Kappil Beach & Backwaters"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 md:p-3 pt-6 flex items-center gap-1.5 text-white">
+                <MapPin className="w-3.5 h-3.5 text-[#E57624] shrink-0" />
+                <span className="text-[0.7rem] md:text-xs font-semibold drop-shadow truncate">
+                  Kappil Beach &amp; Backwaters
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

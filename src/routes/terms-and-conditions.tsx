@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar, Footer, WhatsAppFloat, PageHero, BookNowFloat } from "./about";
-import hero from "@/assets/retreat.jpg";
+import hero from "@/assets/New/ocean-coast-bali.jpg";
 import { ShieldAlert, BookOpen, Clock, AlertTriangle, FileText, Scale } from "lucide-react";
 
 export const Route = createFileRoute("/terms-and-conditions")({

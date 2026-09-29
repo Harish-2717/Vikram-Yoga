@@ -7,6 +7,7 @@ requireAdmin();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $name = $_POST['name'] ?? 'Untitled';
+        $category = $_POST['category'] ?? 'Our Centre';
 
         if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
             sendJson(["success" => false, "error" => "Image file is required"], 400);
@@ -31,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo = getDbConnection();
         $id = "gal-" . round(microtime(true) * 1000) . "-" . substr(md5(uniqid(rand(), true)), 0, 7);
 
-        $stmt = $pdo->prepare("INSERT INTO `gallery_images` (`id`, `name`, `image`, `created_at`) VALUES (?, ?, ?, NOW())");
-        $stmt->execute([$id, $name, $filePath]);
+        $stmt = $pdo->prepare("INSERT INTO `gallery_images` (`id`, `name`, `image`, `category`, `created_at`) VALUES (?, ?, ?, ?, NOW())");
+        $stmt->execute([$id, $name, $filePath, $category]);
 
         sendJson(["success" => true]);
     } catch (Exception $e) {

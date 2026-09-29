@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 
 function getDbConnection() {
     $host = 'localhost';
-    $dbName = 'emerald_serenity_hub';
+    $dbName = 'yoga';
     $user = 'root';
     $pass = '';
 

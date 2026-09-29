@@ -10,6 +10,8 @@ import {
   Images as ImagesIcon,
   Type,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/gallery")({
@@ -19,16 +21,30 @@ export const Route = createFileRoute("/admin/gallery")({
 function GalleryAdminPage() {
   const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const PAGE_SIZE = 15;
 
   // Form States
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState("");
+  const [category, setCategory] = useState("Our Centre");
   const [submitting, setSubmitting] = useState(false);
 
   // Edit Modal States
   const [editingEntry, setEditingEntry] = useState<any>(null);
   const [editName, setEditName] = useState("");
+  const [editCategory, setEditCategory] = useState("Our Centre");
   const [editingLoading, setEditingLoading] = useState(false);
+
+  const categories = [
+    "Our Centre",
+    "Yoga & Wellness",
+    "Wellness & Therapies",
+    "Deluxe Non-AC Room",
+    "Deluxe AC Room",
+    "Certifications & Training",
+    "Local Experiences & Excursions",
+  ];
 
   const getSessionToken = () => {
     if (typeof document === "undefined") return undefined;
@@ -53,6 +69,7 @@ function GalleryAdminPage() {
           (a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
         setImages(sorted);
+        setCurrentPage(1); // reset to first page on every reload
       } else {
         toast.error("Failed to load gallery images.");
       }
@@ -78,6 +95,7 @@ function GalleryAdminPage() {
     const formData = new FormData();
     formData.append("image", file);
     formData.append("name", name);
+    formData.append("category", category);
 
     const token = getSessionToken();
     try {
@@ -93,6 +111,7 @@ function GalleryAdminPage() {
         toast.success("Gallery image added successfully!");
         setFile(null);
         setName("");
+        setCategory("Our Centre");
         // Reset file input element
         const input = document.getElementById("file-input") as HTMLInputElement;
         if (input) input.value = "";
@@ -120,15 +139,15 @@ function GalleryAdminPage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ id: editingEntry.id, name: editName }),
+        body: JSON.stringify({ id: editingEntry.id, name: editName, category: editCategory }),
       });
       const res = await response.json();
       if (response.ok && res.success) {
-        toast.success("Image name updated successfully!");
+        toast.success("Image details updated successfully!");
         setEditingEntry(null);
         fetchImages();
       } else {
-        toast.error(res.error || "Failed to update image name.");
+        toast.error(res.error || "Failed to update image details.");
       }
     } catch {
       toast.error("An error occurred.");
@@ -230,6 +249,22 @@ function GalleryAdminPage() {
                   />
                 </div>
               </div>
+              <div className="space-y-2">
+                <label className="text-slate-500 font-medium text-xs uppercase tracking-wider block">
+                  Category
+                </label>
+                <div className="relative">
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full bg-slate-50/50 border border-slate-200 focus:border-emerald focus:outline-none rounded-xl py-2.5 px-4 text-slate-700 text-xs transition-all appearance-none"
+                  >
+                    {categories.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
 
               <button
                 type="submit"
@@ -242,7 +277,7 @@ function GalleryAdminPage() {
           </div>
 
           {/* GALLERY LIST */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 space-y-6">
             {loading ? (
               <div className="flex items-center justify-center h-48 bg-white rounded-2xl border border-slate-100 shadow-[0_4px_30px_rgba(0,0,0,0.01)]">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-deep"></div>
@@ -257,55 +292,147 @@ function GalleryAdminPage() {
                   Upload images to display them in the Dynamic Gallery Sanctuary.
                 </p>
               </div>
-            ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                {images.map((entry) => (
-                  <div
-                    key={entry.id}
-                    className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.01)] flex flex-col group hover:shadow-soft transition-all duration-300"
-                  >
-                    <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                      <img
-                        src={entry.image}
-                        alt={entry.name}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="p-4 border-t border-slate-50 flex-1 flex flex-col justify-between">
-                      <div>
-                        <h4 className="text-xs font-semibold text-slate-700 truncate" title={entry.name}>
-                          {entry.name}
-                        </h4>
-                        <span className="text-[0.55rem] text-slate-300 block mt-1">
-                          {new Date(entry.created_at).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-slate-100">
-                        <button
-                          onClick={() => {
-                            setEditingEntry(entry);
-                            setEditName(entry.name);
-                          }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-emerald/30 hover:bg-emerald/5 text-[0.65rem] font-semibold text-slate-500 hover:text-emerald transition-all cursor-pointer"
-                          title="Rename Image"
-                        >
-                          <Edit3 className="w-3 h-3" />
-                          <span>Rename</span>
-                        </button>
-                        <button
-                          onClick={() => handleDelete(entry.id)}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-red-200 hover:bg-red-50 text-[0.65rem] font-semibold text-slate-500 hover:text-red-600 transition-all cursor-pointer"
-                          title="Delete Image"
-                        >
-                          <Trash2 className="w-3 h-3" />
-                          <span>Delete</span>
-                        </button>
-                      </div>
-                    </div>
+            ) : (() => {
+              const totalPages = Math.ceil(images.length / PAGE_SIZE);
+              const pageImages = images.slice(
+                (currentPage - 1) * PAGE_SIZE,
+                currentPage * PAGE_SIZE
+              );
+              return (
+                <>
+                  {/* Count bar */}
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs text-slate-400 font-medium">
+                      Showing{" "}
+                      <span className="text-slate-600 font-semibold">
+                        {(currentPage - 1) * PAGE_SIZE + 1}–
+                        {Math.min(currentPage * PAGE_SIZE, images.length)}
+                      </span>{" "}
+                      of{" "}
+                      <span className="text-slate-600 font-semibold">{images.length}</span>{" "}
+                      images
+                    </p>
+                    <p className="text-[0.65rem] text-slate-400">
+                      Page {currentPage} / {totalPages}
+                    </p>
                   </div>
-                ))}
-              </div>
-            )}
+
+                  {/* Image Grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    {pageImages.map((entry) => (
+                      <div
+                        key={entry.id}
+                        className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.01)] flex flex-col group hover:shadow-soft transition-all duration-300"
+                      >
+                        <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                          <img
+                            src={entry.image}
+                            alt={entry.name}
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                        <div className="p-4 border-t border-slate-50 flex-1 flex flex-col justify-between">
+                          <div>
+                            <h4 className="text-xs font-semibold text-slate-700 truncate" title={entry.name}>
+                              {entry.name}
+                            </h4>
+                            <span className="inline-block mt-1.5 px-2 py-0.5 bg-emerald/10 text-emerald-deep text-[0.6rem] font-semibold rounded-md">
+                              {entry.category || "Our Centre"}
+                            </span>
+                            <span className="text-[0.55rem] text-slate-400 block mt-1.5">
+                              {new Date(entry.created_at).toLocaleDateString()}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-slate-100">
+                            <button
+                              onClick={() => {
+                                setEditingEntry(entry);
+                                setEditName(entry.name);
+                                setEditCategory(entry.category || "Our Centre");
+                              }}
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-emerald/30 hover:bg-emerald/5 text-[0.65rem] font-semibold text-slate-500 hover:text-emerald transition-all cursor-pointer"
+                              title="Edit Image"
+                            >
+                              <Edit3 className="w-3 h-3" />
+                              <span>Edit</span>
+                            </button>
+                            <button
+                              onClick={() => handleDelete(entry.id)}
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-red-200 hover:bg-red-50 text-[0.65rem] font-semibold text-slate-500 hover:text-red-600 transition-all cursor-pointer"
+                              title="Delete Image"
+                            >
+                              <Trash2 className="w-3 h-3" />
+                              <span>Delete</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Pagination Controls */}
+                  {totalPages > 1 && (
+                    <div className="flex items-center justify-center gap-2 pt-2">
+                      {/* Prev */}
+                      <button
+                        onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                        disabled={currentPage === 1}
+                        className="flex items-center gap-1 px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-500 hover:border-emerald/40 hover:text-emerald hover:bg-emerald/5 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
+                      >
+                        <ChevronLeft className="w-3.5 h-3.5" />
+                        Prev
+                      </button>
+
+                      {/* Page Numbers */}
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                        const isActive = page === currentPage;
+                        // Show first, last, currentPage ±1, and ellipsis
+                        const show =
+                          page === 1 ||
+                          page === totalPages ||
+                          Math.abs(page - currentPage) <= 1;
+                        if (!show) {
+                          // Show ellipsis once between groups
+                          const prevShow =
+                            page - 1 === 1 ||
+                            page - 1 === totalPages ||
+                            Math.abs(page - 1 - currentPage) <= 1;
+                          if (!prevShow) return null;
+                          return (
+                            <span key={`ellipsis-${page}`} className="px-1 text-slate-300 text-xs select-none">
+                              …
+                            </span>
+                          );
+                        }
+                        return (
+                          <button
+                            key={page}
+                            onClick={() => setCurrentPage(page)}
+                            className={`w-8 h-8 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                              isActive
+                                ? "bg-emerald-deep text-white shadow-md"
+                                : "border border-slate-200 text-slate-500 hover:border-emerald/40 hover:text-emerald hover:bg-emerald/5"
+                            }`}
+                          >
+                            {page}
+                          </button>
+                        );
+                      })}
+
+                      {/* Next */}
+                      <button
+                        onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                        disabled={currentPage === totalPages}
+                        className="flex items-center gap-1 px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-500 hover:border-emerald/40 hover:text-emerald hover:bg-emerald/5 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
+                      >
+                        Next
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
           </div>
         </div>
       </div>
@@ -321,7 +448,7 @@ function GalleryAdminPage() {
               <X className="w-5 h-5" />
             </button>
             <h3 className="font-serif-display text-lg text-emerald-deep font-bold mb-4">
-              Rename Gallery Image
+              Edit Gallery Image
             </h3>
             <div className="mb-4 aspect-video rounded-xl overflow-hidden bg-slate-100 relative">
               <img
@@ -345,6 +472,22 @@ function GalleryAdminPage() {
                     placeholder="Sunrise Yoga Practice"
                     className="w-full bg-slate-50/50 border border-slate-200 focus:border-emerald focus:outline-none rounded-xl py-2.5 pl-10 pr-4 text-slate-700 text-xs transition-all"
                   />
+                </div>
+              </div>
+              <div className="space-y-1">
+                <label className="text-[0.65rem] tracking-[0.2em] uppercase text-slate-400 font-bold">
+                  Category
+                </label>
+                <div className="relative">
+                  <select
+                    value={editCategory}
+                    onChange={(e) => setEditCategory(e.target.value)}
+                    className="w-full bg-slate-50/50 border border-slate-200 focus:border-emerald focus:outline-none rounded-xl py-2.5 px-4 text-slate-700 text-xs transition-all appearance-none"
+                  >
+                    {categories.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <button
