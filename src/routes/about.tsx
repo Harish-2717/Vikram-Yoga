@@ -193,6 +193,7 @@ export function Navbar({ variant = "dark" }: { variant?: "dark" | "light" }) {
         { to: "/yoga", label: "Yoga" },
         { to: "/wellness-therapy", label: "Wellness Therapy" },
         { to: "/retreats", label: "Yoga & Wellness Retreats" },
+        { to: "/retreat-apply", label: "Retreat Application Form" },
         { to: "/certificate-courses", label: "Massage Certificate Courses" },
       ],
     },

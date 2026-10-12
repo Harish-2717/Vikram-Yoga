@@ -426,7 +426,7 @@ function RetreatsSection() {
 
                       <div className="pt-2 flex justify-end">
                         <a
-                          href={`/apply?category=Retreat-Programs&course=${encodeURIComponent(r.title)}`}
+                          href={`/retreat-apply?course=${encodeURIComponent(r.title)}`}
                           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gold-gradient text-emerald-deep font-semibold tracking-wider text-xs uppercase shadow-md hover:scale-105 transition-transform"
                         >
                           Apply Now <ArrowRight className="w-3.5 h-3.5" />
