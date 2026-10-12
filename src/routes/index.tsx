@@ -411,9 +411,10 @@ function Hero() {
 
             {/* Headline 2: Yoga & Wellness Centre */}
             <p
-              className="font-display italic text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] xl:text-[3.5rem] font-bold tracking-normal mt-0.5 sm:mt-1 text-[#ba8336]"
+              className="font-display italic text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] xl:text-[3.5rem] font-extrabold tracking-normal mt-0.5 sm:mt-1 text-[#ba8336]"
               style={{
-                textShadow: "0 1px 2px rgba(255, 255, 255, 0.6)",
+                fontWeight: 800,
+                textShadow: "0 1px 2px rgba(255, 255, 255, 0.7)",
               }}
             >
               Yoga &amp; Wellness Centre
@@ -421,8 +422,9 @@ function Hero() {
 
             {/* Tagline */}
             <p
-              className="font-display text-xs sm:text-sm md:text-base lg:text-[1.05rem] xl:text-[1.12rem] font-semibold text-[#083d25] tracking-normal sm:tracking-wide mt-2 sm:mt-2.5 px-2 max-w-3xl xl:max-w-4xl leading-relaxed whitespace-normal sm:whitespace-nowrap"
+              className="font-display text-xs sm:text-sm md:text-base lg:text-[1.05rem] xl:text-[1.15rem] font-bold text-[#083d25] tracking-normal sm:tracking-wide mt-2 sm:mt-2.5 px-2 max-w-3xl xl:max-w-4xl leading-relaxed whitespace-normal sm:whitespace-nowrap"
               style={{
+                fontWeight: 700,
                 textShadow: "0 1px 2px rgba(255, 255, 255, 0.7)",
               }}
             >
@@ -431,11 +433,14 @@ function Hero() {
 
             {/* Divider: HEAL • HARMONIZE • TRANSFORM */}
             <div className="flex items-center justify-center gap-3 sm:gap-4 w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-3 sm:my-3.5 px-2">
-              <span className="h-[1.5px] flex-1 min-w-[20px] bg-gradient-to-r from-transparent via-[#ba8336]/70 to-[#ba8336]" />
-              <span className="font-display text-[0.68rem] sm:text-[0.76rem] md:text-[0.84rem] tracking-[0.22em] uppercase text-[#083d25] font-bold text-center shrink-0 whitespace-nowrap">
-                HEAL <span className="text-[#ba8336] mx-1 sm:mx-1.5">&bull;</span> HARMONIZE <span className="text-[#ba8336] mx-1 sm:mx-1.5">&bull;</span> TRANSFORM
+              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-r from-transparent via-[#ba8336] to-[#ba8336]" />
+              <span
+                className="font-display text-[0.7rem] sm:text-[0.78rem] md:text-[0.88rem] tracking-[0.22em] uppercase text-[#083d25] font-extrabold text-center shrink-0 whitespace-nowrap"
+                style={{ fontWeight: 800 }}
+              >
+                HEAL <span className="text-[#ba8336] mx-1 sm:mx-1.5 font-black">&bull;</span> HARMONIZE <span className="text-[#ba8336] mx-1 sm:mx-1.5 font-black">&bull;</span> TRANSFORM
               </span>
-              <span className="h-[1.5px] flex-1 min-w-[20px] bg-gradient-to-l from-transparent via-[#ba8336]/70 to-[#ba8336]" />
+              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-l from-transparent via-[#ba8336] to-[#ba8336]" />
             </div>
 
             {/* 4 Action Pill Buttons in 2x2 Grid */}
