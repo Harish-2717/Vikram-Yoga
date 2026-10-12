@@ -8,23 +8,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Retrieve POST data
         $name = $_POST['name'] ?? null;
-        $course = $_POST['course'] ?? null;
-        $minorOption = $_POST['minorOption'] ?? '';
-        $dateOfCourse = $_POST['dateOfCourse'] ?? null;
+        if (!$name && !empty($_POST['firstName'])) {
+            $name = trim(($_POST['firstName'] ?? '') . ' ' . ($_POST['surname'] ?? ''));
+        }
+        $course = $_POST['course'] ?? $_POST['serviceCategory'] ?? null;
+        $minorOption = $_POST['minorOption'] ?? $_POST['courseProgram'] ?? '';
+        $dateOfCourse = $_POST['dateOfCourse'] ?? $_POST['checkInDate'] ?? date('Y-m-d');
         $email = $_POST['email'] ?? null;
-        $dob = $_POST['dob'] ?? '';
+        $dob = $_POST['dob'] ?? $_POST['age'] ?? '';
         $gender = $_POST['gender'] ?? '';
-        $accommodation = $_POST['accommodation'] ?? '';
-        $address = $_POST['address'] ?? '';
+        $accommodation = $_POST['accommodation'] ?? ($_POST['requireAccommodation'] ?? '');
+        if ($accommodation === 'Yes' && !empty($_POST['accommodationPreference'])) {
+            $accommodation = $_POST['accommodationPreference'];
+        }
+        $address = $_POST['address'] ?? (!empty($_POST['phone']) ? "Phone / WhatsApp: " . $_POST['phone'] : '');
         $practisedYoga = $_POST['practisedYoga'] ?? '';
-        $howLong = $_POST['howLong'] ?? '';
-        $whyTeacherTraining = $_POST['whyTeacherTraining'] ?? '';
-        $meaningOfYoga = $_POST['meaningOfYoga'] ?? '';
-        $injuries = $_POST['injuries'] ?? '';
-        $additionalInfo = $_POST['additionalInfo'] ?? '';
+        $howLong = $_POST['howLongPracticing'] ?? $_POST['howLong'] ?? '';
+        $whyTeacherTraining = $_POST['expectations'] ?? $_POST['whyTeacherTraining'] ?? '';
+        $meaningOfYoga = $_POST['yogaStyle'] ?? $_POST['meaningOfYoga'] ?? '';
+        $injuries = !empty($_POST['healthDetails']) ? $_POST['healthDetails'] : ($_POST['injuries'] ?? '');
+        
+        // Build comprehensive additionalInfo including all retreat details
+        $rawAdditionalInfo = $_POST['additionalInfo'] ?? '';
+        $details = [];
+        if (!empty($_POST['phone'])) $details[] = "Phone / WhatsApp: " . $_POST['phone'];
+        if (!empty($_POST['age'])) $details[] = "Age: " . $_POST['age'];
+        if (!empty($_POST['requireAccommodation'])) $details[] = "Accommodation Required: " . $_POST['requireAccommodation'];
+        if (!empty($_POST['accommodationPreference'])) $details[] = "Accommodation Type: " . $_POST['accommodationPreference'];
+        if (!empty($_POST['checkInDate'])) $details[] = "Check-in Date: " . $_POST['checkInDate'];
+        if (!empty($_POST['checkOutDate'])) $details[] = "Check-out Date: " . $_POST['checkOutDate'];
+        if (!empty($_POST['numberOfNights'])) $details[] = "Number of Nights: " . $_POST['numberOfNights'];
+        if (!empty($_POST['yogaStyle'])) $details[] = "Style of Yoga / Practices: " . $_POST['yogaStyle'];
+        if (!empty($_POST['healthConditions'])) $details[] = "Health Conditions / Limitations: " . $_POST['healthConditions'];
+        if (!empty($_POST['healthDetails'])) $details[] = "Health Details: " . $_POST['healthDetails'];
+        if (!empty($_POST['dietaryRequirement'])) $details[] = "Dietary Requirement: " . $_POST['dietaryRequirement'] . (!empty($_POST['dietaryOther']) ? " (" . $_POST['dietaryOther'] . ")" : "");
+        if (!empty($_POST['dietaryDetails'])) $details[] = "Dietary Details: " . $_POST['dietaryDetails'];
+        if (!empty($_POST['expectations'])) $details[] = "Retreat Expectations: " . $_POST['expectations'];
+        if (!empty($_POST['specialArrangements'])) $details[] = "Special Arrangements: " . $_POST['specialArrangements'];
+        if (!empty($_POST['hearAboutUs'])) $details[] = "Heard About Us Via: " . $_POST['hearAboutUs'] . (!empty($_POST['hearAboutUsOther']) ? " (" . $_POST['hearAboutUsOther'] . ")" : "");
+        if (!empty($rawAdditionalInfo)) $details[] = "Additional Notes: " . $rawAdditionalInfo;
 
-        if (!$name || !$course || !$dateOfCourse || !$email) {
-            sendJson(["success" => false, "error" => "Missing required form fields"], 400);
+        $additionalInfo = !empty($details) ? implode("\n\n", $details) : $rawAdditionalInfo;
+
+        if (!$name || !$course || !$email) {
+            sendJson(["success" => false, "error" => "Missing required form fields (Name, Category, Email)"], 400);
         }
 
         // Handle File Upload

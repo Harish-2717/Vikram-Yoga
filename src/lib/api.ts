@@ -165,23 +165,28 @@ export async function handleApiRequest(req: any, res: any): Promise<boolean> {
       const db = readDb();
       const appId = "app-" + Date.now() + "-" + Math.random().toString(36).substring(2, 9);
 
+      const fullName = fields.name || `${fields.firstName || ''} ${fields.surname || ''}`.trim();
+      const courseCategory = fields.course || fields.serviceCategory || "Yoga & Wellness Retreat";
+      const courseProg = fields.minorOption || fields.courseProgram || "";
+      const courseDate = fields.dateOfCourse || fields.checkInDate || new Date().toISOString().split('T')[0];
+
       const newApp = {
         id: appId,
-        name: fields.name,
-        course: fields.course,
-        minorOption: fields.minorOption,
-        dateOfCourse: fields.dateOfCourse,
+        name: fullName,
+        course: courseCategory,
+        minorOption: courseProg,
+        dateOfCourse: courseDate,
         email: fields.email,
-        dob: fields.dob,
-        gender: fields.gender,
-        accommodation: fields.accommodation,
-        address: fields.address,
-        practisedYoga: fields.practisedYoga,
-        howLong: fields.howLong,
-        whyTeacherTraining: fields.whyTeacherTraining,
-        meaningOfYoga: fields.meaningOfYoga,
-        injuries: fields.injuries,
-        additionalInfo: fields.additionalInfo,
+        dob: fields.dob || fields.age || "",
+        gender: fields.gender || "",
+        accommodation: fields.accommodation || fields.accommodationPreference || fields.requireAccommodation || "",
+        address: fields.address || (fields.phone ? `Phone / WhatsApp: ${fields.phone}` : ""),
+        practisedYoga: fields.practisedYoga || "",
+        howLong: fields.howLongPracticing || fields.howLong || "",
+        whyTeacherTraining: fields.expectations || fields.whyTeacherTraining || "",
+        meaningOfYoga: fields.yogaStyle || fields.meaningOfYoga || "",
+        injuries: fields.healthDetails || fields.injuries || "",
+        additionalInfo: fields.additionalInfo || "",
         status: "Pending" as const,
         created_at: new Date().toISOString(),
       };

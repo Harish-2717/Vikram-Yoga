@@ -583,7 +583,7 @@ function ApplicationsPage() {
                       <span className="text-slate-400 font-semibold block mb-1">
                         Additional queries or remarks:
                       </span>
-                      <p className="font-medium text-slate-700 bg-slate-50 p-3 rounded-lg border border-slate-100 leading-relaxed">
+                      <p className="font-medium text-slate-700 bg-slate-50 p-3 rounded-lg border border-slate-100 leading-relaxed whitespace-pre-wrap">
                         {selectedApp.additionalInfo}
                       </p>
                     </div>
