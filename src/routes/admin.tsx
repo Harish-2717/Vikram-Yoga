@@ -16,6 +16,7 @@ import {
   Lock,
   User as UserIcon,
   MessageSquare,
+  Layers,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
@@ -214,6 +215,7 @@ function AdminLayout() {
   const sidebarLinks = [
     { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
     { to: "/admin/gallery", label: "Gallery Images", icon: ImagesIcon },
+    { to: "/admin/service-images", label: "Service Images", icon: Layers },
     { to: "/admin/social-media", label: "Social Media Images", icon: ImageIcon },
     { to: "/admin/applications", label: "Applications", icon: FileSpreadsheet },
     { to: "/admin/payments", label: "Payment Verification", icon: CreditCard },

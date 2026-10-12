@@ -13,7 +13,7 @@ import {
   X,
   Sparkles,
 } from "lucide-react";
-import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
+import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
 
 export const Route = createFileRoute("/faq")({
   component: FAQPage,
@@ -47,6 +47,7 @@ function FAQPage() {
       <FAQSection />
       <Footer />
       <WhatsAppFloat />
+      <BookNowFloat />
     </main>
   );
 }

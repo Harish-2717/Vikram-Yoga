@@ -18,6 +18,7 @@ import {
   HelpCircle,
   ArrowRight,
   X,
+  Bookmark,
 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero, BookNowFloat } from "./about";
 import classes from "@/assets/classes.jpg";
@@ -38,7 +39,7 @@ export const Route = createFileRoute("/certificate-courses")({
 
 function CoursesPage() {
   return (
-    <main className="overflow-x-hidden bg-cream min-h-screen selection:bg-gold/30 selection:text-emerald-deep">
+    <main className="overflow-x-hidden bg-[#faeee2] min-h-screen selection:bg-gold/30 selection:text-emerald-deep">
       <Navbar />
       <PageHero
         title="Certification Courses"
@@ -49,11 +50,11 @@ function CoursesPage() {
       {/* Introduction */}
       <IntroSection />
 
-      {/* Additional Offerings: Short Workshops & Sessions */}
-      <AdditionalOfferings />
-
       {/* 7 Certification Courses */}
       <CoursesShowcase />
+
+      {/* Additional Offerings: Short Workshops & Sessions */}
+      <AdditionalOfferings />
 
       {/* Unique Highlights */}
       <UniqueFeaturesSection />
@@ -139,7 +140,7 @@ function IntroSection() {
 /* ── Short Workshops & Certification Courses Overview ── */
 function AdditionalOfferings() {
   return (
-    <section className="py-6 px-6 max-w-6xl mx-auto">
+    <section className="pb-24 pt-4 px-6 max-w-6xl mx-auto">
       <div className="bg-[#f7f5ed] rounded-3xl p-6 sm:p-8 md:p-10 relative overflow-hidden shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-[#ede8dd]">
         {/* Decorative Leaves */}
         <div className="absolute -left-6 -bottom-3 w-28 h-28 opacity-10 pointer-events-none text-emerald-deep transform -rotate-12">
@@ -152,27 +153,31 @@ function AdditionalOfferings() {
         <div className="grid lg:grid-cols-2 gap-8 md:gap-10 relative z-10 items-stretch">
           {/* Left Card: Short Workshops */}
           <div className="flex flex-col">
-            <div className="flex items-start gap-3.5 mb-3">
+            <div className="flex items-center gap-3.5 mb-4">
               <div className="w-12 h-12 rounded-full border border-emerald-deep flex items-center justify-center shrink-0 bg-white shadow-sm">
                 <Users className="w-5 h-5 text-emerald-deep" strokeWidth={1.5} />
               </div>
               <div className="pt-0.5">
-                <p className="text-emerald-deep font-serif text-xs mb-0.5 leading-tight">In addition to our certification courses,</p>
+                <p className="text-emerald-deep font-serif text-[11px] sm:text-xs tracking-wider uppercase font-semibold leading-tight mb-1">
+                  IN ADDITION TO OUR CERTIFICATION COURSES,
+                </p>
                 <h3 className="font-display text-2xl md:text-3xl text-emerald-deep font-bold leading-tight">
                   Short Workshops
                 </h3>
-                <p className="text-emerald-deep font-serif text-xs mt-0.5 leading-tight">are also available on booking.</p>
+                <p className="text-emerald-deep font-serif text-[11px] sm:text-xs tracking-wider uppercase font-semibold leading-tight mt-1">
+                  ARE ALSO AVAILABLE ON BOOKING.
+                </p>
               </div>
             </div>
-            <p className="text-stone-600 text-sm leading-relaxed mb-6 mt-1 max-w-md lg:ml-16">
+            <p className="text-stone-600 text-sm md:text-base leading-relaxed mb-6 font-normal">
               These focused workshops are designed to give you practical knowledge and hands-on experience in specific topics related to yoga, wellness and holistic therapies.
             </p>
-            <div className="mt-auto lg:ml-16">
+            <div className="mt-auto">
               <Link
                 to="/apply"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-deep text-emerald-deep font-semibold text-xs tracking-wider uppercase hover:bg-emerald-deep hover:text-cream transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-emerald-deep text-emerald-deep font-semibold text-xs tracking-wider uppercase hover:bg-emerald-deep hover:text-cream transition-colors shadow-sm"
               >
-                View Workshop Topics <ArrowRight className="w-3.5 h-3.5" />
+                VIEW WORKSHOP TOPICS <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
@@ -183,25 +188,25 @@ function AdditionalOfferings() {
 
           {/* Right Card: One-to-One & Group Training */}
           <div className="flex flex-col lg:pl-6">
-            <div className="flex items-start gap-3.5 mb-3">
+            <div className="flex items-center gap-3.5 mb-4">
               <div className="w-12 h-12 rounded-full border border-emerald-deep flex items-center justify-center shrink-0 bg-white shadow-sm">
                 <Calendar className="w-5 h-5 text-emerald-deep" strokeWidth={1.5} />
               </div>
               <div className="pt-0.5">
-                <h3 className="font-display text-xl md:text-2xl text-emerald-deep font-bold leading-snug">
+                <h3 className="font-display text-2xl md:text-3xl text-emerald-deep font-bold leading-snug">
                   One-to-One &amp; Group Training<br className="hidden sm:block" /> for Certification Courses
                 </h3>
               </div>
             </div>
-            <p className="text-stone-600 text-sm leading-relaxed mb-6 mt-1 max-w-md lg:ml-16">
+            <p className="text-stone-600 text-sm md:text-base leading-relaxed mb-6 font-normal">
               We offer personalized one-to-one mentorship as well as intensive group training sessions for all certification courses, with flexible scheduling tailored to your pace.
             </p>
-            <div className="mt-auto lg:ml-16">
+            <div className="mt-auto">
               <Link
                 to="/apply"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-deep text-emerald-deep font-semibold text-xs tracking-wider uppercase hover:bg-emerald-deep hover:text-cream transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-emerald-deep text-emerald-deep font-semibold text-xs tracking-wider uppercase hover:bg-emerald-deep hover:text-cream transition-colors shadow-sm"
               >
-                Apply / Enroll Now <ArrowRight className="w-3.5 h-3.5" />
+                APPLY / ENROLL NOW <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
@@ -216,8 +221,8 @@ function AdditionalOfferings() {
             className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
           >
             <Flower2 className="w-5 h-5 text-emerald-deep shrink-0 group-hover:rotate-12 transition-transform duration-300" strokeWidth={1.5} />
-            <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
-              Flexible Scheduling
+            <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors">
+              FLEXIBLE SCHEDULING
             </span>
           </Link>
 
@@ -227,8 +232,8 @@ function AdditionalOfferings() {
               className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer pl-4"
             >
               <User className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
-                One-to-One Mentorship
+              <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors">
+                ONE-TO-ONE MENTORSHIP
               </span>
             </Link>
           </div>
@@ -238,8 +243,8 @@ function AdditionalOfferings() {
               className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
             >
               <User className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
-                One-to-One Mentorship
+              <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors">
+                ONE-TO-ONE MENTORSHIP
               </span>
             </Link>
           </div>
@@ -250,8 +255,8 @@ function AdditionalOfferings() {
               className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer pl-4"
             >
               <Users className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
-                Group Training Available
+              <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors">
+                GROUP TRAINING AVAILABLE
               </span>
             </Link>
           </div>
@@ -261,8 +266,8 @@ function AdditionalOfferings() {
               className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
             >
               <Users className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
-                Group Training Available
+              <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors">
+                GROUP TRAINING AVAILABLE
               </span>
             </Link>
           </div>
@@ -272,9 +277,9 @@ function AdditionalOfferings() {
               href="#courses"
               className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer pl-4"
             >
-              <Award className="w-5 h-5 text-emerald-deep shrink-0 group-hover:-translate-y-0.5 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
-                Short Workshops on Booking
+              <Bookmark className="w-5 h-5 text-emerald-deep shrink-0 group-hover:-translate-y-0.5 transition-transform duration-300" strokeWidth={1.5} />
+              <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors leading-tight">
+                SHORT WORKSHOPS ON BOOKING
               </span>
             </a>
           </div>
@@ -283,9 +288,9 @@ function AdditionalOfferings() {
               href="#courses"
               className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
             >
-              <Award className="w-5 h-5 text-emerald-deep shrink-0 group-hover:-translate-y-0.5 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="font-serif font-semibold text-emerald-deep text-xs md:text-sm leading-tight group-hover:text-gold transition-colors">
-                Short Workshops on Booking
+              <Bookmark className="w-5 h-5 text-emerald-deep shrink-0 group-hover:-translate-y-0.5 transition-transform duration-300" strokeWidth={1.5} />
+              <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors leading-tight">
+                SHORT WORKSHOPS ON BOOKING
               </span>
             </a>
           </div>
@@ -623,23 +628,23 @@ function CoursesShowcase() {
           />
 
           {/* Modal Container */}
-          <div className="bg-white rounded-[2rem] border border-gold/20 shadow-luxury max-w-4xl w-full max-h-[90vh] flex flex-col relative z-10 overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
+          <div className="bg-white rounded-2xl sm:rounded-[2rem] border border-gold/20 shadow-luxury max-w-4xl w-full max-h-[92vh] sm:max-h-[90vh] flex flex-col relative z-10 overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
             {/* Scrollable Content Area */}
-            <div className="overflow-y-auto p-6 md:p-10 flex-1 relative">
+            <div className="overflow-y-auto p-4 sm:p-6 md:p-10 flex-1 relative">
               {/* Close Button */}
               <button
                 onClick={() => setSelectedCourse(null)}
-                className="absolute top-6 right-6 p-2.5 rounded-full bg-cream/80 hover:bg-gold/20 text-emerald-deep/60 hover:text-emerald-deep transition-all duration-300"
+                className="absolute top-3 right-3 sm:top-6 sm:right-6 p-2 rounded-full bg-cream/80 hover:bg-gold/20 text-emerald-deep/60 hover:text-emerald-deep transition-all duration-300 z-10"
                 aria-label="Close details"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="grid md:grid-cols-12 gap-8 items-start mt-6">
+              <div className="grid md:grid-cols-12 gap-6 sm:gap-8 items-start mt-4 sm:mt-6">
                 {/* Left Column: Course Info */}
-                <div className="md:col-span-5 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="p-4 bg-emerald-deep/5 rounded-2xl shrink-0 border border-gold/10">
+                <div className="md:col-span-5 space-y-4 sm:space-y-6">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="p-3 sm:p-4 bg-emerald-deep/5 rounded-2xl shrink-0 border border-gold/10">
                       {selectedCourse.svg}
                     </div>
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-gold/10 text-emerald-deep text-[10px] uppercase font-bold tracking-wider rounded-full border border-gold/20">
@@ -648,37 +653,37 @@ function CoursesShowcase() {
                     </span>
                   </div>
 
-                  <div className="space-y-2">
-                    <h3 className="font-serif-display text-2xl tracking-wider text-emerald-deep uppercase font-bold leading-tight">
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <h3 className="font-serif-display text-xl sm:text-2xl tracking-wider text-emerald-deep uppercase font-bold leading-tight">
                       {selectedCourse.title}
                     </h3>
-                    <p className="text-sm tracking-widest text-gold uppercase font-semibold">
+                    <p className="text-xs sm:text-sm tracking-widest text-gold uppercase font-semibold">
                       {selectedCourse.subtitle}
                     </p>
                   </div>
 
-                  <p className="text-emerald-deep/80 text-sm leading-relaxed font-semibold">
+                  <p className="text-emerald-deep/80 text-xs sm:text-sm leading-relaxed font-semibold">
                     {selectedCourse.desc}
                   </p>
 
-                  <div className="inline-flex items-center gap-3 text-sm font-semibold text-emerald-deep bg-cream px-5 py-3.5 rounded-xl border border-gold/10 w-full">
-                    <Calendar className="w-5 h-5 text-gold shrink-0" />
+                  <div className="inline-flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-semibold text-emerald-deep bg-cream px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl border border-gold/10 w-full">
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-gold shrink-0" />
                     <span>Duration: {selectedCourse.duration}</span>
                   </div>
                 </div>
 
                 {/* Right Column: Syllabus */}
-                <div className="md:col-span-7 bg-cream/40 rounded-2xl border border-gold/10 p-6 md:p-8 space-y-5">
-                  <h4 className="font-display text-xl text-emerald-deep font-semibold flex items-center gap-2.5">
-                    <BookOpen className="w-5 h-5 text-gold shrink-0" />
+                <div className="md:col-span-7 bg-cream/40 rounded-2xl border border-gold/10 p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-5">
+                  <h4 className="font-display text-lg sm:text-xl text-emerald-deep font-semibold flex items-center gap-2.5">
+                    <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-gold shrink-0" />
                     What You Will Learn
                   </h4>
                   <div className="gold-divider" />
-                  <ul className="space-y-4">
+                  <ul className="space-y-3 sm:space-y-4">
                     {selectedCourse.learn.map((item: string, itemIdx: number) => (
-                      <li key={itemIdx} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-                        <span className="text-sm text-emerald-deep/95 leading-relaxed font-semibold">
+                      <li key={itemIdx} className="flex items-start gap-2.5 sm:gap-3">
+                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-gold shrink-0 mt-0.5" />
+                        <span className="text-xs sm:text-sm text-emerald-deep/95 leading-relaxed font-semibold">
                           {item}
                         </span>
                       </li>
@@ -689,16 +694,16 @@ function CoursesShowcase() {
             </div>
 
             {/* Sticky Actions Footer */}
-            <div className="bg-cream/30 border-t border-gold/10 px-6 py-5 md:px-10 flex flex-col sm:flex-row gap-3 justify-end shrink-0">
+            <div className="bg-cream/30 border-t border-gold/10 px-4 py-3.5 sm:px-6 sm:py-5 md:px-10 flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-end shrink-0">
               <button
                 onClick={() => setSelectedCourse(null)}
-                className="px-6 py-3.5 rounded-xl border border-emerald-deep/20 hover:border-gold text-emerald-deep text-xs font-semibold tracking-wider uppercase transition-colors"
+                className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3.5 rounded-xl border border-emerald-deep/20 hover:border-gold text-emerald-deep text-xs font-semibold tracking-wider uppercase transition-colors"
               >
                 Close Details
               </button>
               <a
                 href={`/apply?category=Certification-Courses&course=${encodeURIComponent(selectedCourse.title)}`}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-wider uppercase shadow-soft hover:scale-[1.02] hover:shadow-gold transition-all duration-300"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-wider uppercase shadow-soft hover:scale-[1.02] hover:shadow-gold transition-all duration-300"
               >
                 <span>Book This Course</span>
                 <ArrowRight className="w-4 h-4" />
@@ -755,14 +760,14 @@ function UniqueFeaturesSection() {
   const icons = [Sparkles, Users, Award, Globe, Leaf, Heart, Shield, BookOpen, Clock];
 
   return (
-    <section className="py-24 bg-emerald-deep text-cream relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/5 blur-3xl rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+    <section className="py-24 bg-[#faeee2] text-[#112e22] relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16 space-y-4">
-          <span className="font-serif-display text-xs tracking-[0.4em] text-gold uppercase">
+          <span className="font-serif-display text-xs tracking-[0.4em] text-[#a06d1c] uppercase font-bold">
             Features
           </span>
-          <h2 className="font-display text-4xl md:text-5xl text-white">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-black">
             What Makes Our Training Unique
           </h2>
           <div className="gold-divider max-w-sm mx-auto my-6" />
@@ -774,17 +779,19 @@ function UniqueFeaturesSection() {
             return (
               <div
                 key={idx}
-                className="glass p-8 rounded-3xl border border-gold/10 hover:border-gold/30 transition-all duration-300 group"
+                className="group bg-[#082618] border-2 border-[#0e442b] hover:border-gold/40 rounded-3xl p-8 shadow-[0_14px_40px_rgba(8,38,24,0.18)] hover:shadow-luxury hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
-                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 border border-gold/10 group-hover:bg-gold-gradient transition-all duration-300">
-                  <IconComponent className="w-6 h-6 text-gold group-hover:text-emerald-deep transition-colors" />
+                <div>
+                  <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 border border-gold/20 group-hover:bg-gold-gradient transition-all duration-300 shadow-sm">
+                    <IconComponent className="w-6 h-6 text-gold group-hover:text-emerald-deep transition-colors" />
+                  </div>
+                  <h3 className="font-serif-display text-base tracking-wider text-gold mb-3 uppercase font-bold">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs md:text-sm text-cream/80 leading-relaxed font-semibold">
+                    {item.desc}
+                  </p>
                 </div>
-                <h3 className="font-serif-display text-base tracking-wider text-gold mb-3 uppercase font-bold">
-                  {item.title}
-                </h3>
-                <p className="text-xs md:text-sm text-cream/70 leading-relaxed font-semibold">
-                  {item.desc}
-                </p>
               </div>
             );
           })}
@@ -889,7 +896,7 @@ function InclusionsSection() {
   ];
 
   return (
-    <section className="py-20 bg-cream border-y border-gold/10">
+    <section className="py-20 bg-[#faeee2] border-y border-gold/10">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <h2 className="font-display text-3xl text-emerald-deep font-semibold mb-12">
           What Your Certification Includes
@@ -915,43 +922,45 @@ function InclusionsSection() {
 /* ── Closing CTA Banner ── */
 function ClosingCTASection() {
   return (
-    <section className="py-28 bg-emerald-gradient text-cream text-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-hero-overlay opacity-30 pointer-events-none" />
-      <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-8 animate-fade-up">
-        <span className="font-serif-display text-sm tracking-[0.5em] text-gold uppercase block">
-          Learn • Practice • Transform
-        </span>
+    <section className="py-28 bg-[#faeee2] text-cream text-center relative overflow-hidden">
+      <div className="max-w-4xl mx-auto px-6 relative z-10 animate-fade-up">
+        <div className="bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-8 sm:p-12 md:p-16 shadow-[0_14px_40px_rgba(8,38,24,0.18)] space-y-8 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-gold/5 blur-3xl rounded-full pointer-events-none" />
+          <span className="font-serif-display text-sm tracking-[0.5em] text-gold uppercase block">
+            Learn • Practice • Transform
+          </span>
 
-        <h2 className="font-display text-4xl md:text-6xl text-white leading-tight font-bold">
-          Begin Your Professional <br className="hidden md:block" />
-          <em className="text-gold-gradient not-italic font-bold">Holistic Journey</em> Today
-        </h2>
+          <h2 className="font-display text-4xl md:text-6xl text-white leading-tight font-bold">
+            Begin Your Professional <br className="hidden md:block" />
+            <em className="text-gold-gradient not-italic font-bold">Holistic Journey</em> Today
+          </h2>
 
-        <p className="text-cream/80 max-w-2xl mx-auto text-sm md:text-base font-semibold italic leading-relaxed">
-          "Develop practical therapeutic skills, deepen your understanding of holistic wellness, and
-          gain confidence through immersive hands-on training designed for both personal growth and
-          professional development."
-        </p>
+          <p className="text-cream/80 max-w-2xl mx-auto text-sm md:text-base font-semibold italic leading-relaxed">
+            "Develop practical therapeutic skills, deepen your understanding of holistic wellness, and
+            gain confidence through immersive hands-on training designed for both personal growth and
+            professional development."
+          </p>
 
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
-          <a
-            href="/apply?category=Certification-Courses"
-            className="w-full sm:w-auto px-8 py-4 bg-gold-gradient hover:bg-gold text-emerald-deep rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300 hover:scale-105 shadow-gold"
-          >
-            Register Course With Us
-          </a>
-          <a
-            href="/apply?category=Certification-Courses"
-            className="w-full sm:w-auto px-8 py-4 glass text-white hover:bg-white/10 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300"
-          >
-            Have A Query For Us?
-          </a>
-        </div>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+            <a
+              href="/apply?category=Certification-Courses"
+              className="w-full sm:w-auto px-8 py-4 bg-gold-gradient hover:bg-gold text-emerald-deep rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300 hover:scale-105 shadow-gold font-bold"
+            >
+              Register Course With Us
+            </a>
+            <a
+              href="/apply?category=Certification-Courses"
+              className="w-full sm:w-auto px-8 py-4 glass text-white hover:bg-white/10 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300 font-bold"
+            >
+              Have A Query For Us?
+            </a>
+          </div>
 
-        <div className="pt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-cream/60 uppercase tracking-widest">
-          <span>✓ Suitable for Beginners & Practitioners</span>
-          <span>✓ Group & One-to-One Options</span>
-          <span>✓ 1–3 Day Workshops Available</span>
+          <div className="pt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-cream/70 uppercase tracking-widest font-semibold">
+            <span>✓ Suitable for Beginners &amp; Practitioners</span>
+            <span>✓ Group &amp; One-to-One Options</span>
+            <span>✓ 1–3 Day Workshops Available</span>
+          </div>
         </div>
       </div>
     </section>

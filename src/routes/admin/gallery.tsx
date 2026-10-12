@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { getApiUrl } from "@/lib/utils";
+import { getApiUrl, resolveImageUrl } from "@/lib/utils";
 import {
   Upload,
   Trash2,
@@ -34,6 +34,8 @@ function GalleryAdminPage() {
   const [editingEntry, setEditingEntry] = useState<any>(null);
   const [editName, setEditName] = useState("");
   const [editCategory, setEditCategory] = useState("Our Centre");
+  const [editFile, setEditFile] = useState<File | null>(null);
+  const [editPreview, setEditPreview] = useState<string | null>(null);
   const [editingLoading, setEditingLoading] = useState(false);
 
   const categories = [
@@ -133,21 +135,30 @@ function GalleryAdminPage() {
     setEditingLoading(true);
     const token = getSessionToken();
     try {
+      const formData = new FormData();
+      formData.append("id", editingEntry.id);
+      formData.append("name", editName);
+      formData.append("category", editCategory);
+      if (editFile) {
+        formData.append("image", editFile);
+      }
+
       const response = await fetch(getApiUrl("admin/gallery-images-edit.php"), {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ id: editingEntry.id, name: editName, category: editCategory }),
+        body: formData,
       });
       const res = await response.json();
       if (response.ok && res.success) {
-        toast.success("Image details updated successfully!");
+        toast.success("Gallery image updated successfully!");
         setEditingEntry(null);
+        setEditFile(null);
+        setEditPreview(null);
         fetchImages();
       } else {
-        toast.error(res.error || "Failed to update image details.");
+        toast.error(res.error || "Failed to update image.");
       }
     } catch {
       toast.error("An error occurred.");
@@ -326,9 +337,13 @@ function GalleryAdminPage() {
                       >
                         <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                           <img
-                            src={entry.image}
+                            src={resolveImageUrl(entry.image)}
                             alt={entry.name}
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src =
+                                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' fill='%23f1f5f9'%3E%3Crect width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%2394a3b8' font-size='14' font-family='sans-serif'%3EImage not found%3C/text%3E%3C/svg%3E";
+                            }}
                           />
                         </div>
                         <div className="p-4 border-t border-slate-50 flex-1 flex flex-col justify-between">
@@ -349,6 +364,8 @@ function GalleryAdminPage() {
                                 setEditingEntry(entry);
                                 setEditName(entry.name);
                                 setEditCategory(entry.category || "Our Centre");
+                                setEditFile(null);
+                                setEditPreview(null);
                               }}
                               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-emerald/30 hover:bg-emerald/5 text-[0.65rem] font-semibold text-slate-500 hover:text-emerald transition-all cursor-pointer"
                               title="Edit Image"
@@ -450,14 +467,66 @@ function GalleryAdminPage() {
             <h3 className="font-serif-display text-lg text-emerald-deep font-bold mb-4">
               Edit Gallery Image
             </h3>
-            <div className="mb-4 aspect-video rounded-xl overflow-hidden bg-slate-100 relative">
+            <div className="mb-4 aspect-video rounded-xl overflow-hidden bg-slate-100 relative group border border-slate-200">
               <img
-                src={editingEntry.image}
+                src={editPreview || resolveImageUrl(editingEntry.image)}
                 alt="Preview"
                 className="absolute inset-0 w-full h-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src =
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' fill='%23f1f5f9'%3E%3Crect width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%2394a3b8' font-size='14' font-family='sans-serif'%3EImage not found%3C/text%3E%3C/svg%3E";
+                }}
               />
+              {editPreview && (
+                <div className="absolute top-2 right-2 bg-emerald text-white text-[0.6rem] font-bold px-2.5 py-1 rounded-full shadow">
+                  New Image Selected
+                </div>
+              )}
             </div>
             <form onSubmit={handleEdit} className="space-y-4">
+              {/* Replace Image Upload Field */}
+              <div className="space-y-1">
+                <label className="text-[0.65rem] tracking-[0.2em] uppercase text-slate-400 font-bold block">
+                  Change Photo (Optional)
+                </label>
+                <label
+                  htmlFor="edit-file-input"
+                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 border border-dashed border-slate-300 hover:border-emerald/50 rounded-xl cursor-pointer bg-slate-50/50 hover:bg-emerald/5 transition-all text-center"
+                >
+                  <Upload className="w-4 h-4 text-slate-500 shrink-0" />
+                  <span className="text-xs font-medium text-slate-600 truncate">
+                    {editFile ? editFile.name : "Choose new JPG, PNG or WEBP"}
+                  </span>
+                  <input
+                    id="edit-file-input"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const selected = e.target.files?.[0] || null;
+                      setEditFile(selected);
+                      if (selected) {
+                        setEditPreview(URL.createObjectURL(selected));
+                      } else {
+                        setEditPreview(null);
+                      }
+                    }}
+                  />
+                </label>
+                {editFile && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditFile(null);
+                      setEditPreview(null);
+                    }}
+                    className="text-[0.65rem] text-red-500 hover:underline flex items-center gap-1 mt-1"
+                  >
+                    <X className="w-3 h-3" /> Revert to current image
+                  </button>
+                )}
+              </div>
+
               <div className="space-y-1">
                 <label className="text-[0.65rem] tracking-[0.2em] uppercase text-slate-400 font-bold">
                   Image Name
@@ -495,7 +564,7 @@ function GalleryAdminPage() {
                 disabled={editingLoading}
                 className="w-full py-2.5 bg-emerald-deep hover:bg-[#0c2a21] text-white text-xs font-semibold tracking-wider uppercase rounded-xl transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                {editingLoading ? "Saving..." : "Save Image Name"}
+                {editingLoading ? "Updating..." : "Save Changes"}
               </button>
             </form>
           </div>

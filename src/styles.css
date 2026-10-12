@@ -119,11 +119,21 @@
 @layer base {
   * {
     border-color: var(--color-border);
+    box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
-    font-size: 18px; /* base font size */
+    font-size: 16px;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    html {
+      font-size: 15px;
+    }
   }
 
   body {
@@ -134,6 +144,16 @@
     line-height: 1.6;
     letter-spacing: 0.015em;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
   }
 
   h1,
@@ -146,10 +166,13 @@
     font-weight: 800;
     line-height: 1.15;
     letter-spacing: -0.01em;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   p {
     font-weight: 600;
+    overflow-wrap: break-word;
   }
 
   span, a, li, label, button, input, select, textarea {

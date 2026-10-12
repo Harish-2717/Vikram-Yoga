@@ -25,10 +25,7 @@ if ($method === 'GET') {
         // Handle File Upload
         $filePath = '';
         if (isset($_FILES['proof']) && $_FILES['proof']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = __DIR__ . '/../public/uploads';
-            if (!file_exists($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
-            }
+            $uploadDir = getUploadDir();
             
             $originalName = $_FILES['proof']['name'];
             $cleanName = preg_replace('/[^a-zA-Z0-9.-]/', '_', $originalName);

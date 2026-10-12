@@ -24,13 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             sendJson(["success" => false, "error" => "Entry not found"], 404);
         }
 
-        // Unlink file if it exists
+        // Unlink file safely across environments
         $img = $entry['image'];
-        if ($img && strpos($img, '/uploads/') === 0) {
-            $filePath = __DIR__ . '/../../public' . $img;
-            if (file_exists($filePath)) {
-                @unlink($filePath);
-            }
+        if ($img) {
+            deletePhysicalFile($img);
         }
 
         $delStmt = $pdo->prepare("DELETE FROM `social_images` WHERE `id` = ?");

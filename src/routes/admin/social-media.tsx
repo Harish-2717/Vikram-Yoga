@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { getApiUrl } from "@/lib/utils";
+import { getApiUrl, resolveImageUrl } from "@/lib/utils";
 import {
   Upload,
   Trash2,
@@ -263,9 +263,13 @@ function SocialMediaPage() {
                   >
                     <div className="relative aspect-square overflow-hidden bg-slate-100">
                       <img
-                        src={entry.image}
+                        src={resolveImageUrl(entry.image)}
                         alt="Gallery Item"
                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' fill='%23f1f5f9'%3E%3Crect width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%2394a3b8' font-size='14' font-family='sans-serif'%3EImage not found%3C/text%3E%3C/svg%3E";
+                        }}
                       />
                       <div className="absolute inset-0 bg-[#08120d]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
                         <a
@@ -333,7 +337,7 @@ function SocialMediaPage() {
             </h3>
             <div className="mb-4 aspect-video rounded-xl overflow-hidden bg-slate-100 relative">
               <img
-                src={editingEntry.image}
+                src={resolveImageUrl(editingEntry.image)}
                 alt="Preview"
                 className="absolute inset-0 w-full h-full object-cover"
               />

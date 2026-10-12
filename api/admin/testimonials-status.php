@@ -27,13 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($action === 'delete') {
-            // Unlink image file if it exists in uploads
+            // Unlink image file safely across environments
             $img = $testimonial['image'];
-            if ($img && strpos($img, '/uploads/') === 0) {
-                $filePath = __DIR__ . '/../../public' . $img;
-                if (file_exists($filePath)) {
-                    @unlink($filePath);
-                }
+            if ($img) {
+                deletePhysicalFile($img);
             }
             
             $stmtDel = $pdo->prepare("DELETE FROM `testimonials` WHERE `id` = ?");

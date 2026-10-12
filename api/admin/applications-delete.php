@@ -24,11 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($payment) {
             $img = $payment['paymentProofScreenshot'];
-            if ($img && strpos($img, '/uploads/') === 0) {
-                $filePath = __DIR__ . '/../../public' . $img;
-                if (file_exists($filePath)) {
-                    @unlink($filePath);
-                }
+            if ($img) {
+                deletePhysicalFile($img);
             }
         }
 

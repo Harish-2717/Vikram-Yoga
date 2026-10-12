@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import classes from "@/assets/classes.jpg";
 import { ArrowRight } from "lucide-react";
-import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
+import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
 
 // Authentic Yoga Pose Images for Drop-In Classes & Classical Asanas
 import virabhadrasanaImg from "@/assets/New/file_0000000011a881fd88d925006e3dce12.png"; // Warrior I (Hatha Yoga)
@@ -30,12 +30,13 @@ export const Route = createFileRoute("/yoga")({
 
 function YogaPage() {
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden bg-[#faeee2]">
       <Navbar />
       <PageHero title="Yoga Classes" subtitle="Practices for every body & breath." bg={classes} />
       <ClassesSection />
       <Footer />
       <WhatsAppFloat />
+      <BookNowFloat />
     </main>
   );
 }
@@ -218,29 +219,29 @@ function ClassesSection() {
   ];
 
   return (
-    <section className="relative py-28 bg-emerald-gradient text-cream overflow-hidden">
-      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3" />
+    <section className="relative py-28 bg-[#faeee2] text-[#112e22] overflow-hidden">
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3" />
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold uppercase font-bold">
+          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-[#a06d1c] uppercase font-bold">
             DAILY SCHEDULE &amp; OFFERINGS
           </span>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance leading-tight font-bold">
+          <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance leading-tight font-bold text-emerald-deep">
             Practices for every <em className="text-gold-gradient not-italic">body &amp; breath</em>.
           </h2>
           <div className="gold-divider mt-6 mx-auto" />
-          <p className="mt-6 text-cream/70 leading-relaxed text-sm md:text-base font-medium">
+          <p className="mt-6 text-[#243e31] leading-relaxed text-sm md:text-base font-semibold">
             From dynamic Vinyasa to deeply restorative therapy sessions, our classes meet you
             exactly where you are. Each session honours alignment, breath, and intention — guiding
             you toward sustainable wellbeing.
           </p>
 
           {/* Toggle pill switcher */}
-          <div className="mt-10 inline-flex items-center p-1.5 rounded-full bg-emerald-deep/80 border border-white/20 backdrop-blur-md shadow-inner gap-1">
+          <div className="mt-8 sm:mt-10 inline-flex max-w-full flex-wrap sm:flex-nowrap items-center justify-center p-1.5 rounded-2xl sm:rounded-full bg-emerald-deep border border-[#0e442b] shadow-inner gap-1">
             <button
               type="button"
               onClick={() => setActiveTab("daily")}
-              className={`px-5 sm:px-7 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`px-4 sm:px-7 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-[0.68rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "daily"
                   ? "bg-gold-gradient text-emerald-deep shadow-md font-bold"
                   : "text-cream/80 hover:text-white font-medium"
@@ -251,13 +252,13 @@ function ClassesSection() {
             <button
               type="button"
               onClick={() => setActiveTab("showcase")}
-              className={`px-5 sm:px-7 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`px-4 sm:px-7 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-[0.68rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "showcase"
                   ? "bg-gold-gradient text-emerald-deep shadow-md font-bold"
                   : "text-cream/80 hover:text-white font-medium"
               }`}
             >
-              CLASSICAL ASANAS SHOWCASE (12 POSES)
+              CLASSICAL ASANAS SHOWCASE
             </button>
           </div>
         </div>
@@ -268,32 +269,21 @@ function ClassesSection() {
             {classList.map((c) => (
               <div
                 key={c.t}
-                className="group glass rounded-2xl overflow-hidden hover:shadow-luxury transition-all duration-500 hover:-translate-y-1 flex flex-col border border-white/10"
+                className="group bg-[#082618] rounded-2xl overflow-hidden hover:shadow-luxury transition-all duration-500 hover:-translate-y-1 flex flex-col border-2 border-[#0e442b] shadow-[0_14px_40px_rgba(8,38,24,0.18)]"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-emerald-deep/40">
                   <img
                     src={c.img}
-                    alt={`${c.t} - ${c.poseSanskrit}`}
+                    alt={c.t}
                     className={`absolute inset-0 w-full h-full ${c.imgPosition} object-cover group-hover:scale-105 transition-transform duration-700`}
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/80 via-transparent to-black/20" />
-                  <div className="absolute top-4 right-4 glass-dark rounded-full px-3 py-1 text-[0.65rem] tracking-wider text-cream/90 font-bold border border-white/10">
-                    {c.tag}
-                  </div>
-                  <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-                    <span className="text-[0.7rem] font-serif tracking-wider text-gold font-bold drop-shadow">
-                      {c.poseSanskrit}
-                    </span>
-                    <span className="text-[0.65rem] text-cream/80 drop-shadow font-sans font-medium">
-                      {c.poseEnglish}
-                    </span>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/40 via-transparent to-black/10 pointer-events-none" />
                 </div>
                 <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                   <div className="flex flex-col flex-1">
                     <h3 className="font-display text-2xl text-cream font-bold">{c.t}</h3>
-                    <p className="mt-3 text-sm text-cream/70 leading-relaxed font-medium flex-1">{c.d}</p>
+                    <p className="mt-3 text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
                   </div>
                   <div className="mt-6 pt-5 border-t border-cream/10 flex flex-col gap-3">
                     <span className="text-[0.75rem] sm:text-xs tracking-[0.1em] text-cream/90 font-bold uppercase min-h-[2.5rem] flex items-center">
@@ -317,7 +307,7 @@ function ClassesSection() {
             {classicalAsanas.map((c, i) => (
               <div
                 key={c.sanskrit + i}
-                className="group glass rounded-2xl overflow-hidden hover:shadow-luxury transition-all duration-500 hover:-translate-y-1 flex flex-col border border-white/10"
+                className="group bg-[#082618] rounded-2xl overflow-hidden hover:shadow-luxury transition-all duration-500 hover:-translate-y-1 flex flex-col border-2 border-[#0e442b] shadow-[0_14px_40px_rgba(8,38,24,0.18)]"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-emerald-deep/40">
                   <img
@@ -326,36 +316,19 @@ function ClassesSection() {
                     className={`absolute inset-0 w-full h-full object-cover ${c.imgPosition || "object-center"} group-hover:scale-105 transition-transform duration-700`}
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/80 via-transparent to-black/20" />
-                  <div className="absolute top-4 right-4 glass-dark rounded-full px-3 py-1 text-[0.65rem] tracking-wider text-cream/90 font-bold border border-white/10">
-                    {c.tag}
-                  </div>
-                  <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-                    <span className="text-[0.7rem] font-serif tracking-wider text-gold font-bold drop-shadow">
-                      {c.sanskrit}
-                    </span>
-                    <span className="text-[0.65rem] text-cream/80 drop-shadow font-sans font-medium">
-                      {c.english}
-                    </span>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/40 via-transparent to-black/10 pointer-events-none" />
                 </div>
                 <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                   <div className="flex flex-col flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <h3 className="font-display text-2xl text-cream font-bold">{c.sanskrit}</h3>
-                      <span className="text-[0.65rem] tracking-widest text-gold/80 uppercase font-mono">
-                        {String(i + 1).padStart(2, "0")} / 12
-                      </span>
-                    </div>
-                    <span className="text-xs text-cream/60 font-medium italic mt-1">{c.english}</span>
-                    <p className="mt-3 text-sm text-cream/70 leading-relaxed font-medium flex-1">{c.d}</p>
+                    <h3 className="font-display text-2xl text-cream font-bold">{c.english}</h3>
+                    <p className="mt-3 text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
                   </div>
                   <div className="mt-6 pt-5 border-t border-cream/10 flex flex-col gap-3">
-                    <span className="text-[0.72rem] tracking-wider text-gold/90 font-medium min-h-[2.5rem] flex items-center">
+                    <span className="text-[0.72rem] tracking-wider text-gold font-bold min-h-[2.5rem] flex items-center">
                       {c.focus}
                     </span>
                     <a
-                      href={`/apply?category=Yoga-Classes&course=${encodeURIComponent(c.sanskrit)}`}
+                      href={`/apply?category=Yoga-Classes&course=${encodeURIComponent(c.english)}`}
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-soft"
                     >
                       <span>Book Session</span>

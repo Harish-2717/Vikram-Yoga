@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { getApiUrl } from "@/lib/utils";
+import { getApiUrl, resolveImageUrl } from "@/lib/utils";
 import {
   Check,
   X as XIcon,
@@ -244,9 +244,13 @@ function TestimonialsPage() {
                       <div className="flex items-center gap-3">
                         {t.image ? (
                           <img
-                            src={t.image}
+                            src={resolveImageUrl(t.image)}
                             alt={t.name}
                             className="w-10 h-10 rounded-full object-cover border border-slate-100"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src =
+                                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23f1f5f9'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%2394a3b8' font-size='24' font-family='sans-serif'%3EY%3C/text%3E%3C/svg%3E";
+                            }}
                           />
                         ) : (
                           <div className="w-10 h-10 rounded-full bg-emerald-deep/15 text-emerald-deep font-bold flex items-center justify-center text-sm border border-emerald-deep/10">
@@ -363,7 +367,7 @@ function TestimonialsPage() {
             <div className="flex items-center gap-4 mb-6 pb-4 border-b border-slate-100">
               {selectedMsg.image ? (
                 <img
-                  src={selectedMsg.image}
+                  src={resolveImageUrl(selectedMsg.image)}
                   alt={selectedMsg.name}
                   className="w-12 h-12 rounded-full object-cover border border-slate-100"
                 />

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { getApiUrl } from "@/lib/utils";
+import { getApiUrl, resolveImageUrl } from "@/lib/utils";
 import {
   Check,
   X as XIcon,
@@ -184,9 +184,13 @@ function PaymentsPage() {
                               className="relative w-12 h-12 rounded-lg overflow-hidden border border-slate-200 shadow-sm shrink-0 group hover:border-emerald/40 transition-colors"
                             >
                               <img
-                                src={pay.paymentProofScreenshot}
+                                src={resolveImageUrl(pay.paymentProofScreenshot)}
                                 alt="Proof Thumbnail"
                                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src =
+                                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23f1f5f9'%3E%3Crect width='100' height='100'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%2394a3b8' font-size='10' font-family='sans-serif'%3ENo image%3C/text%3E%3C/svg%3E";
+                                }}
                               />
                               <div className="absolute inset-0 bg-[#08120d]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
                                 <Eye className="w-3.5 h-3.5" />
@@ -278,7 +282,7 @@ function PaymentsPage() {
               <XIcon className="w-5 h-5" />
             </button>
             <img
-              src={activeImage}
+              src={resolveImageUrl(activeImage)}
               alt="Payment Proof Full Size"
               className="rounded-2xl shadow-luxury max-w-full max-h-[85vh] object-contain border border-white/5 bg-[#0c1c14]"
             />

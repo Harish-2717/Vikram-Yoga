@@ -26,6 +26,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminTestimonialsRouteImport } from './routes/admin/testimonials'
 import { Route as AdminSocialMediaRouteImport } from './routes/admin/social-media'
+import { Route as AdminServiceImagesRouteImport } from './routes/admin/service-images'
 import { Route as AdminPaymentsRouteImport } from './routes/admin/payments'
 import { Route as AdminGalleryRouteImport } from './routes/admin/gallery'
 import { Route as AdminContactMessagesRouteImport } from './routes/admin/contact-messages'
@@ -116,6 +117,11 @@ const AdminSocialMediaRoute = AdminSocialMediaRouteImport.update({
   path: '/social-media',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminServiceImagesRoute = AdminServiceImagesRouteImport.update({
+  id: '/service-images',
+  path: '/service-images',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
   id: '/payments',
   path: '/payments',
@@ -156,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/admin/contact-messages': typeof AdminContactMessagesRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/service-images': typeof AdminServiceImagesRoute
   '/admin/social-media': typeof AdminSocialMediaRoute
   '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin/': typeof AdminIndexRoute
@@ -178,6 +185,7 @@ export interface FileRoutesByTo {
   '/admin/contact-messages': typeof AdminContactMessagesRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/service-images': typeof AdminServiceImagesRoute
   '/admin/social-media': typeof AdminSocialMediaRoute
   '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin': typeof AdminIndexRoute
@@ -202,6 +210,7 @@ export interface FileRoutesById {
   '/admin/contact-messages': typeof AdminContactMessagesRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/service-images': typeof AdminServiceImagesRoute
   '/admin/social-media': typeof AdminSocialMediaRoute
   '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin/': typeof AdminIndexRoute
@@ -227,6 +236,7 @@ export interface FileRouteTypes {
     | '/admin/contact-messages'
     | '/admin/gallery'
     | '/admin/payments'
+    | '/admin/service-images'
     | '/admin/social-media'
     | '/admin/testimonials'
     | '/admin/'
@@ -249,6 +259,7 @@ export interface FileRouteTypes {
     | '/admin/contact-messages'
     | '/admin/gallery'
     | '/admin/payments'
+    | '/admin/service-images'
     | '/admin/social-media'
     | '/admin/testimonials'
     | '/admin'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/admin/contact-messages'
     | '/admin/gallery'
     | '/admin/payments'
+    | '/admin/service-images'
     | '/admin/social-media'
     | '/admin/testimonials'
     | '/admin/'
@@ -415,6 +427,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSocialMediaRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/service-images': {
+      id: '/admin/service-images'
+      path: '/service-images'
+      fullPath: '/admin/service-images'
+      preLoaderRoute: typeof AdminServiceImagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/payments': {
       id: '/admin/payments'
       path: '/payments'
@@ -451,6 +470,7 @@ interface AdminRouteChildren {
   AdminContactMessagesRoute: typeof AdminContactMessagesRoute
   AdminGalleryRoute: typeof AdminGalleryRoute
   AdminPaymentsRoute: typeof AdminPaymentsRoute
+  AdminServiceImagesRoute: typeof AdminServiceImagesRoute
   AdminSocialMediaRoute: typeof AdminSocialMediaRoute
   AdminTestimonialsRoute: typeof AdminTestimonialsRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -461,6 +481,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminContactMessagesRoute: AdminContactMessagesRoute,
   AdminGalleryRoute: AdminGalleryRoute,
   AdminPaymentsRoute: AdminPaymentsRoute,
+  AdminServiceImagesRoute: AdminServiceImagesRoute,
   AdminSocialMediaRoute: AdminSocialMediaRoute,
   AdminTestimonialsRoute: AdminTestimonialsRoute,
   AdminIndexRoute: AdminIndexRoute,

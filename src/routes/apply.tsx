@@ -37,9 +37,6 @@ const serviceMap: Record<string, string[]> = {
     "Dorn Therapy"
   ],
   "Retreat Programs": [
-    "Wellness Retreat",
-    "Detox Retreat",
-    "Meditation Retreat",
     "7 DAYS & 14 DAYS HOLISTIC WELLNESS RETREAT",
     "YOGA & MEDITATION RETREAT",
     "COUPLE WELLNESS RETREAT",
@@ -138,7 +135,7 @@ function getMappedCategoryAndCourse(catParam?: string | null, courseParam?: stri
   } else if (category === "Wellness Therapies") {
     course = "Shiatsu Therapy";
   } else if (category === "Retreat Programs") {
-    course = "Wellness Retreat";
+    course = "7 DAYS & 14 DAYS HOLISTIC WELLNESS RETREAT";
   } else if (category === "Certification Courses") {
     course = "Shiatsu Massage Certification";
   }
@@ -265,212 +262,212 @@ function ApplyPage() {
     <main className="overflow-x-hidden bg-[#fafafa] min-h-screen">
       <Navbar />
 
-      <div className="pt-32 pb-24 px-4 sm:px-6 max-w-4xl mx-auto">
-        <h1 className="text-3xl text-center text-[#55b9b7] font-serif mb-10 tracking-wide">
+      <div className="pt-28 sm:pt-32 pb-20 sm:pb-24 px-4 sm:px-6 max-w-4xl mx-auto">
+        <h1 className="text-3xl sm:text-4xl text-center text-[#55b9b7] font-serif mb-8 sm:mb-10 tracking-wide font-semibold">
           Apply
         </h1>
         <form
           onSubmit={handleSubmit}
-              className="bg-white px-6 sm:px-10 py-10 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-7">
-                <div className="flex flex-col gap-2">
-                  <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
-                    Name :
-                  </label>
+          className="bg-white px-4 sm:px-8 md:px-10 py-8 md:py-10 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 sm:gap-y-7">
+            <div className="flex flex-col gap-2">
+              <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
+                Name :
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full text-slate-700"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
+                Service Category :
+              </label>
+              {lockedCategory ? (
+                /* Arrived from a service page — show only the matched category */
+                <div className="border border-gray-200 rounded-[0.5rem] p-3 text-[0.9rem] w-full bg-gray-50 text-slate-700 select-none">
+                  {lockedCategory}
+                  <input type="hidden" name="course" value={lockedCategory} />
+                </div>
+              ) : (
+                /* Direct visit — all categories selectable */
+                <select
+                  name="course"
+                  value={formData.course}
+                  onChange={handleChange}
+                  className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full bg-white appearance-none text-slate-700"
+                >
+                  <option value="Yoga Classes">Yoga Classes</option>
+                  <option value="Wellness Therapies">Wellness Therapies</option>
+                  <option value="Retreat Programs">Retreat Programs</option>
+                  <option value="Certification Courses">Certification Courses</option>
+                </select>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
+                Course / Program :
+              </label>
+              {lockedCourse ? (
+                /* A specific course was passed — show only that course */
+                <div className="border border-gray-200 rounded-[0.5rem] p-3 text-[0.9rem] w-full bg-gray-50 text-slate-700 select-none">
+                  {lockedCourse}
+                  <input type="hidden" name="minorOption" value={lockedCourse} />
+                </div>
+              ) : (
+                /* No specific course locked — allow selection within the (possibly locked) category */
+                <select
+                  name="minorOption"
+                  value={formData.minorOption}
+                  onChange={handleChange}
+                  className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full bg-white appearance-none text-slate-700"
+                >
+                  {serviceMap[formData.course]?.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
+                Date of Course :
+              </label>
+              <input
+                type="date"
+                name="dateOfCourse"
+                value={formData.dateOfCourse}
+                onChange={handleChange}
+                className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full bg-white text-slate-700"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
+                Email :
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full text-slate-700"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
+                Date of Birth :
+              </label>
+              <input
+                type="date"
+                name="dob"
+                value={formData.dob}
+                onChange={handleChange}
+                className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full bg-white text-slate-700"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide mb-1">
+                Gender :
+              </label>
+              <div className="flex flex-wrap gap-4 sm:gap-6 items-center min-h-[46px]">
+                <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
                   <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
+                    type="radio"
+                    name="gender"
+                    value="Male"
                     onChange={handleChange}
-                    className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full text-slate-700"
-                    required
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
-                    Service Category :
-                  </label>
-                  {lockedCategory ? (
-                    /* Arrived from a service page — show only the matched category */
-                    <div className="border border-gray-200 rounded-[0.5rem] p-3 text-[0.9rem] w-full bg-gray-50 text-slate-700 select-none">
-                      {lockedCategory}
-                      <input type="hidden" name="course" value={lockedCategory} />
-                    </div>
-                  ) : (
-                    /* Direct visit — all categories selectable */
-                    <select
-                      name="course"
-                      value={formData.course}
-                      onChange={handleChange}
-                      className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full bg-white appearance-none text-slate-700"
-                    >
-                      <option value="Yoga Classes">Yoga Classes</option>
-                      <option value="Wellness Therapies">Wellness Therapies</option>
-                      <option value="Retreat Programs">Retreat Programs</option>
-                      <option value="Certification Courses">Certification Courses</option>
-                    </select>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
-                    Course / Program :
-                  </label>
-                  {lockedCourse ? (
-                    /* A specific course was passed — show only that course */
-                    <div className="border border-gray-200 rounded-[0.5rem] p-3 text-[0.9rem] w-full bg-gray-50 text-slate-700 select-none">
-                      {lockedCourse}
-                      <input type="hidden" name="minorOption" value={lockedCourse} />
-                    </div>
-                  ) : (
-                    /* No specific course locked — allow selection within the (possibly locked) category */
-                    <select
-                      name="minorOption"
-                      value={formData.minorOption}
-                      onChange={handleChange}
-                      className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full bg-white appearance-none text-slate-700"
-                    >
-                      {serviceMap[formData.course]?.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
-                    Date of Course :
-                  </label>
+                    checked={formData.gender === "Male"}
+                    className="w-3.5 h-3.5 accent-[#3b82f6]"
+                  />{" "}
+                  Male
+                </label>
+                <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
                   <input
-                    type="date"
-                    name="dateOfCourse"
-                    value={formData.dateOfCourse}
+                    type="radio"
+                    name="gender"
+                    value="Female"
                     onChange={handleChange}
-                    className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full bg-white text-slate-700"
-                    required
-                  />
-                </div>
+                    checked={formData.gender === "Female"}
+                    className="w-3.5 h-3.5 accent-[#3b82f6]"
+                  />{" "}
+                  Female
+                </label>
+              </div>
+            </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
-                    Email :
-                  </label>
+            <div className="flex flex-col gap-2">
+              <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide mb-1">
+                Accommodation :
+              </label>
+              <div className="flex flex-wrap gap-4 sm:gap-6 items-center min-h-[46px]">
+                <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
                   <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
+                    type="radio"
+                    name="accommodation"
+                    value="Shared Room"
                     onChange={handleChange}
-                    className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full text-slate-700"
-                    required
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">
-                    Date of Birth :
-                  </label>
+                    checked={formData.accommodation === "Shared Room"}
+                    className="w-3.5 h-3.5 accent-[#3b82f6]"
+                  />{" "}
+                  Shared Room
+                </label>
+                <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
                   <input
-                    type="date"
-                    name="dob"
-                    value={formData.dob}
+                    type="radio"
+                    name="accommodation"
+                    value="Individual Room"
                     onChange={handleChange}
-                    className="border border-gray-200 rounded-[0.5rem] p-3 outline-none focus:border-gray-300 text-[0.9rem] w-full bg-white text-slate-700"
-                  />
-                </div>
+                    checked={formData.accommodation === "Individual Room"}
+                    className="w-3.5 h-3.5 accent-[#3b82f6]"
+                  />{" "}
+                  Individual Room
+                </label>
+              </div>
+            </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide mb-1">
-                    Gender :
-                  </label>
-                  <div className="flex gap-6 items-center h-[46px]">
-                    <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="gender"
-                        value="Male"
-                        onChange={handleChange}
-                        checked={formData.gender === "Male"}
-                        className="w-3.5 h-3.5 accent-[#3b82f6]"
-                      />{" "}
-                      Male
-                    </label>
-                    <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="gender"
-                        value="Female"
-                        onChange={handleChange}
-                        checked={formData.gender === "Female"}
-                        className="w-3.5 h-3.5 accent-[#3b82f6]"
-                      />{" "}
-                      Female
-                    </label>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide mb-1">
-                    Accomodation :
-                  </label>
-                  <div className="flex gap-6 items-center h-[46px]">
-                    <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="accommodation"
-                        value="Shared Room"
-                        onChange={handleChange}
-                        checked={formData.accommodation === "Shared Room"}
-                        className="w-3.5 h-3.5 accent-[#3b82f6]"
-                      />{" "}
-                      Shared Room
-                    </label>
-                    <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="accommodation"
-                        value="Individual Room"
-                        onChange={handleChange}
-                        checked={formData.accommodation === "Individual Room"}
-                        className="w-3.5 h-3.5 accent-[#3b82f6]"
-                      />{" "}
-                      Individual Room
-                    </label>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide mb-1">
-                    Have you practised yoga before?
-                  </label>
-                  <div className="flex gap-6 items-center h-[46px]">
-                    <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="practisedYoga"
-                        value="Yes"
-                        onChange={handleChange}
-                        checked={formData.practisedYoga === "Yes"}
-                        className="w-3.5 h-3.5 accent-[#55b9b7]"
-                      />{" "}
-                      Yes
-                    </label>
-                    <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="practisedYoga"
-                        value="No"
-                        onChange={handleChange}
-                        checked={formData.practisedYoga === "No"}
-                        className="w-3.5 h-3.5 accent-[#55b9b7]"
-                      />{" "}
-                      No
-                    </label>
-                  </div>
-                </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide mb-1">
+                Have you practised yoga before?
+              </label>
+              <div className="flex flex-wrap gap-4 sm:gap-6 items-center min-h-[46px]">
+                <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="practisedYoga"
+                    value="Yes"
+                    onChange={handleChange}
+                    checked={formData.practisedYoga === "Yes"}
+                    className="w-3.5 h-3.5 accent-[#3b82f6]"
+                  />{" "}
+                  Yes
+                </label>
+                <label className="flex items-center gap-2 text-[0.9rem] text-slate-600 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="practisedYoga"
+                    value="No"
+                    onChange={handleChange}
+                    checked={formData.practisedYoga === "No"}
+                    className="w-3.5 h-3.5 accent-[#3b82f6]"
+                  />{" "}
+                  No
+                </label>
+              </div>
+            </div>
 
                 <div className="flex flex-col gap-2 md:col-span-2">
                   <label className="text-[0.85rem] text-slate-500 font-medium tracking-wide">

@@ -109,6 +109,20 @@ try {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
     echo "Table 'testimonials' verified.\n";
 
+    // Service Images Table (maps admin-uploaded images to individual services)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS `service_images` (
+        `id` VARCHAR(60) PRIMARY KEY,
+        `service_key` VARCHAR(100) NOT NULL,
+        `service_label` VARCHAR(150) NOT NULL,
+        `image` VARCHAR(255) NOT NULL,
+        `alt_text` VARCHAR(200) DEFAULT '',
+        `sort_order` INT DEFAULT 0,
+        `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX `idx_service_key` (`service_key`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+    echo "Table 'service_images' verified.\n";
+
     // 2. Read db.json Data
     $dbJsonPath = __DIR__ . '/../data/db.json';
     if (!file_exists($dbJsonPath)) {
@@ -121,6 +135,7 @@ try {
     }
 
     // 3. Clear Existing Data (To avoid duplicate primary keys on re-run)
+    // NOTE: service_images is NOT truncated here — admin-uploaded images are preserved across migrations
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0;");
     $pdo->exec("TRUNCATE TABLE `contact_message_replies`;");
     $pdo->exec("TRUNCATE TABLE `contact_messages`;");

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import hero from "@/assets/New/Image Sep 17, 2026, 10_26_43 AM.png";
+import hero from "@/assets/New/Meditation at Tropical Sunset.png";
 import logo from "@/assets/logo.png";
 import founder from "@/assets/founder.png";
 import about from "@/assets/about.png";
@@ -52,8 +52,8 @@ import instaNew8 from "@/assets/New/IMG_20250520_083632.jpg.jpeg";
 import lordShivaImg from "@/assets/New/file_00000000c5288211bdea0b8f67d20cd7.png";
 import sagePatanjaliImg from "@/assets/New/file_00000000f42c8211906c077874ac5b69.png";
 
-import thaiMassageImg from "@/assets/images/thai-massage.jpeg";
-import ayurvedicMassageImg from "@/assets/images/Traditional Ayurvedic Massage.jpeg";
+import thaiMassageImg from "@/assets/New folder/Thai yoga massage courses.png";
+import ayurvedicMassageImg from "@/assets/New folder/Ayurvedic massage courses.png";
 import thaiCourseImg from "@/assets/New folder/Thai yoga massage courses.png";
 import ayurvedicCourseImg from "@/assets/New folder/Ayurvedic massage courses.png";
 import yogaWellnessRetreatImg from "@/assets/Yoga wellness retreat.png";
@@ -99,7 +99,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat } from "./about";
-import { getApiUrl } from "@/lib/utils";
+import { getApiUrl, resolveImageUrl } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -206,7 +206,7 @@ function ImageShowcase() {
   const goNext = () => goTo((current + 1) % slides.length);
 
   return (
-    <section className="relative w-full h-[82vh] md:h-[92vh] overflow-hidden bg-emerald-deep">
+    <section className="relative w-full h-[48vh] sm:h-[58vh] md:h-[66vh] max-h-[600px] overflow-hidden bg-emerald-deep">
       {/* Stacked slides with crossfade */}
       {slides.map((slide, idx) => (
         <div
@@ -246,16 +246,16 @@ function ImageShowcase() {
       </div>
 
       {/* Caption */}
-      <div className="absolute bottom-20 md:bottom-24 left-8 md:left-16 z-20 max-w-xl">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="h-px w-10 bg-gold" />
-          <span className="text-gold font-serif-display text-[0.65rem] tracking-[0.4em] uppercase">
+      <div className="absolute bottom-10 sm:bottom-12 md:bottom-14 left-4 sm:left-6 md:left-12 right-4 md:right-auto z-20 max-w-xl">
+        <div className="flex items-center gap-2.5 mb-1.5 sm:mb-2">
+          <div className="h-px w-6 sm:w-10 bg-gold" />
+          <span className="text-gold font-serif-display text-[0.6rem] sm:text-[0.65rem] tracking-[0.25em] sm:tracking-[0.4em] uppercase">
             {slides[current].sub}
           </span>
         </div>
         <h2
           key={current}
-          className="font-display text-3xl md:text-5xl lg:text-6xl text-cream drop-shadow-2xl leading-tight animate-fade-up"
+          className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-cream drop-shadow-2xl leading-tight animate-fade-up"
         >
           {slides[current].label}
         </h2>
@@ -265,16 +265,16 @@ function ImageShowcase() {
       <button
         onClick={goPrev}
         aria-label="Previous slide"
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/20 hover:bg-gold/30 border border-white/20 hover:border-gold/60 flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
+        className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-black/30 hover:bg-gold/30 border border-white/20 hover:border-gold/60 flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
       >
-        <ChevronLeft className="w-5 h-5 text-cream" />
+        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-cream" />
       </button>
       <button
         onClick={goNext}
         aria-label="Next slide"
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/20 hover:bg-gold/30 border border-white/20 hover:border-gold/60 flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
+        className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-black/30 hover:bg-gold/30 border border-white/20 hover:border-gold/60 flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
       >
-        <ChevronRight className="w-5 h-5 text-cream" />
+        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-cream" />
       </button>
 
       {/* Dot navigation */}
@@ -302,14 +302,58 @@ function ImageShowcase() {
   );
 }
 
+/* ---------------- Golden Lotus Emblem ---------------- */
+function GoldenLotusEmblem({ className = "w-10 h-7" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 100 68"
+      className={className}
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Central petal */}
+      <path
+        d="M50 2 C44 20 40 40 50 56 C60 40 56 20 50 2 Z"
+        className="text-[#c89945]"
+      />
+      {/* Inner left petal */}
+      <path
+        d="M47 14 C32 26 26 43 45 54 C34 44 38 28 47 14 Z"
+        className="text-[#d8a84e]"
+      />
+      {/* Inner right petal */}
+      <path
+        d="M53 14 C68 26 74 43 55 54 C66 44 62 28 53 14 Z"
+        className="text-[#d8a84e]"
+      />
+      {/* Outer left petal */}
+      <path
+        d="M38 28 C18 38 12 52 38 58 C22 52 24 39 38 28 Z"
+        className="text-[#b98737]"
+      />
+      {/* Outer right petal */}
+      <path
+        d="M62 28 C82 38 88 52 62 58 C78 52 76 39 62 28 Z"
+        className="text-[#b98737]"
+      />
+      {/* Base curve */}
+      <path
+        d="M36 60 C44 64 56 64 64 60 C58 63 42 63 36 60 Z"
+        className="text-[#b98737]"
+      />
+    </svg>
+  );
+}
+
 /* ---------------- Hero ---------------- */
 function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] lg:min-h-screen flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden bg-[#eef3f0]"
+      className="relative min-h-screen min-h-[100dvh] w-full flex items-center justify-center pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 overflow-hidden bg-[#eef3f0]"
     >
-      {/* Background image — matching reference image (bright natural daylight) */}
+      {/* Background image */}
       <img
         src={hero}
         alt="Dr. Vikram Yoga & Wellness Centre overlooking the ocean"
@@ -321,52 +365,87 @@ function Hero() {
       {/* Main Centered Content */}
       <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center justify-center my-auto animate-fade-up">
         {/* Logo Crest */}
-        <div className="mb-4 md:mb-6 flex justify-center">
+        <div className="mb-2 sm:mb-3 flex justify-center">
           <img
             src={logo}
             alt="Dr Vikram crest"
-            className="h-32 md:h-48 lg:h-56 w-auto animate-float drop-shadow-[0_0_25px_rgba(212,175,55,0.5)]"
+            className="h-20 sm:h-28 md:h-36 lg:h-44 w-auto animate-float drop-shadow-[0_0_25px_rgba(212,175,55,0.5)]"
           />
         </div>
 
         {/* Headline: Dr. Vikram */}
-        <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[5.75rem] font-bold text-cream tracking-tight leading-[1.05] drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
+        <h1
+          className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.75rem] font-bold text-emerald-deep tracking-tight leading-[1.05]"
+          style={{
+            textShadow:
+              "0 0 16px rgba(255,255,255,0.7), 0 0 35px rgba(255,255,255,0.4), 0 2px 10px rgba(0,0,0,0.25)",
+          }}
+        >
           Dr. Vikram
         </h1>
 
-        {/* Subheadline: Yoga & Wellness Centre */}
-        <p className="font-display italic text-3xl sm:text-5xl md:text-6xl lg:text-7xl mt-1 sm:mt-2 mb-3 sm:mb-4 font-medium tracking-wide drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
-          <span className="text-gold-gradient">Yoga &amp; Wellness Centre</span>
+        {/* Subheadline: Yoga & Wellness Centre — bright gold with subtle 3D depth */}
+        <p className="font-display italic text-2xl sm:text-4xl md:text-5xl lg:text-7xl mt-1 sm:mt-2 mb-2 sm:mb-3 font-bold tracking-wide transform md:translate-x-3 lg:translate-x-5">
+          <span
+            style={{
+              background: "linear-gradient(160deg, #fff0a0 0%, #ffd43b 30%, #ffb700 60%, #e89000 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              filter:
+                "drop-shadow(1px 1px 0px rgba(160,90,0,0.9)) " +
+                "drop-shadow(2px 2px 0px rgba(120,60,0,0.7)) " +
+                "drop-shadow(3px 3px 0px rgba(80,40,0,0.45)) " +
+                "drop-shadow(0 0 20px rgba(255,180,0,0.65)) " +
+                "drop-shadow(0 6px 20px rgba(0,0,0,0.75))",
+            }}
+          >
+            Yoga &amp; Wellness Centre
+          </span>
         </p>
 
         {/* Tagline */}
-        <p className="text-cream font-light text-sm sm:text-base md:text-lg lg:text-xl tracking-wide max-w-3xl mx-auto mb-5 sm:mb-6 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+        <p
+          className="text-cream font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide max-w-3xl mx-auto mb-3 sm:mb-4 leading-relaxed px-2"
+          style={{
+            textShadow:
+              "0 0 8px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.55), 0 0 40px rgba(255,255,255,0.2), 0 2px 12px rgba(0,0,0,0.9)",
+          }}
+        >
           Holistic Healing • Therapeutic Wellness • Transformative Retreat Experiences
         </p>
 
         {/* Motto / Horizontal Lines Divider */}
-        <div className="flex items-center justify-center gap-3 sm:gap-6 w-full max-w-xl mx-auto mb-7 sm:mb-8">
-          <span className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#dfb055] to-[#dfb055] drop-shadow-sm" />
-          <span className="font-serif-display text-[0.72rem] sm:text-[0.82rem] md:text-[0.9rem] tracking-[0.35em] sm:tracking-[0.45em] uppercase text-[#e8b958] font-extrabold whitespace-nowrap drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-            HEAL &nbsp;•&nbsp; HARMONIZE &nbsp;•&nbsp; TRANSFORM
+        <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-5 w-full max-w-2xl sm:max-w-3xl mx-auto mb-4 sm:mb-5 px-3">
+          <span className="h-[2px] flex-1 min-w-[16px] sm:min-w-[36px] md:min-w-[50px] bg-gradient-to-r from-transparent via-[#ffd043]/80 to-[#ffd043] drop-shadow-sm" />
+          <span
+            className="font-serif-display text-[0.78rem] sm:text-[0.92rem] md:text-[1.05rem] tracking-[0.14em] sm:tracking-[0.2em] md:tracking-[0.26em] uppercase text-[#ffd043] font-black text-center shrink-0 whitespace-nowrap"
+            style={{
+              fontWeight: 900,
+              WebkitTextStroke: "0.55px #ffd043",
+              textShadow:
+                "0 1px 2px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.9), 0 0 14px rgba(255,208,67,0.5), 0 0 2px rgba(0,0,0,0.8)",
+            }}
+          >
+            HEAL <span className="text-white mx-1 sm:mx-1.5 font-black">•</span> HARMONIZE <span className="text-white mx-1 sm:mx-1.5 font-black">•</span> TRANSFORM
           </span>
-          <span className="h-[2px] flex-1 bg-gradient-to-l from-transparent via-[#dfb055] to-[#dfb055] drop-shadow-sm" />
+          <span className="h-[2px] flex-1 min-w-[16px] sm:min-w-[36px] md:min-w-[50px] bg-gradient-to-l from-transparent via-[#ffd043]/80 to-[#ffd043] drop-shadow-sm" />
         </div>
 
         {/* Action Buttons (2 Rows of Centered Buttons matching reference design) */}
-        <div className="flex flex-col items-center gap-3 sm:gap-3.5 w-full max-w-2xl mx-auto">
+        <div className="flex flex-col items-center gap-2.5 sm:gap-3 w-full max-w-2xl mx-auto">
           {/* Row 1: Primary Actions */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 w-full">
             <Link
               to="/yoga"
-              className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full bg-[#dfb055] hover:bg-[#d4a548] text-[#072c1c] font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-md hover:scale-[1.02] transition-all duration-300 min-w-[210px] text-center inline-flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#dfb055] hover:bg-[#d1a243] text-[#072c1c] font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-md hover:scale-[1.02] transition-all duration-300 min-w-0 sm:min-w-[210px] text-center inline-flex items-center justify-center gap-2"
             >
               <span>JOIN OUR CLASSES</span>
               <span className="font-bold text-base leading-none">&gt;</span>
             </Link>
             <Link
               to="/retreats"
-              className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full bg-white/95 hover:bg-white text-[#072c1c] border-2 border-[#072c1c] font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-md hover:scale-[1.02] transition-all duration-300 min-w-[210px] text-center inline-flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-white/95 hover:bg-white text-[#072c1c] border-2 border-[#072c1c] font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-md hover:scale-[1.02] transition-all duration-300 min-w-0 sm:min-w-[210px] text-center inline-flex items-center justify-center gap-2"
             >
               <span>EXPLORE RETREATS</span>
               <span className="font-bold text-base leading-none">&gt;</span>
@@ -374,17 +453,17 @@ function Hero() {
           </div>
 
           {/* Row 2: Secondary Consultation & Enrollment Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 w-full">
             <Link
               to="/wellness-therapy"
-              className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-white/95 hover:bg-white text-[#072c1c] border border-[#072c1c]/70 font-bold text-xs sm:text-sm tracking-normal shadow-sm hover:scale-[1.02] transition-all duration-300 min-w-[240px] text-center inline-flex items-center justify-center gap-2.5"
+              className="w-full sm:w-auto px-5 sm:px-7 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#072c1c] border border-[#072c1c]/70 font-semibold text-xs sm:text-sm tracking-normal shadow-sm hover:scale-[1.02] transition-all duration-300 min-w-0 sm:min-w-[240px] text-center inline-flex items-center justify-center gap-2"
             >
               <Calendar className="w-4 h-4 text-[#072c1c] shrink-0" />
               <span>Book a Wellness Consultation</span>
             </Link>
             <Link
               to="/certificate-courses"
-              className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-white/95 hover:bg-white text-[#072c1c] border border-[#072c1c]/70 font-bold text-xs sm:text-sm tracking-normal shadow-sm hover:scale-[1.02] transition-all duration-300 min-w-[240px] text-center inline-flex items-center justify-center gap-2.5"
+              className="w-full sm:w-auto px-5 sm:px-7 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#072c1c] border border-[#072c1c]/70 font-semibold text-xs sm:text-sm tracking-normal shadow-sm hover:scale-[1.02] transition-all duration-300 min-w-0 sm:min-w-[240px] text-center inline-flex items-center justify-center gap-2"
             >
               <GraduationCap className="w-4 h-4 text-[#072c1c] shrink-0" />
               <span>Enroll in Certificate Courses</span>
@@ -394,11 +473,11 @@ function Hero() {
       </div>
 
       {/* Bottom Scroll Indicator */}
-      <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-0.5 text-cream/75 hover:text-cream transition-colors cursor-pointer drop-shadow-md">
-        <span className="font-serif-display text-[0.55rem] sm:text-[0.6rem] tracking-[0.4em] uppercase font-bold text-cream">
+      <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-0.5 text-[#072c1c]/80 hover:text-[#072c1c] transition-colors cursor-pointer drop-shadow-sm">
+        <span className="font-serif-display text-[0.55rem] sm:text-[0.6rem] tracking-[0.4em] uppercase font-bold text-[#072c1c]">
           SCROLL
         </span>
-        <ChevronDown className="w-3.5 h-3.5 animate-bounce text-cream" />
+        <ChevronDown className="w-3.5 h-3.5 animate-bounce text-[#072c1c]" />
       </div>
     </section>
   );
@@ -407,7 +486,7 @@ function Hero() {
 /* ---------------- Welcome ---------------- */
 function Welcome() {
   return (
-    <section className="relative pt-16 lg:pt-20 pb-6 lg:pb-8 bg-cream overflow-hidden">
+    <section className="relative py-10 sm:py-14 bg-cream overflow-hidden">
       {/* Decorative background ambient glows */}
       <div className="absolute top-0 right-0 w-[45rem] h-[45rem] bg-gold/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[35rem] h-[35rem] bg-emerald/10 blur-[100px] rounded-full translate-y-1/3 -translate-x-1/4 pointer-events-none" />
@@ -451,10 +530,10 @@ function Welcome() {
                 <p className="font-display italic text-base sm:text-lg font-semibold text-cream leading-relaxed">
                   &ldquo;Our programs are thoughtfully designed for authentic yoga experiences, therapeutic healing, mindful relaxation, and natural wellness in a peaceful coastal atmosphere.&rdquo;
                 </p>
-                <div className="mt-3 flex items-center gap-2">
-                  <span className="h-[2px] w-8 bg-gold" />
-                  <span className="text-xs font-serif-display font-bold uppercase tracking-[0.25em] text-gold">
-                    HEAL &nbsp;•&nbsp; HARMONIZE &nbsp;•&nbsp; TRANSFORM
+                <div className="mt-3 flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                  <span className="h-[2px] w-6 sm:w-8 bg-gold shrink-0" />
+                  <span className="text-[0.72rem] sm:text-xs font-serif-display font-bold uppercase tracking-[0.18em] sm:tracking-[0.25em] text-gold">
+                    HEAL <span className="text-cream/80 mx-1">•</span> HARMONIZE <span className="text-cream/80 mx-1">•</span> TRANSFORM
                   </span>
                 </div>
               </div>
@@ -476,7 +555,7 @@ function Welcome() {
             <div className="relative grid grid-cols-2 gap-3.5">
 
               {/* Tall left image */}
-              <div className="relative rounded-3xl overflow-hidden shadow-luxury border-2 border-gold/20 group h-[560px]">
+              <div className="relative rounded-3xl overflow-hidden shadow-luxury border-2 border-gold/20 group h-[380px] sm:h-[460px] md:h-[520px] lg:h-[560px]">
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/50 via-transparent to-transparent z-10" />
                 <img
                   src={varkalaBeach}
@@ -487,7 +566,7 @@ function Welcome() {
               </div>
 
               {/* Right column — two stacked cards */}
-              <div className="flex flex-col gap-3.5 h-[560px]">
+              <div className="flex flex-col gap-3.5 h-[380px] sm:h-[460px] md:h-[520px] lg:h-[560px]">
                 <div className="relative rounded-3xl overflow-hidden shadow-luxury border-2 border-gold/20 group flex-1">
                   <img
                     src={therapy}
@@ -510,14 +589,14 @@ function Welcome() {
             </div>
 
             {/* Floating Bottom Badge */}
-            <div className="absolute -bottom-5 left-4 right-4 sm:left-6 sm:right-auto glass-dark rounded-2xl px-6 py-4 shadow-2xl border-2 border-gold/40 text-cream backdrop-blur-md z-20 animate-float">
+            <div className="absolute -bottom-5 left-2 right-2 sm:left-6 sm:right-auto glass-dark rounded-2xl p-3.5 sm:px-6 sm:py-4 shadow-2xl border-2 border-gold/40 text-cream backdrop-blur-md z-20 animate-float">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center text-emerald-deep font-bold shadow-gold shrink-0">
-                  <Star className="w-5 h-5 fill-emerald-deep text-emerald-deep" />
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gold-gradient flex items-center justify-center text-emerald-deep font-bold shadow-gold shrink-0">
+                  <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-emerald-deep text-emerald-deep" />
                 </div>
                 <div>
-                  <div className="font-display text-lg sm:text-xl font-bold text-gold-gradient leading-tight">Authentic Experience</div>
-                  <div className="text-[0.62rem] sm:text-[0.68rem] tracking-[0.25em] uppercase font-bold text-cream/90 mt-0.5">
+                  <div className="font-display text-base sm:text-xl font-bold text-gold-gradient leading-tight">Authentic Experience</div>
+                  <div className="text-[0.58rem] sm:text-[0.68rem] tracking-[0.2em] sm:tracking-[0.25em] uppercase font-bold text-cream/90 mt-0.5">
                     Holistic Healing Sanctuary
                   </div>
                 </div>
@@ -573,17 +652,17 @@ function DiscoverServices() {
   ];
 
   return (
-    <section className="relative pt-2 lg:pt-4 pb-16 lg:pb-24 bg-cream overflow-hidden">
+    <section className="relative pt-2 pb-10 sm:pb-14 bg-cream overflow-hidden">
       {/* Subtle ambient glows */}
       <div className="absolute top-0 left-0 w-[36rem] h-[36rem] bg-emerald/5 blur-[100px] rounded-full -translate-y-1/2 -translate-x-1/4 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] bg-gold/6 blur-[90px] rounded-full translate-y-1/3 translate-x-1/4 pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto px-6">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         {/* ── Single outer rectangular container ── */}
         <div className="rounded-3xl border-2 border-gold/25 bg-white shadow-[0_16px_50px_rgba(8,18,13,0.08)] overflow-hidden">
 
           {/* ── Header bar inside the container ── */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-6 sm:px-8 py-5 sm:py-6 border-b border-gold/15 bg-gradient-to-r from-emerald-deep/[0.03] to-transparent">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-5 sm:px-8 py-5 sm:py-6 border-b border-gold/15 bg-gradient-to-r from-emerald-deep/[0.03] to-transparent">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-deep/5 border border-gold/30 mb-2">
                 <Sparkles className="w-3.5 h-3.5 text-gold" />
@@ -603,7 +682,7 @@ function DiscoverServices() {
             {/* Clickable Action Button → /services */}
             <Link
               to="/services"
-              className="inline-flex items-center gap-3 px-6 sm:px-7 py-3 rounded-full bg-gold-gradient text-emerald-deep font-bold text-xs sm:text-sm tracking-[0.12em] uppercase shadow-gold hover:scale-105 transition-all duration-300 shrink-0"
+              className="inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full bg-gold-gradient text-emerald-deep font-bold text-xs sm:text-sm tracking-[0.12em] uppercase shadow-gold hover:scale-105 transition-all duration-300 shrink-0"
             >
               Discover Our Services
               <ArrowRight className="w-4 h-4" />
@@ -618,10 +697,10 @@ function DiscoverServices() {
                 <Link
                   key={svc.name}
                   to={svc.link}
-                  className="group flex flex-row bg-white hover:bg-emerald-deep/[0.025] transition-colors duration-300 p-6 gap-5 items-start"
+                  className="group flex flex-col sm:flex-row bg-white hover:bg-emerald-deep/[0.025] transition-colors duration-300 p-5 sm:p-6 gap-4 sm:gap-5 items-start"
                 >
                   {/* Thumbnail */}
-                  <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden shrink-0 border border-gold/20 shadow-md">
+                  <div className="relative w-full sm:w-32 h-44 sm:h-32 rounded-2xl overflow-hidden shrink-0 border border-gold/20 shadow-md">
                     <img
                       src={svc.img}
                       alt={svc.name}
@@ -636,7 +715,7 @@ function DiscoverServices() {
                   </div>
 
                   {/* Text content */}
-                  <div className="flex flex-col flex-1 min-w-0">
+                  <div className="flex flex-col flex-1 min-w-0 w-full">
                     <h3 className="font-display text-base sm:text-[1.05rem] font-bold text-emerald-deep mb-1.5 leading-snug group-hover:text-gold transition-colors duration-300">
                       {svc.name}
                     </h3>
@@ -806,70 +885,73 @@ function OriginsOfYoga() {
   ];
 
   return (
-    <section className="relative py-10 md:py-16 bg-emerald-deep text-cream overflow-hidden">
-      {/* Background ambient glows */}
-      <div className="absolute top-0 left-1/4 w-[40rem] h-[40rem] bg-gold/10 blur-[100px] rounded-full pointer-events-none -translate-y-1/2" />
-      <div className="absolute bottom-0 right-1/4 w-[35rem] h-[35rem] bg-emerald/15 blur-[90px] rounded-full pointer-events-none translate-y-1/3" />
+    <section className="relative py-10 sm:py-16 bg-[#fbf2e9] text-[#072c1c] overflow-hidden">
+      {/* Background ambient warm glows */}
+      <div className="absolute top-0 left-1/4 w-[40rem] h-[40rem] bg-[#f5d9be]/40 blur-[110px] rounded-full pointer-events-none -translate-y-1/2" />
+      <div className="absolute bottom-0 right-1/4 w-[35rem] h-[35rem] bg-[#edd0b5]/50 blur-[100px] rounded-full pointer-events-none translate-y-1/3" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-10">
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <Flower2 className="w-3.5 h-3.5 text-gold shrink-0" />
-            <span className="font-serif-display text-xs md:text-sm tracking-[0.4em] text-gold uppercase">
+        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+          <div className="flex items-center justify-center gap-3 mb-2.5">
+            <Flower2 className="w-4 h-4 text-[#a06d1c] shrink-0" />
+            <span className="font-serif-display text-xs md:text-sm tracking-[0.4em] text-[#a06d1c] font-bold uppercase">
               THE ORIGINS OF YOGA
             </span>
-            <Flower2 className="w-3.5 h-3.5 text-gold shrink-0" />
+            <Flower2 className="w-4 h-4 text-[#a06d1c] shrink-0" />
           </div>
-          <h2 className="font-display text-2xl md:text-4xl text-cream leading-tight text-balance">
-            Lord Shiva &bull; Sage Patanjali &bull;{" "}
-            <em className="text-gold-gradient not-italic">The Timeless Wisdom of Yoga</em>
+          <h2 className="font-display text-2xl md:text-4xl text-[#072c1c] font-bold leading-tight text-balance">
+            Lord Shiva &bull; Sage Patanjali
+            <span className="inline md:hidden"> &bull;</span>{" "}
+            <br className="hidden md:block" />
+            <em className="text-[#a06d1c] not-italic">The Timeless Wisdom of Yoga</em>
           </h2>
-          <div className="gold-divider mt-4 mx-auto max-w-[3.5rem]" />
+          <div className="h-0.5 w-16 mx-auto mt-4 bg-gradient-to-r from-transparent via-[#a06d1c]/60 to-transparent" />
         </div>
 
         {/* Content Cards Layout: 2 side-by-side balanced cards (Left: Image, Right: Content) */}
         <div className="grid lg:grid-cols-2 gap-6 xl:gap-8 items-stretch">
           {/* ── Card 1: Lord Shiva ── */}
-          <div className="glass rounded-3xl p-5 md:p-6 border border-gold/20 shadow-luxury flex flex-col justify-between relative group">
+          <div className="rounded-3xl p-5 md:p-6 bg-[#082618] border-2 border-[#0e442b] shadow-[0_14px_40px_rgba(8,38,24,0.18)] flex flex-col justify-between relative group hover:shadow-[0_18px_48px_rgba(8,38,24,0.26)] transition-all duration-300">
             <div className="grid sm:grid-cols-12 gap-5 items-center h-full">
               {/* Left: Lord Shiva Image */}
-              <div className="sm:col-span-5 relative rounded-2xl overflow-hidden shadow-luxury border border-gold/20 aspect-[4/5] sm:h-full max-h-[280px]">
+              <div className="sm:col-span-5 relative rounded-2xl overflow-hidden shadow-md border-2 border-[#134d31]/60 aspect-[4/5] sm:h-full max-h-[290px]">
                 <img
                   src={lordShivaImg}
                   alt="Lord Shiva — Adiyogi, the First Yogi"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/80 via-transparent to-transparent z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#051c11]/85 via-transparent to-transparent z-10" />
                 <div className="absolute bottom-3 left-3 right-3 z-20">
-                  <span className="px-2.5 py-0.5 rounded-full glass text-[0.62rem] tracking-[0.2em] uppercase text-gold border border-gold/30">
+                  <span className="px-2.5 py-1 rounded-full bg-[#051a10]/95 text-[0.62rem] tracking-[0.2em] uppercase text-[#e9be65] border border-[#e9be65]/40 font-bold backdrop-blur-md block text-center shadow-sm">
                     Adiyogi &middot; First Yogi
                   </span>
                 </div>
               </div>
 
               {/* Right: Lord Shiva Content */}
-              <div className="sm:col-span-7 space-y-3">
+              <div className="sm:col-span-7 space-y-3.5">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-gold shrink-0" />
+                  <Sparkles className="w-4 h-4 text-[#e9be65] shrink-0" />
                   <h3 className="font-display text-base md:text-lg text-cream font-bold leading-snug">
-                    Lord Shiva — <em className="text-gold-gradient not-italic">Adiyogi, the First Yogi</em>
+                    Lord Shiva — <em className="text-[#e9be65] not-italic font-bold">Adiyogi, the First Yogi</em>
                   </h3>
                 </div>
 
-                <p className="text-cream/90 text-xs md:text-[0.83rem] leading-relaxed">
+                <p className="text-[#f2ebe2] text-xs md:text-[0.84rem] font-semibold leading-relaxed">
                   In the yogic tradition, Lord Shiva is revered as{" "}
-                  <strong className="text-gold font-semibold">Adiyogi — the First Yogi</strong>,
+                  <strong className="text-[#e9be65] font-bold">Adiyogi — the First Yogi</strong>,
                   representing the origin of yogic knowledge and inner transformation. Ancient
                   traditions describe Adiyogi as the source of profound teachings on the body,
                   breath, consciousness, meditation, and spiritual awakening.
                 </p>
 
-                <div className="p-3.5 rounded-xl glass border border-gold/20 text-cream/95 text-[0.78rem] md:text-[0.8rem] italic leading-relaxed">
+                {/* Highlighted Key Insight Box */}
+                <div className="p-3.5 rounded-2xl bg-[#faeee2] border border-[#d4af37]/40 shadow-sm text-[#072c1c] text-[0.8rem] md:text-[0.83rem] font-semibold italic leading-relaxed">
                   Yoga is therefore understood not merely as physical exercise, but as a journey
                   toward{" "}
-                  <strong className="text-gold not-italic font-semibold">
+                  <strong className="text-[#9e6b15] not-italic font-bold">
                     self-awareness, inner balance, harmony, and union
                   </strong>
                   .
@@ -879,47 +961,47 @@ function OriginsOfYoga() {
           </div>
 
           {/* ── Card 2: Sage Patanjali ── */}
-          <div className="glass rounded-3xl p-5 md:p-6 border border-gold/20 shadow-luxury flex flex-col justify-between relative group">
+          <div className="rounded-3xl p-5 md:p-6 bg-[#082618] border-2 border-[#0e442b] shadow-[0_14px_40px_rgba(8,38,24,0.18)] flex flex-col justify-between relative group hover:shadow-[0_18px_48px_rgba(8,38,24,0.26)] transition-all duration-300">
             <div className="grid sm:grid-cols-12 gap-5 items-center h-full">
               {/* Left: Sage Patanjali Image */}
-              <div className="sm:col-span-5 relative rounded-2xl overflow-hidden shadow-luxury border border-gold/20 aspect-[4/5] sm:h-full max-h-[280px]">
+              <div className="sm:col-span-5 relative rounded-2xl overflow-hidden shadow-md border-2 border-[#134d31]/60 aspect-[4/5] sm:h-full max-h-[290px]">
                 <img
                   src={sagePatanjaliImg}
                   alt="Sage Patanjali — The Father of Classical Yoga"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/80 via-transparent to-transparent z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#051c11]/85 via-transparent to-transparent z-10" />
                 <div className="absolute bottom-3 left-3 right-3 z-20">
-                  <span className="px-2.5 py-0.5 rounded-full glass text-[0.62rem] tracking-[0.2em] uppercase text-gold border border-gold/30">
+                  <span className="px-2.5 py-1 rounded-full bg-[#051a10]/95 text-[0.62rem] tracking-[0.2em] uppercase text-[#e9be65] border border-[#e9be65]/40 font-bold backdrop-blur-md block text-center shadow-sm">
                     Maharishi Patanjali
                   </span>
                 </div>
               </div>
 
               {/* Right: Sage Patanjali Content */}
-              <div className="sm:col-span-7 space-y-2.5">
+              <div className="sm:col-span-7 space-y-3">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-gold shrink-0" />
+                  <Sparkles className="w-4 h-4 text-[#e9be65] shrink-0" />
                   <h3 className="font-display text-base md:text-lg text-cream font-bold leading-snug">
-                    Sage Patanjali — <em className="text-gold-gradient not-italic">Father of Classical Yoga</em>
+                    Sage Patanjali — <em className="text-[#e9be65] not-italic font-bold">Father of Classical Yoga</em>
                   </h3>
                 </div>
 
-                <p className="text-cream/90 text-xs md:text-[0.82rem] leading-relaxed">
+                <p className="text-[#f2ebe2] text-xs md:text-[0.83rem] font-semibold leading-relaxed">
                   Sage Patanjali is widely regarded as the{" "}
-                  <strong className="text-gold font-semibold">Father of Classical Yoga</strong> for
+                  <strong className="text-[#e9be65] font-bold">Father of Classical Yoga</strong> for
                   systematically presenting the philosophical foundations and practices of yoga
-                  through the <em className="italic font-serif text-cream">Yoga Sutras of Patanjali</em>.
+                  through the <em className="italic font-serif text-cream font-bold">Yoga Sutras of Patanjali</em>.
                   The Yoga Sutras provide a structured path for understanding the nature of the mind
                   and cultivating inner discipline, awareness, and liberation.
                 </p>
 
-                {/* Eight Limbs Card */}
-                <div className="p-3 rounded-xl glass border border-gold/25 space-y-2">
+                {/* Eight Limbs Highlighted Card */}
+                <div className="p-3.5 rounded-2xl bg-[#faeee2] border border-[#d4af37]/40 shadow-sm space-y-2.5">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-gold text-xs">☯</span>
-                    <h4 className="font-display text-[0.75rem] text-gold font-semibold uppercase tracking-wide">
+                    <span className="text-[#9e6b15] text-xs font-bold">☯</span>
+                    <h4 className="font-display text-[0.74rem] text-[#072c1c] font-bold uppercase tracking-wider">
                       Patanjali’s Eight Limbs of Yoga (Ashtanga Yoga) include:
                     </h4>
                   </div>
@@ -927,7 +1009,7 @@ function OriginsOfYoga() {
                     {eightLimbs.map((limb) => (
                       <span
                         key={limb}
-                        className="px-2 py-0.5 rounded-full bg-gold/15 border border-gold/30 text-[0.62rem] font-serif-display tracking-wider text-cream uppercase hover:bg-gold/25 transition-colors"
+                        className="px-2.5 py-0.5 rounded-full bg-[#fceddc] border border-[#0b3823]/30 text-[0.63rem] font-serif-display tracking-wider text-[#072c1c] font-bold uppercase hover:bg-[#ebd0b6] hover:border-[#9e6b15] transition-colors"
                       >
                         {limb}
                       </span>
@@ -935,7 +1017,7 @@ function OriginsOfYoga() {
                   </div>
                 </div>
 
-                <p className="text-cream/80 text-[0.75rem] md:text-[0.78rem] leading-relaxed">
+                <p className="text-[#f2ebe2]/90 text-[0.76rem] md:text-[0.79rem] font-semibold leading-relaxed">
                   These principles continue to provide a timeless foundation for authentic yoga
                   practice and mindful living.
                 </p>
@@ -1003,7 +1085,7 @@ function WhyUs() {
     },
   ];
   return (
-    <section className="min-h-screen flex items-center py-28 bg-cream">
+    <section className="relative py-10 sm:py-14 bg-cream">
       <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           <div className="text-center">
@@ -1014,9 +1096,9 @@ function WhyUs() {
               A Personalized Approach to{" "}
               <em className="text-black not-italic">Holistic Healing & Wellness</em>
             </h2>
-            <div className="gold-divider mt-8 mx-auto" />
+            <div className="gold-divider mt-5 mx-auto" />
           </div>
-          <div className="mt-8 space-y-4 text-muted-foreground leading-relaxed text-[1rem] text-center md:text-justify">
+          <div className="mt-5 space-y-3 text-muted-foreground leading-relaxed text-[0.98rem] text-center md:text-justify">
             <p>
               At Dr. Vikram Yoga & Wellness Centre, we believe wellness is not a one-size-fits-all
               journey. Every individual is unique, and our approach is designed to provide
@@ -1030,7 +1112,7 @@ function WhyUs() {
             </p>
           </div>
         </div>
-        <div className="mt-16 grid md:grid-cols-2 gap-y-10 gap-x-12 max-w-5xl mx-auto">
+        <div className="mt-8 sm:mt-10 grid md:grid-cols-2 gap-y-6 sm:gap-y-8 gap-x-10 max-w-5xl mx-auto">
           {items.map(({ icon: Icon, t, d }, idx) => (
             <div key={t} className="flex items-start gap-5">
               <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-1">
@@ -1051,7 +1133,7 @@ function WhyUs() {
 /* ---------------- Led by Dr. Vikram Pandya ---------------- */
 function LedByDoctor() {
   return (
-    <section className="pt-2 pb-16 bg-cream relative overflow-hidden">
+    <section className="py-4 sm:py-6 bg-cream relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-6">
         <Link
           to="/about"
@@ -1081,7 +1163,7 @@ function LedByDoctor() {
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
                 <h4 className="font-display text-xl sm:text-2xl font-bold text-gold group-hover:text-gold transition-colors">
-                  Led by Dr. S. Vikram Pandy
+                  Dr. S. Vikram Pandy
                 </h4>
                 {/* Integrated "About Dr. Vikram" link replacing the standalone arrow */}
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-deep/5 group-hover:bg-gold-gradient text-emerald-deep group-hover:text-emerald-deep border border-emerald-deep/15 group-hover:border-gold/40 text-xs font-serif-display font-bold tracking-wider uppercase transition-all duration-300 shadow-sm shrink-0">
@@ -1090,10 +1172,12 @@ function LedByDoctor() {
                 </span>
               </div>
 
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#9a7024] mb-2 font-serif flex items-center gap-2">
-                <span>Founder &amp; Director</span>
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 font-serif flex flex-wrap items-center gap-2">
+                <span className="text-[#9a7024]">Founder &amp; Director</span>
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-gold" />
-                <span>BNYS., M.D.(ACU)., E-RYT.</span>
+                <span className="text-[#9a7024]">Lead Trainer</span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-gold" />
+                <span className="text-[#112e22] font-extrabold tracking-wide">BNYS., M.D.(ACU)., E-RYT.</span>
               </p>
 
               <p className="text-sm sm:text-[0.95rem] font-semibold leading-relaxed text-emerald-deep mb-3">
@@ -1940,14 +2024,14 @@ function VisitLocalAreas() {
       : localAreas.filter((item) => item.category === activeTab);
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-cream via-cream/80 to-cream relative overflow-hidden">
+    <section className="py-10 sm:py-14 bg-gradient-to-b from-cream via-cream/80 to-cream relative overflow-hidden">
       {/* Decorative subtle background accents */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-emerald/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald/10 border border-emerald/20 mb-4 shadow-xs">
             <Compass className="w-4 h-4 text-emerald animate-spin-slow" />
             <span className="font-serif-display text-xs font-bold tracking-[0.2em] text-emerald uppercase">
@@ -2390,7 +2474,7 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative flex flex-col justify-center py-16 md:py-24 overflow-hidden bg-cream"
+      className="relative flex flex-col justify-center py-10 sm:py-14 overflow-hidden bg-cream"
     >
       <img
         src={testimonialBg}
@@ -2399,7 +2483,7 @@ function Testimonials() {
         loading="lazy"
       />
       <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
-        <div className="text-center mb-8 px-2">
+        <div className="text-center mb-6 px-2">
           <span className="font-serif-display text-sm md:text-base tracking-[0.4em] text-emerald">
             TESTIMONIALS
           </span>
@@ -2437,9 +2521,13 @@ function Testimonials() {
                     </div>
                     {t.img ? (
                       <img
-                        src={t.img}
+                        src={resolveImageUrl(t.img)}
                         alt={t.name}
                         className="w-16 h-16 rounded-full object-cover mt-2 mb-3 shadow-sm border-2 border-cream relative z-10"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23f1f5f9'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%2394a3b8' font-size='24' font-family='sans-serif'%3EY%3C/text%3E%3C/svg%3E";
+                        }}
                       />
                     ) : (
                       <div className="w-16 h-16 rounded-full bg-[#0c1c14] text-gold font-bold flex items-center justify-center text-xl mt-2 mb-3 shadow-sm border-2 border-cream relative z-10">
@@ -2634,9 +2722,9 @@ function SocialFeed() {
       ];
 
   return (
-    <section className="pt-12 pb-24 bg-cream">
+    <section className="py-8 sm:py-12 bg-cream">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 sm:mb-8">
           <div>
             <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">
               @DRVIKRAM.WELLNESS
@@ -2664,10 +2752,14 @@ function SocialFeed() {
               className="relative aspect-square overflow-hidden rounded-xl group block"
             >
               <img
-                src={item.image}
+                src={resolveImageUrl(item.image)}
                 alt={`Instagram ${i + 1}`}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 loading="lazy"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src =
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' fill='%23f1f5f9'%3E%3Crect width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%2394a3b8' font-size='14' font-family='sans-serif'%3EImage not found%3C/text%3E%3C/svg%3E";
+                }}
               />
               <div className="absolute inset-0 bg-emerald-deep/0 group-hover:bg-emerald-deep/60 transition-colors flex items-center justify-center">
                 <Instagram className="w-6 h-6 text-cream opacity-0 group-hover:opacity-100 transition-opacity" />

@@ -17,7 +17,7 @@ import coupleRetreatImg from "@/assets/Couple Wellness retreat.png";
 import stressInsomniaRetreatImg from "@/assets/stress_insomnia_retreat.jpg";
 import painManagementRetreatImg from "@/assets/pain_management_retreat.jpg";
 import { ArrowRight, Flower2, ChevronDown, MapPin } from "lucide-react";
-import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
+import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
 
 export const Route = createFileRoute("/retreats")({
   component: RetreatsPage,
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/retreats")({
 
 function RetreatsPage() {
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden bg-[#faeee2]">
       <Navbar />
       <PageHero
         title="Wellness Retreats"
@@ -39,6 +39,7 @@ function RetreatsPage() {
       <Excursions />
       <Footer />
       <WhatsAppFloat />
+      <BookNowFloat />
     </main>
   );
 }
@@ -279,7 +280,7 @@ function RetreatsSection() {
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-[#fcfaf4] relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-[#faeee2] relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-emerald-deep/5 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -445,7 +446,7 @@ function RetreatsSection() {
 
 function Excursions() {
   return (
-    <section className="py-20 bg-[#FDF5EC] text-gray-800">
+    <section className="py-20 bg-[#faeee2] text-gray-800">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-10">
           <span className="text-[#E57624] italic font-semibold text-sm mb-2 block">
@@ -504,8 +505,8 @@ function Excursions() {
             </li>
           </ul>
 
-          <div className="grid grid-cols-3 gap-3 md:gap-4">
-            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+            <div className="relative overflow-hidden rounded-xl h-48 sm:h-40 md:h-64 bg-gray-200 group">
               <img
                 src={temple1}
                 alt="Janardhana Swamy Temple"
@@ -520,7 +521,7 @@ function Excursions() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+            <div className="relative overflow-hidden rounded-xl h-48 sm:h-40 md:h-64 bg-gray-200 group">
               <img
                 src={temple2}
                 alt="Sacred Temple Rituals & Pooja"
@@ -529,7 +530,7 @@ function Excursions() {
               />
             </div>
 
-            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+            <div className="relative overflow-hidden rounded-xl h-48 sm:h-40 md:h-64 bg-gray-200 group">
               <img
                 src={sivagiriMuttImg}
                 alt="Sivagiri Mutt & Ashram"
@@ -581,8 +582,8 @@ function Excursions() {
             </li>
           </ul>
 
-          <div className="grid grid-cols-3 gap-3 md:gap-4">
-            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+            <div className="relative overflow-hidden rounded-xl h-48 sm:h-40 md:h-64 bg-gray-200 group">
               <img
                 src={varkalaBeach}
                 alt="Varkala Beach (Papanasam Beach)"
@@ -597,7 +598,7 @@ function Excursions() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+            <div className="relative overflow-hidden rounded-xl h-48 sm:h-40 md:h-64 bg-gray-200 group">
               <img
                 src={anjengoFortImg}
                 alt="Anjengo Fort & Historic Lighthouse"
@@ -612,7 +613,7 @@ function Excursions() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-xl h-32 md:h-64 bg-gray-200 group">
+            <div className="relative overflow-hidden rounded-xl h-48 sm:h-40 md:h-64 bg-gray-200 group">
               <img
                 src={kappilBackwatersImg}
                 alt="Kappil Beach & Backwaters"

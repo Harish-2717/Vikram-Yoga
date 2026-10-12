@@ -26,11 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Unlink file if it exists in uploads or gallery
         $img = $entry['image'];
-        if ($img && (strpos($img, '/uploads/') === 0 || strpos($img, '/gallery/') === 0)) {
-            $filePath = __DIR__ . '/../../public' . $img;
-            if (file_exists($filePath)) {
-                @unlink($filePath);
-            }
+        if ($img) {
+            deletePhysicalFile($img);
         }
 
         $delStmt = $pdo->prepare("DELETE FROM `gallery_images` WHERE `id` = ?");

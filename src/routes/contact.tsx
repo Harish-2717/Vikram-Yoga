@@ -12,7 +12,7 @@ import {
   Clock,
   Globe,
 } from "lucide-react";
-import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
+import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { getApiUrl } from "@/lib/utils";
@@ -44,6 +44,7 @@ function ContactPage() {
       <MapSection />
       <Footer />
       <WhatsAppFloat />
+      <BookNowFloat />
     </main>
   );
 }
@@ -162,219 +163,242 @@ function ContactSection() {
   };
 
   return (
-    <section className="py-28 bg-emerald-gradient text-cream relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
-      <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14">
-        {/* Left: Info */}
-        <div>
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">
+    <section className="py-24 md:py-28 bg-[#faeee2] text-[#112e22] relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[35rem] h-[35rem] bg-gold/5 blur-3xl rounded-full translate-y-1/3 -translate-x-1/3 pointer-events-none" />
+      
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Golden Centered Heading on Peach Background */}
+        <div className="text-center mb-16 space-y-4">
+          <span className="font-serif-display text-xs tracking-[0.4em] text-black uppercase font-bold">
             REACH US
           </span>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance leading-tight">
-            Begin your <em className="text-gold-gradient not-italic">transformation</em>.
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-black">
+            Begin your <em className="text-black not-italic">transformation</em>.
           </h2>
-          <p className="mt-6 text-cream/80 leading-relaxed max-w-md">
-            Reach out for class enrollment, retreat reservations, or a personal wellness
-            consultation. Our team is here to guide you to the right path.
+          <div className="gold-divider max-w-sm mx-auto my-6" />
+          <p className="text-[#243e31] leading-relaxed max-w-2xl mx-auto text-sm md:text-base font-semibold">
+            Reach out for class enrollment, retreat reservations, or a personal wellness consultation.
+            Our team is here to guide you to the right path.
           </p>
-
-          {/* Contact Details */}
-          <div className="mt-10 space-y-5">
-            {[
-              { Icon: Phone, label: "Phone", value: "+91 8778639989", href: "tel:+918778639989" },
-              {
-                Icon: Mail,
-                label: "Email",
-                value: "drvikramyogawellness@gmail.com",
-                href: "mailto:drvikramyogawellness@gmail.com",
-              },
-              {
-                Icon: MapPin,
-                label: "Address",
-                value: "Dr. Vikram Yoga & Wellness Centre, N Cliff Rd, Varkala, Kerala 695141",
-                href: "https://maps.google.com/?q=Dr.+Vikram+Yoga+%26+Wellness+Centre,+N+Cliff+Rd,+Varkala,+Kerala+695141",
-              },
-              {
-                Icon: Clock,
-                label: "Hours",
-                value: "Mon–Sat: 6am – 8pm  |  Sun: 6am – 8pm",
-                href: null,
-              },
-              {
-                Icon: Globe,
-                label: "Website",
-                value: "www.drvikramyogawellness.com",
-                href: "https://www.drvikramyogawellness.com/",
-              },
-            ].map(({ Icon, label, value, href }) => (
-              <div key={label} className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-full glass flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Icon className="w-4 h-4 text-gold" />
-                </div>
-                <div>
-                  <div className="text-[0.65rem] tracking-[0.25em] uppercase text-cream/50 mb-1">
-                    {label}
-                  </div>
-                  {href ? (
-                    <a
-                      href={href}
-                      className="text-cream/90 hover:text-gold transition-colors"
-                      target={href.startsWith("http") ? "_blank" : undefined}
-                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    >
-                      {value}
-                    </a>
-                  ) : (
-                    <span className="text-cream/90">{value}</span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Social */}
-          <div className="mt-10">
-            <div className="text-[0.65rem] tracking-[0.25em] uppercase text-cream/50 mb-4">
-              Follow Us
-            </div>
-            <p className="text-sm text-cream/80 mb-4 leading-relaxed">
-              Follow us on Instagram for wellness tips, yoga inspiration, healing practices, retreat
-              updates, and educational wellness content.
-            </p>
-            <div className="flex gap-3">
-              {[
-                { Icon: Instagram, href: "https://www.instagram.com/dr.vikram_yoga_wellness?stkn=MTQ0YnhucG94cXJ1Nw==", label: "Instagram" },
-                { Icon: Facebook, href: "#", label: "Facebook" },
-                { Icon: Youtube, href: "#", label: "YouTube" },
-                { Icon: MessageCircle, href: "https://wa.me/918778639989", label: "WhatsApp" },
-              ].map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="w-11 h-11 rounded-full glass flex items-center justify-center hover:bg-gold/20 transition-colors"
-                >
-                  <Icon className="w-4 h-4 text-gold" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* WhatsApp CTA */}
-          <div className="mt-10">
-            <p className="text-sm text-cream/80 mb-4 leading-relaxed">
-              Connect with us directly on WhatsApp for class bookings, retreat inquiries, and
-              wellness consultations.
-            </p>
-            <a
-              href="https://wa.me/918778639989"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full glass border border-gold/30 text-gold text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors"
-            >
-              <MessageCircle className="w-4 h-4" /> Chat on WhatsApp
-            </a>
-          </div>
         </div>
 
-        {/* Right: Form */}
-        <form
-          id="contact-form"
-          onSubmit={handleSubmit}
-          className="glass rounded-3xl p-8 md:p-10 space-y-5"
-        >
-          <h3 className="font-display text-2xl text-cream mb-2">Send an Enquiry</h3>
-          <div className="gold-divider mb-6" />
-          <div className="grid sm:grid-cols-2 gap-5">
-            <Field label="Full Name" type="text" id="contact-name" name="name" required />
-            <Field label="Email Address" type="email" id="contact-email" name="email" required />
-          </div>
-          <Field label="Phone Number" type="tel" id="contact-phone" name="phone" required />
-          <div>
-            <label
-              htmlFor="contact-interest"
-              className="text-[0.7rem] tracking-[0.25em] uppercase text-cream/70"
-            >
-              Interest
-            </label>
-            <select
-              id="contact-interest"
-              name="interest"
-              value={interest}
-              onChange={handleInterestChange}
-              className="mt-2 w-full bg-transparent border-b border-cream/30 py-3 text-cream focus:border-gold focus:outline-none"
-            >
-              {[
-                "Yoga Classes",
-                "Wellness Therapy",
-                "Retreat",
-                "Certification Course",
-                "Online Sessions",
-                "Consultation",
-              ].map((o) => (
-                <option key={o} value={o} className="bg-emerald-deep">
-                  {o}
-                </option>
-              ))}
-            </select>
-          </div>
+        {/* 2 Green-coloured Boxes (Left: Contact Details & Connect, Right: Send an Enquiry Form) */}
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+          {/* Left Green Box: Contact Details & Connect */}
+          <div className="lg:col-span-5 bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_14px_40px_rgba(8,38,24,0.18)] text-cream flex flex-col justify-between space-y-8">
+            <div>
+              <h3 className="font-display text-2xl text-cream font-bold mb-2">Direct Contact</h3>
+              <div className="gold-divider mb-6" />
 
-          {subOptions[interest] && (
-            <div className="animate-fade-up">
-              <label
-                htmlFor="contact-specific"
-                className="text-[0.7rem] tracking-[0.25em] uppercase text-cream/70"
-              >
-                Specific{" "}
-                {interest
-                  .replace("Classes", "Class")
-                  .replace("Sessions", "Session")
-                  .replace("Course", "Course")}
-              </label>
-              <select
-                id="contact-specific"
-                name="specificInterest"
-                value={specificInterest}
-                onChange={(e) => setSpecificInterest(e.target.value)}
-                className="mt-2 w-full bg-transparent border-b border-cream/30 py-3 text-cream focus:border-gold focus:outline-none"
-              >
-                {subOptions[interest].map((o) => (
-                  <option
-                    key={o}
-                    value={o === subOptions[interest][0] ? "" : o}
-                    className="bg-emerald-deep"
-                  >
-                    {o}
-                  </option>
+              {/* Contact Details */}
+              <div className="space-y-5">
+                {[
+                  { Icon: Phone, label: "Phone", value: "+91 8778639989", href: "tel:+918778639989" },
+                  {
+                    Icon: Mail,
+                    label: "Email",
+                    value: "drvikramyogawellness@gmail.com",
+                    href: "mailto:drvikramyogawellness@gmail.com",
+                  },
+                  {
+                    Icon: MapPin,
+                    label: "Address",
+                    value: "Dr. Vikram Yoga & Wellness Centre, N Cliff Rd, Varkala, Kerala 695141",
+                    href: "https://maps.google.com/?q=Dr.+Vikram+Yoga+%26+Wellness+Centre,+N+Cliff+Rd,+Varkala,+Kerala+695141",
+                  },
+                  {
+                    Icon: Clock,
+                    label: "Hours",
+                    value: "Mon–Sat: 6am – 8pm  |  Sun: 6am – 8pm",
+                    href: null,
+                  },
+                  {
+                    Icon: Globe,
+                    label: "Website",
+                    value: "www.drvikramyogawellness.com",
+                    href: "https://www.drvikramyogawellness.com/",
+                  },
+                ].map(({ Icon, label, value, href }) => (
+                  <div key={label} className="flex items-start gap-4 min-w-0">
+                    <div className="w-11 h-11 rounded-2xl bg-white/5 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                      <Icon className="w-4 h-4 text-gold" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[0.68rem] tracking-[0.2em] uppercase text-gold font-bold mb-1">
+                        {label}
+                      </div>
+                      {href ? (
+                        <a
+                          href={href}
+                          className="text-cream/90 hover:text-gold transition-colors break-words text-sm sm:text-base block font-medium"
+                          target={href.startsWith("http") ? "_blank" : undefined}
+                          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                        >
+                          {value}
+                        </a>
+                      ) : (
+                        <span className="text-cream/90 break-words text-sm sm:text-base block font-medium">
+                          {value}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 ))}
-              </select>
+              </div>
             </div>
-          )}
 
-          <div>
-            <label
-              htmlFor="contact-message"
-              className="text-[0.7rem] tracking-[0.25em] uppercase text-cream/70"
-            >
-              Message
-            </label>
-            <textarea
-              id="contact-message"
-              name="message"
-              rows={5}
-              required
-              className="mt-2 w-full bg-transparent border-b border-cream/30 py-3 text-cream placeholder:text-cream/40 focus:border-gold focus:outline-none resize-none"
-              placeholder="Tell us about your wellness goals..."
-            />
+            {/* Social Links & WhatsApp Button */}
+            <div className="pt-6 border-t border-cream/10 space-y-6">
+              <div>
+                <div className="text-[0.68rem] tracking-[0.2em] uppercase text-gold font-bold mb-2">
+                  Follow Us
+                </div>
+                <p className="text-xs sm:text-sm text-cream/70 font-semibold leading-relaxed mb-4">
+                  Follow us on Instagram for wellness tips, yoga inspiration, healing practices, and retreat updates.
+                </p>
+                <div className="flex gap-3">
+                  {[
+                    { Icon: Instagram, href: "https://www.instagram.com/dr.vikram_yoga_wellness?stkn=MTQ0YnhucG94cXJ1Nw==", label: "Instagram" },
+                    { Icon: Facebook, href: "#", label: "Facebook" },
+                    { Icon: Youtube, href: "#", label: "YouTube" },
+                    { Icon: MessageCircle, href: "https://wa.me/918778639989", label: "WhatsApp" },
+                  ].map(({ Icon, href, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-xl bg-white/5 border border-gold/20 flex items-center justify-center hover:bg-gold-gradient hover:text-emerald-deep text-gold transition-all duration-300 shadow-sm"
+                    >
+                      <Icon className="w-4 h-4" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <a
+                  href="https://wa.me/918778639989"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-3 w-full px-6 py-3.5 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-[0.15em] uppercase shadow-soft hover:scale-[1.02] transition-transform"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+              </div>
+            </div>
           </div>
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full px-7 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.25em] uppercase shadow-gold hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+
+          {/* Right Green Box: Enquiry Form */}
+          <form
+            id="contact-form"
+            onSubmit={handleSubmit}
+            className="lg:col-span-7 bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_14px_40px_rgba(8,38,24,0.18)] text-cream space-y-5 flex flex-col justify-between"
           >
-            {isSubmitting ? "Sending..." : "Send Enquiry"} <ArrowRight className="w-4 h-4" />
-          </button>
-        </form>
+            <div>
+              <h3 className="font-display text-2xl text-cream font-bold mb-2">Send an Enquiry</h3>
+              <div className="gold-divider mb-6" />
+
+              <div className="grid sm:grid-cols-2 gap-5">
+                <Field label="Full Name" type="text" id="contact-name" name="name" required />
+                <Field label="Email Address" type="email" id="contact-email" name="email" required />
+              </div>
+
+              <div className="mt-5">
+                <Field label="Phone Number" type="tel" id="contact-phone" name="phone" required />
+              </div>
+
+              <div className="mt-5">
+                <label
+                  htmlFor="contact-interest"
+                  className="text-[0.7rem] tracking-[0.25em] uppercase text-cream/70 font-semibold"
+                >
+                  Interest
+                </label>
+                <select
+                  id="contact-interest"
+                  name="interest"
+                  value={interest}
+                  onChange={handleInterestChange}
+                  className="mt-2 w-full bg-[#061f14] border-b border-cream/30 py-3 px-3 text-cream focus:border-gold focus:outline-none rounded-t"
+                >
+                  {[
+                    "Yoga Classes",
+                    "Wellness Therapy",
+                    "Retreat",
+                    "Certification Course",
+                    "Online Sessions",
+                    "Consultation",
+                  ].map((o) => (
+                    <option key={o} value={o} className="bg-[#082618] text-cream">
+                      {o}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {subOptions[interest] && (
+                <div className="mt-5 animate-fade-up">
+                  <label
+                    htmlFor="contact-specific"
+                    className="text-[0.7rem] tracking-[0.25em] uppercase text-cream/70 font-semibold"
+                  >
+                    Specific{" "}
+                    {interest
+                      .replace("Classes", "Class")
+                      .replace("Sessions", "Session")
+                      .replace("Course", "Course")}
+                  </label>
+                  <select
+                    id="contact-specific"
+                    name="specificInterest"
+                    value={specificInterest}
+                    onChange={(e) => setSpecificInterest(e.target.value)}
+                    className="mt-2 w-full bg-[#061f14] border-b border-cream/30 py-3 px-3 text-cream focus:border-gold focus:outline-none rounded-t"
+                  >
+                    {subOptions[interest].map((o) => (
+                      <option
+                        key={o}
+                        value={o === subOptions[interest][0] ? "" : o}
+                        className="bg-[#082618] text-cream"
+                      >
+                        {o}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              <div className="mt-5">
+                <label
+                  htmlFor="contact-message"
+                  className="text-[0.7rem] tracking-[0.25em] uppercase text-cream/70 font-semibold"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={5}
+                  required
+                  className="mt-2 w-full bg-[#061f14] border-b border-cream/30 py-3 px-3 text-cream placeholder:text-cream/40 focus:border-gold focus:outline-none resize-none rounded-t"
+                  placeholder="Tell us about your wellness goals..."
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full mt-6 px-7 py-4 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-[0.25em] uppercase shadow-gold hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            >
+              {isSubmitting ? "Sending..." : "Send Enquiry"} <ArrowRight className="w-4 h-4" />
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );

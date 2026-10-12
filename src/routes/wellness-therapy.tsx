@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import therapy from "@/assets/therapy.jpg";
 import { Hand, Wind, Mountain, Leaf, Sun, Flower2, ArrowRight } from "lucide-react";
-import { Navbar, Footer, WhatsAppFloat, PageHero } from "./about";
+import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
 
 export const Route = createFileRoute("/wellness-therapy")({
   component: WellnessTherapyPage,
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/wellness-therapy")({
 
 function WellnessTherapyPage() {
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden bg-[#faeee2]">
       <Navbar />
       <PageHero
         title="Wellness Therapy"
@@ -30,6 +30,7 @@ function WellnessTherapyPage() {
       <TherapyCTA />
       <Footer />
       <WhatsAppFloat />
+      <BookNowFloat />
     </main>
   );
 }
@@ -85,18 +86,18 @@ function TherapiesGrid() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center py-28 bg-cream overflow-hidden">
-      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-emerald-deep/5 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3" />
+    <section className="relative min-h-screen flex items-center py-28 bg-[#faeee2] overflow-hidden">
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-emerald">
+          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-[#a06d1c] uppercase font-bold">
             THERAPEUTIC TREATMENTS
           </span>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep leading-tight">
+          <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep leading-tight font-bold">
             Comprehensive <em className="text-gold-gradient not-italic">Healing Modalities</em>
           </h2>
           <div className="gold-divider mt-8 max-w-xs mx-auto" />
-          <p className="mt-6 text-muted-foreground leading-relaxed">
+          <p className="mt-6 text-[#243e31] leading-relaxed font-semibold">
             Each treatment is delivered by certified therapists in serene private rooms, combining
             classical techniques with our signature standard of care for optimal recovery.
           </p>
@@ -106,15 +107,15 @@ function TherapiesGrid() {
           {items.map(({ icon: Icon, t, d }) => (
             <div
               key={t}
-              className="group relative overflow-hidden rounded-2xl bg-card border border-border p-8 shadow-soft hover:shadow-luxury transition-all duration-500 hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-2xl bg-white/90 border border-gold/20 p-8 shadow-soft hover:shadow-luxury transition-all duration-500 hover:-translate-y-1"
             >
               <div className="absolute -top-12 -right-12 w-40 h-40 bg-gold/10 rounded-full blur-2xl group-hover:bg-gold/20 transition-colors" />
               <Icon className="w-10 h-10 text-emerald relative" strokeWidth={1.2} />
-              <h3 className="mt-6 font-display text-2xl text-emerald-deep">{t}</h3>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d}</p>
+              <h3 className="mt-6 font-display text-2xl text-emerald-deep font-bold">{t}</h3>
+              <p className="mt-3 text-sm text-[#3c5245] leading-relaxed font-medium">{d}</p>
               <a
                 href={`/apply?category=Wellness-Therapies&course=${encodeURIComponent(t)}`}
-                className="mt-6 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-emerald hover:text-gold transition-colors"
+                className="mt-6 inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-emerald hover:text-gold font-bold transition-colors"
               >
                 Book Session <ArrowRight className="w-3.5 h-3.5" />
               </a>
@@ -128,34 +129,38 @@ function TherapiesGrid() {
 
 function TherapyCTA() {
   return (
-    <section className="min-h-screen flex items-center py-20 bg-emerald-gradient text-cream">
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold">
-          CONSULTATION
-        </span>
-        <h2 className="mt-4 font-display text-3xl md:text-5xl leading-tight text-balance">
-          Not sure which therapy is right for you?
-        </h2>
-        <p className="mt-6 text-cream/70 leading-relaxed text-sm md:text-base max-w-2xl mx-auto">
-          We offer personalized wellness guidance. Contact us to discuss your goals, health
-          conditions, or any discomfort you're experiencing, and we will tailor a treatment plan
-          specifically for you.
-        </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <a
-            href="/apply?category=Wellness-Therapies"
-            className="px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform"
-          >
-            Book a Consultation
-          </a>
-          <a
-            href="https://wa.me/918778639989"
-            target="_blank"
-            rel="noreferrer"
-            className="px-8 py-4 rounded-full glass border border-gold/30 text-gold text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors"
-          >
-            Ask on WhatsApp
-          </a>
+    <section className="py-24 bg-[#faeee2] text-cream">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-8 sm:p-12 md:p-16 shadow-[0_14px_40px_rgba(8,38,24,0.18)] text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-gold/5 blur-3xl rounded-full pointer-events-none" />
+          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold uppercase block font-bold">
+            CONSULTATION
+          </span>
+          <h2 className="mt-4 font-display text-3xl md:text-5xl leading-tight text-balance font-bold text-cream">
+            Not sure which therapy is right for you?
+          </h2>
+          <div className="gold-divider mt-6 mb-6 mx-auto max-w-xs" />
+          <p className="text-cream/80 leading-relaxed text-sm md:text-base max-w-2xl mx-auto font-medium">
+            We offer personalized wellness guidance. Contact us to discuss your goals, health
+            conditions, or any discomfort you're experiencing, and we will tailor a treatment plan
+            specifically for you.
+          </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <a
+              href="/apply?category=Wellness-Therapies"
+              className="px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform font-bold"
+            >
+              Book a Consultation
+            </a>
+            <a
+              href="https://wa.me/918778639989"
+              target="_blank"
+              rel="noreferrer"
+              className="px-8 py-4 rounded-full glass border border-gold/30 text-gold text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors font-bold"
+            >
+              Ask on WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </section>

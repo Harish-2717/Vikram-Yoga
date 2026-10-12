@@ -160,11 +160,11 @@ function FeedbackFloat() {
       <button
         onClick={() => setIsOpen(true)}
         aria-label="Share Feedback"
-        className="fixed bottom-[5.5rem] right-[1.75rem] z-50 w-12 h-12 rounded-full bg-gold-gradient flex items-center justify-center text-emerald-deep shadow-gold hover:-translate-y-1 hover:scale-105 transition-all border border-gold/30 animate-fade-up group"
+        className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 z-50 w-12 h-12 rounded-full bg-gold-gradient flex items-center justify-center text-emerald-deep shadow-gold hover:-translate-y-1 hover:scale-105 transition-all border border-gold/30 animate-fade-up group"
       >
         <MessageSquarePlus className="w-5 h-5 group-hover:rotate-12 transition-transform" />
         {/* Floating tooltip label */}
-        <span className="absolute right-14 scale-0 group-hover:scale-100 origin-right transition-all duration-200 bg-[#0c1c14] text-cream text-[0.6rem] tracking-widest uppercase font-semibold px-3 py-1.5 rounded-full shadow-soft whitespace-nowrap border border-gold/20">
+        <span className="hidden sm:block absolute right-14 scale-0 group-hover:scale-100 origin-right transition-all duration-200 bg-[#0c1c14] text-cream text-[0.6rem] tracking-widest uppercase font-semibold px-3 py-1.5 rounded-full shadow-soft whitespace-nowrap border border-gold/20 pointer-events-none">
           Share Review
         </span>
       </button>

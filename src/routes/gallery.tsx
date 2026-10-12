@@ -11,7 +11,7 @@ import {
   BedDouble,
 } from "lucide-react";
 
-import { Navbar, Footer, WhatsAppFloat } from "./about";
+import { Navbar, Footer, WhatsAppFloat, BookNowFloat } from "./about";
 import { getApiUrl, resolveImageUrl } from "@/lib/utils";
 
 // ── Hero & Banner Assets ──────────────────────────────────────────────────────
@@ -41,16 +41,16 @@ import yoga10 from "@/assets/New/IMG_20250520_124838.jpg.jpeg";
 import yoga11 from "@/assets/New/IMG_20250520_130020.jpg.jpeg";
 
 // ── Category 3: Wellness & Therapies ──────────────────────────────────────────
-import therapy1 from "@/assets/images/Traditional Ayurvedic Massage.jpeg";
+import therapy1 from "@/assets/New folder/Ayurvedic massage courses.png";
 import therapy2 from "@/assets/images/acupuncture.jpeg";
-import therapy3 from "@/assets/images/ayurvedic.jpg";
+import therapy3 from "@/assets/New folder/Ayurvedic massage courses.png";
 import therapy4 from "@/assets/images/cupping.jpg";
-import therapy5 from "@/assets/images/deep-tissue.jpeg";
+import therapy5 from "@/assets/New folder/Deep tissue massage courses.png";
 import therapy6 from "@/assets/images/dorn-therapy.jpg";
 import therapy7 from "@/assets/images/shiatsu.jpeg";
-import therapy8 from "@/assets/images/reflexology.jpg";
+import therapy8 from "@/assets/New folder/Reflexology course.png";
 import therapy9 from "@/assets/images/swedish-massage.jpeg";
-import therapy10 from "@/assets/images/thai-massage.jpeg";
+import therapy10 from "@/assets/New folder/Thai yoga massage courses.png";
 import therapy11 from "@/assets/images/extra-gallery-1.jpeg";
 import therapy12 from "@/assets/images/extra-gallery-2.jpeg";
 import therapy13 from "@/assets/images/extra-gallery-3.jpeg";
@@ -294,6 +294,7 @@ function GalleryPage() {
 
       <Footer />
       <WhatsAppFloat />
+      <BookNowFloat />
 
       {lightbox && (
         <Lightbox

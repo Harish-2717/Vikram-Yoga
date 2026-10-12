@@ -30,10 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle File Upload
         $filePath = '';
         if (isset($_FILES['proof']) && $_FILES['proof']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = __DIR__ . '/../public/uploads';
-            if (!file_exists($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
-            }
+            $uploadDir = getUploadDir();
             
             // Clean filename to match Node regex replace(/[^a-zA-Z0-9.-]/g, "_")
             $originalName = $_FILES['proof']['name'];

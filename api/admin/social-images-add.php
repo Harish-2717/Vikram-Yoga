@@ -12,10 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             sendJson(["success" => false, "error" => "Image file is required"], 400);
         }
 
-        $uploadDir = __DIR__ . '/../../public/uploads';
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
+        $uploadDir = getUploadDir();
 
         $originalName = $_FILES['image']['name'];
         $cleanName = preg_replace('/[^a-zA-Z0-9.-]/', '_', $originalName);

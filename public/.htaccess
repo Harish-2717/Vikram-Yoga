@@ -1,6 +1,10 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+  # Support legacy or cached requests pointing to /public/uploads or /public/gallery
+  RewriteRule ^public/uploads/(.*)$ uploads/$1 [L,NC]
+  RewriteRule ^public/gallery/(.*)$ gallery/$1 [L,NC]
+
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
