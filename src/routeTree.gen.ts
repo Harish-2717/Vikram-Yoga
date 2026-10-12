@@ -14,7 +14,6 @@ import { Route as WellnessTherapyRouteImport } from './routes/wellness-therapy'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RetreatsRouteImport } from './routes/retreats'
-import { Route as RetreatApplyRouteImport } from './routes/retreat-apply'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -28,8 +27,6 @@ import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminTestimonialsRouteImport } from './routes/admin/testimonials'
 import { Route as AdminSocialMediaRouteImport } from './routes/admin/social-media'
 import { Route as AdminServiceImagesRouteImport } from './routes/admin/service-images'
-import { Route as AdminRetreatProgramsRouteImport } from './routes/admin/retreat-programs'
-import { Route as AdminRetreatApplicationsRouteImport } from './routes/admin/retreat-applications'
 import { Route as AdminPaymentsRouteImport } from './routes/admin/payments'
 import { Route as AdminGalleryRouteImport } from './routes/admin/gallery'
 import { Route as AdminContactMessagesRouteImport } from './routes/admin/contact-messages'
@@ -58,11 +55,6 @@ const ServicesRoute = ServicesRouteImport.update({
 const RetreatsRoute = RetreatsRouteImport.update({
   id: '/retreats',
   path: '/retreats',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RetreatApplyRoute = RetreatApplyRouteImport.update({
-  id: '/retreat-apply',
-  path: '/retreat-apply',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaymentRoute = PaymentRouteImport.update({
@@ -130,17 +122,6 @@ const AdminServiceImagesRoute = AdminServiceImagesRouteImport.update({
   path: '/service-images',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminRetreatProgramsRoute = AdminRetreatProgramsRouteImport.update({
-  id: '/retreat-programs',
-  path: '/retreat-programs',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminRetreatApplicationsRoute =
-  AdminRetreatApplicationsRouteImport.update({
-    id: '/retreat-applications',
-    path: '/retreat-applications',
-    getParentRoute: () => AdminRoute,
-  } as any)
 const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
   id: '/payments',
   path: '/payments',
@@ -172,7 +153,6 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/payment': typeof PaymentRoute
-  '/retreat-apply': typeof RetreatApplyRoute
   '/retreats': typeof RetreatsRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -182,8 +162,6 @@ export interface FileRoutesByFullPath {
   '/admin/contact-messages': typeof AdminContactMessagesRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/payments': typeof AdminPaymentsRoute
-  '/admin/retreat-applications': typeof AdminRetreatApplicationsRoute
-  '/admin/retreat-programs': typeof AdminRetreatProgramsRoute
   '/admin/service-images': typeof AdminServiceImagesRoute
   '/admin/social-media': typeof AdminSocialMediaRoute
   '/admin/testimonials': typeof AdminTestimonialsRoute
@@ -198,7 +176,6 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/payment': typeof PaymentRoute
-  '/retreat-apply': typeof RetreatApplyRoute
   '/retreats': typeof RetreatsRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -208,8 +185,6 @@ export interface FileRoutesByTo {
   '/admin/contact-messages': typeof AdminContactMessagesRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/payments': typeof AdminPaymentsRoute
-  '/admin/retreat-applications': typeof AdminRetreatApplicationsRoute
-  '/admin/retreat-programs': typeof AdminRetreatProgramsRoute
   '/admin/service-images': typeof AdminServiceImagesRoute
   '/admin/social-media': typeof AdminSocialMediaRoute
   '/admin/testimonials': typeof AdminTestimonialsRoute
@@ -226,7 +201,6 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/payment': typeof PaymentRoute
-  '/retreat-apply': typeof RetreatApplyRoute
   '/retreats': typeof RetreatsRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -236,8 +210,6 @@ export interface FileRoutesById {
   '/admin/contact-messages': typeof AdminContactMessagesRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/payments': typeof AdminPaymentsRoute
-  '/admin/retreat-applications': typeof AdminRetreatApplicationsRoute
-  '/admin/retreat-programs': typeof AdminRetreatProgramsRoute
   '/admin/service-images': typeof AdminServiceImagesRoute
   '/admin/social-media': typeof AdminSocialMediaRoute
   '/admin/testimonials': typeof AdminTestimonialsRoute
@@ -255,7 +227,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/gallery'
     | '/payment'
-    | '/retreat-apply'
     | '/retreats'
     | '/services'
     | '/terms-and-conditions'
@@ -265,8 +236,6 @@ export interface FileRouteTypes {
     | '/admin/contact-messages'
     | '/admin/gallery'
     | '/admin/payments'
-    | '/admin/retreat-applications'
-    | '/admin/retreat-programs'
     | '/admin/service-images'
     | '/admin/social-media'
     | '/admin/testimonials'
@@ -281,7 +250,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/gallery'
     | '/payment'
-    | '/retreat-apply'
     | '/retreats'
     | '/services'
     | '/terms-and-conditions'
@@ -291,8 +259,6 @@ export interface FileRouteTypes {
     | '/admin/contact-messages'
     | '/admin/gallery'
     | '/admin/payments'
-    | '/admin/retreat-applications'
-    | '/admin/retreat-programs'
     | '/admin/service-images'
     | '/admin/social-media'
     | '/admin/testimonials'
@@ -308,7 +274,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/gallery'
     | '/payment'
-    | '/retreat-apply'
     | '/retreats'
     | '/services'
     | '/terms-and-conditions'
@@ -318,8 +283,6 @@ export interface FileRouteTypes {
     | '/admin/contact-messages'
     | '/admin/gallery'
     | '/admin/payments'
-    | '/admin/retreat-applications'
-    | '/admin/retreat-programs'
     | '/admin/service-images'
     | '/admin/social-media'
     | '/admin/testimonials'
@@ -336,7 +299,6 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   GalleryRoute: typeof GalleryRoute
   PaymentRoute: typeof PaymentRoute
-  RetreatApplyRoute: typeof RetreatApplyRoute
   RetreatsRoute: typeof RetreatsRoute
   ServicesRoute: typeof ServicesRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
@@ -379,13 +341,6 @@ declare module '@tanstack/react-router' {
       path: '/retreats'
       fullPath: '/retreats'
       preLoaderRoute: typeof RetreatsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/retreat-apply': {
-      id: '/retreat-apply'
-      path: '/retreat-apply'
-      fullPath: '/retreat-apply'
-      preLoaderRoute: typeof RetreatApplyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/payment': {
@@ -479,20 +434,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminServiceImagesRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/retreat-programs': {
-      id: '/admin/retreat-programs'
-      path: '/retreat-programs'
-      fullPath: '/admin/retreat-programs'
-      preLoaderRoute: typeof AdminRetreatProgramsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/retreat-applications': {
-      id: '/admin/retreat-applications'
-      path: '/retreat-applications'
-      fullPath: '/admin/retreat-applications'
-      preLoaderRoute: typeof AdminRetreatApplicationsRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/admin/payments': {
       id: '/admin/payments'
       path: '/payments'
@@ -529,8 +470,6 @@ interface AdminRouteChildren {
   AdminContactMessagesRoute: typeof AdminContactMessagesRoute
   AdminGalleryRoute: typeof AdminGalleryRoute
   AdminPaymentsRoute: typeof AdminPaymentsRoute
-  AdminRetreatApplicationsRoute: typeof AdminRetreatApplicationsRoute
-  AdminRetreatProgramsRoute: typeof AdminRetreatProgramsRoute
   AdminServiceImagesRoute: typeof AdminServiceImagesRoute
   AdminSocialMediaRoute: typeof AdminSocialMediaRoute
   AdminTestimonialsRoute: typeof AdminTestimonialsRoute
@@ -542,8 +481,6 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminContactMessagesRoute: AdminContactMessagesRoute,
   AdminGalleryRoute: AdminGalleryRoute,
   AdminPaymentsRoute: AdminPaymentsRoute,
-  AdminRetreatApplicationsRoute: AdminRetreatApplicationsRoute,
-  AdminRetreatProgramsRoute: AdminRetreatProgramsRoute,
   AdminServiceImagesRoute: AdminServiceImagesRoute,
   AdminSocialMediaRoute: AdminSocialMediaRoute,
   AdminTestimonialsRoute: AdminTestimonialsRoute,
@@ -562,7 +499,6 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   GalleryRoute: GalleryRoute,
   PaymentRoute: PaymentRoute,
-  RetreatApplyRoute: RetreatApplyRoute,
   RetreatsRoute: RetreatsRoute,
   ServicesRoute: ServicesRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,

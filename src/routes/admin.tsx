@@ -17,8 +17,6 @@ import {
   User as UserIcon,
   MessageSquare,
   Layers,
-  Sparkles,
-  CalendarCheck,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
@@ -216,12 +214,10 @@ function AdminLayout() {
   // RENDER ADMIN INTERFACE IF AUTHENTICATED
   const sidebarLinks = [
     { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/admin/retreat-applications", label: "Retreat Applications", icon: CalendarCheck },
-    { to: "/admin/retreat-programs", label: "Retreat Programs", icon: Sparkles },
-    { to: "/admin/applications", label: "Course Applications", icon: FileSpreadsheet },
     { to: "/admin/gallery", label: "Gallery Images", icon: ImagesIcon },
     { to: "/admin/service-images", label: "Service Images", icon: Layers },
     { to: "/admin/social-media", label: "Social Media Images", icon: ImageIcon },
+    { to: "/admin/applications", label: "Applications", icon: FileSpreadsheet },
     { to: "/admin/payments", label: "Payment Verification", icon: CreditCard },
     { to: "/admin/contact-messages", label: "Contact Messages", icon: Mail },
     { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
