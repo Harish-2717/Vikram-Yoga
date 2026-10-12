@@ -409,38 +409,41 @@ function Hero() {
               Dr. Vikram
             </h1>
 
-            {/* Headline 2: Yoga & Wellness Centre */}
+            {/* Headline 2: Yoga & Wellness Centre (Bold, elegant green) */}
             <p
-              className="font-display italic text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] xl:text-[3.5rem] font-extrabold tracking-normal mt-0.5 sm:mt-1 text-[#ba8336]"
+              className="font-display italic text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] xl:text-[3.5rem] font-extrabold tracking-normal mt-0.5 sm:mt-1 text-[#083d25]"
               style={{
                 fontWeight: 800,
-                textShadow: "0 1px 2px rgba(255, 255, 255, 0.7)",
+                textShadow: "0 1px 3px rgba(255, 255, 255, 0.9), 0 0 16px rgba(255, 255, 255, 0.75)",
               }}
             >
               Yoga &amp; Wellness Centre
             </p>
 
-            {/* Tagline */}
+            {/* Tagline (Bold, clean white text for strong contrast) */}
             <p
-              className="font-display text-xs sm:text-sm md:text-base lg:text-[1.05rem] xl:text-[1.15rem] font-bold text-[#083d25] tracking-normal sm:tracking-wide mt-2 sm:mt-2.5 px-2 max-w-3xl xl:max-w-4xl leading-relaxed whitespace-normal sm:whitespace-nowrap"
+              className="font-display text-xs sm:text-sm md:text-base lg:text-[1.05rem] xl:text-[1.15rem] font-bold text-white tracking-normal sm:tracking-wide mt-2 sm:mt-2.5 px-2 max-w-3xl xl:max-w-4xl leading-relaxed whitespace-normal sm:whitespace-nowrap"
               style={{
                 fontWeight: 700,
-                textShadow: "0 1px 2px rgba(255, 255, 255, 0.7)",
+                textShadow: "0 2px 8px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.75)",
               }}
             >
-              Holistic Healing &bull; Therapeutic Wellness &bull; Transformative Retreat Experiences
+              Holistic Healing <span className="text-[#deb05e] mx-1 sm:mx-1.5 font-bold">&bull;</span> Therapeutic Wellness <span className="text-[#deb05e] mx-1 sm:mx-1.5 font-bold">&bull;</span> Transformative Retreat Experiences
             </p>
 
-            {/* Divider: HEAL • HARMONIZE • TRANSFORM */}
+            {/* Divider: HEAL • HARMONIZE • TRANSFORM (Rich golden color) */}
             <div className="flex items-center justify-center gap-3 sm:gap-4 w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-3 sm:my-3.5 px-2">
-              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-r from-transparent via-[#ba8336] to-[#ba8336]" />
+              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-r from-transparent via-[#deb05e] to-[#deb05e]" />
               <span
-                className="font-display text-[0.7rem] sm:text-[0.78rem] md:text-[0.88rem] tracking-[0.22em] uppercase text-[#083d25] font-extrabold text-center shrink-0 whitespace-nowrap"
-                style={{ fontWeight: 800 }}
+                className="font-display text-[0.72rem] sm:text-[0.8rem] md:text-[0.9rem] tracking-[0.24em] uppercase text-[#deb05e] font-extrabold text-center shrink-0 whitespace-nowrap"
+                style={{
+                  fontWeight: 800,
+                  textShadow: "0 2px 8px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.75)",
+                }}
               >
-                HEAL <span className="text-[#ba8336] mx-1 sm:mx-1.5 font-black">&bull;</span> HARMONIZE <span className="text-[#ba8336] mx-1 sm:mx-1.5 font-black">&bull;</span> TRANSFORM
+                HEAL <span className="text-white mx-1 sm:mx-1.5 font-black">&bull;</span> HARMONIZE <span className="text-white mx-1 sm:mx-1.5 font-black">&bull;</span> TRANSFORM
               </span>
-              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-l from-transparent via-[#ba8336] to-[#ba8336]" />
+              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-l from-transparent via-[#deb05e] to-[#deb05e]" />
             </div>
 
             {/* 4 Action Pill Buttons in 2x2 Grid */}
