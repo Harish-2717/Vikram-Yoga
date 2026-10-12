@@ -97,6 +97,8 @@ import {
   X,
   Info,
   CheckCircle2,
+  Palmtree,
+  Stethoscope,
 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat } from "./about";
 import { getApiUrl, resolveImageUrl } from "@/lib/utils";
@@ -346,138 +348,164 @@ function GoldenLotusEmblem({ className = "w-10 h-7" }: { className?: string }) {
   );
 }
 
+/* ---------------- Meditating Silhouette Icon for Join Our Classes ---------------- */
+function MeditatingSilhouetteIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Head */}
+      <circle cx="12" cy="4" r="2" />
+      {/* Torso & arms resting on crossed knees in Padmasana */}
+      <path d="M12 7c-1.5 0-2.8.8-3.4 2.1l-2.1 4.2c-.2.4 0 .9.4 1.1.4.2.9 0 1.1-.4l1.6-3.2v3.7l-3 1.5c-.4.2-.6.7-.4 1.1.2.4.7.6 1.1.4l2.5-1.2c.6-.3 1.3-.5 2.2-.5s1.6.2 2.2.5l2.5 1.2c.4.2.9 0 1.1-.4.2-.4 0-.9-.4-1.1l-3-1.5V10.8l1.6 3.2c.2.4.7.6 1.1.4.4-.2.6-.7.4-1.1l-2.1-4.2C14.8 7.8 13.5 7 12 7z" />
+    </svg>
+  );
+}
+
 /* ---------------- Hero ---------------- */
 function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen min-h-[100dvh] w-full flex items-center justify-center pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 overflow-hidden bg-[#eef3f0]"
+      className="relative min-h-screen min-h-[100dvh] w-full flex items-center justify-center pt-24 sm:pt-28 lg:pt-20 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#eef3f0]"
     >
-      {/* Background image */}
+      {/* Background image — panoramic coastal yoga vista matching reference image */}
       <img
         src={hero}
-        alt="Dr. Vikram Yoga & Wellness Centre overlooking the ocean"
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        alt="Dr. Vikram Yoga &amp; Wellness Centre overlooking the ocean"
+        className="absolute inset-0 w-full h-full object-cover object-[18%_center] sm:object-[22%_center] lg:object-[26%_center] 2xl:object-center select-none pointer-events-none"
         width={1920}
         height={1080}
       />
 
-      {/* Main Centered Content */}
-      <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center justify-center my-auto animate-fade-up">
-        {/* Logo Crest */}
-        <div className="mb-2 sm:mb-3 flex justify-center">
-          <img
-            src={logo}
-            alt="Dr Vikram crest"
-            className="h-20 sm:h-28 md:h-36 lg:h-44 w-auto animate-float drop-shadow-[0_0_25px_rgba(212,175,55,0.5)]"
-          />
-        </div>
+      {/* Main Content Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto py-8 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+          {/* Left Column Spacer: preserves unobstructed view of meditating figure on rocks on desktop */}
+          <div className="hidden lg:block lg:col-span-5 pointer-events-none" />
 
-        {/* Headline: Dr. Vikram */}
-        <h1
-          className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.75rem] font-bold text-emerald-deep tracking-tight leading-[1.05]"
-          style={{
-            textShadow:
-              "0 0 16px rgba(255,255,255,0.7), 0 0 35px rgba(255,255,255,0.4), 0 2px 10px rgba(0,0,0,0.25)",
-          }}
-        >
-          Dr. Vikram
-        </h1>
+          {/* Right Column: Hero Content Cluster precisely replicating reference design */}
+          <div className="lg:col-span-7 flex flex-col items-center text-center animate-fade-up">
+            {/* Logo just above the headline in the hero section */}
+            <div className="mb-2 sm:mb-3 flex justify-center">
+              <img
+                src={logo}
+                alt="Dr. Vikram Yoga & Wellness Centre"
+                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:scale-105 transition-transform duration-300"
+              />
+            </div>
 
-        {/* Subheadline: Yoga & Wellness Centre — bright gold with subtle 3D depth */}
-        <p className="font-display italic text-2xl sm:text-4xl md:text-5xl lg:text-7xl mt-1 sm:mt-2 mb-2 sm:mb-3 font-bold tracking-wide transform md:translate-x-3 lg:translate-x-5">
-          <span
-            style={{
-              background: "linear-gradient(160deg, #fff0a0 0%, #ffd43b 30%, #ffb700 60%, #e89000 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              filter:
-                "drop-shadow(1px 1px 0px rgba(160,90,0,0.9)) " +
-                "drop-shadow(2px 2px 0px rgba(120,60,0,0.7)) " +
-                "drop-shadow(3px 3px 0px rgba(80,40,0,0.45)) " +
-                "drop-shadow(0 0 20px rgba(255,180,0,0.65)) " +
-                "drop-shadow(0 6px 20px rgba(0,0,0,0.75))",
-            }}
-          >
-            Yoga &amp; Wellness Centre
-          </span>
-        </p>
-
-        {/* Tagline */}
-        <p
-          className="text-cream font-semibold text-sm sm:text-base md:text-lg lg:text-xl tracking-wide max-w-3xl mx-auto mb-3 sm:mb-4 leading-relaxed px-2"
-          style={{
-            textShadow:
-              "0 0 8px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.55), 0 0 40px rgba(255,255,255,0.2), 0 2px 12px rgba(0,0,0,0.9)",
-          }}
-        >
-          Holistic Healing • Therapeutic Wellness • Transformative Retreat Experiences
-        </p>
-
-        {/* Motto / Horizontal Lines Divider */}
-        <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-5 w-full max-w-2xl sm:max-w-3xl mx-auto mb-4 sm:mb-5 px-3">
-          <span className="h-[2px] flex-1 min-w-[16px] sm:min-w-[36px] md:min-w-[50px] bg-gradient-to-r from-transparent via-[#ffd043]/80 to-[#ffd043] drop-shadow-sm" />
-          <span
-            className="font-serif-display text-[0.78rem] sm:text-[0.92rem] md:text-[1.05rem] tracking-[0.14em] sm:tracking-[0.2em] md:tracking-[0.26em] uppercase text-[#ffd043] font-black text-center shrink-0 whitespace-nowrap"
-            style={{
-              fontWeight: 900,
-              WebkitTextStroke: "0.55px #ffd043",
-              textShadow:
-                "0 1px 2px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.9), 0 0 14px rgba(255,208,67,0.5), 0 0 2px rgba(0,0,0,0.8)",
-            }}
-          >
-            HEAL <span className="text-white mx-1 sm:mx-1.5 font-black">•</span> HARMONIZE <span className="text-white mx-1 sm:mx-1.5 font-black">•</span> TRANSFORM
-          </span>
-          <span className="h-[2px] flex-1 min-w-[16px] sm:min-w-[36px] md:min-w-[50px] bg-gradient-to-l from-transparent via-[#ffd043]/80 to-[#ffd043] drop-shadow-sm" />
-        </div>
-
-        {/* Action Buttons (2 Rows of Centered Buttons matching reference design) */}
-        <div className="flex flex-col items-center gap-2.5 sm:gap-3 w-full max-w-2xl mx-auto">
-          {/* Row 1: Primary Actions */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 w-full">
-            <Link
-              to="/yoga"
-              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#dfb055] hover:bg-[#d1a243] text-[#072c1c] font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-md hover:scale-[1.02] transition-all duration-300 min-w-0 sm:min-w-[210px] text-center inline-flex items-center justify-center gap-2"
+            {/* Headline 1: Dr. Vikram */}
+            <h1
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.25rem] font-bold text-[#083d25] tracking-tight leading-[1.05]"
+              style={{
+                textShadow: "0 1px 2px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.5)",
+              }}
             >
-              <span>JOIN OUR CLASSES</span>
-              <span className="font-bold text-base leading-none">&gt;</span>
-            </Link>
-            <Link
-              to="/retreats"
-              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-white/95 hover:bg-white text-[#072c1c] border-2 border-[#072c1c] font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-md hover:scale-[1.02] transition-all duration-300 min-w-0 sm:min-w-[210px] text-center inline-flex items-center justify-center gap-2"
+              Dr. Vikram
+            </h1>
+
+            {/* Headline 2: Yoga & Wellness Centre */}
+            <p
+              className="font-display italic text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] xl:text-[3.5rem] font-bold tracking-normal mt-0.5 sm:mt-1 text-[#ba8336]"
+              style={{
+                textShadow: "0 1px 2px rgba(255, 255, 255, 0.6)",
+              }}
             >
-              <span>EXPLORE RETREATS</span>
-              <span className="font-bold text-base leading-none">&gt;</span>
-            </Link>
+              Yoga &amp; Wellness Centre
+            </p>
+
+            {/* Tagline */}
+            <p
+              className="font-display text-xs sm:text-sm md:text-base lg:text-[1.05rem] xl:text-[1.12rem] font-semibold text-[#083d25] tracking-normal sm:tracking-wide mt-2 sm:mt-2.5 px-2 max-w-3xl xl:max-w-4xl leading-relaxed whitespace-normal sm:whitespace-nowrap"
+              style={{
+                textShadow: "0 1px 2px rgba(255, 255, 255, 0.7)",
+              }}
+            >
+              Holistic Healing &bull; Therapeutic Wellness &bull; Transformative Retreat Experiences
+            </p>
+
+            {/* Divider: HEAL • HARMONIZE • TRANSFORM */}
+            <div className="flex items-center justify-center gap-3 sm:gap-4 w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-3 sm:my-3.5 px-2">
+              <span className="h-[1.5px] flex-1 min-w-[20px] bg-gradient-to-r from-transparent via-[#ba8336]/70 to-[#ba8336]" />
+              <span className="font-display text-[0.68rem] sm:text-[0.76rem] md:text-[0.84rem] tracking-[0.22em] uppercase text-[#083d25] font-bold text-center shrink-0 whitespace-nowrap">
+                HEAL <span className="text-[#ba8336] mx-1 sm:mx-1.5">&bull;</span> HARMONIZE <span className="text-[#ba8336] mx-1 sm:mx-1.5">&bull;</span> TRANSFORM
+              </span>
+              <span className="h-[1.5px] flex-1 min-w-[20px] bg-gradient-to-l from-transparent via-[#ba8336]/70 to-[#ba8336]" />
+            </div>
+
+            {/* 4 Action Pill Buttons in 2x2 Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5 w-full max-w-md sm:max-w-xl lg:max-w-2xl mx-auto mt-1 sm:mt-1.5">
+              {/* Button 1: JOIN OUR CLASSES (Dark Green) */}
+              <Link
+                to="/yoga"
+                className="group flex items-center justify-between h-[48px] sm:h-[52px] lg:h-[54px] px-3 sm:px-3.5 rounded-full bg-[#063b21] hover:bg-[#042816] text-white shadow-[0_4px_14px_rgba(6,59,33,0.35)] hover:shadow-[0_6px_20px_rgba(6,59,33,0.45)] transition-all duration-300 hover:scale-[1.02] border border-[#0d4f2e]"
+              >
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#0b3821] border border-[#deb05e] flex items-center justify-center text-[#deb05e] shrink-0 shadow-inner">
+                    <MeditatingSilhouetteIcon className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                  </span>
+                  <span className="font-sans font-bold text-[0.72rem] sm:text-[0.78rem] lg:text-[0.82rem] tracking-wider uppercase text-white whitespace-nowrap">
+                    JOIN OUR CLASSES
+                  </span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#deb05e] shrink-0 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+
+              {/* Button 2: EXPLORE RETREATS (Warm Gold) */}
+              <Link
+                to="/retreats"
+                className="group flex items-center justify-between h-[48px] sm:h-[52px] lg:h-[54px] px-3 sm:px-3.5 rounded-full bg-[#deb05e] hover:bg-[#d4a34b] text-[#063b21] shadow-[0_4px_14px_rgba(222,176,94,0.35)] hover:shadow-[0_6px_20px_rgba(222,176,94,0.45)] transition-all duration-300 hover:scale-[1.02] border border-[#ecd299]"
+              >
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#cf9f47]/60 border border-[#ba8336] flex items-center justify-center text-[#063b21] shrink-0 shadow-inner">
+                    <Palmtree className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.2} />
+                  </span>
+                  <span className="font-sans font-bold text-[0.72rem] sm:text-[0.78rem] lg:text-[0.82rem] tracking-wider uppercase text-[#063b21] whitespace-nowrap">
+                    EXPLORE RETREATS
+                  </span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#063b21] shrink-0 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+
+              {/* Button 3: Book a Wellness Consultation (Ivory/White) */}
+              <Link
+                to="/wellness-therapy"
+                className="group flex items-center justify-between h-[48px] sm:h-[52px] lg:h-[54px] px-3 sm:px-3.5 rounded-full bg-white hover:bg-neutral-50 text-[#063b21] shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_18px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-[1.02] border border-[#d0dbd4]"
+              >
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#f0fdec] border border-[#d0dbd4] flex items-center justify-center text-[#063b21] shrink-0">
+                    <Stethoscope className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.2} />
+                  </span>
+                  <span className="font-sans font-semibold text-[0.72rem] sm:text-[0.78rem] lg:text-[0.82rem] text-[#063b21] whitespace-nowrap">
+                    Book a Wellness Consultation
+                  </span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#063b21] shrink-0 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+
+              {/* Button 4: Enroll In Certificate Courses (Ivory/White) */}
+              <Link
+                to="/certificate-courses"
+                className="group flex items-center justify-between h-[48px] sm:h-[52px] lg:h-[54px] px-3 sm:px-3.5 rounded-full bg-white hover:bg-neutral-50 text-[#063b21] shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_18px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-[1.02] border border-[#d0dbd4]"
+              >
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#f1fdf1] border border-[#d0dbd4] flex items-center justify-center text-[#063b21] shrink-0">
+                    <GraduationCap className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.2} />
+                  </span>
+                  <span className="font-sans font-semibold text-[0.72rem] sm:text-[0.78rem] lg:text-[0.82rem] text-[#063b21] whitespace-nowrap">
+                    Enroll In Certificate Courses
+                  </span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[#063b21] shrink-0 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
           </div>
-
-          {/* Row 2: Secondary Consultation & Enrollment Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 w-full">
-            <Link
-              to="/wellness-therapy"
-              className="w-full sm:w-auto px-5 sm:px-7 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#072c1c] border border-[#072c1c]/70 font-semibold text-xs sm:text-sm tracking-normal shadow-sm hover:scale-[1.02] transition-all duration-300 min-w-0 sm:min-w-[240px] text-center inline-flex items-center justify-center gap-2"
-            >
-              <Calendar className="w-4 h-4 text-[#072c1c] shrink-0" />
-              <span>Book a Wellness Consultation</span>
-            </Link>
-            <Link
-              to="/certificate-courses"
-              className="w-full sm:w-auto px-5 sm:px-7 py-2 sm:py-2.5 rounded-full bg-white/95 hover:bg-white text-[#072c1c] border border-[#072c1c]/70 font-semibold text-xs sm:text-sm tracking-normal shadow-sm hover:scale-[1.02] transition-all duration-300 min-w-0 sm:min-w-[240px] text-center inline-flex items-center justify-center gap-2"
-            >
-              <GraduationCap className="w-4 h-4 text-[#072c1c] shrink-0" />
-              <span>Enroll in Certificate Courses</span>
-            </Link>
-          </div>
         </div>
-      </div>
-
-      {/* Bottom Scroll Indicator */}
-      <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-0.5 text-[#072c1c]/80 hover:text-[#072c1c] transition-colors cursor-pointer drop-shadow-sm">
-        <span className="font-serif-display text-[0.55rem] sm:text-[0.6rem] tracking-[0.4em] uppercase font-bold text-[#072c1c]">
-          SCROLL
-        </span>
-        <ChevronDown className="w-3.5 h-3.5 animate-bounce text-[#072c1c]" />
       </div>
     </section>
   );
