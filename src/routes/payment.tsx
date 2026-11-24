@@ -138,12 +138,12 @@ function PaymentPage() {
       <Navbar />
       <div className="pt-32 pb-24 px-4 sm:px-6 max-w-4xl mx-auto">
         <h1 className="text-3xl text-center text-[#55b9b7] font-serif mb-10 tracking-wide">Payment</h1>
-               <div className="bg-white px-6 sm:px-10 py-10 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100">
+               <div className="bg-white px-4 sm:px-10 py-6 sm:py-10 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100">
 
           {/* Bank Details & UPI Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8">
             {/* Bank Details Card */}
-            <div className="bg-white p-7 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-green-900/10 relative overflow-hidden group hover:shadow-lg transition-shadow">
+            <div className="bg-white p-5 sm:p-7 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-green-900/10 relative overflow-hidden group hover:shadow-lg transition-shadow">
               <div className="absolute top-0 left-0 w-1.5 h-full bg-[#55b9b7]" />
               <div className="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
                 <div className="w-10 h-10 rounded-full bg-[#55b9b7]/10 flex items-center justify-center text-[#55b9b7]">
@@ -180,7 +180,7 @@ function PaymentPage() {
             </div>
 
             {/* UPI Card */}
-            <div className="bg-white p-7 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-green-900/10 relative overflow-hidden group hover:shadow-lg transition-shadow">
+            <div className="bg-white p-5 sm:p-7 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-green-900/10 relative overflow-hidden group hover:shadow-lg transition-shadow">
               <div className="absolute top-0 left-0 w-1.5 h-full bg-[#55b9b7]" />
               <div className="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
                 <div className="w-10 h-10 rounded-full bg-[#55b9b7]/10 flex items-center justify-center text-[#55b9b7]">
@@ -190,7 +190,7 @@ function PaymentPage() {
               </div>
               <div className="flex flex-col items-center justify-center py-4 text-center">
                 <span className="text-slate-500 mb-3 text-sm">Transfer easily using UPI</span>
-                <div className="font-medium text-[0.95rem] text-emerald-950 tracking-wider bg-slate-50 px-4 py-3 rounded-lg border border-slate-200 w-full mb-8 shadow-inner select-all">
+                <div className="font-medium text-[0.85rem] sm:text-[0.95rem] text-emerald-950 tracking-wider bg-slate-50 px-3 sm:px-4 py-3 rounded-lg border border-slate-200 w-full mb-8 shadow-inner select-all break-all">
                   vikrampandy1998@okaxis
                 </div>
                 <div className="w-full space-y-4 text-left px-2">

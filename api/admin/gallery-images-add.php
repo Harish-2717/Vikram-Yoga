@@ -13,15 +13,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             sendJson(["success" => false, "error" => "Image file is required"], 400);
         }
 
-        $uploadDir = getUploadDir();
+        // Validate MIME type
+        $allowedMimes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+        $mimeType = mime_content_type($_FILES['image']['tmp_name']);
+        if (!in_array($mimeType, $allowedMimes)) {
+            sendJson(["success" => false, "error" => "Only JPG, PNG, WEBP, GIF images allowed."], 400);
+        }
 
-        $originalName = $_FILES['image']['name'];
-        $cleanName = preg_replace('/[^a-zA-Z0-9.-]/', '_', $originalName);
-        $fileName = time() . "-" . $cleanName;
-        $targetPath = $uploadDir . '/' . $fileName;
+        // Validate file size (max 8 MB)
+        if ($_FILES['image']['size'] > 8 * 1024 * 1024) {
+            sendJson(["success" => false, "error" => "Image must be under 8 MB"], 400);
+        }
+
+        // Use gallery subfolder for consistency with existing gallery records
+        $uploadDir = getUploadDir('gallery');
+
+        $mimeToExt = ['image/jpeg' => 'jpg', 'image/jpg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif'];
+        $ext = $mimeToExt[$mimeType] ?? 'jpg';
+        $fileName = 'gal-' . time() . '-' . substr(md5(uniqid(rand(), true)), 0, 7) . '.' . $ext;
+        $targetPath = $uploadDir . DIRECTORY_SEPARATOR . $fileName;
 
         if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-            $filePath = "/uploads/" . $fileName;
+            // Store as /uploads/gallery/... path (web-accessible)
+            $filePath = "/uploads/gallery/" . $fileName;
         } else {
             sendJson(["success" => false, "error" => "Failed to save uploaded file"], 500);
         }
@@ -32,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("INSERT INTO `gallery_images` (`id`, `name`, `image`, `category`, `created_at`) VALUES (?, ?, ?, ?, NOW())");
         $stmt->execute([$id, $name, $filePath, $category]);
 
-        sendJson(["success" => true]);
+        sendJson(["success" => true, "id" => $id, "image" => $filePath, "name" => $name, "category" => $category]);
     } catch (Exception $e) {
         sendJson(["success" => false, "error" => $e->getMessage()], 500);
     }

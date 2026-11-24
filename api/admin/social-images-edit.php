@@ -34,12 +34,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $newFilePath = null;
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        if (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
+            if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+                $errCode = $_FILES['image']['error'];
+                $msg = "File upload failed with error code: " . $errCode;
+                if ($errCode === UPLOAD_ERR_INI_SIZE || $errCode === UPLOAD_ERR_FORM_SIZE) {
+                    $msg = "Uploaded image exceeds the maximum upload size limit allowed by server.";
+                } elseif ($errCode === UPLOAD_ERR_PARTIAL) {
+                    $msg = "The image file was only partially uploaded. Please try again.";
+                }
+                sendJson(["success" => false, "error" => $msg], 400);
+            }
+
+            // Validate MIME type
+            $allowedMimes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+            $mimeType = mime_content_type($_FILES['image']['tmp_name']);
+            if (!in_array($mimeType, $allowedMimes)) {
+                sendJson(["success" => false, "error" => "Only JPG, PNG, WEBP, and GIF images are allowed."], 400);
+            }
+
+            // Validate file size (max 10MB)
+            if ($_FILES['image']['size'] > 10 * 1024 * 1024) {
+                sendJson(["success" => false, "error" => "Image must be under 10 MB in size."], 400);
+            }
+
             $uploadDir = getUploadDir();
-            $originalName = $_FILES['image']['name'];
-            $cleanName = preg_replace('/[^a-zA-Z0-9.-]/', '_', $originalName);
-            $fileName = time() . "-" . $cleanName;
-            $targetPath = $uploadDir . '/' . $fileName;
+            $mimeToExt = ['image/jpeg' => 'jpg', 'image/jpg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif'];
+            $ext = $mimeToExt[$mimeType] ?? 'jpg';
+            $fileName = 'social-' . time() . '-' . substr(md5(uniqid(rand(), true)), 0, 7) . '.' . $ext;
+            $targetPath = $uploadDir . DIRECTORY_SEPARATOR . $fileName;
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
                 $newFilePath = "/uploads/" . $fileName;
@@ -48,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     deletePhysicalFile($existing['image']);
                 }
             } else {
-                sendJson(["success" => false, "error" => "Failed to save replacement image"], 500);
+                sendJson(["success" => false, "error" => "Failed to save replacement image to disk"], 500);
             }
         }
 

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import therapy from "@/assets/therapy.jpg";
 import { Hand, Wind, Mountain, Leaf, Sun, Flower2, ArrowRight } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
+import { getWhatsAppBookingUrl, getWhatsAppUrl } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/wellness-therapy")({
   component: WellnessTherapyPage,
@@ -86,28 +87,28 @@ function TherapiesGrid() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center py-28 bg-[#faeee2] overflow-hidden">
+    <section className="relative min-h-screen flex items-center py-14 sm:py-20 md:py-28 bg-[#faeee2] overflow-hidden">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3 pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-6 relative">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-[#a06d1c] uppercase font-bold">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+          <span className="font-serif-display text-[0.65rem] sm:text-[0.7rem] tracking-[0.3em] sm:tracking-[0.4em] text-[#a06d1c] uppercase font-bold">
             THERAPEUTIC TREATMENTS
           </span>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl text-emerald-deep leading-tight font-bold">
+          <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl md:text-5xl text-emerald-deep leading-tight font-bold">
             Comprehensive <em className="text-gold-gradient not-italic">Healing Modalities</em>
           </h2>
-          <div className="gold-divider mt-8 max-w-xs mx-auto" />
-          <p className="mt-6 text-[#243e31] leading-relaxed font-semibold">
+          <div className="gold-divider mt-6 sm:mt-8 max-w-xs mx-auto" />
+          <p className="mt-4 sm:mt-6 text-[#243e31] leading-relaxed text-xs sm:text-sm md:text-base font-semibold">
             Each treatment is delivered by certified therapists in serene private rooms, combining
             classical techniques with our signature standard of care for optimal recovery.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {items.map(({ icon: Icon, t, d }) => (
             <div
               key={t}
-              className="group relative overflow-hidden rounded-2xl bg-white/90 border border-gold/20 p-8 shadow-soft hover:shadow-luxury transition-all duration-500 hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-2xl bg-white/90 border border-gold/20 p-5 sm:p-8 shadow-soft hover:shadow-luxury transition-all duration-500 hover:-translate-y-1"
             >
               <div className="absolute -top-12 -right-12 w-40 h-40 bg-gold/10 rounded-full blur-2xl group-hover:bg-gold/20 transition-colors" />
               <Icon className="w-10 h-10 text-emerald relative" strokeWidth={1.2} />
@@ -129,14 +130,14 @@ function TherapiesGrid() {
 
 function TherapyCTA() {
   return (
-    <section className="py-24 bg-[#faeee2] text-cream">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-8 sm:p-12 md:p-16 shadow-[0_14px_40px_rgba(8,38,24,0.18)] text-center relative overflow-hidden">
+    <section className="py-14 sm:py-20 md:py-24 bg-[#faeee2] text-cream">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-6 sm:p-12 md:p-16 shadow-[0_14px_40px_rgba(8,38,24,0.18)] text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-gold/5 blur-3xl rounded-full pointer-events-none" />
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-gold uppercase block font-bold">
+          <span className="font-serif-display text-[0.65rem] sm:text-[0.7rem] tracking-[0.3em] sm:tracking-[0.4em] text-gold uppercase block font-bold">
             CONSULTATION
           </span>
-          <h2 className="mt-4 font-display text-3xl md:text-5xl leading-tight text-balance font-bold text-cream">
+          <h2 className="mt-3 sm:mt-4 font-display text-2xl sm:text-3xl md:text-5xl leading-tight text-balance font-bold text-cream">
             Not sure which therapy is right for you?
           </h2>
           <div className="gold-divider mt-6 mb-6 mx-auto max-w-xs" />
@@ -147,13 +148,15 @@ function TherapyCTA() {
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
-              href="/apply?category=Wellness-Therapies"
+              href={getWhatsAppBookingUrl("Wellness Therapy Consultation", "Wellness Therapies")}
+              target="_blank"
+              rel="noreferrer"
               className="px-8 py-4 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold hover:scale-105 transition-transform font-bold"
             >
               Book a Consultation
             </a>
             <a
-              href="https://wa.me/918778639989"
+              href={getWhatsAppUrl()}
               target="_blank"
               rel="noreferrer"
               className="px-8 py-4 rounded-full glass border border-gold/30 text-gold text-xs font-semibold tracking-[0.2em] uppercase hover:bg-gold/10 transition-colors font-bold"

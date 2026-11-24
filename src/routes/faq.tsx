@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/faq")({
   component: FAQPage,
@@ -228,23 +229,23 @@ function FAQSection() {
   };
 
   return (
-    <section className="py-24 px-6 max-w-4xl mx-auto">
+    <section className="py-14 sm:py-20 md:py-24 px-4 sm:px-6 max-w-4xl mx-auto">
       {/* Title */}
-      <div className="text-center mb-12 space-y-4">
+      <div className="text-center mb-10 sm:mb-12 space-y-3 sm:space-y-4">
         <span className="font-serif-display text-xs tracking-[0.4em] text-emerald uppercase">
           Knowledge Base
         </span>
-        <h2 className="font-display text-4xl md:text-5xl text-emerald-deep">
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-emerald-deep font-bold">
           Questions, <em className="text-gold-gradient not-italic font-medium">answered</em>.
         </h2>
         <div className="w-16 h-px bg-gold-gradient mx-auto" />
       </div>
 
       {/* Search Bar */}
-      <div className="relative mb-12 max-w-2xl mx-auto group">
+      <div className="relative mb-8 sm:mb-12 max-w-2xl mx-auto group">
         <div className="absolute inset-0 bg-gold-gradient opacity-10 blur-xl rounded-full transition-opacity group-hover:opacity-15 pointer-events-none" />
         <div className="relative flex items-center bg-white rounded-2xl border border-gold/15 shadow-soft group-focus-within:border-gold group-focus-within:ring-1 group-focus-within:ring-gold/30 transition-all duration-300">
-          <Search className="w-5 h-5 text-gold shrink-0 ml-5" />
+          <Search className="w-5 h-5 text-gold shrink-0 ml-4 sm:ml-5" />
           <input
             type="text"
             placeholder="Search questions (e.g. beginners, accommodation)..."
@@ -253,7 +254,7 @@ function FAQSection() {
               setSearchQuery(e.target.value);
               setOpenIdx(null); // Reset open accordion during search
             }}
-            className="w-full bg-transparent px-4 py-4.5 text-sm md:text-base text-emerald-deep placeholder-emerald-deep/45 outline-none font-sans"
+            className="w-full bg-transparent px-3 sm:px-4 py-3.5 sm:py-4.5 text-xs sm:text-sm md:text-base text-emerald-deep placeholder-emerald-deep/45 outline-none font-sans"
           />
           {searchQuery && (
             <button
@@ -271,7 +272,7 @@ function FAQSection() {
 
       {/* Category Tabs (Hidden when search query is typed) */}
       {!searchQuery && (
-        <div className="flex flex-wrap justify-center gap-3 mb-12 border-b border-gold/10 pb-6">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 border-b border-gold/10 pb-5 sm:pb-6">
           {categories.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -279,14 +280,14 @@ function FAQSection() {
               <button
                 key={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-full text-xs font-semibold uppercase tracking-wider border transition-all duration-300 ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-3 rounded-full text-[0.65rem] sm:text-xs font-semibold uppercase tracking-wider border transition-all duration-300 ${
                   isActive
                     ? "bg-emerald-deep text-white border-gold/30 shadow-soft"
                     : "bg-white/60 text-emerald-deep/80 border-gold/10 hover:bg-gold/10 hover:text-emerald-deep"
                 }`}
               >
                 <Icon
-                  className={`w-4 h-4 ${isActive ? "text-gold animate-pulse" : "text-gold/75"}`}
+                  className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive ? "text-gold animate-pulse" : "text-gold/75"}`}
                 />
                 <span>{tab.label}</span>
               </button>
@@ -312,7 +313,7 @@ function FAQSection() {
       )}
 
       {/* FAQ Accordion List */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {filteredItems.length > 0 ? (
           filteredItems.map((item, idx) => {
             const isOpen = openIdx === idx;
@@ -325,7 +326,7 @@ function FAQSection() {
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full flex items-center justify-between gap-5 p-6 text-left"
+                  className="w-full flex items-center justify-between gap-3 sm:gap-5 p-4 sm:p-6 text-left"
                 >
                   <div className="space-y-1.5">
                     {searchQuery && (
@@ -333,7 +334,7 @@ function FAQSection() {
                         {getCategoryLabel(item.category)}
                       </span>
                     )}
-                    <h3 className="font-display text-base md:text-lg text-emerald-deep font-medium leading-snug">
+                    <h3 className="font-display text-sm sm:text-base md:text-lg text-emerald-deep font-semibold leading-snug">
                       {item.q}
                     </h3>
                   </div>
@@ -349,7 +350,7 @@ function FAQSection() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-6 pb-6 text-emerald-deep/80 text-xs md:text-sm leading-relaxed font-light border-t border-cream/50 pt-4">
+                    <p className="px-4 sm:px-6 pb-4 sm:pb-6 text-emerald-deep/80 text-xs sm:text-sm leading-relaxed font-normal border-t border-cream/50 pt-3 sm:pt-4">
                       {item.a}
                     </p>
                   </div>
@@ -398,7 +399,7 @@ function FAQSection() {
             Contact Center
           </a>
           <a
-            href="https://wa.me/918778639989"
+            href={getWhatsAppUrl("Hi, I have a question about Dr. Vikram Yoga & Wellness programs.")}
             target="_blank"
             rel="noreferrer"
             className="w-full sm:w-auto text-center px-6 py-3 rounded-full glass text-white text-xs font-semibold tracking-wider uppercase border border-gold/30 hover:bg-white/5 transition-all"

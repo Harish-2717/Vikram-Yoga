@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { getApiUrl, resolveImageUrl } from "@/lib/utils";
+import { getApiUrl, resolveImageUrl, bustCache } from "@/lib/utils";
 import {
   Upload,
   Trash2,
@@ -12,6 +12,8 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
+  RefreshCw,
+  Image as ImageIcon,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/gallery")({
@@ -59,7 +61,7 @@ function GalleryAdminPage() {
   const fetchImages = async () => {
     const token = getSessionToken();
     try {
-      const response = await fetch(getApiUrl("admin/gallery-images.php"), {
+      const response = await fetch(bustCache(getApiUrl("admin/gallery-images.php")), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -90,6 +92,11 @@ function GalleryAdminPage() {
     e.preventDefault();
     if (!file) {
       toast.error("Please select an image to upload.");
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("Image file must be under 10 MB.");
       return;
     }
 
@@ -132,6 +139,11 @@ function GalleryAdminPage() {
     e.preventDefault();
     if (!editingEntry) return;
 
+    if (editFile && editFile.size > 10 * 1024 * 1024) {
+      toast.error("Replacement image must be under 10 MB.");
+      return;
+    }
+
     setEditingLoading(true);
     const token = getSessionToken();
     try {
@@ -152,7 +164,7 @@ function GalleryAdminPage() {
       });
       const res = await response.json();
       if (response.ok && res.success) {
-        toast.success("Gallery image updated successfully!");
+        toast.success(editFile ? "Image replaced and details saved successfully!" : "Gallery image details updated successfully!");
         setEditingEntry(null);
         setEditFile(null);
         setEditPreview(null);
@@ -161,7 +173,7 @@ function GalleryAdminPage() {
         toast.error(res.error || "Failed to update image.");
       }
     } catch {
-      toast.error("An error occurred.");
+      toast.error("An error occurred while saving changes.");
     } finally {
       setEditingLoading(false);
     }
@@ -455,81 +467,120 @@ function GalleryAdminPage() {
       </div>
 
       {/* RENAME MODAL */}
+      {/* EDIT GALLERY IMAGE MODAL */}
       {editingEntry && (
         <div className="fixed inset-0 z-50 bg-[#08120d]/60 backdrop-blur-sm flex items-center justify-center px-4 animate-fade-in">
-          <div className="bg-white rounded-2xl border border-slate-100 max-w-md w-full p-6 shadow-luxury relative">
+          <div className="bg-white rounded-2xl border border-slate-100 max-w-md w-full p-6 shadow-luxury relative max-h-[90vh] overflow-y-auto">
             <button
-              onClick={() => setEditingEntry(null)}
-              className="absolute top-4 right-4 p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors"
+              onClick={() => {
+                setEditingEntry(null);
+                setEditFile(null);
+                setEditPreview(null);
+              }}
+              className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
-            <h3 className="font-serif-display text-lg text-emerald-deep font-bold mb-4">
+            <h3 className="font-serif-display text-lg text-emerald-deep font-bold mb-1">
               Edit Gallery Image
             </h3>
-            <div className="mb-4 aspect-video rounded-xl overflow-hidden bg-slate-100 relative group border border-slate-200">
+            <p className="text-xs text-slate-400 mb-4">
+              Update image details or upload a new photo to replace the current one.
+            </p>
+
+            {/* PREVIEW CONTAINER */}
+            <div className="mb-4 aspect-video rounded-xl overflow-hidden bg-slate-100 relative group border border-slate-200 shadow-inner">
               <img
                 src={editPreview || resolveImageUrl(editingEntry.image)}
                 alt="Preview"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover transition-all"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src =
-                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' fill='%23f1f5f9'%3E%3Crect width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%2394a3b8' font-size='14' font-family='sans-serif'%3EImage not found%3C/text%3E%3C/svg%3E";
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' fill='%23f1f5f9'%3E%3Crect width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%2394a3b8' font-size='14' font-family='sans-serif'%3ENo Preview Available%3C/text%3E%3C/svg%3E";
                 }}
               />
+              <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-white text-[0.6rem] font-medium px-2.5 py-1 rounded-full shadow">
+                {editPreview ? "New Photo Preview" : "Current Photo"}
+              </div>
               {editPreview && (
-                <div className="absolute top-2 right-2 bg-emerald text-white text-[0.6rem] font-bold px-2.5 py-1 rounded-full shadow">
-                  New Image Selected
+                <div className="absolute top-2 right-2 bg-emerald text-white text-[0.6rem] font-bold px-2.5 py-1 rounded-full shadow animate-pulse">
+                  Ready to Replace
                 </div>
               )}
             </div>
+
             <form onSubmit={handleEdit} className="space-y-4">
               {/* Replace Image Upload Field */}
-              <div className="space-y-1">
-                <label className="text-[0.65rem] tracking-[0.2em] uppercase text-slate-400 font-bold block">
-                  Change Photo (Optional)
-                </label>
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label className="text-[0.65rem] tracking-[0.2em] uppercase text-slate-500 font-bold block">
+                    Replace Photo (Optional)
+                  </label>
+                  {editFile && (
+                    <span className="text-[0.65rem] text-emerald font-semibold">
+                      {(editFile.size / 1024 / 1024).toFixed(2)} MB
+                    </span>
+                  )}
+                </div>
                 <label
                   htmlFor="edit-file-input"
-                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 border border-dashed border-slate-300 hover:border-emerald/50 rounded-xl cursor-pointer bg-slate-50/50 hover:bg-emerald/5 transition-all text-center"
+                  className={`flex items-center justify-center gap-2.5 w-full py-3 px-4 border-2 border-dashed rounded-xl cursor-pointer transition-all text-center ${
+                    editFile
+                      ? "border-emerald/40 bg-emerald/5 hover:bg-emerald/10"
+                      : "border-slate-200 hover:border-emerald/40 bg-slate-50 hover:bg-emerald/5"
+                  }`}
                 >
-                  <Upload className="w-4 h-4 text-slate-500 shrink-0" />
-                  <span className="text-xs font-medium text-slate-600 truncate">
-                    {editFile ? editFile.name : "Choose new JPG, PNG or WEBP"}
+                  <RefreshCw className={`w-4 h-4 shrink-0 ${editFile ? "text-emerald" : "text-slate-400"}`} />
+                  <span className="text-xs font-medium text-slate-700 truncate">
+                    {editFile ? editFile.name : "Click to select a replacement image (JPG, PNG, WEBP)"}
                   </span>
                   <input
                     id="edit-file-input"
                     type="file"
-                    accept="image/*"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
                     className="hidden"
                     onChange={(e) => {
                       const selected = e.target.files?.[0] || null;
-                      setEditFile(selected);
                       if (selected) {
+                        if (!selected.type.startsWith("image/")) {
+                          toast.error("Please select a valid image file (JPG, PNG, WEBP, GIF).");
+                          return;
+                        }
+                        if (selected.size > 10 * 1024 * 1024) {
+                          toast.error("Image file must be under 10 MB.");
+                          return;
+                        }
+                        setEditFile(selected);
                         setEditPreview(URL.createObjectURL(selected));
-                      } else {
-                        setEditPreview(null);
                       }
                     }}
                   />
                 </label>
                 {editFile && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEditFile(null);
-                      setEditPreview(null);
-                    }}
-                    className="text-[0.65rem] text-red-500 hover:underline flex items-center gap-1 mt-1"
-                  >
-                    <X className="w-3 h-3" /> Revert to current image
-                  </button>
+                  <div className="flex items-center justify-between pt-1">
+                    <span className="text-[0.65rem] text-slate-400">
+                      Existing photo will be replaced upon saving.
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditFile(null);
+                        setEditPreview(null);
+                        const inp = document.getElementById("edit-file-input") as HTMLInputElement;
+                        if (inp) inp.value = "";
+                      }}
+                      className="text-[0.65rem] text-red-500 hover:text-red-700 hover:underline flex items-center gap-1 font-medium cursor-pointer"
+                    >
+                      <X className="w-3 h-3" /> Revert to current photo
+                    </button>
+                  </div>
                 )}
               </div>
 
+              {/* Image Name */}
               <div className="space-y-1">
-                <label className="text-[0.65rem] tracking-[0.2em] uppercase text-slate-400 font-bold">
-                  Image Name
+                <label className="text-[0.65rem] tracking-[0.2em] uppercase text-slate-500 font-bold">
+                  Image Name / Caption
                 </label>
                 <div className="relative">
                   <Type className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
@@ -538,20 +589,22 @@ function GalleryAdminPage() {
                     required
                     value={editName}
                     onChange={(e) => setEditName(e.target.value)}
-                    placeholder="Sunrise Yoga Practice"
-                    className="w-full bg-slate-50/50 border border-slate-200 focus:border-emerald focus:outline-none rounded-xl py-2.5 pl-10 pr-4 text-slate-700 text-xs transition-all"
+                    placeholder="e.g. Sunrise Yoga Practice"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-emerald focus:outline-none rounded-xl py-2.5 pl-10 pr-4 text-slate-700 text-xs transition-all"
                   />
                 </div>
               </div>
+
+              {/* Category */}
               <div className="space-y-1">
-                <label className="text-[0.65rem] tracking-[0.2em] uppercase text-slate-400 font-bold">
+                <label className="text-[0.65rem] tracking-[0.2em] uppercase text-slate-500 font-bold">
                   Category
                 </label>
                 <div className="relative">
                   <select
                     value={editCategory}
                     onChange={(e) => setEditCategory(e.target.value)}
-                    className="w-full bg-slate-50/50 border border-slate-200 focus:border-emerald focus:outline-none rounded-xl py-2.5 px-4 text-slate-700 text-xs transition-all appearance-none"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-emerald focus:outline-none rounded-xl py-2.5 px-4 text-slate-700 text-xs transition-all appearance-none cursor-pointer"
                   >
                     {categories.map((c) => (
                       <option key={c} value={c}>{c}</option>
@@ -559,13 +612,23 @@ function GalleryAdminPage() {
                   </select>
                 </div>
               </div>
-              <button
-                type="submit"
-                disabled={editingLoading}
-                className="w-full py-2.5 bg-emerald-deep hover:bg-[#0c2a21] text-white text-xs font-semibold tracking-wider uppercase rounded-xl transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
-              >
-                {editingLoading ? "Updating..." : "Save Changes"}
-              </button>
+
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={editingLoading}
+                  className="w-full py-3 bg-emerald-deep hover:bg-[#0c2a21] text-white text-xs font-semibold tracking-wider uppercase rounded-xl transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+                >
+                  {editingLoading ? (
+                    <>
+                      <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Saving Changes...</span>
+                    </>
+                  ) : (
+                    <span>Save Changes</span>
+                  )}
+                </button>
+              </div>
             </form>
           </div>
         </div>

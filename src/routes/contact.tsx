@@ -13,6 +13,7 @@ import {
   Globe,
 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { getApiUrl } from "@/lib/utils";
@@ -163,30 +164,30 @@ function ContactSection() {
   };
 
   return (
-    <section className="py-24 md:py-28 bg-[#faeee2] text-[#112e22] relative overflow-hidden">
+    <section className="py-14 sm:py-20 md:py-28 bg-[#faeee2] text-[#112e22] relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/3 translate-x-1/3 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[35rem] h-[35rem] bg-gold/5 blur-3xl rounded-full translate-y-1/3 -translate-x-1/3 pointer-events-none" />
       
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Golden Centered Heading on Peach Background */}
-        <div className="text-center mb-16 space-y-4">
+        <div className="text-center mb-10 sm:mb-16 space-y-3 sm:space-y-4">
           <span className="font-serif-display text-xs tracking-[0.4em] text-black uppercase font-bold">
             REACH US
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-black">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-black">
             Begin your <em className="text-black not-italic">transformation</em>.
           </h2>
-          <div className="gold-divider max-w-sm mx-auto my-6" />
-          <p className="text-[#243e31] leading-relaxed max-w-2xl mx-auto text-sm md:text-base font-semibold">
+          <div className="gold-divider max-w-sm mx-auto my-4 sm:my-6" />
+          <p className="text-[#243e31] leading-relaxed max-w-2xl mx-auto text-xs sm:text-sm md:text-base font-semibold">
             Reach out for class enrollment, retreat reservations, or a personal wellness consultation.
             Our team is here to guide you to the right path.
           </p>
         </div>
 
         {/* 2 Green-coloured Boxes (Left: Contact Details & Connect, Right: Send an Enquiry Form) */}
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
           {/* Left Green Box: Contact Details & Connect */}
-          <div className="lg:col-span-5 bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_14px_40px_rgba(8,38,24,0.18)] text-cream flex flex-col justify-between space-y-8">
+          <div className="lg:col-span-5 bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-5 sm:p-8 md:p-10 shadow-[0_14px_40px_rgba(8,38,24,0.18)] text-cream flex flex-col justify-between space-y-6 sm:space-y-8">
             <div>
               <h3 className="font-display text-2xl text-cream font-bold mb-2">Direct Contact</h3>
               <div className="gold-divider mb-6" />
@@ -262,7 +263,7 @@ function ContactSection() {
                     { Icon: Instagram, href: "https://www.instagram.com/dr.vikram_yoga_wellness?stkn=MTQ0YnhucG94cXJ1Nw==", label: "Instagram" },
                     { Icon: Facebook, href: "#", label: "Facebook" },
                     { Icon: Youtube, href: "#", label: "YouTube" },
-                    { Icon: MessageCircle, href: "https://wa.me/918778639989", label: "WhatsApp" },
+                    { Icon: MessageCircle, href: getWhatsAppUrl(), label: "WhatsApp" },
                   ].map(({ Icon, href, label }) => (
                     <a
                       key={label}
@@ -280,7 +281,7 @@ function ContactSection() {
 
               <div>
                 <a
-                  href="https://wa.me/918778639989"
+                  href={getWhatsAppUrl("Hi, I would like to get in touch with Vikram Yoga & Wellness Centre.")}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center justify-center gap-3 w-full px-6 py-3.5 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-[0.15em] uppercase shadow-soft hover:scale-[1.02] transition-transform"
@@ -296,7 +297,7 @@ function ContactSection() {
           <form
             id="contact-form"
             onSubmit={handleSubmit}
-            className="lg:col-span-7 bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_14px_40px_rgba(8,38,24,0.18)] text-cream space-y-5 flex flex-col justify-between"
+            className="lg:col-span-7 bg-[#082618] border-2 border-[#0e442b] rounded-3xl p-5 sm:p-8 md:p-10 shadow-[0_14px_40px_rgba(8,38,24,0.18)] text-cream space-y-5 flex flex-col justify-between"
           >
             <div>
               <h3 className="font-display text-2xl text-cream font-bold mb-2">Send an Enquiry</h3>

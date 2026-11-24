@@ -18,6 +18,7 @@ import stressInsomniaRetreatImg from "@/assets/stress_insomnia_retreat.jpg";
 import painManagementRetreatImg from "@/assets/pain_management_retreat.jpg";
 import { ArrowRight, Flower2, ChevronDown, MapPin } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
+import { getWhatsAppRetreatUrl } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/retreats")({
   component: RetreatsPage,
@@ -346,7 +347,7 @@ function RetreatsSection() {
                   className="flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 select-none"
                 >
                   {/* Thumbnail Image */}
-                  <div className="w-28 sm:w-36 md:w-36 lg:w-44 h-20 sm:h-24 rounded-xl overflow-hidden shrink-0 relative">
+                  <div className="w-24 sm:w-36 md:w-36 lg:w-44 h-20 sm:h-24 rounded-xl overflow-hidden shrink-0 relative">
                     <img
                       src={r.img}
                       alt={r.title}
@@ -426,8 +427,10 @@ function RetreatsSection() {
 
                       <div className="pt-2 flex justify-end">
                         <a
-                          href={`/apply?category=Retreat-Programs&course=${encodeURIComponent(r.title)}`}
-                          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gold-gradient text-emerald-deep font-semibold tracking-wider text-xs uppercase shadow-md hover:scale-105 transition-transform"
+                          href={getWhatsAppRetreatUrl(r.title)}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-gold-gradient text-emerald-deep font-semibold tracking-wider text-xs uppercase shadow-md hover:scale-105 transition-transform"
                         >
                           Apply Now <ArrowRight className="w-3.5 h-3.5" />
                         </a>

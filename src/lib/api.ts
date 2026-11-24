@@ -8,6 +8,7 @@ import {
   deleteSession,
 } from "./db";
 import { sendEmail } from "./email";
+import { WHATSAPP_DISPLAY } from "./whatsapp";
 import Busboy from "busboy";
 import fs from "fs";
 import path from "path";
@@ -602,7 +603,7 @@ export async function handleApiRequest(req: any, res: any): Promise<boolean> {
               </div>
               
               <p>Your spot is now officially reserved. We will reach out with further coordination details, guidelines, and preparation material as the start date approaches.</p>
-              <p>If you have any questions or require support, please connect with us on WhatsApp at +91 8778639989 or reply directly to this email.</p>
+              <p>If you have any questions or require support, please connect with us on WhatsApp at ${WHATSAPP_DISPLAY} or reply directly to this email.</p>
               <p style="margin-top: 30px;">Warm regards,<br/><strong>Administrative Team</strong><br/>Dr. Vikram Yoga & Wellness Centre</p>
               <div style="border-top: 1px solid #eeeeee; margin-top: 30px; padding-top: 15px; text-align: center; font-size: 11px; color: #aaaaaa;">
                 © ${new Date().getFullYear()} Dr. Vikram Yoga & Wellness Centre. All rights reserved.
@@ -710,7 +711,7 @@ export async function handleApiRequest(req: any, res: any): Promise<boolean> {
               </div>
               
               <p>Your spot is now officially reserved. We will reach out with further coordination details, guidelines, and preparation material as the start date approaches.</p>
-              <p>If you have any questions or require support, please connect with us on WhatsApp at +91 8778639989 or reply directly to this email.</p>
+              <p>If you have any questions or require support, please connect with us on WhatsApp at ${WHATSAPP_DISPLAY} or reply directly to this email.</p>
               <p style="margin-top: 30px;">Warm regards,<br/><strong>Administrative Team</strong><br/>Dr. Vikram Yoga & Wellness Centre</p>
               <div style="border-top: 1px solid #eeeeee; margin-top: 30px; padding-top: 15px; text-align: center; font-size: 11px; color: #aaaaaa;">
                 © ${new Date().getFullYear()} Dr. Vikram Yoga & Wellness Centre. All rights reserved.
@@ -783,7 +784,7 @@ export async function handleApiRequest(req: any, res: any): Promise<boolean> {
             ${data.replyBody.replace(/\n/g, "<br/>")}
           </div>
           
-          <p>If you have any further questions, feel free to reply directly to this email or connect with us on WhatsApp at +91 8778639989.</p>
+          <p>If you have any further questions, feel free to reply directly to this email or connect with us on WhatsApp at ${WHATSAPP_DISPLAY}.</p>
           <p style="margin-top: 30px;">Warm regards,<br/><strong>Administrative Team</strong><br/>Dr. Vikram Yoga & Wellness Centre</p>
           <div style="border-top: 1px solid #eeeeee; margin-top: 30px; padding-top: 15px; text-align: center; font-size: 11px; color: #aaaaaa;">
             © ${new Date().getFullYear()} Dr. Vikram Yoga & Wellness Centre. All rights reserved.

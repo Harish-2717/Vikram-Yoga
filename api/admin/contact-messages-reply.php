@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     {$bodyHtml}
   </div>
   
-  <p>If you have any further questions, feel free to reply directly to this email or connect with us on WhatsApp at +91 8778639989.</p>
+  <p>If you have any further questions, feel free to reply directly to this email or connect with us on WhatsApp at ' . htmlspecialchars(getWhatsAppNumber()) . '.</p>
   <p style="margin-top: 30px;">Warm regards,<br/><strong>Administrative Team</strong><br/>Dr. Vikram Yoga & Wellness Centre</p>
   <div style="border-top: 1px solid #eeeeee; margin-top: 30px; padding-top: 15px; text-align: center; font-size: 11px; color: #aaaaaa;">
     © {$year} Dr. Vikram Yoga & Wellness Centre. All rights reserved.

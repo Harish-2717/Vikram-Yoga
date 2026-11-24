@@ -130,9 +130,16 @@
     max-width: 100%;
   }
 
-  @media (max-width: 640px) {
+  /* Enhanced mobile typography scaling */
+  @media (max-width: 768px) {
     html {
-      font-size: 15px;
+      font-size: 17.5px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    html {
+      font-size: 18px;
     }
   }
 
@@ -144,6 +151,7 @@
     line-height: 1.6;
     letter-spacing: 0.015em;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
@@ -164,7 +172,7 @@
   h6 {
     font-family: var(--font-display);
     font-weight: 800;
-    line-height: 1.15;
+    line-height: 1.2;
     letter-spacing: -0.01em;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -183,6 +191,137 @@
     font-family: var(--font-serif);
     letter-spacing: 0.12em;
     font-weight: 800;
+  }
+
+  /* ============================================================ */
+  /* COMPREHENSIVE MOBILE TYPOGRAPHY & WEIGHT ENHANCEMENTS        */
+  /* ============================================================ */
+  @media (max-width: 768px) {
+    body {
+      font-weight: 650;
+      letter-spacing: 0.012em;
+    }
+
+    /* Headings on mobile: bolder, more prominent & premium */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 900 !important;
+      line-height: 1.22 !important;
+      letter-spacing: -0.015em;
+    }
+
+    /* Body copy and paragraphs */
+    p, li, dd, dt, blockquote {
+      font-weight: 600;
+      line-height: 1.68;
+    }
+
+    /* UI text, badges, navigation, and interactive items */
+    span, a, label, button, input, select, textarea, th, td {
+      font-weight: 650;
+    }
+
+    /* Luxury serif subheadings and eyebrow badges */
+    .font-serif-display {
+      font-weight: 850 !important;
+      letter-spacing: 0.15em !important;
+    }
+
+    /* Boost utility weight classes for mobile visibility */
+    .font-normal {
+      font-weight: 600 !important;
+    }
+
+    .font-medium {
+      font-weight: 650 !important;
+    }
+
+    .font-semibold {
+      font-weight: 750 !important;
+    }
+
+    .font-bold {
+      font-weight: 850 !important;
+    }
+
+    .font-extrabold,
+    .font-black {
+      font-weight: 900 !important;
+    }
+
+    /* Elevate small text sizes on mobile to guarantee easy reading */
+    .text-xs {
+      font-size: 0.85rem !important;
+      line-height: 1.45 !important;
+      font-weight: 650 !important;
+    }
+
+    .text-sm {
+      font-size: 0.95rem !important;
+      line-height: 1.55 !important;
+      font-weight: 600;
+    }
+
+    .text-base {
+      font-size: 1.05rem !important;
+      line-height: 1.65 !important;
+    }
+
+    /* Boost arbitrary micro-text sizes (e.g. text-[0.5rem], text-[0.6rem], text-[0.7rem]) */
+    [class*="text-\[0.4"],
+    [class*="text-\[0.5"] {
+      font-size: 0.72rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.12em !important;
+    }
+
+    [class*="text-\[0.6"],
+    [class*="text-\[0.7"] {
+      font-size: 0.84rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em !important;
+    }
+
+    [class*="text-\[0.8"] {
+      font-size: 0.94rem !important;
+      font-weight: 650 !important;
+    }
+
+    /* Enhanced contrast for secondary/muted text so it stays crisp on mobile */
+    .text-slate-500,
+    .text-stone-500,
+    .text-stone-400 {
+      color: #334155 !important;
+      font-weight: 600 !important;
+    }
+
+    .text-slate-600,
+    .text-stone-600 {
+      color: #1e293b !important;
+      font-weight: 600 !important;
+    }
+
+    .text-cream\/70 {
+      color: rgba(248, 245, 240, 0.9) !important;
+      font-weight: 600 !important;
+    }
+
+    .text-cream\/80,
+    .text-cream\/85 {
+      color: rgba(248, 245, 240, 0.96) !important;
+      font-weight: 600 !important;
+    }
+
+    /* Form controls: prevent iOS auto-zoom & ensure clear input typing */
+    input, select, textarea {
+      font-size: 1rem !important;
+      font-weight: 600 !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    p {
+      line-height: 1.7;
+    }
   }
 }
 
@@ -313,4 +452,115 @@
 
 .font-handwriting {
   font-family: "Caveat", cursive;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Yoga Card Timings & Focus Tags — Guaranteed Single Line Visibility
+   Prevents text from wrapping on mobile while ensuring 100% full
+   visibility on desktop without clipping or overflow cutoff.
+   ───────────────────────────────────────────────────────────── */
+/* ── Yoga Class Timing: single-line on mobile, wraps cleanly on desktop ── */
+.yoga-class-timing {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  font-size: clamp(0.52rem, 2.2vw, 0.65rem);
+  width: 100%;
+  max-width: 100%;
+  line-height: 1.5;
+}
+
+/* sm: 2-col — still single-line */
+@media (min-width: 640px) {
+  .yoga-class-timing {
+    font-size: 0.7rem;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+  }
+}
+
+/* lg: 3-col — allow wrapping, cards too narrow for single line */
+@media (min-width: 1024px) {
+  .yoga-class-timing {
+    font-size: 0.7rem;
+    letter-spacing: -0.01em;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.6;
+  }
+}
+
+/* xl: wider cards — still allow wrapping */
+@media (min-width: 1280px) {
+  .yoga-class-timing {
+    font-size: 0.74rem;
+    letter-spacing: -0.01em;
+    white-space: normal;
+    overflow: visible;
+  }
+}
+
+/* 2xl: large monitors */
+@media (min-width: 1536px) {
+  .yoga-class-timing {
+    font-size: 0.78rem;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ── Classical Asana Focus Tag ── */
+.yoga-focus-tag {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+  font-size: clamp(0.52rem, 2.2vw, 0.65rem);
+  width: 100%;
+  max-width: 100%;
+  line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+  .yoga-focus-tag {
+    font-size: 0.7rem;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 1024px) {
+  .yoga-focus-tag {
+    font-size: 0.7rem;
+    letter-spacing: -0.01em;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.6;
+  }
+}
+
+@media (min-width: 1280px) {
+  .yoga-focus-tag {
+    font-size: 0.74rem;
+    letter-spacing: -0.01em;
+    white-space: normal;
+    overflow: visible;
+  }
+}
+
+@media (min-width: 1536px) {
+  .yoga-focus-tag {
+    font-size: 0.78rem;
+    letter-spacing: -0.01em;
+  }
 }

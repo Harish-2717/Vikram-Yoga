@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import {
   X,
   ChevronLeft,
@@ -9,137 +9,30 @@ import {
   GraduationCap,
   MapPin,
   BedDouble,
+  Images as ImagesIcon,
+  Sparkles,
+  Loader2,
+  Grid,
+  Layers,
+  ArrowLeft,
+  Maximize2,
+  Camera,
 } from "lucide-react";
 
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat } from "./about";
-import { getApiUrl, resolveImageUrl } from "@/lib/utils";
+import { getApiUrl, resolveImageUrl, bustCache } from "@/lib/utils";
 
-// ── Hero & Banner Assets ──────────────────────────────────────────────────────
+// ── Background Assets ─────────────────────────────────────────────────────────
 import galleryHeroImg from "@/assets/beach_sunset_varkala.jpg";
-import varkalaSunsetSea from "@/assets/varkala_sunset_sea.jpg";
 import dewyLeaf from "@/assets/cta_dewy_leaf.jpg";
-
-// ── Category 1: Our Centre ────────────────────────────────────────────────────
-import centre1 from "@/assets/New/file_00000000e2f48208b353a09b8451f839.png";
-import centre2 from "@/assets/New/file_00000000e22081fa8bafa1253752641e.png";
-import centre3 from "@/assets/New/file_000000007e508211bf31b2012c7739be.png";
-import centre4 from "@/assets/New/file_0000000027c0820b9a5711022d613771.png";
-import centre5 from "@/assets/New/file_00000000dfcc82119d61541189667cd6.png";
-import centre6 from "@/assets/New/file_000000001188820791659018f9dd9303.png";
-
-// ── Category 2: Yoga & Wellness ───────────────────────────────────────────────
-import yoga1 from "@/assets/New/IMG_20250516_171414.jpg.jpeg";
-import yoga2 from "@/assets/New/IMG_20250516_171813.jpg.jpeg";
-import yoga3 from "@/assets/New/IMG_20250516_171957.jpg.jpeg";
-import yoga4 from "@/assets/New/IMG_20250517_083145.jpg.jpeg";
-import yoga5 from "@/assets/New/IMG_20250517_084451.jpg.jpeg";
-import yoga6 from "@/assets/New/IMG_20250520_082653.jpg.jpeg";
-import yoga7 from "@/assets/New/IMG_20250520_083011.jpg.jpeg";
-import yoga8 from "@/assets/New/IMG_20250520_083632.jpg.jpeg";
-import yoga9 from "@/assets/New/IMG_20250520_092421.jpg.jpeg";
-import yoga10 from "@/assets/New/IMG_20250520_124838.jpg.jpeg";
-import yoga11 from "@/assets/New/IMG_20250520_130020.jpg.jpeg";
-
-// ── Category 3: Wellness & Therapies ──────────────────────────────────────────
-import therapy1 from "@/assets/New folder/Ayurvedic massage courses.png";
-import therapy2 from "@/assets/images/acupuncture.jpeg";
-import therapy3 from "@/assets/New folder/Ayurvedic massage courses.png";
-import therapy4 from "@/assets/images/cupping.jpg";
-import therapy5 from "@/assets/New folder/Deep tissue massage courses.png";
-import therapy6 from "@/assets/images/dorn-therapy.jpg";
-import therapy7 from "@/assets/images/shiatsu.jpeg";
-import therapy8 from "@/assets/New folder/Reflexology course.png";
-import therapy9 from "@/assets/images/swedish-massage.jpeg";
-import therapy10 from "@/assets/New folder/Thai yoga massage courses.png";
-import therapy11 from "@/assets/images/extra-gallery-1.jpeg";
-import therapy12 from "@/assets/images/extra-gallery-2.jpeg";
-import therapy13 from "@/assets/images/extra-gallery-3.jpeg";
-import therapy14 from "@/assets/images/extra-gallery-5.jpeg";
-import therapy15 from "@/assets/images/extra-gallery-6.jpeg";
-
-// ── Category 4: Accommodation ────────────────────────────────────────────────
-import acRoom1 from "@/assets/retreat.jpg";
-import acRoom2 from "@/assets/about_hero_veranda.jpg";
-
-// Deluxe Non-AC Room (24 authentic photos from Assets -> New)
-// @ts-ignore
-import nonAc1 from "@/assets/New/unnamed (1).webp";
-// @ts-ignore
-import nonAc5 from "@/assets/New/unnamed (5).webp";
-// @ts-ignore
-import nonAc6 from "@/assets/New/unnamed (6).webp";
-// @ts-ignore
-import nonAc7 from "@/assets/New/unnamed (7).webp";
-// @ts-ignore
-import nonAc8 from "@/assets/New/unnamed (8).webp";
-// @ts-ignore
-import nonAc9 from "@/assets/New/unnamed (9).webp";
-// @ts-ignore
-import nonAc10 from "@/assets/New/unnamed (10).webp";
-// @ts-ignore
-import nonAc11 from "@/assets/New/unnamed (11).webp";
-// @ts-ignore
-import nonAc12 from "@/assets/New/unnamed (12).webp";
-// @ts-ignore
-import nonAc13 from "@/assets/New/unnamed (13).webp";
-// @ts-ignore
-import nonAc14 from "@/assets/New/unnamed (14).webp";
-// @ts-ignore
-import nonAc15 from "@/assets/New/unnamed (15).webp";
-// @ts-ignore
-import nonAc17 from "@/assets/New/unnamed (17).webp";
-// @ts-ignore
-import nonAc18 from "@/assets/New/unnamed (18).webp";
-// @ts-ignore
-import nonAc20 from "@/assets/New/unnamed (20).webp";
-// @ts-ignore
-import nonAc21 from "@/assets/New/unnamed (21).webp";
-// @ts-ignore
-import nonAc22 from "@/assets/New/unnamed (22).webp";
-// @ts-ignore
-import nonAc23 from "@/assets/New/unnamed (23).webp";
-// @ts-ignore
-import nonAc24 from "@/assets/New/unnamed (24).webp";
-// @ts-ignore
-import nonAc25 from "@/assets/New/unnamed (25).webp";
-// @ts-ignore
-import nonAc26 from "@/assets/New/unnamed (26).webp";
-// @ts-ignore
-import nonAc28 from "@/assets/New/unnamed (28).webp";
-// @ts-ignore
-import nonAc29 from "@/assets/New/unnamed (29).webp";
-// @ts-ignore
-import nonAcMain from "@/assets/New/unnamed.webp";
-
-// ── Category 5: Certifications & Training ─────────────────────────────────────
-import cert1 from "@/assets/training_100h.png";
-import cert2 from "@/assets/training_200h_std.png";
-import cert3 from "@/assets/training_200h_lux.png";
-import cert4 from "@/assets/training_300h.png";
-import cert5 from "@/assets/dr_chandra_kumar.jpg";
-import cert6 from "@/assets/classes.jpg";
-import cert7 from "@/assets/leader.jpeg";
-import cert8 from "@/assets/founder.png";
-
-// ── Category 6: Local Experiences & Excursions ────────────────────────────────
-import local1 from "@/assets/varkala_beach.png";
-import local2 from "@/assets/temple_1.png";
-import local3 from "@/assets/temple_2.png";
-import local4 from "@/assets/retreat.jpg";
-import local5 from "@/assets/retreat_banner.png";
-import local6 from "@/assets/hero.jpg";
-import local7 from "@/assets/about.png";
-import local8 from "@/assets/healing_atmosphere.png";
-import local9 from "@/assets/classes.jpg";
-import local10 from "@/assets/cta_dewy_leaf.jpg";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 export type GalleryPhoto = {
-  image: string;
+  id: string;
   name?: string;
-  id?: string;
-  category?: string;
+  image: string;
+  category: string;
   created_at?: string;
 };
 
@@ -172,7 +65,223 @@ function YogaIcon({ className = "w-4 h-4" }: { className?: string }) {
   );
 }
 
-// ── Route ─────────────────────────────────────────────────────────────────────
+// ── Preset Metadata for Categories ────────────────────────────────────────────
+
+interface CategoryMeta {
+  subtitle: string;
+  tagline: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const CATEGORY_META_PRESETS: Record<string, CategoryMeta> = {
+  "Our Centre": {
+    subtitle: "Explore our peaceful wellness space and ocean-view practice areas.",
+    tagline: "A home for\nhealing & growth",
+    icon: Home,
+  },
+  "Yoga & Wellness": {
+    subtitle: "Moments of movement, mindful alignment, and conscious breathwork.",
+    tagline: "Breathe\nMove\nBe Present",
+    icon: YogaIcon,
+  },
+  "Wellness & Therapies": {
+    subtitle: "Authentic Ayurvedic treatments, Shiatsu, Thai Yoga, and bodywork.",
+    tagline: "Natural Therapies\nReal Healing",
+    icon: Leaf,
+  },
+  "Our Accommodation": {
+    subtitle: "Comfortable air-conditioned and non-AC rooms for deep restful stays.",
+    tagline: "Simple Stays\nDeeper Rest",
+    icon: BedDouble,
+  },
+  "Deluxe Non-AC Room": {
+    subtitle: "Naturally ventilated spaces with tranquil garden and veranda views.",
+    tagline: "Simple Stays\nDeeper Rest",
+    icon: BedDouble,
+  },
+  "Deluxe AC Room": {
+    subtitle: "Climate-controlled comfort with private ensuite amenities.",
+    tagline: "Cool Comfort\nSerene Living",
+    icon: BedDouble,
+  },
+  "Certifications & Training": {
+    subtitle: "Celebrating hands-on learning, student certifications, and growth.",
+    tagline: "Knowledge Today\nA Healthier Tomorrow",
+    icon: GraduationCap,
+  },
+  "Local Experiences & Excursions": {
+    subtitle: "Varkala beach walks, cliff sunsets, ancient temples, and backwaters.",
+    tagline: "Explore\nExperience\nFeel Alive",
+    icon: MapPin,
+  },
+};
+
+const PREFERRED_CATEGORY_ORDER = [
+  "Our Centre",
+  "Yoga & Wellness",
+  "Wellness & Therapies",
+  "Our Accommodation",
+  "Certifications & Training",
+  "Local Experiences & Excursions",
+];
+
+function getCategoryMeta(catName: string): CategoryMeta {
+  if (CATEGORY_META_PRESETS[catName]) {
+    return CATEGORY_META_PRESETS[catName];
+  }
+  return {
+    subtitle: `Explore authentic moments and spaces from ${catName}.`,
+    tagline: "Moments of\nTransformation",
+    icon: Sparkles,
+  };
+}
+
+// ── Curated Authentic Fallback Dataset ────────────────────────────────────────
+// Guarantees immediate zero-delay display and prevents empty states or broken icons.
+
+const FALLBACK_GALLERY_PHOTOS: GalleryPhoto[] = [
+  // Our Centre
+  { id: "fb-1", category: "Our Centre", name: "Sunset Roof Practice", image: "/gallery/centre-sunset-roof.png" },
+  { id: "fb-2", category: "Our Centre", name: "Beach Handstand Pose", image: "/gallery/centre-beach-handstand.png" },
+  { id: "fb-3", category: "Our Centre", name: "Sea View Balance", image: "/gallery/centre-sea-view-balance.png" },
+  { id: "fb-4", category: "Our Centre", name: "Veranda Practice Space", image: "/gallery/centre-veranda-space.png" },
+  { id: "fb-5", category: "Our Centre", name: "Holistic Wellness Sanctuary", image: "/gallery/centre-holistic-sanctuary.png" },
+  { id: "fb-6", category: "Our Centre", name: "Centre View", image: "/gallery/centre-view.png" },
+
+  // Yoga & Wellness
+  { id: "fb-7", category: "Yoga & Wellness", name: "Group Asana Session", image: "/gallery/yoga-group-asana.jpeg" },
+  { id: "fb-8", category: "Yoga & Wellness", name: "Breath & Movement Practice", image: "/gallery/yoga-breath-movement.jpeg" },
+  { id: "fb-9", category: "Yoga & Wellness", name: "Aligning the Posture", image: "/gallery/yoga-posture-alignment.jpeg" },
+  { id: "fb-10", category: "Yoga & Wellness", name: "Morning Vinyasa Flow", image: "/gallery/yoga-vinyasa-flow.jpeg" },
+  { id: "fb-11", category: "Yoga & Wellness", name: "Pranayama & Focus", image: "/gallery/yoga-pranayama-focus.jpeg" },
+  { id: "fb-12", category: "Yoga & Wellness", name: "Strength & Flexibility", image: "/gallery/yoga-strength-flexibility.jpeg" },
+  { id: "fb-13", category: "Yoga & Wellness", name: "Guided Practice", image: "/gallery/yoga-guided-practice.jpeg" },
+  { id: "fb-14", category: "Yoga & Wellness", name: "Deep Stretch Session", image: "/gallery/yoga-deep-stretch.jpeg" },
+  { id: "fb-15", category: "Yoga & Wellness", name: "Mindful Alignment", image: "/gallery/yoga-mindful-alignment.jpeg" },
+  { id: "fb-16", category: "Yoga & Wellness", name: "Intensive Practice", image: "/gallery/yoga-intensive-practice.jpeg" },
+  { id: "fb-17", category: "Yoga & Wellness", name: "Savasana & Relaxation", image: "/gallery/yoga-savasana-relaxation.jpeg" },
+
+  // Wellness & Therapies
+  { id: "fb-18", category: "Wellness & Therapies", name: "Traditional Ayurvedic Massage", image: "/gallery/therapy-ayurvedic-massage.png" },
+  { id: "fb-19", category: "Wellness & Therapies", name: "Ayurvedic Treatment", image: "/gallery/therapy-ayurvedic-treatment.jpeg" },
+  { id: "fb-20", category: "Wellness & Therapies", name: "Acupuncture Therapy", image: "/gallery/therapy-acupuncture.jpeg" },
+  { id: "fb-21", category: "Wellness & Therapies", name: "Reflexology Session", image: "/gallery/therapy-reflexology.png" },
+  { id: "fb-22", category: "Wellness & Therapies", name: "Cupping Therapy", image: "/gallery/therapy-cupping.jpg" },
+  { id: "fb-23", category: "Wellness & Therapies", name: "Deep Tissue Massage", image: "/gallery/therapy-deep-tissue.png" },
+  { id: "fb-24", category: "Wellness & Therapies", name: "Dorn Therapy", image: "/gallery/therapy-dorn.jpg" },
+  { id: "fb-25", category: "Wellness & Therapies", name: "Shiatsu Massage", image: "/gallery/therapy-shiatsu.jpeg" },
+  { id: "fb-26", category: "Wellness & Therapies", name: "Swedish Massage", image: "/gallery/therapy-swedish.jpeg" },
+  { id: "fb-27", category: "Wellness & Therapies", name: "Thai Yoga Massage", image: "/gallery/therapy-thai-massage.png" },
+  { id: "fb-28", category: "Wellness & Therapies", name: "Natural Herbal Oils", image: "/gallery/therapy-herbal-oils.jpeg" },
+  { id: "fb-29", category: "Wellness & Therapies", name: "Holistic Rest", image: "/gallery/therapy-holistic-rest.jpeg" },
+
+  // Deluxe AC Room
+  { id: "fb-30", category: "Deluxe AC Room", name: "Deluxe AC Master Bedroom", image: "/gallery/room-ac-master.webp" },
+  { id: "fb-31", category: "Deluxe AC Room", name: "Room Ambiance", image: "/gallery/room-ac-ambiance.webp" },
+  { id: "fb-32", category: "Deluxe AC Room", name: "Ensuite Bathroom", image: "/gallery/room-ac-bathroom.webp" },
+  { id: "fb-33", category: "Deluxe AC Room", name: "Cooling & Comfort", image: "/gallery/room-ac-cooling.webp" },
+  { id: "fb-34", category: "Deluxe AC Room", name: "Courtyard View", image: "/gallery/room-ac-courtyard.webp" },
+  { id: "fb-35", category: "Deluxe AC Room", name: "Relaxation Space", image: "/gallery/room-ac-relaxation.webp" },
+  { id: "fb-36", category: "Deluxe AC Room", name: "Modern Amenities", image: "/gallery/room-ac-modern-amenities.webp" },
+  { id: "fb-37", category: "Deluxe AC Room", name: "Clean Living", image: "/gallery/room-ac-clean-living.webp" },
+
+  // Deluxe Non-AC Room
+  { id: "fb-38", category: "Deluxe Non-AC Room", name: "Deluxe Non-AC Master View", image: "/gallery/room-non-ac-master.webp" },
+  { id: "fb-39", category: "Deluxe Non-AC Room", name: "Bed & Wardrobe", image: "/gallery/room-non-ac-bed-wardrobe.webp" },
+  { id: "fb-40", category: "Deluxe Non-AC Room", name: "Seating Area", image: "/gallery/room-non-ac-seating.webp" },
+  { id: "fb-41", category: "Deluxe Non-AC Room", name: "Veranda Walk", image: "/gallery/room-non-ac-veranda.webp" },
+  { id: "fb-42", category: "Deluxe Non-AC Room", name: "Garden Outlook", image: "/gallery/room-non-ac-garden.webp" },
+  { id: "fb-43", category: "Deluxe Non-AC Room", name: "Ensuite Restroom", image: "/gallery/room-non-ac-restroom.webp" },
+  { id: "fb-44", category: "Deluxe Non-AC Room", name: "Tranquil Air", image: "/gallery/room-non-ac-air.webp" },
+  { id: "fb-45", category: "Deluxe Non-AC Room", name: "Bathroom Interior", image: "/gallery/room-non-ac-bathroom.webp" },
+
+  // Certifications & Training
+  { id: "fb-46", category: "Certifications & Training", name: "100h Teacher Training Ceremony", image: "/gallery/cert-100h-ceremony.png" },
+  { id: "fb-47", category: "Certifications & Training", name: "200h Luxury Training", image: "/gallery/cert-200h-lux.png" },
+  { id: "fb-48", category: "Certifications & Training", name: "300h Advanced Training", image: "/gallery/cert-300h-advanced.png" },
+  { id: "fb-49", category: "Certifications & Training", name: "Dr. Chandra Kumar & Teachers", image: "/gallery/cert-dr-chandra-kumar.jpg" },
+  { id: "fb-50", category: "Certifications & Training", name: "Classroom Practice Session", image: "/gallery/cert-classroom-practice.jpg" },
+  { id: "fb-51", category: "Certifications & Training", name: "200h Standard Training", image: "/gallery/cert-200h-std.png" },
+  { id: "fb-52", category: "Certifications & Training", name: "Yoga Master Guidance", image: "/gallery/cert-master-guidance.jpeg" },
+  { id: "fb-53", category: "Certifications & Training", name: "Founder Guidance & Wisdom", image: "/gallery/cert-founder-guidance.png" },
+
+  // Local Experiences & Excursions
+  { id: "fb-54", category: "Local Experiences & Excursions", name: "Varkala Beach", image: "/gallery/excursion-varkala-beach.png" },
+  { id: "fb-55", category: "Local Experiences & Excursions", name: "Varkala Cliff", image: "/gallery/excursion-varkala-cliff.jpg" },
+  { id: "fb-56", category: "Local Experiences & Excursions", name: "Janardanaswamy Temple", image: "/gallery/excursion-janardana-temple.png" },
+  { id: "fb-57", category: "Local Experiences & Excursions", name: "Kappil Beach", image: "/gallery/excursion-kappil-beach.png" },
+  { id: "fb-58", category: "Local Experiences & Excursions", name: "Kappil Lake", image: "/gallery/excursion-kappil-lake.jpg" },
+  { id: "fb-59", category: "Local Experiences & Excursions", name: "Local Life & Culture", image: "/gallery/excursion-local-life.png" },
+  { id: "fb-60", category: "Local Experiences & Excursions", name: "Varkala Coastline", image: "/gallery/excursion-coastline.png" },
+  { id: "fb-61", category: "Local Experiences & Excursions", name: "Healing Atmosphere", image: "/gallery/excursion-healing-atmosphere.png" },
+  { id: "fb-62", category: "Local Experiences & Excursions", name: "Tropical Nature", image: "/gallery/excursion-tropical-nature.jpg" },
+];
+
+// ── Smart Image Component with Fallback & Shimmer ─────────────────────────────
+
+function ImageWithFallback({
+  src,
+  alt,
+  className = "",
+  containerClassName = "",
+  objectFit = "cover",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  containerClassName?: string;
+  objectFit?: "cover" | "contain";
+}) {
+  const [loaded, setLoaded] = useState(false);
+  const [errorStage, setErrorStage] = useState<number>(0);
+
+  const resolvedUrl = useMemo(() => {
+    const initial = resolveImageUrl(src);
+    if (errorStage === 0) return initial;
+    if (errorStage === 1) {
+      // Try root-relative gallery path
+      const filename = initial.split("/").pop() || "";
+      return `/gallery/${filename}`;
+    }
+    if (errorStage === 2) {
+      // Try public prefix
+      const filename = initial.split("/").pop() || "";
+      return `/public/gallery/${filename}`;
+    }
+    return "";
+  }, [src, errorStage]);
+
+  return (
+    <div className={`relative overflow-hidden w-full h-full bg-stone-200/70 ${containerClassName}`}>
+      {/* Shimmer skeleton until image loads */}
+      {!loaded && errorStage < 3 && (
+        <div className="absolute inset-0 bg-gradient-to-r from-stone-200 via-stone-100 to-stone-200 animate-pulse pointer-events-none" />
+      )}
+
+      {errorStage < 3 ? (
+        <img
+          src={resolvedUrl}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          onError={() => setErrorStage((prev) => prev + 1)}
+          className={`w-full h-full transition-opacity duration-500 ${
+            objectFit === "contain" ? "object-contain" : "object-cover object-center"
+          } ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
+        />
+      ) : (
+        // Polished elegant placeholder when image cannot be resolved
+        <div className="w-full h-full flex flex-col items-center justify-center p-3 text-center bg-stone-100 text-stone-400">
+          <Camera className="w-6 h-6 mb-1 opacity-60 text-[#143d2c]" />
+          <span className="text-[0.68rem] font-serif text-stone-600 line-clamp-1">{alt}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Route Definition ──────────────────────────────────────────────────────────
 
 export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
@@ -182,57 +291,107 @@ export const Route = createFileRoute("/gallery")({
       {
         name: "description",
         content:
-          "Moments of healing, learning and transformation at Dr. Vikram Yoga & Wellness Centre in Varkala.",
+          "Explore dynamic moments of healing, learning and transformation at Dr. Vikram Yoga & Wellness Centre in Varkala.",
       },
     ],
   }),
 });
 
-// ── Page Component ────────────────────────────────────────────────────────────
+// ── Main Gallery Page Component ───────────────────────────────────────────────
 
 function GalleryPage() {
   const [lightbox, setLightbox] = useState<LightboxState>(null);
   const [dynamicImages, setDynamicImages] = useState<GalleryPhoto[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string>("ALL");
+  const [viewMode, setViewMode] = useState<"showcase" | "grid">("showcase");
 
-  useEffect(() => {
-    let isMounted = true;
-    const fetchImages = async () => {
-      try {
-        const endpoints = [
-          getApiUrl("gallery-images.php"),
-          "/api/gallery-images.php",
-          "/Vikram%20Yoga/emerald-serenity-hub/api/gallery-images.php",
-        ];
+  const fetchImages = useCallback(async () => {
+    try {
+      const endpoints = [
+        getApiUrl("gallery-images.php"),
+        "/api/gallery-images.php",
+        "/Vikram%20Yoga/emerald-serenity-hub/api/gallery-images.php",
+      ];
 
-        for (const ep of endpoints) {
-          try {
-            const response = await fetch(ep);
-            const contentType = response.headers.get("content-type") || "";
-            if (response.ok && contentType.includes("application/json")) {
-              const res = await response.json();
-              if (Array.isArray(res) && isMounted) {
-                setDynamicImages(res);
-                return;
-              }
+      for (const ep of endpoints) {
+        try {
+          const response = await fetch(bustCache(ep));
+          const contentType = response.headers.get("content-type") || "";
+          if (response.ok && contentType.includes("application/json")) {
+            const res = await response.json();
+            if (Array.isArray(res) && res.length > 0) {
+              setDynamicImages(res);
+              return;
             }
-          } catch {}
+          }
+        } catch {
+          // Try next fallback endpoint
         }
-      } catch (err) {
-        console.error("Failed to load dynamic gallery images", err);
       }
-    };
-    fetchImages();
-    return () => {
-      isMounted = false;
-    };
+      // If network response was empty or failed, use authentic curated dataset
+      setDynamicImages(FALLBACK_GALLERY_PHOTOS);
+    } catch (err) {
+      console.error("Failed to load dynamic gallery images", err);
+      setDynamicImages(FALLBACK_GALLERY_PHOTOS);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const openLightbox = useCallback(
-    (images: (GalleryPhoto | string)[], currentIndex: number, title: string) => {
-      const normalized: GalleryPhoto[] = images.map((img) =>
-        typeof img === "string" ? { image: img, name: "" } : img
+  useEffect(() => {
+    fetchImages();
+  }, [fetchImages]);
+
+  // Combined photo collection (ensuring non-empty)
+  const displayPhotos = useMemo(() => {
+    return dynamicImages.length > 0 ? dynamicImages : FALLBACK_GALLERY_PHOTOS;
+  }, [dynamicImages]);
+
+  // Extract all distinct categories
+  const allCategories = useMemo(() => {
+    const map = new Map<string, string>();
+    displayPhotos.forEach((img) => {
+      const cat = (img.category || "General").trim();
+      const lower = cat.toLowerCase();
+      if (!map.has(lower)) {
+        map.set(lower, cat);
+      }
+    });
+
+    const list = Array.from(map.values());
+
+    list.sort((a, b) => {
+      const idxA = PREFERRED_CATEGORY_ORDER.findIndex(
+        (o) => o.toLowerCase() === a.toLowerCase()
       );
-      setLightbox({ images: normalized, currentIndex, title });
+      const idxB = PREFERRED_CATEGORY_ORDER.findIndex(
+        (o) => o.toLowerCase() === b.toLowerCase()
+      );
+      if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+      if (idxA !== -1) return -1;
+      if (idxB !== -1) return 1;
+      return a.localeCompare(b);
+    });
+
+    return list;
+  }, [displayPhotos]);
+
+  // Category counts
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    displayPhotos.forEach((img) => {
+      const cat = (img.category || "General").trim();
+      counts[cat] = (counts[cat] || 0) + 1;
+    });
+    return counts;
+  }, [displayPhotos]);
+
+  // Lightbox handlers
+  const openLightbox = useCallback(
+    (images: GalleryPhoto[], currentIndex: number, title: string) => {
+      if (!images || images.length === 0) return;
+      setLightbox({ images, currentIndex, title });
       document.body.style.overflow = "hidden";
     },
     []
@@ -279,17 +438,127 @@ function GalleryPage() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [lightbox, closeLightbox, goNext, goPrev]);
 
+  // Handle category selection
+  const handleSelectCategory = (cat: string) => {
+    setSelectedCategoryFilter(cat);
+  };
+
   return (
-    <main className="overflow-x-hidden bg-[#f6f5f0] text-stone-900 font-sans">
+    <main className="overflow-x-hidden bg-[#f6f5f0] text-stone-900 font-sans min-h-screen">
       <Navbar />
 
-      {/* Hero Banner matching the template */}
+      {/* Hero Banner */}
       <GalleryHero />
 
-      {/* 6 Category Cards Grid */}
-      <GallerySection openLightbox={openLightbox} dynamicImages={dynamicImages} />
+      {/* Filter and View Controls Bar */}
+      <section className="sticky top-0 z-20 bg-[#f6f5f0]/95 backdrop-blur-md border-b border-stone-200/70 shadow-2xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            {/* Category Filter Pills (Smooth scrollable on mobile) */}
+            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1.5 md:pb-0 scrollbar-none scroll-smooth">
+              <button
+                type="button"
+                onClick={() => handleSelectCategory("ALL")}
+                className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold tracking-wide whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
+                  selectedCategoryFilter === "ALL"
+                    ? "bg-[#143d2c] text-white shadow-xs scale-102"
+                    : "bg-white text-stone-700 hover:bg-stone-100 hover:text-stone-900 border border-stone-200"
+                }`}
+              >
+                <span>All Categories</span>
+              </button>
 
-      {/* Bottom Banner matching the template */}
+              {allCategories.map((cat) => {
+                const isSelected = selectedCategoryFilter === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => handleSelectCategory(cat)}
+                    className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold tracking-wide whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
+                      isSelected
+                        ? "bg-[#143d2c] text-white shadow-xs scale-102"
+                        : "bg-white text-stone-700 hover:bg-stone-100 hover:text-stone-900 border border-stone-200"
+                    }`}
+                  >
+                    <span>{cat}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* View Mode Toggle: Showcase vs Full Grid (Shown in ALL categories) */}
+            {selectedCategoryFilter === "ALL" && (
+              <div className="flex items-center justify-end gap-1 shrink-0 pt-1 md:pt-0 border-t md:border-t-0 border-stone-200/50">
+                <span className="text-[0.68rem] uppercase font-serif text-stone-500 tracking-wider mr-1 hidden sm:inline">
+                  View:
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setViewMode("showcase")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
+                    viewMode === "showcase"
+                      ? "bg-[#143d2c] text-white shadow-2xs"
+                      : "bg-white text-stone-600 hover:bg-stone-100 border border-stone-200"
+                  }`}
+                  title="Category Showcase View"
+                >
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>Showcase</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode("grid")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
+                    viewMode === "grid"
+                      ? "bg-[#143d2c] text-white shadow-2xs"
+                      : "bg-white text-stone-600 hover:bg-stone-100 border border-stone-200"
+                  }`}
+                  title="Full Photo Grid View"
+                >
+                  <Grid className="w-3.5 h-3.5" />
+                  <span>All Photos</span>
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Dynamic Gallery Content */}
+      {loading ? (
+        <section className="py-24 flex flex-col items-center justify-center gap-3">
+          <Loader2 className="w-8 h-8 text-[#143d2c] animate-spin" />
+          <p className="text-sm font-serif text-stone-600">Loading authentic moments...</p>
+        </section>
+      ) : selectedCategoryFilter !== "ALL" ? (
+        // When a single category is filtered, show ALL photos of that category in a responsive grid
+        <CategoryFullGridView
+          category={selectedCategoryFilter}
+          photos={displayPhotos.filter(
+            (p) =>
+              (p.category || "").trim().toLowerCase() ===
+              selectedCategoryFilter.trim().toLowerCase()
+          )}
+          openLightbox={openLightbox}
+          onResetFilter={() => setSelectedCategoryFilter("ALL")}
+        />
+      ) : viewMode === "grid" ? (
+        // Full Photo Grid view for ALL photos
+        <AllPhotosGridView
+          photos={displayPhotos}
+          openLightbox={openLightbox}
+        />
+      ) : (
+        // Curated Category Showcase View
+        <DynamicGallerySection
+          openLightbox={openLightbox}
+          dynamicImages={displayPhotos}
+          onSelectCategory={handleSelectCategory}
+        />
+      )}
+
+      {/* Bottom Journey Banner */}
       <GalleryJourneyBanner />
 
       <Footer />
@@ -315,18 +584,15 @@ function GalleryPage() {
 
 function GalleryHero() {
   return (
-    <section className="relative w-full overflow-hidden border-b border-stone-200/60">
-      {/* Background Image: Scenic Varkala sea / veranda sunset */}
+    <section className="relative w-full overflow-hidden border-b border-stone-200/60 bg-[#0a2318]">
       <img
         src={galleryHeroImg}
-        alt="Gallery Hero"
+        alt="Varkala Sunset Sanctuary"
         className="absolute inset-0 w-full h-full object-cover brightness-105 saturate-110 object-center md:object-right"
+        loading="eager"
       />
 
-      {/* Dark emerald gradient overlay matching Our Services */}
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-emerald-deep/75 via-emerald-deep/40 to-emerald-deep/20 md:bg-gradient-to-r md:from-emerald-deep/70 md:via-emerald-deep/40 md:to-transparent"
-      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a2318]/80 via-[#0a2318]/50 to-[#0a2318]/25 md:bg-gradient-to-r md:from-[#0a2318]/80 md:via-[#0a2318]/45 md:to-transparent" />
 
       {/* Decorative Palm Frond branch on top-left */}
       <div className="absolute -top-6 -left-6 w-36 h-36 md:w-56 md:h-56 pointer-events-none opacity-10 text-white">
@@ -342,26 +608,38 @@ function GalleryHero() {
         </svg>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-24 sm:pt-28 md:pt-32 pb-14 sm:pb-16 md:pb-20 flex flex-col md:flex-row md:items-center md:justify-between gap-8 z-10">
-        {/* Left text block */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 flex flex-col md:flex-row md:items-center md:justify-between gap-6 z-10">
         <div className="max-w-xl">
-          <h1 className="font-serif font-bold text-4xl sm:text-5xl md:text-[3.25rem] text-cream tracking-tight leading-none uppercase drop-shadow-sm">
+          <span className="inline-block px-3 py-1 rounded-full bg-white/10 backdrop-blur-xs text-[#dfcaa9] text-[0.65rem] sm:text-xs tracking-[0.25em] uppercase font-semibold border border-white/15 mb-3">
+            Visual Sanctuary
+          </span>
+          <h1 className="font-serif font-bold text-3xl sm:text-4xl md:text-[3rem] text-[#fbfbfa] tracking-tight leading-tight uppercase drop-shadow-sm">
             OUR GALLERY
           </h1>
-          <p className="mt-2.5 font-serif text-lg sm:text-2xl text-cream/95 font-medium leading-snug drop-shadow-sm">
-            Moments of Healing, Learning and<br className="hidden sm:inline" /> Transformation
+          <p className="mt-2 font-serif text-base sm:text-xl text-[#fbfbfa]/95 font-medium leading-snug drop-shadow-sm">
+            Moments of Healing, Learning and Transformation
           </p>
-          <p className="mt-3 text-cream/80 text-sm sm:text-base leading-relaxed max-w-lg font-medium drop-shadow-sm">
-            A glimpse into our centre, our practices, our people and the beautiful surroundings of Varkala.
+          <p className="mt-2.5 text-[#fbfbfa]/80 text-xs sm:text-sm leading-relaxed max-w-lg font-medium drop-shadow-sm">
+            A glimpse into our sanctuary, yoga classes, authentic therapies, accommodation and the stunning coastline of Varkala.
           </p>
-          <p className="mt-5 font-serif text-sm sm:text-base tracking-[0.28em] font-bold text-gold uppercase drop-shadow-sm">
+          <p
+            className="mt-4 font-serif text-xs sm:text-sm tracking-[0.28em] uppercase"
+            style={{
+              color: "#D4AF37",
+              fontWeight: 800,
+              filter: "brightness(1.15) contrast(1.1)",
+              textShadow: "0 0 12px rgba(212, 175, 55, 0.4), 0 2px 6px rgba(0, 0, 0, 0.75)",
+            }}
+          >
             HEAL &nbsp;•&nbsp; HARMONIZE &nbsp;•&nbsp; TRANSFORM
           </p>
         </div>
 
-        {/* Right handwriting script quote */}
-        <div className="md:text-right select-none md:pr-4 lg:pr-10 flex flex-col items-start md:items-end justify-center">
-          <p className="font-handwriting text-2xl sm:text-3xl md:text-4xl text-white leading-[1.12] -rotate-3 font-bold" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.7), 0 0 12px rgba(0,0,0,0.4)' }}>
+        <div className="md:text-right select-none flex flex-col items-start md:items-end justify-center">
+          <p
+            className="font-handwriting text-2xl sm:text-3xl md:text-4xl text-white leading-[1.12] -rotate-2 font-bold"
+            style={{ textShadow: "2px 2px 6px rgba(0,0,0,0.7), 0 0 12px rgba(0,0,0,0.4)" }}
+          >
             Good People<br />
             Good Energy<br />
             Brighter Tomorrows
@@ -372,487 +650,298 @@ function GalleryHero() {
   );
 }
 
-// ── 2. Gallery Section (6 Cards in 2 Columns) ─────────────────────────────────
+// ── 2. Showcase Section (Grouped by Category) ──────────────────────────────────
 
-function GallerySection({
+function DynamicGallerySection({
   openLightbox,
   dynamicImages,
+  onSelectCategory,
 }: {
-  openLightbox: (images: (GalleryPhoto | string)[], idx: number, title: string) => void;
+  openLightbox: (images: GalleryPhoto[], idx: number, title: string) => void;
   dynamicImages: GalleryPhoto[];
+  onSelectCategory: (cat: string) => void;
 }) {
-  const getCatImages = (cat: string): GalleryPhoto[] => {
-    return dynamicImages.filter(
-      (img) => img.category && img.category.trim().toLowerCase() === cat.trim().toLowerCase()
-    );
-  };
+  const getCatImages = useCallback(
+    (cat: string): GalleryPhoto[] => {
+      return dynamicImages.filter(
+        (img) => (img.category || "").trim().toLowerCase() === cat.trim().toLowerCase()
+      );
+    },
+    [dynamicImages]
+  );
 
-  const centreImages = getCatImages("Our Centre");
-  const yogaImages = getCatImages("Yoga & Wellness");
-  const therapyImages = getCatImages("Wellness & Therapies");
   const nonAcImages = getCatImages("Deluxe Non-AC Room");
   const acImages = getCatImages("Deluxe AC Room");
-  const certImages = getCatImages("Certifications & Training");
-  const localImages = getCatImages("Local Experiences & Excursions");
+  const hasAccommodation = nonAcImages.length > 0 || acImages.length > 0;
+
+  const distinctCategories = useMemo(() => {
+    const set = new Set<string>();
+    dynamicImages.forEach((img) => {
+      const c = (img.category || "General").trim();
+      set.add(c);
+    });
+
+    const categories: string[] = [];
+    const lowerSet = new Set(Array.from(set).map((c) => c.toLowerCase()));
+
+    if (lowerSet.has("our centre")) categories.push("Our Centre");
+    if (lowerSet.has("yoga & wellness")) categories.push("Yoga & Wellness");
+    if (lowerSet.has("wellness & therapies")) categories.push("Wellness & Therapies");
+    if (hasAccommodation) categories.push("Our Accommodation");
+    if (lowerSet.has("certifications & training")) categories.push("Certifications & Training");
+    if (lowerSet.has("local experiences & excursions")) categories.push("Local Experiences & Excursions");
+
+    set.forEach((cat) => {
+      const lower = cat.toLowerCase();
+      if (
+        lower !== "our centre" &&
+        lower !== "yoga & wellness" &&
+        lower !== "wellness & therapies" &&
+        lower !== "deluxe ac room" &&
+        lower !== "deluxe non-ac room" &&
+        lower !== "our accommodation" &&
+        lower !== "certifications & training" &&
+        lower !== "local experiences & excursions"
+      ) {
+        categories.push(cat);
+      }
+    });
+
+    return categories;
+  }, [dynamicImages, hasAccommodation]);
 
   return (
-    <section className="py-10 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-        {/* 1 — OUR CENTRE */}
-        <CentreCard openLightbox={openLightbox} dynamicImages={centreImages} />
+        {distinctCategories.map((catName) => {
+          if (catName === "Our Accommodation") {
+            return (
+              <DynamicAccommodationCard
+                key="Our Accommodation"
+                openLightbox={openLightbox}
+                dynamicAcImages={acImages}
+                dynamicNonAcImages={nonAcImages}
+                onSelectCategory={onSelectCategory}
+              />
+            );
+          }
 
-        {/* 2 — YOGA & WELLNESS */}
-        <YogaCard openLightbox={openLightbox} dynamicImages={yogaImages} />
+          const catPhotos = getCatImages(catName);
+          if (catPhotos.length === 0) return null;
 
-        {/* 3 — WELLNESS & THERAPIES */}
-        <TherapiesCard openLightbox={openLightbox} dynamicImages={therapyImages} />
-
-        {/* 4 — OUR ACCOMMODATION */}
-        <AccommodationCard
-          openLightbox={openLightbox}
-          dynamicNonAcImages={nonAcImages}
-          dynamicAcImages={acImages}
-        />
-
-        {/* 5 — CERTIFICATIONS & TRAINING */}
-        <CertificationsCard openLightbox={openLightbox} dynamicImages={certImages} />
-
-        {/* 6 — LOCAL EXPERIENCES & EXCURSIONS */}
-        <LocalExcursionsCard openLightbox={openLightbox} dynamicImages={localImages} />
+          return (
+            <DynamicStandardCategoryCard
+              key={catName}
+              category={catName}
+              photos={catPhotos}
+              openLightbox={openLightbox}
+              onSelectCategory={onSelectCategory}
+            />
+          );
+        })}
       </div>
     </section>
   );
 }
 
-// ── Card 1: Our Centre ────────────────────────────────────────────────────────
+// ── 3. Standard Category Card (Showcase) ──────────────────────────────────────
 
-function CentreCard({
+function DynamicStandardCategoryCard({
+  category,
+  photos,
   openLightbox,
-  dynamicImages,
+  onSelectCategory,
 }: {
-  openLightbox: (images: (GalleryPhoto | string)[], idx: number, title: string) => void;
-  dynamicImages: GalleryPhoto[];
+  category: string;
+  photos: GalleryPhoto[];
+  openLightbox: (images: GalleryPhoto[], idx: number, title: string) => void;
+  onSelectCategory: (cat: string) => void;
 }) {
-  const staticImages: GalleryPhoto[] = [
-    { image: centre1, name: "Sunset Roof Practice" },
-    { image: centre2, name: "Beach Handstand Pose" },
-    { image: centre3, name: "Sea View Balance" },
-    { image: centre4, name: "Veranda Practice Space" },
-    { image: centre5, name: "Holistic Wellness Sanctuary" },
-    { image: centre6, name: "Centre View" },
-  ];
-  const images: GalleryPhoto[] = [...dynamicImages, ...staticImages];
-  const title = "Our Centre";
-  const mainImage = images[0];
-  const thumbnails = images.slice(1, 5);
+  const meta = getCategoryMeta(category);
+  const IconComponent = meta.icon;
+  const mainImage = photos[0];
+  const isExcursions = category.toLowerCase().includes("excursions");
+
+  // On mobile show up to 3 thumbnails, on tablet/desktop up to 4 or 5
+  const maxThumbnails = isExcursions ? 5 : 4;
+  const thumbnails = photos.slice(1, maxThumbnails + 1);
+  const remainingCount = Math.max(0, photos.length - (maxThumbnails + 1));
 
   return (
-    <article className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-5 sm:p-6 flex flex-col justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow duration-300">
+    <article className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-4 sm:p-6 flex flex-col justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow duration-300">
       <div>
-        {/* Card Header */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#143d2c] flex items-center justify-center text-white flex-shrink-0 shadow-xs">
-              <Home className="w-4 h-4" />
+        {/* Card Header (Responsive, no text collision on mobile) */}
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-3 mb-4">
+          <div className="flex items-start gap-2.5 min-w-0">
+            <div className="w-8 h-8 rounded-full bg-[#143d2c] flex items-center justify-center text-white flex-shrink-0 shadow-xs mt-0.5">
+              <IconComponent className="w-4 h-4" />
             </div>
-            <div>
-              <h2 className="font-serif font-bold text-sm sm:text-base text-[#143d2c] tracking-wider uppercase">
-                OUR CENTRE
-              </h2>
-              <p className="text-xs text-stone-500 mt-0.5 leading-snug">
-                Explore our peaceful wellness space.
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h2 className="font-serif font-bold text-sm sm:text-base text-[#143d2c] tracking-wider uppercase truncate">
+                  {category}
+                </h2>
+              </div>
+              <p className="text-xs text-stone-500 mt-0.5 leading-snug line-clamp-2">
+                {meta.subtitle}
               </p>
             </div>
           </div>
-          <div className="text-right flex-shrink-0">
-            <p className="font-serif italic text-xs leading-tight text-[#8c5a2c]">
-              A home for<br />healing and growth
+          <div className="text-left sm:text-right flex-shrink-0 pl-10 sm:pl-0">
+            <p className="font-serif italic text-xs leading-tight text-[#8c5a2c] whitespace-pre-line hidden sm:block">
+              {meta.tagline}
             </p>
           </div>
         </div>
 
-        {/* Main Featured Photo */}
-        <div
-          onClick={() => openLightbox(images, 0, title)}
-          className="aspect-[16/9] w-full rounded-xl overflow-hidden cursor-pointer group relative bg-stone-100"
-        >
-          <img
-            src={resolveImageUrl(mainImage.image)}
-            alt={mainImage.name || "Dr. Vikram Yoga & Wellness Centre"}
-            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
-            loading="lazy"
-          />
-          {mainImage.name && (
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-3 pt-7 text-white pointer-events-none">
-              <p className="font-serif text-xs sm:text-sm font-medium tracking-wide drop-shadow-sm truncate">
-                {mainImage.name}
+        {/* Main Featured Photo (16:10 aspect, responsive on all devices) */}
+        {mainImage && (
+          <div
+            onClick={() => openLightbox(photos, 0, category)}
+            className="aspect-[16/10] sm:aspect-[16/9] w-full rounded-xl overflow-hidden cursor-pointer group relative bg-stone-100 shadow-2xs"
+          >
+            <ImageWithFallback
+              src={mainImage.image}
+              alt={mainImage.name || category}
+              className="group-hover:scale-[1.03] transition-transform duration-500"
+            />
+            {/* Overlay Caption Chip */}
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-3 pt-6 flex items-end justify-between gap-2 pointer-events-none">
+              <p className="font-serif text-xs sm:text-sm font-medium tracking-wide text-white drop-shadow-sm truncate">
+                {mainImage.name || category}
               </p>
+              <span className="shrink-0 text-[0.65rem] text-[#dfcaa9] bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-full border border-white/10 flex items-center gap-1">
+                <Maximize2 className="w-2.5 h-2.5" />
+                <span>Enlarge</span>
+              </span>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
-        {/* 4 Thumbnails */}
-        <div className="grid grid-cols-4 gap-2 mt-2.5">
-          {thumbnails.map((thumb, idx) => (
-            <div
-              key={idx}
-              onClick={() => openLightbox(images, idx + 1, title)}
-              className="aspect-[4/3] rounded-lg overflow-hidden cursor-pointer group bg-stone-100 relative"
-              title={thumb.name}
-            >
-              <img
-                src={resolveImageUrl(thumb.image)}
-                alt={thumb.name || `Our Centre thumbnail ${idx + 1}`}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              {thumb.name && (
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-1.5 py-1 text-center pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity">
-                  <p className="text-[0.55rem] text-white font-medium truncate drop-shadow-xs">
-                    {thumb.name}
-                  </p>
+        {/* Responsive Thumbnails Row */}
+        {thumbnails.length > 0 && (
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-2.5 mt-2.5">
+            {thumbnails.map((thumb, idx) => {
+              const isLastTile = idx === thumbnails.length - 1 && remainingCount > 0;
+              return (
+                <div
+                  key={thumb.id || idx}
+                  onClick={() => openLightbox(photos, idx + 1, category)}
+                  className="aspect-[4/3] rounded-lg overflow-hidden cursor-pointer group bg-stone-100 relative shadow-2xs"
+                  title={thumb.name}
+                >
+                  <ImageWithFallback
+                    src={thumb.image}
+                    alt={thumb.name || `${category} thumbnail ${idx + 1}`}
+                    className="group-hover:scale-105 transition-transform duration-500"
+                  />
+
+                  {/* "View More Images" overlay on the last thumbnail */}
+                  {isLastTile ? (
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectCategory(category);
+                      }}
+                      className="absolute inset-0 bg-[#0a2318]/85 backdrop-blur-2xs flex flex-col items-center justify-center text-white text-center p-1 hover:bg-[#0a2318]/95 transition-colors"
+                    >
+                      <span className="font-semibold text-xs sm:text-sm font-serif leading-tight">View More</span>
+                      <span className="text-[0.6rem] text-emerald-200">Images</span>
+                    </div>
+                  ) : (
+                    // Subtle title badge on hover
+                    thumb.name && (
+                      <div className="absolute inset-x-0 bottom-0 bg-black/70 p-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-center">
+                        <p className="text-[0.55rem] text-white truncate">{thumb.name}</p>
+                      </div>
+                    )
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
-      {/* Centered Button */}
-      <div className="flex justify-center mt-5">
+      {/* Action Button Row */}
+      <div className="flex items-center justify-between gap-2 pt-4 mt-4 border-t border-stone-100 flex-wrap">
         <button
-          onClick={() => openLightbox(images, 0, title)}
-          className="px-8 py-2 rounded-full bg-[#143d2c] hover:bg-[#1c523b] text-white font-serif text-[0.68rem] tracking-[0.18em] font-semibold flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
+          type="button"
+          onClick={() => onSelectCategory(category)}
+          className="text-xs font-serif font-semibold text-[#143d2c] hover:underline cursor-pointer flex items-center gap-1 shrink-0"
         >
-          VIEW ALL PHOTOS &nbsp;→
+          <span>View Grid</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => openLightbox(photos, 0, category)}
+          className="px-4 sm:px-6 py-2 rounded-full bg-[#143d2c] hover:bg-[#1c523b] text-white font-serif text-[0.62rem] sm:text-[0.68rem] tracking-[0.14em] sm:tracking-[0.16em] font-semibold flex items-center gap-1.5 transition-all shadow-xs active:scale-95 cursor-pointer whitespace-nowrap ml-auto"
+        >
+          <span>VIEW ALL PHOTOS</span>
+          <span>→</span>
         </button>
       </div>
     </article>
   );
 }
 
-// ── Card 2: Yoga & Wellness ───────────────────────────────────────────────────
+// ── 4. Accommodation Card (Showcase) ──────────────────────────────────────────
 
-function YogaCard({
+function DynamicAccommodationCard({
   openLightbox,
-  dynamicImages,
-}: {
-  openLightbox: (images: (GalleryPhoto | string)[], idx: number, title: string) => void;
-  dynamicImages: GalleryPhoto[];
-}) {
-  const staticImages: GalleryPhoto[] = [
-    { image: yoga1, name: "Group Asana Session" },
-    { image: yoga2, name: "Breath & Movement Practice" },
-    { image: yoga3, name: "Aligning the Posture" },
-    { image: yoga4, name: "Morning Vinyasa Flow" },
-    { image: yoga5, name: "Pranayama & Focus" },
-    { image: yoga6, name: "Strength & Flexibility" },
-    { image: yoga7, name: "Guided Practice" },
-    { image: yoga8, name: "Deep Stretch Session" },
-    { image: yoga9, name: "Mindful Alignment" },
-    { image: yoga10, name: "Intensive Practice" },
-    { image: yoga11, name: "Savasana & Relaxation" },
-  ];
-  const images: GalleryPhoto[] = [...dynamicImages, ...staticImages];
-  const title = "Yoga & Wellness";
-  const mainImage = images[0];
-  const thumbnails = images.slice(1, 5);
-
-  return (
-    <article className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-5 sm:p-6 flex flex-col justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow duration-300">
-      <div>
-        {/* Card Header */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#143d2c] flex items-center justify-center text-white flex-shrink-0 shadow-xs">
-              <YogaIcon className="w-4 h-4" />
-            </div>
-            <div>
-              <h2 className="font-serif font-bold text-sm sm:text-base text-[#143d2c] tracking-wider uppercase">
-                YOGA & WELLNESS
-              </h2>
-              <p className="text-xs text-stone-500 mt-0.5 leading-snug">
-                Moments of movement, mindfulness and well-being.
-              </p>
-            </div>
-          </div>
-          <div className="text-right flex-shrink-0">
-            <p className="font-serif italic text-xs leading-tight text-[#8c5a2c]">
-              Breathe<br />Move<br />Be Present
-            </p>
-          </div>
-        </div>
-
-        {/* Main Featured Photo */}
-        <div
-          onClick={() => openLightbox(images, 0, title)}
-          className="aspect-[16/9] w-full rounded-xl overflow-hidden cursor-pointer group relative bg-stone-100"
-        >
-          <img
-            src={resolveImageUrl(mainImage.image)}
-            alt={mainImage.name || "Yoga and meditation overlooking sea at sunset"}
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            loading="lazy"
-          />
-          {mainImage.name && (
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-3 pt-7 text-white pointer-events-none">
-              <p className="font-serif text-xs sm:text-sm font-medium tracking-wide drop-shadow-sm truncate">
-                {mainImage.name}
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* 4 Thumbnails */}
-        <div className="grid grid-cols-4 gap-2 mt-2.5">
-          {thumbnails.map((thumb, idx) => (
-            <div
-              key={idx}
-              onClick={() => openLightbox(images, idx + 1, title)}
-              className="aspect-[4/3] rounded-lg overflow-hidden cursor-pointer group bg-stone-100 relative"
-              title={thumb.name}
-            >
-              <img
-                src={resolveImageUrl(thumb.image)}
-                alt={thumb.name || `Yoga session thumbnail ${idx + 1}`}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              {thumb.name && (
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-1.5 py-1 text-center pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity">
-                  <p className="text-[0.55rem] text-white font-medium truncate drop-shadow-xs">
-                    {thumb.name}
-                  </p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Centered Button */}
-      <div className="flex justify-center mt-5">
-        <button
-          onClick={() => openLightbox(images, 0, title)}
-          className="px-8 py-2 rounded-full bg-[#143d2c] hover:bg-[#1c523b] text-white font-serif text-[0.68rem] tracking-[0.18em] font-semibold flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
-        >
-          VIEW ALL PHOTOS &nbsp;→
-        </button>
-      </div>
-    </article>
-  );
-}
-
-// ── Card 3: Wellness & Therapies ──────────────────────────────────────────────
-
-function TherapiesCard({
-  openLightbox,
-  dynamicImages,
-}: {
-  openLightbox: (images: (GalleryPhoto | string)[], idx: number, title: string) => void;
-  dynamicImages: GalleryPhoto[];
-}) {
-  const staticImages: GalleryPhoto[] = [
-    { image: therapy1, name: "Traditional Ayurvedic Massage" },
-    { image: therapy11, name: "Ayurvedic Treatment" },
-    { image: therapy2, name: "Acupuncture Therapy" },
-    { image: therapy8, name: "Reflexology Session" },
-    { image: therapy4, name: "Cupping Therapy" },
-    { image: therapy3, name: "Ayurvedic Care" },
-    { image: therapy5, name: "Deep Tissue Massage" },
-    { image: therapy6, name: "Dorn Therapy" },
-    { image: therapy7, name: "Shiatsu Massage" },
-    { image: therapy9, name: "Swedish Massage" },
-    { image: therapy10, name: "Thai Massage" },
-    { image: therapy12, name: "Natural Herbal Oils" },
-    { image: therapy13, name: "Holistic Rest" },
-    { image: therapy14, name: "Therapeutic Healing" },
-    { image: therapy15, name: "Body Balance" },
-  ];
-  const images: GalleryPhoto[] = [...dynamicImages, ...staticImages];
-  const title = "Wellness & Therapies";
-  const mainImage = images[0];
-  const thumbnails = images.slice(1, 5);
-
-  return (
-    <article className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-5 sm:p-6 flex flex-col justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow duration-300">
-      <div>
-        {/* Card Header */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#143d2c] flex items-center justify-center text-white flex-shrink-0 shadow-xs">
-              <Leaf className="w-4 h-4" />
-            </div>
-            <div>
-              <h2 className="font-serif font-bold text-sm sm:text-base text-[#143d2c] tracking-wider uppercase">
-                WELLNESS & THERAPIES
-              </h2>
-              <p className="text-xs text-stone-500 mt-0.5 leading-snug">
-                Holistic therapies supporting relaxation, balance and well-being.
-              </p>
-            </div>
-          </div>
-          <div className="text-right flex-shrink-0">
-            <p className="font-serif italic text-xs leading-tight text-[#8c5a2c]">
-              Natural Therapies<br />Real Healing
-            </p>
-          </div>
-        </div>
-
-        {/* Main Featured Photo */}
-        <div
-          onClick={() => openLightbox(images, 0, title)}
-          className="aspect-[16/9] w-full rounded-xl overflow-hidden cursor-pointer group relative bg-stone-100"
-        >
-          <img
-            src={resolveImageUrl(mainImage.image)}
-            alt={mainImage.name || "Traditional Ayurvedic massage therapy session"}
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            loading="lazy"
-          />
-          {mainImage.name && (
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-3 pt-7 text-white pointer-events-none">
-              <p className="font-serif text-xs sm:text-sm font-medium tracking-wide drop-shadow-sm truncate">
-                {mainImage.name}
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* 4 Thumbnails */}
-        <div className="grid grid-cols-4 gap-2 mt-2.5">
-          {thumbnails.map((thumb, idx) => (
-            <div
-              key={idx}
-              onClick={() => openLightbox(images, idx + 1, title)}
-              className="aspect-[4/3] rounded-lg overflow-hidden cursor-pointer group bg-stone-100 relative"
-              title={thumb.name}
-            >
-              <img
-                src={resolveImageUrl(thumb.image)}
-                alt={thumb.name || `Therapy thumbnail ${idx + 1}`}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              {thumb.name && (
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-1.5 py-1 text-center pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity">
-                  <p className="text-[0.55rem] text-white font-medium truncate drop-shadow-xs">
-                    {thumb.name}
-                  </p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Centered Button */}
-      <div className="flex justify-center mt-5">
-        <button
-          onClick={() => openLightbox(images, 0, title)}
-          className="px-8 py-2 rounded-full bg-[#143d2c] hover:bg-[#1c523b] text-white font-serif text-[0.68rem] tracking-[0.18em] font-semibold flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
-        >
-          VIEW ALL PHOTOS &nbsp;→
-        </button>
-      </div>
-    </article>
-  );
-}
-
-// ── Card 4: Our Accommodation ─────────────────────────────────────────────────
-
-function AccommodationCard({
-  openLightbox,
-  dynamicNonAcImages,
   dynamicAcImages,
+  dynamicNonAcImages,
+  onSelectCategory,
 }: {
-  openLightbox: (images: (GalleryPhoto | string)[], idx: number, title: string) => void;
-  dynamicNonAcImages: GalleryPhoto[];
+  openLightbox: (images: GalleryPhoto[], idx: number, title: string) => void;
   dynamicAcImages: GalleryPhoto[];
+  dynamicNonAcImages: GalleryPhoto[];
+  onSelectCategory: (cat: string) => void;
 }) {
-  const [activeTab, setActiveTab] = useState<"ac" | "non-ac">("ac");
+  const [activeTab, setActiveTab] = useState<"ac" | "non-ac">(
+    dynamicAcImages.length > 0 ? "ac" : "non-ac"
+  );
 
-  // All 16 unique Deluxe Non-AC Room images — dynamic images prepended
-  const staticNonAcImages: GalleryPhoto[] = [
-    { image: nonAc24, name: "Deluxe Non-AC Master View" },
-    { image: nonAcMain, name: "Bed & Wardrobe" },
-    { image: nonAc1, name: "Seating Area" },
-    { image: nonAc7, name: "Veranda Walk" },
-    { image: nonAc10, name: "Room Corner" },
-    { image: nonAc28, name: "Washbasin & Mirror" },
-    { image: nonAc20, name: "Window Light" },
-    { image: nonAc5, name: "Bedroom Angle" },
-    { image: nonAc6, name: "Spacious Layout" },
-    { image: nonAc8, name: "Wooden Accents" },
-    { image: nonAc9, name: "Tranquil Interior" },
-    { image: nonAc11, name: "Peaceful Sleep" },
-    { image: nonAc17, name: "Garden Facing" },
-    { image: nonAc18, name: "Breeze Veranda" },
-    { image: nonAc22, name: "Natural Wood" },
-    { image: nonAc29, name: "Bathroom Interior" },
-  ];
-  const deluxeNonAcImages: GalleryPhoto[] = [...dynamicNonAcImages, ...staticNonAcImages];
+  const allAccommodationImages = useMemo(
+    () => [...dynamicAcImages, ...dynamicNonAcImages],
+    [dynamicAcImages, dynamicNonAcImages]
+  );
 
-  // All 8 authentic Deluxe AC Room images — dynamic images prepended
-  const staticAcImages: GalleryPhoto[] = [
-    { image: nonAc12, name: "Deluxe AC Master Bedroom" },
-    { image: nonAc13, name: "Room Ambiance" },
-    { image: nonAc14, name: "Ensuite Bathroom" },
-    { image: nonAc15, name: "Cooling & Comfort" },
-    { image: nonAc21, name: "Courtyard View" },
-    { image: nonAc23, name: "Relaxation Space" },
-    { image: nonAc25, name: "Modern Amenities" },
-    { image: nonAc26, name: "Clean Living" },
-  ];
-  const acRoomImages: GalleryPhoto[] = [...dynamicAcImages, ...staticAcImages];
-
-  const allAccommodationImages: GalleryPhoto[] = [
-    ...acRoomImages,
-    ...deluxeNonAcImages,
-  ];
-
-  // 4 highlighted thumbnails for Non-AC room
-  const nonAcThumbnails = [
-    { src: resolveImageUrl(deluxeNonAcImages[1]?.image || nonAcMain), label: deluxeNonAcImages[1]?.name || "Bed & Wardrobe" },
-    { src: resolveImageUrl(deluxeNonAcImages[2]?.image || nonAc1), label: deluxeNonAcImages[2]?.name || "Seating Area" },
-    { src: resolveImageUrl(deluxeNonAcImages[3]?.image || nonAc7), label: deluxeNonAcImages[3]?.name || "Veranda Walk" },
-    { src: resolveImageUrl(deluxeNonAcImages[4]?.image || nonAc28), label: deluxeNonAcImages[4]?.name || "Washbasin & Mirror" },
-  ];
-
-  const acThumbnails = [
-    { src: resolveImageUrl(acRoomImages[0]?.image || nonAc12), label: acRoomImages[0]?.name || "Bedroom" },
-    { src: resolveImageUrl(acRoomImages[1]?.image || nonAc13), label: acRoomImages[1]?.name || "Room Ambiance" },
-    { src: resolveImageUrl(acRoomImages[2]?.image || nonAc14), label: acRoomImages[2]?.name || "Ensuite Bathroom" },
-    { src: resolveImageUrl(acRoomImages[3]?.image || nonAc21), label: acRoomImages[3]?.name || "Courtyard View" },
-  ];
-
-  const activeThumbnails = activeTab === "ac" ? acThumbnails : nonAcThumbnails;
-  const activePhotos = activeTab === "ac" ? acRoomImages : deluxeNonAcImages;
+  const activePhotos = activeTab === "ac" ? dynamicAcImages : dynamicNonAcImages;
   const activeTitle =
     activeTab === "ac"
       ? "Accommodation — Deluxe AC Room"
       : "Accommodation — Deluxe Non-AC Room";
 
+  const acFeatured = dynamicAcImages[0];
+  const nonAcFeatured = dynamicNonAcImages[0];
+
+  const activeThumbnails = activePhotos.slice(1, 5);
+  const remainingCount = Math.max(0, activePhotos.length - 5);
+
   return (
-    <article className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-5 sm:p-6 flex flex-col justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow duration-300">
+    <article className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-4 sm:p-6 flex flex-col justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow duration-300">
       <div>
         {/* Card Header */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#143d2c] flex items-center justify-center text-white flex-shrink-0 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-3 mb-4">
+          <div className="flex items-start gap-2.5 min-w-0">
+            <div className="w-8 h-8 rounded-full bg-[#143d2c] flex items-center justify-center text-white flex-shrink-0 shadow-xs mt-0.5">
               <BedDouble className="w-4 h-4" />
             </div>
-            <div>
-              <h2 className="font-serif font-bold text-sm sm:text-base text-[#143d2c] tracking-wider uppercase">
-                OUR ACCOMMODATION
-              </h2>
-              <p className="text-xs text-stone-500 mt-0.5 leading-snug">
-                Comfortable stays for rest, relaxation and rejuvenation.
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h2 className="font-serif font-bold text-sm sm:text-base text-[#143d2c] tracking-wider uppercase">
+                  OUR ACCOMMODATION
+                </h2>
+              </div>
+              <p className="text-xs text-stone-500 mt-0.5 leading-snug line-clamp-2">
+                Comfortable stays for rest, relaxation, and rejuvenation.
               </p>
             </div>
           </div>
-          <div className="text-right flex-shrink-0">
-            <p className="font-serif italic text-xs leading-tight text-[#8c5a2c]">
+          <div className="text-left sm:text-right flex-shrink-0 pl-10 sm:pl-0">
+            <p className="font-serif italic text-xs leading-tight text-[#8c5a2c] hidden sm:block">
               Simple Stays<br />Deeper Rest
             </p>
           </div>
@@ -863,355 +952,316 @@ function AccommodationCard({
           <button
             type="button"
             onClick={() => setActiveTab("ac")}
-            className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-serif font-semibold tracking-wide transition-all cursor-pointer ${
+            className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-serif font-semibold tracking-wide transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
               activeTab === "ac"
                 ? "bg-[#143d2c] text-white shadow-xs"
                 : "text-stone-600 hover:text-stone-900"
             }`}
           >
-           Deluxe AC Room
+            <span>Deluxe AC Room</span>
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("non-ac")}
-            className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-serif font-semibold tracking-wide transition-all cursor-pointer ${
+            className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-serif font-semibold tracking-wide transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
               activeTab === "non-ac"
                 ? "bg-[#143d2c] text-white shadow-xs"
                 : "text-stone-600 hover:text-stone-900"
             }`}
           >
-            Deluxe Non-AC Room
+            <span>Deluxe Non-AC Room</span>
           </button>
         </div>
 
-        {/* Two Featured Rooms Side-by-Side: AC on Left, Non-AC on Right (matching tabs directly above) */}
-        <div className="grid grid-cols-2 gap-3">
-          {/* Deluxe AC Room (Left, directly below Deluxe AC tab) */}
-          <div
-            onClick={() => {
-              setActiveTab("ac");
-              openLightbox(acRoomImages, 0, "Accommodation — Deluxe AC Room");
-            }}
-            className={`cursor-pointer rounded-xl p-1 transition-all ${
-              activeTab === "ac" ? "ring-2 ring-[#143d2c]/70 bg-emerald-50/40" : ""
-            }`}
-          >
-            <div className="aspect-[16/11] w-full rounded-lg overflow-hidden group relative bg-stone-100">
-              <img
-                src={resolveImageUrl(acRoomImages[0]?.image || nonAc12)}
-                alt="Deluxe AC Room"
-                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                loading="lazy"
-              />
+        {/* Room Previews: Responsive 1 col on mobile, 2 col on tablet/desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Deluxe AC Room */}
+          {acFeatured && (
+            <div
+              onClick={() => {
+                setActiveTab("ac");
+                openLightbox(dynamicAcImages, 0, "Accommodation — Deluxe AC Room");
+              }}
+              className={`cursor-pointer rounded-xl p-1.5 transition-all ${
+                activeTab === "ac"
+                  ? "ring-2 ring-[#143d2c]/80 bg-emerald-50/60 shadow-xs"
+                  : "hover:bg-stone-50 border border-stone-200/60"
+              }`}
+            >
+              <div className="aspect-[16/11] w-full rounded-lg overflow-hidden group relative bg-stone-100">
+                <ImageWithFallback
+                  src={acFeatured.image}
+                  alt={acFeatured.name || "Deluxe AC Room"}
+                  className="group-hover:scale-[1.03] transition-transform duration-500"
+                />
+              </div>
+              <div className="flex items-center justify-between mt-1.5 px-1">
+                <p className="font-serif text-xs text-stone-900 font-bold truncate">
+                  {acFeatured.name || "Deluxe AC Room"}
+                </p>
+                <span className="text-[0.65rem] text-[#143d2c] font-semibold hover:underline shrink-0 ml-1">
+                  View →
+                </span>
+              </div>
             </div>
-            <div className="flex items-center justify-between mt-1.5 px-1">
-              <p className="font-serif text-xs text-stone-900 font-bold">
-                Deluxe AC Room
-              </p>
-              <span className="text-[0.65rem] text-[#143d2c] font-medium hover:underline">
-                View →
-              </span>
-            </div>
-          </div>
+          )}
 
-          {/* Deluxe Non-AC Room (Right, directly below Deluxe Non-AC tab) */}
-          <div
-            onClick={() => {
-              setActiveTab("non-ac");
-              openLightbox(deluxeNonAcImages, 0, "Accommodation — Deluxe Non-AC Room");
-            }}
-            className={`cursor-pointer rounded-xl p-1 transition-all ${
-              activeTab === "non-ac" ? "ring-2 ring-[#143d2c]/70 bg-emerald-50/40" : ""
-            }`}
-          >
-            <div className="aspect-[16/11] w-full rounded-lg overflow-hidden group relative bg-stone-100">
-              <img
-                src={resolveImageUrl(deluxeNonAcImages[0]?.image || nonAc24)}
-                alt="Deluxe Non-AC Room"
-                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                loading="lazy"
-              />
+          {/* Deluxe Non-AC Room */}
+          {nonAcFeatured && (
+            <div
+              onClick={() => {
+                setActiveTab("non-ac");
+                openLightbox(dynamicNonAcImages, 0, "Accommodation — Deluxe Non-AC Room");
+              }}
+              className={`cursor-pointer rounded-xl p-1.5 transition-all ${
+                activeTab === "non-ac"
+                  ? "ring-2 ring-[#143d2c]/80 bg-emerald-50/60 shadow-xs"
+                  : "hover:bg-stone-50 border border-stone-200/60"
+              }`}
+            >
+              <div className="aspect-[16/11] w-full rounded-lg overflow-hidden group relative bg-stone-100">
+                <ImageWithFallback
+                  src={nonAcFeatured.image}
+                  alt={nonAcFeatured.name || "Deluxe Non-AC Room"}
+                  className="group-hover:scale-[1.03] transition-transform duration-500"
+                />
+              </div>
+              <div className="flex items-center justify-between mt-1.5 px-1">
+                <p className="font-serif text-xs text-stone-900 font-bold truncate">
+                  {nonAcFeatured.name || "Deluxe Non-AC Room"}
+                </p>
+                <span className="text-[0.65rem] text-[#143d2c] font-semibold hover:underline shrink-0 ml-1">
+                  View →
+                </span>
+              </div>
             </div>
-            <div className="flex items-center justify-between mt-1.5 px-1">
-              <p className="font-serif text-xs text-stone-900 font-bold">
-                Deluxe Non-AC Room
-              </p>
-              <span className="text-[0.65rem] text-[#143d2c] font-medium hover:underline">
-                View →
-              </span>
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Accommodation Thumbnails Preview */}
-        <div className="grid grid-cols-4 gap-2 mt-3">
-          {activeThumbnails.map((thumb, idx) => (
-            <div
-              key={idx}
-              onClick={() =>
-                openLightbox(activePhotos, idx + 1, activeTitle)
-              }
-              className="aspect-[4/3] rounded-lg overflow-hidden cursor-pointer group bg-stone-100 relative"
-            >
-              <img
-                src={thumb.src}
-                alt={thumb.label}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
+        {activeThumbnails.length > 0 && (
+          <div className="grid grid-cols-4 gap-2 mt-3">
+            {activeThumbnails.map((thumb, idx) => {
+              const isLastTile = idx === activeThumbnails.length - 1 && remainingCount > 0;
+              return (
+                <div
+                  key={thumb.id || idx}
+                  onClick={() => openLightbox(activePhotos, idx + 1, activeTitle)}
+                  className="aspect-[4/3] rounded-lg overflow-hidden cursor-pointer group bg-stone-100 relative shadow-2xs"
+                  title={thumb.name}
+                >
+                  <ImageWithFallback
+                    src={thumb.image}
+                    alt={thumb.name || `${activeTitle} photo ${idx + 1}`}
+                    className="group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {isLastTile && (
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectCategory(
+                          activeTab === "ac" ? "Deluxe AC Room" : "Deluxe Non-AC Room"
+                        );
+                      }}
+                      className="absolute inset-0 bg-[#0a2318]/85 backdrop-blur-2xs flex flex-col items-center justify-center text-white text-center p-1 hover:bg-[#0a2318]/95 transition-colors"
+                    >
+                      <span className="font-semibold text-xs font-serif leading-tight">View More</span>
+                      <span className="text-[0.55rem] text-emerald-200">Images</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
-      {/* Centered Action Button */}
-      <div className="flex flex-col items-center gap-1.5 mt-5">
-        <button
-          onClick={() => openLightbox(activePhotos, 0, activeTitle)}
-          className="px-8 py-2 rounded-full bg-[#143d2c] hover:bg-[#1c523b] text-white font-serif text-[0.68rem] tracking-[0.18em] font-semibold flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
-        >
-          {activeTab === "ac"
-            ? "VIEW DELUXE AC →"
-            : "VIEW DELUXE NON-AC →"}
-        </button>
+      {/* Action Buttons */}
+      <div className="flex items-center justify-between gap-2 pt-4 mt-4 border-t border-stone-100 flex-wrap">
         <button
           type="button"
           onClick={() =>
-            openLightbox(allAccommodationImages, 0, "Our Accommodation")
+            onSelectCategory(activeTab === "ac" ? "Deluxe AC Room" : "Deluxe Non-AC Room")
           }
-          className="text-[0.65rem] text-stone-500 hover:text-stone-800 font-serif tracking-wider underline cursor-pointer"
+          className="text-xs font-serif font-semibold text-[#143d2c] hover:underline cursor-pointer flex items-center gap-1 shrink-0"
         >
-          View all accommodation photos
+          <span>View Grid</span>
         </button>
-      </div>
-    </article>
-  );
-}
 
-// ── Card 5: Certifications & Training ─────────────────────────────────────────
-
-function CertificationsCard({
-  openLightbox,
-  dynamicImages = [],
-}: {
-  openLightbox: (images: (GalleryPhoto | string)[], idx: number, title: string) => void;
-  dynamicImages?: GalleryPhoto[];
-}) {
-  const staticImages: GalleryPhoto[] = [
-    { image: cert1, name: "100h Teacher Training Ceremony" },
-    { image: cert3, name: "200h Luxury Training" },
-    { image: cert4, name: "300h Advanced Training" },
-    { image: cert5, name: "Dr. Chandra Kumar & Teachers" },
-    { image: cert6, name: "Classroom Practice Session" },
-    { image: cert2, name: "200h Standard Training" },
-    { image: cert7, name: "Yoga Master Guidance" },
-    { image: cert8, name: "Founder Guidance & Wisdom" },
-  ];
-  const images: GalleryPhoto[] = [...dynamicImages, ...staticImages];
-  const title = "Certifications & Training";
-  const mainImage = images[0];
-  const thumbnails = images.slice(1, 5);
-
-  return (
-    <article className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-5 sm:p-6 flex flex-col justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow duration-300">
-      <div>
-        {/* Card Header */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#143d2c] flex items-center justify-center text-white flex-shrink-0 shadow-xs">
-              <GraduationCap className="w-4 h-4" />
-            </div>
-            <div>
-              <h2 className="font-serif font-bold text-sm sm:text-base text-[#143d2c] tracking-wider uppercase">
-                CERTIFICATIONS & TRAINING
-              </h2>
-              <p className="text-xs text-stone-500 mt-0.5 leading-snug">
-                Celebrating learning, achievement and professional growth.
-              </p>
-            </div>
-          </div>
-          <div className="text-right flex-shrink-0">
-            <p className="font-serif italic text-xs leading-tight text-[#8c5a2c]">
-              Knowledge Today<br />A Healthier Tomorrow
-            </p>
-          </div>
-        </div>
-
-        {/* Main Featured Photo */}
-        <div
-          onClick={() => openLightbox(images, 0, title)}
-          className="aspect-[16/9] w-full rounded-xl overflow-hidden cursor-pointer group relative bg-stone-100"
-        >
-          <img
-            src={resolveImageUrl(mainImage.image)}
-            alt={mainImage.name || "Yoga teachers certification and graduation ceremony"}
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            loading="lazy"
-          />
-          {mainImage.name && (
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-3 pt-7 text-white pointer-events-none">
-              <p className="font-serif text-xs sm:text-sm font-medium tracking-wide drop-shadow-sm truncate">
-                {mainImage.name}
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* 4 Thumbnails */}
-        <div className="grid grid-cols-4 gap-2 mt-2.5">
-          {thumbnails.map((thumb, idx) => (
-            <div
-              key={idx}
-              onClick={() => openLightbox(images, idx + 1, title)}
-              className="aspect-[4/3] rounded-lg overflow-hidden cursor-pointer group bg-stone-100 relative"
-              title={thumb.name}
-            >
-              <img
-                src={resolveImageUrl(thumb.image)}
-                alt={thumb.name || `Training certification photo ${idx + 1}`}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              {thumb.name && (
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-1.5 py-1 text-center pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity">
-                  <p className="text-[0.55rem] text-white font-medium truncate drop-shadow-xs">
-                    {thumb.name}
-                  </p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Centered Button */}
-      <div className="flex justify-center mt-5">
         <button
-          onClick={() => openLightbox(images, 0, title)}
-          className="px-8 py-2 rounded-full bg-[#143d2c] hover:bg-[#1c523b] text-white font-serif text-[0.68rem] tracking-[0.18em] font-semibold flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
+          type="button"
+          onClick={() => openLightbox(activePhotos, 0, activeTitle)}
+          className="px-4 sm:px-6 py-2 rounded-full bg-[#143d2c] hover:bg-[#1c523b] text-white font-serif text-[0.62rem] sm:text-[0.68rem] tracking-[0.14em] sm:tracking-[0.16em] font-semibold flex items-center gap-1.5 transition-all shadow-xs active:scale-95 cursor-pointer whitespace-nowrap ml-auto"
         >
-          VIEW ALL PHOTOS &nbsp;→
+          <span>{activeTab === "ac" ? "VIEW DELUXE AC →" : "VIEW DELUXE NON-AC →"}</span>
         </button>
       </div>
     </article>
   );
 }
 
-// ── Card 6: Local Experiences & Excursions ────────────────────────────────────
+// ── 5. Category Full Grid View (When a Category is Selected) ──────────────────
 
-function LocalExcursionsCard({
+function CategoryFullGridView({
+  category,
+  photos,
   openLightbox,
-  dynamicImages = [],
+  onResetFilter,
 }: {
-  openLightbox: (images: (GalleryPhoto | string)[], idx: number, title: string) => void;
-  dynamicImages?: GalleryPhoto[];
+  category: string;
+  photos: GalleryPhoto[];
+  openLightbox: (images: GalleryPhoto[], idx: number, title: string) => void;
+  onResetFilter: () => void;
 }) {
-  const staticExcursions: GalleryPhoto[] = [
-    { name: "Varkala Beach", image: local1 },
-    { name: "Varkala Cliff", image: varkalaSunsetSea },
-    { name: "Janardanaswamy Temple", image: local2 },
-    { name: "Kappil Beach", image: local5 },
-    { name: "Kappil Lake", image: local6 },
-    { name: "Local Life & Culture", image: local7 },
-    { name: "Varkala Coastline", image: local3 },
-    { name: "Healing Atmosphere", image: local8 },
-    { name: "Sunset Practice", image: local9 },
-    { name: "Tropical Nature", image: local10 },
-  ];
-
-  const allImages: GalleryPhoto[] = [...dynamicImages, ...staticExcursions];
-  const title = "Local Experiences & Excursions";
-  const mainImage = allImages[0];
-  const thumbnails = allImages.slice(0, 6);
+  const meta = getCategoryMeta(category);
+  const IconComponent = meta.icon;
 
   return (
-    <article className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-5 sm:p-6 flex flex-col justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow duration-300">
-      <div>
-        {/* Card Header */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#143d2c] flex items-center justify-center text-white flex-shrink-0 shadow-xs">
-              <MapPin className="w-4 h-4" />
+    <section className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Category Info Header with Back Button */}
+      <div className="bg-white rounded-2xl border border-stone-200/80 p-5 sm:p-7 mb-8 shadow-[0_4px_25px_rgba(0,0,0,0.03)]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-start sm:items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-[#143d2c] flex items-center justify-center text-white shrink-0 shadow-xs">
+              <IconComponent className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="font-serif font-bold text-sm sm:text-base text-[#143d2c] tracking-wider uppercase">
-                LOCAL EXPERIENCES & EXCURSIONS
-              </h2>
-              <p className="text-xs text-stone-500 mt-0.5 leading-snug">
-                Discover the natural beauty, culture and experiences surrounding Varkala.
-              </p>
-            </div>
-          </div>
-          <div className="text-right flex-shrink-0">
-            <p className="font-serif italic text-xs leading-tight text-[#8c5a2c]">
-              Explore<br />Experience<br />Feel Alive
-            </p>
-          </div>
-        </div>
-
-        {/* Main Featured Photo */}
-        <div
-          onClick={() => openLightbox(allImages, 0, title)}
-          className="aspect-[16/9] w-full rounded-xl overflow-hidden cursor-pointer group relative bg-stone-100"
-        >
-          <img
-            src={resolveImageUrl(mainImage.image)}
-            alt={mainImage.name || "Panoramic Varkala cliff and beach at golden sunset"}
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            loading="lazy"
-          />
-          {mainImage.name && (
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-3 pt-7 text-white pointer-events-none">
-              <p className="font-serif text-xs sm:text-sm font-medium tracking-wide drop-shadow-sm truncate">
-                {mainImage.name}
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* 6 Labeled Thumbnails Row */}
-        <div className="grid grid-cols-6 gap-1.5 sm:gap-2 mt-2.5">
-          {thumbnails.map((item, idx) => (
-            <div
-              key={idx}
-              onClick={() => openLightbox(allImages, idx, title)}
-              className="cursor-pointer group flex flex-col items-center"
-            >
-              <div className="aspect-[4/3] w-full rounded-md sm:rounded-lg overflow-hidden bg-stone-100">
-                <img
-                  src={resolveImageUrl(item.image)}
-                  alt={item.name || `Local excursion ${idx + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
+              <div className="flex items-center gap-2.5 flex-wrap">
+                <h2 className="font-serif font-bold text-lg sm:text-xl md:text-2xl text-[#143d2c] uppercase tracking-wide">
+                  {category}
+                </h2>
               </div>
-              <p className="text-[0.52rem] sm:text-[0.58rem] text-stone-600 font-medium text-center leading-tight mt-1 truncate w-full">
-                {item.name}
+              <p className="text-xs sm:text-sm text-stone-600 mt-1 max-w-2xl leading-relaxed">
+                {meta.subtitle}
               </p>
             </div>
-          ))}
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={onResetFilter}
+              className="px-4 py-2 rounded-xl text-xs font-serif font-semibold text-stone-700 bg-stone-100 hover:bg-stone-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>All Categories</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => openLightbox(photos, 0, category)}
+              className="px-4 py-2 rounded-xl text-xs font-serif font-semibold text-white bg-[#143d2c] hover:bg-[#1c523b] transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer"
+            >
+              <Maximize2 className="w-3.5 h-3.5" />
+              <span>Slideshow</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Centered Button */}
-      <div className="flex justify-center mt-5">
-        <button
-          onClick={() => openLightbox(allImages, 0, title)}
-          className="px-8 py-2 rounded-full bg-[#143d2c] hover:bg-[#1c523b] text-white font-serif text-[0.68rem] tracking-[0.18em] font-semibold flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
-        >
-          VIEW ALL PHOTOS &nbsp;→
-        </button>
+      {/* Grid of ALL Photos in this Category (Responsive: 2 cols on mobile, 3 tablet, 4 desktop) */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+        {photos.map((item, index) => (
+          <div
+            key={item.id || index}
+            onClick={() => openLightbox(photos, index, category)}
+            className="group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer bg-stone-100 shadow-2xs hover:shadow-md transition-all duration-300"
+          >
+            <ImageWithFallback
+              src={item.image}
+              alt={item.name || `${category} photo ${index + 1}`}
+              className="group-hover:scale-105 transition-transform duration-500"
+            />
+
+            {/* Hover / Touch Caption Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
+              <p className="text-white text-xs sm:text-sm font-serif font-medium drop-shadow-sm truncate">
+                {item.name || `${category} moment`}
+              </p>
+              <span className="text-[0.62rem] text-[#dfcaa9] mt-0.5 flex items-center gap-1">
+                <Maximize2 className="w-2.5 h-2.5" />
+                <span>Click to view</span>
+              </span>
+            </div>
+          </div>
+        ))}
       </div>
-    </article>
+    </section>
   );
 }
 
-// ── 3. Bottom Journey Banner ──────────────────────────────────────────────────
+// ── 6. All Photos Grid View (Continuous Grid for All Images) ──────────────────
+
+function AllPhotosGridView({
+  photos,
+  openLightbox,
+}: {
+  photos: GalleryPhoto[];
+  openLightbox: (images: GalleryPhoto[], idx: number, title: string) => void;
+}) {
+  return (
+    <section className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mb-6 flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <h2 className="font-serif font-bold text-lg sm:text-xl text-[#143d2c]">
+            All Sanctuary Moments
+          </h2>
+          <p className="text-xs text-stone-500 mt-0.5">
+            Arranged neatly across all practices, therapies, accommodation and excursions
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => openLightbox(photos, 0, "All Sanctuary Moments")}
+          className="px-4 py-2 rounded-xl text-xs font-serif font-semibold text-white bg-[#143d2c] hover:bg-[#1c523b] transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer"
+        >
+          <Maximize2 className="w-3.5 h-3.5" />
+          <span>Start Slideshow</span>
+        </button>
+      </div>
+
+      {/* Fully Responsive Grid (2 cols mobile, 3 cols tablet, 4 cols desktop) */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+        {photos.map((item, index) => (
+          <div
+            key={item.id || index}
+            onClick={() => openLightbox(photos, index, item.category || "Sanctuary Moments")}
+            className="group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer bg-stone-100 shadow-2xs hover:shadow-md transition-all duration-300"
+          >
+            <ImageWithFallback
+              src={item.image}
+              alt={item.name || `Gallery photo ${index + 1}`}
+              className="group-hover:scale-105 transition-transform duration-500"
+            />
+
+            {/* Category tag chip */}
+            <div className="absolute top-2 left-2 pointer-events-none">
+              <span className="px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-xs text-white text-[0.6rem] font-serif tracking-wide border border-white/10">
+                {item.category}
+              </span>
+            </div>
+
+            {/* Hover Caption */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
+              <p className="text-white text-xs sm:text-sm font-serif font-medium drop-shadow-sm truncate">
+                {item.name || item.category}
+              </p>
+              <span className="text-[0.62rem] text-[#dfcaa9] mt-0.5 flex items-center gap-1">
+                <Maximize2 className="w-2.5 h-2.5" />
+                <span>Click to enlarge</span>
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ── 7. Bottom Journey Banner ──────────────────────────────────────────────────
 
 function GalleryJourneyBanner() {
   return (
-    <section className="relative w-full bg-[#0a2318] text-white overflow-hidden py-16 sm:py-20 px-6 sm:px-12">
-      {/* Background Dewy Leaf on the left */}
+    <section className="relative w-full bg-[#0a2318] text-white overflow-hidden py-14 sm:py-20 px-4 sm:px-8">
       <div
         className="absolute inset-y-0 left-0 w-1/2 md:w-2/5 bg-no-repeat bg-cover bg-left pointer-events-none opacity-40 md:opacity-60 mix-blend-screen"
         style={{
@@ -1223,33 +1273,30 @@ function GalleryJourneyBanner() {
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        {/* Center Text */}
-        <div className="text-center md:text-left flex-1 md:pl-16 lg:pl-28">
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.6rem] text-cream font-normal tracking-wide">
+      <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
+        <div className="text-center md:text-left flex-1 md:pl-12 lg:pl-20">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.6rem] text-[#fbfbfa] font-normal tracking-wide">
             Your Journey in Pictures
           </h2>
-          <p className="mt-3 font-serif text-xs sm:text-sm text-[#cbd8d0] tracking-[0.22em] uppercase font-light">
+          <p className="mt-2.5 font-serif text-xs sm:text-sm text-[#cbd8d0] tracking-[0.22em] uppercase font-light">
             People &nbsp;•&nbsp; Practices &nbsp;•&nbsp; Places &nbsp;•&nbsp; Possibilities
           </p>
         </div>
 
-        {/* Right handwriting quote */}
-        <div className="text-right select-none md:pr-4 flex-shrink-0">
-          <p className="font-handwriting text-3xl sm:text-4xl text-[#dfcaa9] leading-[1.08] -rotate-6 font-medium drop-shadow-sm">
+        <div className="text-center md:text-right select-none shrink-0">
+          <p className="font-handwriting text-2xl sm:text-4xl text-[#dfcaa9] leading-[1.08] -rotate-4 font-medium drop-shadow-sm">
             Collect<br />
             Moments<br />
             Not Things
           </p>
-          {/* Subtle decorative underline stroke */}
-          <div className="w-24 h-1 ml-auto mt-2 border-b-2 border-[#dfcaa9]/40 -rotate-3" />
+          <div className="w-20 sm:w-24 h-1 mx-auto md:ml-auto mt-2 border-b-2 border-[#dfcaa9]/40 -rotate-3" />
         </div>
       </div>
     </section>
   );
 }
 
-// ── 4. Interactive Lightbox ───────────────────────────────────────────────────
+// ── 8. Interactive Lightbox (Mobile & Desktop Perfected) ───────────────────────
 
 function Lightbox({
   images,
@@ -1260,7 +1307,7 @@ function Lightbox({
   onPrev,
   onNavigate,
 }: {
-  images: (GalleryPhoto | string)[];
+  images: GalleryPhoto[];
   currentIndex: number;
   title: string;
   onClose: () => void;
@@ -1269,102 +1316,150 @@ function Lightbox({
   onNavigate: (index: number) => void;
 }) {
   const currentItem = images[currentIndex];
-  const currentSrc = resolveImageUrl(
-    typeof currentItem === "string" ? currentItem : currentItem.image
-  );
-  const currentName =
-    typeof currentItem === "string" ? "" : currentItem.name || "";
+  const touchStartXRef = useRef<number | null>(null);
+  const touchEndXRef = useRef<number | null>(null);
+  const thumbnailsRef = useRef<HTMLDivElement | null>(null);
+
+  // Auto-scroll the active thumbnail into view
+  useEffect(() => {
+    if (thumbnailsRef.current) {
+      const activeBtn = thumbnailsRef.current.children[currentIndex] as HTMLElement;
+      if (activeBtn) {
+        activeBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      }
+    }
+  }, [currentIndex]);
+
+  // Touch swipe support for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndXRef.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartXRef.current !== null && touchEndXRef.current !== null) {
+      const distance = touchStartXRef.current - touchEndXRef.current;
+      const isSwipe = Math.abs(distance) > 50;
+      if (isSwipe) {
+        if (distance > 0) {
+          // Swiped left → Next photo
+          onNext();
+        } else {
+          // Swiped right → Prev photo
+          onPrev();
+        }
+      }
+    }
+    touchStartXRef.current = null;
+    touchEndXRef.current = null;
+  };
+
+  if (!currentItem) return null;
+
+  const currentSrc = currentItem.image;
+  const currentName = currentItem.name || "";
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex flex-col animate-fade-in"
-      style={{ background: "rgba(10, 20, 16, 0.98)" }}
+      className="fixed inset-0 z-[100] flex flex-col bg-[#07130e]/98 backdrop-blur-md animate-fade-in select-none"
       role="dialog"
       aria-modal="true"
       aria-label={`${title} photo gallery`}
     >
       {/* ── Top Bar ── */}
-      <div className="flex items-center justify-between px-6 py-4 flex-shrink-0 border-b border-white/10">
-        <div>
-          <p className="font-serif text-xs tracking-[0.25em] text-[#dfcaa9] uppercase font-semibold flex items-center gap-2">
-            <span>{title}</span>
-            {currentName && (
-              <>
-                <span className="text-white/30">•</span>
-                <span className="text-white/90 normal-case tracking-normal font-sans font-medium text-xs truncate max-w-[200px] sm:max-w-md">
-                  {currentName}
-                </span>
-              </>
-            )}
+      <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 shrink-0 border-b border-white/10 bg-black/30">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0 pr-2">
+          <p className="font-serif text-xs tracking-[0.2em] text-[#dfcaa9] uppercase font-semibold shrink-0">
+            {title}
           </p>
+          <span className="text-white/30 hidden sm:inline">•</span>
+          <span className="text-white/90 text-xs sm:text-sm font-sans font-medium truncate hidden sm:inline">
+            {currentName}
+          </span>
+          <span className="px-2 py-0.5 rounded-full bg-white/10 text-white/80 text-[0.65rem] shrink-0 font-sans">
+            {currentIndex + 1} / {images.length}
+          </span>
         </div>
+
         <button
           onClick={onClose}
           aria-label="Close gallery"
-          className="w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/15 transition-all cursor-pointer shrink-0"
         >
           <X className="w-5 h-5" />
         </button>
       </div>
 
-      {/* ── Main Display Image ── */}
-      <div className="flex-1 flex flex-col items-center justify-center relative px-4 md:px-20 py-3 min-h-0 overflow-hidden">
-        {/* Prev Arrow */}
-        <button
-          onClick={onPrev}
-          aria-label="Previous photo"
-          className="absolute left-3 md:left-6 z-10 w-12 h-12 rounded-full flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 bg-white/10 hover:bg-white/20 border border-white/15 cursor-pointer"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
+      {/* ── Main Display Image (With Touch Swipe Support) ── */}
+      <div
+        className="flex-1 flex flex-col items-center justify-center relative px-3 sm:px-16 py-2 min-h-0 overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Previous Button (Cleanly positioned on desktop & mobile) */}
+        {images.length > 1 && (
+          <button
+            onClick={onPrev}
+            aria-label="Previous photo"
+            className="absolute left-2 sm:left-4 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white transition-all hover:scale-105 active:scale-95 bg-black/40 sm:bg-white/10 hover:bg-white/20 border border-white/15 backdrop-blur-xs cursor-pointer"
+          >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
+        )}
 
-        <div className="relative max-w-full max-h-full flex flex-col items-center justify-center">
+        {/* Center Image Container — Preserves Original Proportions 100% */}
+        <div className="relative max-w-full max-h-full flex flex-col items-center justify-center p-1 sm:p-2">
           <img
             key={currentIndex}
-            src={currentSrc}
+            src={resolveImageUrl(currentSrc)}
             alt={currentName || `${title} — photo ${currentIndex + 1} of ${images.length}`}
-            className="max-w-full max-h-full object-contain rounded-xl shadow-2xl animate-fade-up"
-            style={{ maxHeight: "calc(100vh - 220px)" }}
+            className="max-w-full max-h-[68vh] sm:max-h-[76vh] object-contain rounded-lg sm:rounded-xl shadow-2xl transition-all duration-300"
           />
+
           {currentName && (
-            <div className="mt-2 text-center bg-black/50 backdrop-blur-xs px-4 py-1 rounded-full border border-white/10">
-              <p className="text-white/95 text-xs sm:text-sm font-serif tracking-wide">
+            <div className="mt-2 text-center bg-black/60 backdrop-blur-xs px-3 sm:px-4 py-1 rounded-full border border-white/10 max-w-[90%]">
+              <p className="text-white/95 text-xs sm:text-sm font-serif tracking-wide truncate">
                 {currentName}
               </p>
             </div>
           )}
         </div>
 
-        {/* Next Arrow */}
-        <button
-          onClick={onNext}
-          aria-label="Next photo"
-          className="absolute right-3 md:right-6 z-10 w-12 h-12 rounded-full flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 bg-white/10 hover:bg-white/20 border border-white/15 cursor-pointer"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
+        {/* Next Button */}
+        {images.length > 1 && (
+          <button
+            onClick={onNext}
+            aria-label="Next photo"
+            className="absolute right-2 sm:right-4 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white transition-all hover:scale-105 active:scale-95 bg-black/40 sm:bg-white/10 hover:bg-white/20 border border-white/15 backdrop-blur-xs cursor-pointer"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
+        )}
       </div>
 
-      {/* ── Thumbnails Strip ── */}
+      {/* ── Thumbnails Strip (Auto-scrolls to active photo) ── */}
       {images.length > 1 && (
         <div
-          className="flex-shrink-0 flex gap-2 items-center justify-start sm:justify-center overflow-x-auto px-5 py-3 border-t border-white/10"
-          style={{ scrollbarWidth: "none" }}
+          ref={thumbnailsRef}
+          className="shrink-0 flex gap-2 items-center justify-start sm:justify-center overflow-x-auto px-4 py-2.5 sm:py-3 border-t border-white/10 bg-black/30 scrollbar-none"
         >
           {images.map((item, i) => {
-            const itemSrc = resolveImageUrl(
-              typeof item === "string" ? item : item.image
-            );
-            const itemName = typeof item === "string" ? "" : item.name || "";
+            const itemSrc = resolveImageUrl(item.image);
+            const itemName = item.name || "";
+            const isActive = i === currentIndex;
             return (
               <button
-                key={i}
+                key={item.id || i}
                 onClick={() => onNavigate(i)}
                 aria-label={`View photo ${i + 1}`}
                 title={itemName}
-                className={`w-14 h-10 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer ${
-                  i === currentIndex
-                    ? "border-[#dfcaa9] opacity-100 scale-105 shadow-md"
+                className={`w-12 h-9 sm:w-14 sm:h-10 shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer ${
+                  isActive
+                    ? "border-[#dfcaa9] opacity-100 scale-105 shadow-md ring-2 ring-[#dfcaa9]/50"
                     : "border-transparent opacity-40 hover:opacity-75"
                 }`}
               >

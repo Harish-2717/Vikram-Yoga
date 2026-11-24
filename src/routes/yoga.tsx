@@ -3,6 +3,7 @@ import { useState } from "react";
 import classes from "@/assets/classes.jpg";
 import { ArrowRight } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
+import { getWhatsAppBookingUrl } from "@/lib/whatsapp";
 
 // Authentic Yoga Pose Images for Drop-In Classes & Classical Asanas
 import virabhadrasanaImg from "@/assets/New/file_0000000011a881fd88d925006e3dce12.png"; // Warrior I (Hatha Yoga)
@@ -219,14 +220,14 @@ function ClassesSection() {
   ];
 
   return (
-    <section className="relative py-28 bg-[#faeee2] text-[#112e22] overflow-hidden">
+    <section className="relative py-14 sm:py-20 md:py-28 bg-[#faeee2] text-[#112e22] overflow-hidden">
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3" />
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="font-serif-display text-[0.7rem] tracking-[0.4em] text-[#a06d1c] uppercase font-bold">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <span className="font-serif-display text-[0.65rem] sm:text-[0.7rem] tracking-[0.3em] sm:tracking-[0.4em] text-[#a06d1c] uppercase font-bold">
             DAILY SCHEDULE &amp; OFFERINGS
           </span>
-          <h2 className="mt-4 font-display text-4xl md:text-5xl text-balance leading-tight font-bold text-emerald-deep">
+          <h2 className="mt-3 sm:mt-4 font-display text-3xl sm:text-4xl md:text-5xl text-balance leading-tight font-bold text-emerald-deep">
             Practices for every <em className="text-gold-gradient not-italic">body &amp; breath</em>.
           </h2>
           <div className="gold-divider mt-6 mx-auto" />
@@ -237,11 +238,11 @@ function ClassesSection() {
           </p>
 
           {/* Toggle pill switcher */}
-          <div className="mt-8 sm:mt-10 inline-flex max-w-full flex-wrap sm:flex-nowrap items-center justify-center p-1.5 rounded-2xl sm:rounded-full bg-emerald-deep border border-[#0e442b] shadow-inner gap-1">
+          <div className="mt-8 sm:mt-10 inline-flex w-full sm:w-auto max-w-md sm:max-w-none flex-nowrap items-center justify-center p-1 sm:p-1.5 rounded-full bg-emerald-deep border border-[#0e442b] shadow-inner gap-1">
             <button
               type="button"
               onClick={() => setActiveTab("daily")}
-              className={`px-4 sm:px-7 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-[0.68rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`flex-1 sm:flex-initial px-3 sm:px-7 py-2 sm:py-2.5 rounded-full text-[0.62rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap text-center ${
                 activeTab === "daily"
                   ? "bg-gold-gradient text-emerald-deep shadow-md font-bold"
                   : "text-cream/80 hover:text-white font-medium"
@@ -252,7 +253,7 @@ function ClassesSection() {
             <button
               type="button"
               onClick={() => setActiveTab("showcase")}
-              className={`px-4 sm:px-7 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-[0.68rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`flex-1 sm:flex-initial px-3 sm:px-7 py-2 sm:py-2.5 rounded-full text-[0.62rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap text-center ${
                 activeTab === "showcase"
                   ? "bg-gold-gradient text-emerald-deep shadow-md font-bold"
                   : "text-cream/80 hover:text-white font-medium"
@@ -265,7 +266,7 @@ function ClassesSection() {
 
         {activeTab === "daily" ? (
           /* 6 Yoga Drop-In Classes Grid */
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
             {classList.map((c) => (
               <div
                 key={c.t}
@@ -280,17 +281,21 @@ function ClassesSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/40 via-transparent to-black/10 pointer-events-none" />
                 </div>
-                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-between">
                   <div className="flex flex-col flex-1">
-                    <h3 className="font-display text-2xl text-cream font-bold">{c.t}</h3>
-                    <p className="mt-3 text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
+                    <h3 className="font-display text-xl sm:text-2xl text-cream font-bold">{c.t}</h3>
+                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
                   </div>
-                  <div className="mt-6 pt-5 border-t border-cream/10 flex flex-col gap-3">
-                    <span className="text-[0.75rem] sm:text-xs tracking-[0.1em] text-cream/90 font-bold uppercase min-h-[2.5rem] flex items-center">
-                      {c.time}
-                    </span>
+                  <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-cream/10 flex flex-col gap-3">
+                    <div className="w-full">
+                      <span className="yoga-class-timing">
+                        {c.time}
+                      </span>
+                    </div>
                     <a
-                      href={`/apply?category=Yoga-Classes&course=${encodeURIComponent(c.t)}`}
+                      href={getWhatsAppBookingUrl(c.t, "Yoga Classes")}
+                      target="_blank"
+                      rel="noreferrer"
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-soft"
                     >
                       <span>Book Now</span>
@@ -303,7 +308,7 @@ function ClassesSection() {
           </div>
         ) : (
           /* 12 Classical Asanas Showcase Grid */
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-7">
             {classicalAsanas.map((c, i) => (
               <div
                 key={c.sanskrit + i}
@@ -318,15 +323,17 @@ function ClassesSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/40 via-transparent to-black/10 pointer-events-none" />
                 </div>
-                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-between">
                   <div className="flex flex-col flex-1">
-                    <h3 className="font-display text-2xl text-cream font-bold">{c.english}</h3>
-                    <p className="mt-3 text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
+                    <h3 className="font-display text-xl sm:text-2xl text-cream font-bold">{c.english}</h3>
+                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
                   </div>
-                  <div className="mt-6 pt-5 border-t border-cream/10 flex flex-col gap-3">
-                    <span className="text-[0.72rem] tracking-wider text-gold font-bold min-h-[2.5rem] flex items-center">
-                      {c.focus}
-                    </span>
+                  <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-cream/10 flex flex-col gap-3">
+                    <div className="w-full">
+                      <span className="yoga-focus-tag">
+                        {c.focus}
+                      </span>
+                    </div>
                     <a
                       href={`/apply?category=Yoga-Classes&course=${encodeURIComponent(c.english)}`}
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-soft"

@@ -89,30 +89,30 @@ function TermsPage() {
         bg={hero}
       />
 
-      <section className="py-24 px-4 sm:px-6 max-w-5xl mx-auto">
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_4px_30px_rgba(0,0,0,0.02)] border border-gray-100/80">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+      <section className="py-14 sm:py-20 md:py-24 px-4 sm:px-6 max-w-5xl mx-auto">
+        <div className="bg-white rounded-3xl p-5 sm:p-8 md:p-12 shadow-[0_4px_30px_rgba(0,0,0,0.02)] border border-gray-100/80">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
             <span className="font-serif-display text-[0.65rem] tracking-[0.4em] text-emerald-deep uppercase font-bold">
               RULES & DECLARATIONS
             </span>
-            <h2 className="mt-4 font-display text-3xl md:text-4xl text-emerald-deep">
+            <h2 className="mt-4 font-display text-2xl sm:text-3xl md:text-4xl text-emerald-deep font-bold">
               Sanctuary Guidelines
             </h2>
-            <div className="w-16 h-[2px] bg-gold/50 mx-auto mt-6" />
-            <p className="mt-6 text-slate-500 text-sm leading-relaxed">
+            <div className="w-16 h-[2px] bg-gold/50 mx-auto mt-4 sm:mt-6" />
+            <p className="mt-4 sm:mt-6 text-slate-500 text-xs sm:text-sm leading-relaxed">
               By using our website, submitting an application, or attending classes, wellness
               therapies, and retreats at Dr. Vikram Yoga & Wellness Centre, you acknowledge that you
               have read, understood, and agreed to be bound by these Terms & Conditions.
             </p>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-12">
             {sections.map((sect, idx) => {
               const Icon = sect.icon;
               return (
                 <div
                   key={idx}
-                  className="flex gap-6 items-start animate-fade-up border-b border-gray-100 pb-10 last:border-0 last:pb-0"
+                  className="flex flex-col sm:flex-row gap-3 sm:gap-6 items-start animate-fade-up border-b border-gray-100 pb-8 sm:pb-10 last:border-0 last:pb-0"
                 >
                   <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0">
                     <Icon className="w-5 h-5" />

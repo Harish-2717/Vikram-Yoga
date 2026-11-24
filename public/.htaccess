@@ -1,12 +1,58 @@
+# ============================================================
+# Dr. Vikram Yoga & Wellness Centre — Apache SPA Config
+# ============================================================
+# Disable directory listings — prevents bare directory browsing
+Options -Indexes
+
+# Prevent Apache from auto-appending trailing slash to directories.
+# Without this, /gallery → 301 /gallery/ before our rewrite rules run,
+# and the 301 target could hit a 403. We handle routing ourselves below.
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
-  # Support legacy or cached requests pointing to /public/uploads or /public/gallery
-  RewriteRule ^public/uploads/(.*)$ uploads/$1 [L,NC]
-  RewriteRule ^public/gallery/(.*)$ gallery/$1 [L,NC]
 
+  # ── 1. Always serve existing FILES directly ──────────────────────────────
+  # Handles: /gallery/image.jpg, /uploads/file.png, /assets/bundle.js, etc.
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # ── 2. SPA route: /gallery (with or without trailing slash) ──────────────
+  # Must come BEFORE the generic !-d SPA catch-all.
+  # The physical gallery/ folder causes 403 if Apache tries to serve it as
+  # a directory. We intercept and serve the SPA index.html instead.
+  RewriteRule ^gallery/?$ index.html [L,NC]
+
+  # ── 3. SPA route: /uploads bare directory ────────────────────────────────
+  RewriteRule ^uploads/?$ index.html [L,NC]
+
+  # ── 4. Legacy path redirects (cached links / old DB records) ─────────────
+  RewriteRule ^public/uploads/(.+)$ /uploads/$1 [R=301,L,NC]
+  RewriteRule ^public/gallery/(.+)$  /gallery/$1  [R=301,L,NC]
+
+  # ── 5. SPA catch-all: any non-file, non-directory path → index.html ──────
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  RewriteRule . index.html [L]
+</IfModule>
+
+# ── Security headers ──────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# ── Cache control for static image assets ────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg   "access plus 30 days"
+  ExpiresByType image/png    "access plus 30 days"
+  ExpiresByType image/webp   "access plus 30 days"
+  ExpiresByType image/gif    "access plus 30 days"
+  ExpiresByType text/css     "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
 </IfModule>

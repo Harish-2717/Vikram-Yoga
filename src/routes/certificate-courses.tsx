@@ -21,6 +21,7 @@ import {
   Bookmark,
 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, PageHero, BookNowFloat } from "./about";
+import { getWhatsAppEnrollUrl, getWhatsAppInquiryUrl, getWhatsAppBookingUrl } from "@/lib/whatsapp";
 import classes from "@/assets/classes.jpg";
 
 export const Route = createFileRoute("/certificate-courses")({
@@ -173,12 +174,14 @@ function AdditionalOfferings() {
               These focused workshops are designed to give you practical knowledge and hands-on experience in specific topics related to yoga, wellness and holistic therapies.
             </p>
             <div className="mt-auto">
-              <Link
-                to="/apply"
+              <a
+                href={getWhatsAppInquiryUrl("Workshop Topics")}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-emerald-deep text-emerald-deep font-semibold text-xs tracking-wider uppercase hover:bg-emerald-deep hover:text-cream transition-colors shadow-sm"
               >
                 VIEW WORKSHOP TOPICS <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -202,12 +205,14 @@ function AdditionalOfferings() {
               We offer personalized one-to-one mentorship as well as intensive group training sessions for all certification courses, with flexible scheduling tailored to your pace.
             </p>
             <div className="mt-auto">
-              <Link
-                to="/apply"
+              <a
+                href={getWhatsAppEnrollUrl()}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-emerald-deep text-emerald-deep font-semibold text-xs tracking-wider uppercase hover:bg-emerald-deep hover:text-cream transition-colors shadow-sm"
               >
                 APPLY / ENROLL NOW <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -216,15 +221,17 @@ function AdditionalOfferings() {
       {/* Bottom Feature Row */}
       <div className="mt-5 bg-[#f7f5ed] rounded-2xl py-4 px-4 md:px-8 shadow-[0_2px_15px_rgba(0,0,0,0.02)] border border-[#ede8dd]">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 items-center">
-          <Link
-            to="/apply"
+          <a
+            href={getWhatsAppBookingUrl("Flexible Schedule", "Certification Courses")}
+            target="_blank"
+            rel="noreferrer"
             className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
           >
             <Flower2 className="w-5 h-5 text-emerald-deep shrink-0 group-hover:rotate-12 transition-transform duration-300" strokeWidth={1.5} />
             <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors">
               FLEXIBLE SCHEDULING
             </span>
-          </Link>
+          </a>
 
           <div className="hidden md:flex justify-center border-l border-[#ede8dd]">
             <Link
@@ -250,26 +257,30 @@ function AdditionalOfferings() {
           </div>
 
           <div className="hidden md:flex justify-center border-l border-[#ede8dd]">
-            <Link
-              to="/apply"
+            <a
+              href={getWhatsAppBookingUrl("Group Training", "Certification Courses")}
+              target="_blank"
+              rel="noreferrer"
               className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer pl-4"
             >
               <Users className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
               <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors">
                 GROUP TRAINING AVAILABLE
               </span>
-            </Link>
+            </a>
           </div>
           <div className="md:hidden">
-            <Link
-              to="/apply"
+            <a
+              href={getWhatsAppBookingUrl("Group Training", "Certification Courses")}
+              target="_blank"
+              rel="noreferrer"
               className="flex items-center gap-2.5 justify-center text-center group hover:scale-[1.03] transition-all cursor-pointer"
             >
               <Users className="w-5 h-5 text-emerald-deep shrink-0 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
               <span className="font-serif font-bold text-emerald-deep text-xs md:text-sm tracking-wider uppercase group-hover:text-gold transition-colors">
                 GROUP TRAINING AVAILABLE
               </span>
-            </Link>
+            </a>
           </div>
 
           <div className="hidden md:flex justify-center border-l border-[#ede8dd]">
@@ -317,8 +328,8 @@ function CoursesShowcase() {
 
   const courses = [
     {
-      title: "Shiatsu Massage Certification",
-      duration: "Approximately 21 Hours • 7–10 Days",
+      title: "Shiatsu Therapy Certification",
+      duration: "Approximately 21 Hours • 7 Days",
       subtitle: "Traditional Meridian-Based Bodywork",
       desc: "A traditional Japanese bodywork training program focused on meridian-based therapy, therapeutic pressure application, energy balancing concepts, and mindful healing practices.",
       learn: [
@@ -349,7 +360,7 @@ function CoursesShowcase() {
     },
     {
       title: "Thai Yoga Massage Certification",
-      duration: "Approximately 21 Hours • 7–10 Days",
+      duration: "Approximately 21 Hours • 7 Days",
       subtitle: "Integrative Stretching & Acupressure",
       desc: "An integrative therapeutic bodywork program combining assisted stretching, passive yoga movements, acupressure techniques, and mindful body mechanics inspired by traditional Thai healing practices.",
       learn: [
@@ -380,7 +391,7 @@ function CoursesShowcase() {
     },
     {
       title: "Reflexology Therapy Certification",
-      duration: "Approximately 12 Hours • 7 Days",
+      duration: "Approximately 12 Hours • 3 Days",
       subtitle: "Reflex Zone Point Stimulation",
       desc: "A holistic reflex-point therapy training focused on therapeutic stimulation of specific points on the feet and hands to support relaxation, circulation, and wellness balance.",
       learn: [
@@ -411,8 +422,8 @@ function CoursesShowcase() {
       ),
     },
     {
-      title: "Ayurvedic Massage Certification",
-      duration: "Approximately 21 Hours • 10 Days",
+      title: "Ayurvedic Wellness Massage Certification",
+      duration: "Approximately 18 Hours • 5 Days",
       subtitle: "Rhythmic Oil Massage & Doshas",
       desc: "A traditional wellness massage training inspired by Ayurvedic principles using therapeutic oil application methods, rhythmic massage techniques, and holistic relaxation approaches.",
       learn: [
@@ -441,7 +452,7 @@ function CoursesShowcase() {
     },
     {
       title: "Swedish Massage Certification",
-      duration: "Approximately 21 Hours • 10 Days",
+      duration: "Approximately 21 Hours • 7 Days",
       subtitle: "Foundational Classical Massage Flow",
       desc: "A foundational therapeutic massage training program focused on relaxation-based bodywork, circulation support, muscular comfort, and professional massage flow techniques.",
       learn: [
@@ -469,7 +480,7 @@ function CoursesShowcase() {
     },
     {
       title: "Deep Tissue Massage Certification",
-      duration: "Approximately 21 Hours • 10 Days",
+      duration: "Approximately 21 Hours • 7 Days",
       subtitle: "Fascia Release & Trigger Points",
       desc: "A professional soft tissue training program focused on deep muscular release techniques, fascia-focused manipulation methods, mobility support, and therapeutic recovery applications.",
       learn: [
@@ -503,8 +514,8 @@ function CoursesShowcase() {
       ),
     },
     {
-      title: "Dorn Therapy Certification (Spain Care Therapy)",
-      duration: "Approximately 12 Hours • 7 Days",
+      title: "Dorn Therapy Certification (German Spine Care Therapy)",
+      duration: "Approximately 12 Hours • 3 Days",
       subtitle: "Gentle Spinal Alignment Method",
       desc: "A gentle therapeutic wellness training inspired by the German Dorn Method, focusing on posture awareness, spinal balancing approaches, joint alignment concepts, and mindful corrective movement techniques.",
       learn: [
@@ -541,22 +552,22 @@ function CoursesShowcase() {
   ];
 
   return (
-    <section id="courses" className="py-20 px-6 max-w-7xl mx-auto">
-      <div className="text-center mb-16 space-y-4">
+    <section id="courses" className="py-14 sm:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
+      <div className="text-center mb-10 sm:mb-16 space-y-3 sm:space-y-4">
         <span className="font-serif-display text-xs tracking-[0.3em] uppercase text-gold font-bold">
           PROFESSIONAL WELLNESS TRAINING
         </span>
-        <h2 className="font-display text-4xl md:text-5xl text-emerald-deep font-bold">
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-emerald-deep font-bold">
           Certification Courses
         </h2>
         <div className="gold-divider mt-4 mx-auto" />
-        <p className="text-emerald-deep/70 max-w-2xl mx-auto font-medium text-sm md:text-base">
+        <p className="text-emerald-deep/70 max-w-2xl mx-auto font-medium text-xs sm:text-sm md:text-base">
           Explore our professional bodywork and holistic wellness programs. Click on any course to
           view the full syllabus and what you will master.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {courses.map((course, idx) => (
           <div
             key={idx}
@@ -564,8 +575,8 @@ function CoursesShowcase() {
               idx === 6 ? "md:col-span-2 lg:col-span-1 lg:col-start-2 max-w-md md:max-w-none lg:max-w-none mx-auto w-full" : ""
             }`}
           >
-            <div className="p-8 flex flex-col gap-6 flex-1 justify-between">
-              <div className="space-y-5">
+            <div className="p-5 sm:p-8 flex flex-col gap-5 sm:gap-6 flex-1 justify-between">
+              <div className="space-y-4 sm:space-y-5">
                 <div className="flex items-center justify-between gap-4">
                   <div className="p-3 bg-emerald-deep/5 rounded-2xl shrink-0 border border-gold/10">
                     {course.svg}
@@ -589,7 +600,7 @@ function CoursesShowcase() {
                   {course.desc}
                 </p>
 
-                <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-deep bg-cream px-4 py-2.5 rounded-xl border border-gold/10 w-full justify-center lg:justify-start">
+                <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-deep bg-cream px-3.5 sm:px-4 py-2.5 rounded-xl border border-gold/10 w-full justify-center lg:justify-start">
                   <Calendar className="w-4 h-4 text-gold shrink-0" />
                   <span>Duration: {course.duration}</span>
                 </div>
@@ -597,7 +608,7 @@ function CoursesShowcase() {
             </div>
 
             {/* Action Buttons */}
-            <div className="px-8 pb-8 pt-2 bg-gradient-to-t from-cream/20 to-transparent flex flex-col gap-3">
+            <div className="px-5 sm:px-8 pb-6 sm:pb-8 pt-2 bg-gradient-to-t from-cream/20 to-transparent flex flex-col gap-3">
               <button
                 onClick={() => setSelectedCourse(course)}
                 className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl border-2 border-emerald-deep/20 hover:border-gold text-emerald-deep text-xs font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-gold/5"
@@ -943,13 +954,17 @@ function ClosingCTASection() {
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
             <a
-              href="/apply?category=Certification-Courses"
+              href={getWhatsAppEnrollUrl()}
+              target="_blank"
+              rel="noreferrer"
               className="w-full sm:w-auto px-8 py-4 bg-gold-gradient hover:bg-gold text-emerald-deep rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300 hover:scale-105 shadow-gold font-bold"
             >
               Register Course With Us
             </a>
             <a
-              href="/apply?category=Certification-Courses"
+              href={getWhatsAppInquiryUrl("Certification Courses")}
+              target="_blank"
+              rel="noreferrer"
               className="w-full sm:w-auto px-8 py-4 glass text-white hover:bg-white/10 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300 font-bold"
             >
               Have A Query For Us?

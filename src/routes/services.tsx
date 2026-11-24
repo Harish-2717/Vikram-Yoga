@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import servicesHeroBg from "@/assets/New/beautiful-paradise-island-with-beach-sea-around-coconut-palm-tree.jpg";
 import { ArrowRight } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat, PageHero } from "./about";
+import { getWhatsAppBookingUrl, getWhatsAppRetreatUrl, getWhatsAppEnrollUrl } from "@/lib/whatsapp";
 import { getApiUrl, resolveImageUrl, bustCache } from "@/lib/utils";
 
 
@@ -304,11 +305,11 @@ function YogaClassesSection({ resolveImg }: { resolveImg: (key: string, fb: stri
           </p>
 
           {/* Toggle pill switcher */}
-          <div className="mt-7 sm:mt-10 inline-flex w-full max-w-sm sm:max-w-none sm:w-auto flex-wrap sm:flex-nowrap items-center justify-center p-1.5 rounded-2xl sm:rounded-full bg-emerald-deep border border-[#0e442b] shadow-inner gap-1">
+          <div className="mt-7 sm:mt-10 inline-flex w-full sm:w-auto max-w-md sm:max-w-none flex-nowrap items-center justify-center p-1 sm:p-1.5 rounded-full bg-emerald-deep border border-[#0e442b] shadow-inner gap-1">
             <button
               type="button"
               onClick={() => setActiveTab("daily")}
-              className={`flex-1 sm:flex-none px-4 sm:px-7 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-[0.63rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`flex-1 sm:flex-initial px-3 sm:px-7 py-2 sm:py-2.5 rounded-full text-[0.62rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap text-center ${
                 activeTab === "daily"
                   ? "bg-gold-gradient text-emerald-deep shadow-md font-bold"
                   : "text-cream/80 hover:text-white font-medium"
@@ -319,7 +320,7 @@ function YogaClassesSection({ resolveImg }: { resolveImg: (key: string, fb: stri
             <button
               type="button"
               onClick={() => setActiveTab("showcase")}
-              className={`flex-1 sm:flex-none px-4 sm:px-7 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-[0.63rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`flex-1 sm:flex-initial px-3 sm:px-7 py-2 sm:py-2.5 rounded-full text-[0.62rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap text-center ${
                 activeTab === "showcase"
                   ? "bg-gold-gradient text-emerald-deep shadow-md font-bold"
                   : "text-cream/80 hover:text-white font-medium"
@@ -332,7 +333,7 @@ function YogaClassesSection({ resolveImg }: { resolveImg: (key: string, fb: stri
 
         {activeTab === "daily" ? (
           /* 6 Yoga Classes in Balanced 3-Column Grid */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-7">
             {classList.map((c) => (
               <div
                 key={c.t}
@@ -348,17 +349,21 @@ function YogaClassesSection({ resolveImg }: { resolveImg: (key: string, fb: stri
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/40 via-transparent to-black/10 pointer-events-none" />
                 </div>
-                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-between">
                   <div className="flex flex-col flex-1">
-                    <h3 className="font-display text-2xl text-cream font-bold">{c.t}</h3>
-                    <p className="mt-3 text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
+                    <h3 className="font-display text-xl sm:text-2xl text-cream font-bold">{c.t}</h3>
+                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
                   </div>
-                  <div className="mt-6 pt-5 border-t border-cream/10 flex flex-col gap-3">
-                    <span className="text-[0.75rem] sm:text-xs tracking-[0.1em] text-cream/90 font-bold uppercase min-h-[2.5rem] flex items-center">
-                      {c.time}
-                    </span>
+                  <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-cream/10 flex flex-col gap-3">
+                    <div className="w-full">
+                      <span className="yoga-class-timing">
+                        {c.time}
+                      </span>
+                    </div>
                     <a
-                      href={`/apply?category=Yoga-Classes&course=${encodeURIComponent(c.t)}`}
+                      href={getWhatsAppBookingUrl(c.t, "Yoga Classes")}
+                      target="_blank"
+                      rel="noreferrer"
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-soft"
                     >
                       <span>Book Now</span>
@@ -371,7 +376,7 @@ function YogaClassesSection({ resolveImg }: { resolveImg: (key: string, fb: stri
           </div>
         ) : (
           /* 12 Classical Asanas Showcase Grid */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-7">
             {classicalAsanas.map((c, i) => (
               <div
                 key={c.sanskrit + i}
@@ -387,20 +392,24 @@ function YogaClassesSection({ resolveImg }: { resolveImg: (key: string, fb: stri
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/40 via-transparent to-black/10 pointer-events-none" />
                 </div>
-                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-between">
                   <div className="flex flex-col flex-1">
-                    <h3 className="font-display text-2xl text-cream font-bold">{c.english}</h3>
-                    <p className="mt-3 text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
+                    <h3 className="font-display text-xl sm:text-2xl text-cream font-bold">{c.english}</h3>
+                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-cream/70 leading-relaxed font-semibold flex-1">{c.d}</p>
                   </div>
-                  <div className="mt-6 pt-5 border-t border-cream/10 flex flex-col gap-3">
-                    <span className="text-[0.72rem] tracking-wider text-gold font-bold min-h-[2.5rem] flex items-center">
-                      {c.focus}
-                    </span>
+                  <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-cream/10 flex flex-col gap-3">
+                    <div className="w-full">
+                      <span className="yoga-focus-tag">
+                        {c.focus}
+                      </span>
+                    </div>
                     <a
-                      href={`/apply?category=Yoga-Classes&course=${encodeURIComponent(c.english)}`}
+                      href={getWhatsAppBookingUrl(c.english, "Classical Asana Session")}
+                      target="_blank"
+                      rel="noreferrer"
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-soft"
                     >
-                      <span>Book Session</span>
+                      <span>Book Now</span>
                       <ArrowRight className="w-4 h-4" />
                     </a>
                   </div>
@@ -536,10 +545,12 @@ function WellnessTherapiesSection({ resolveImg }: { resolveImg: (key: string, fb
 
                 <div className="mt-5 pt-4 border-t border-cream/10">
                   <a
-                    href={`/apply?category=Wellness-Therapies&course=${encodeURIComponent(item.t)}`}
+                    href={getWhatsAppBookingUrl(item.t, "Wellness Therapies")}
+                    target="_blank"
+                    rel="noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-soft"
                   >
-                    <span>Book Session</span>
+                    <span>Book Now</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
@@ -664,10 +675,12 @@ function RetreatProgramsSection({ resolveImg }: { resolveImg: (key: string, fb: 
 
                 <div className="mt-6 pt-5 border-t border-cream/10 flex flex-col gap-2.5">
                   <a
-                    href={`/apply?category=Retreat-Programs&course=${encodeURIComponent(r.t)}`}
+                    href={getWhatsAppRetreatUrl(r.t)}
+                    target="_blank"
+                    rel="noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-soft"
                   >
-                    <span>Book Retreat</span>
+                    <span>Book Now</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                   <a
@@ -691,34 +704,34 @@ function RetreatProgramsSection({ resolveImg }: { resolveImg: (key: string, fb: 
 function CertificateCoursesSection({ resolveImg }: { resolveImg: (key: string, fb: string) => string }) {
   const courses = [
     {
-      t: "Shiatsu Massage Certification",
-      key: "cert-shiatsu",
-      tag: "Certification",
-      duration: "~21 Hours • 7–10 Days",
-      d: "Traditional Japanese bodywork training focused on meridian-based therapy, therapeutic pressure application, energy balancing concepts, and mindful healing practices.",
-      img: resolveImg("cert-shiatsu", shiatsu),
-    },
-    {
       t: "Thai Yoga Massage Certification",
       key: "cert-thai-yoga",
       tag: "Certification",
-      duration: "~21 Hours • 7–10 Days",
+      duration: "~21 Hours • 7 Days",
       d: "Integrative therapeutic bodywork combining assisted stretching, passive yoga movements, acupressure techniques, and mindful body mechanics inspired by traditional Thai healing.",
       img: resolveImg("cert-thai-yoga", thaiMassage),
+    },
+    {
+      t: "Shiatsu Therapy Certification",
+      key: "cert-shiatsu",
+      tag: "Certification",
+      duration: "~21 Hours • 7 Days",
+      d: "Traditional Japanese bodywork training focused on meridian-based therapy, therapeutic pressure application, energy balancing concepts, and mindful healing practices.",
+      img: resolveImg("cert-shiatsu", shiatsu),
     },
     {
       t: "Reflexology Therapy Certification",
       key: "cert-reflexology",
       tag: "Certification",
-      duration: "~12 Hours • 7 Days",
+      duration: "~12 Hours • 3 Days",
       d: "Holistic reflex-point therapy training focused on therapeutic stimulation of specific points on the feet and hands to support relaxation, circulation, and wellness balance.",
       img: resolveImg("cert-reflexology", reflexology),
     },
     {
-      t: "Ayurvedic Massage Certification",
+      t: "Ayurvedic Wellness Massage Certification",
       key: "cert-ayurvedic",
       tag: "Certification",
-      duration: "~21 Hours • 10 Days",
+      duration: "~18 Hours • 5 Days",
       d: "Traditional wellness massage training inspired by Ayurvedic principles using therapeutic oil application methods, rhythmic massage techniques, and holistic relaxation approaches.",
       img: resolveImg("cert-ayurvedic", ayurvedic),
     },
@@ -726,7 +739,7 @@ function CertificateCoursesSection({ resolveImg }: { resolveImg: (key: string, f
       t: "Swedish Massage Certification",
       key: "cert-swedish",
       tag: "Certification",
-      duration: "~21 Hours • 10 Days",
+      duration: "~21 Hours • 7 Days",
       d: "Foundational therapeutic massage training program focused on relaxation-based bodywork, circulation support, muscular comfort, and professional massage flow techniques.",
       img: resolveImg("cert-swedish", swedishMassage),
     },
@@ -734,7 +747,7 @@ function CertificateCoursesSection({ resolveImg }: { resolveImg: (key: string, f
       t: "Deep Tissue Massage Certification",
       key: "cert-deep-tissue",
       tag: "Certification",
-      duration: "~21 Hours • 10 Days",
+      duration: "~21 Hours • 7 Days",
       d: "Professional soft tissue training focused on deep muscular release techniques, fascia-focused manipulation methods, mobility support, and therapeutic recovery applications.",
       img: resolveImg("cert-deep-tissue", deepTissue),
     },
@@ -742,7 +755,7 @@ function CertificateCoursesSection({ resolveImg }: { resolveImg: (key: string, f
       t: "Dorn Therapy Certification",
       key: "cert-dorn",
       tag: "Certification",
-      duration: "~12 Hours • 7 Days",
+      duration: "~12 Hours • 3 Days",
       d: "Gentle therapeutic wellness training inspired by the German Dorn Method, focusing on posture awareness, spinal balancing, joint alignment concepts, and mindful corrective movement.",
       img: resolveImg("cert-dorn", dornTherapy),
     },
@@ -786,9 +799,9 @@ function CertificateCoursesSection({ resolveImg }: { resolveImg: (key: string, f
                 </div>
               </div>
 
-              <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+              <div className="p-4 sm:p-6 md:p-8 flex-1 flex flex-col justify-between">
                 <div className="flex flex-col flex-1">
-                  <h3 className="font-display text-2xl text-cream font-bold leading-snug min-h-[3.5rem] flex items-center">
+                  <h3 className="font-display text-xl sm:text-2xl text-cream font-bold leading-snug min-h-[3rem] sm:min-h-[3.5rem] flex items-center">
                     {c.t}
                   </h3>
                   <span className="mt-2 text-[0.72rem] tracking-wider text-gold font-bold flex items-center gap-1.5">
@@ -799,10 +812,12 @@ function CertificateCoursesSection({ resolveImg }: { resolveImg: (key: string, f
 
                 <div className="mt-6 pt-5 border-t border-cream/10 flex flex-col gap-3">
                   <a
-                    href={`/apply?category=Certification-Courses&course=${encodeURIComponent(c.t)}`}
+                    href={getWhatsAppEnrollUrl(c.t)}
+                    target="_blank"
+                    rel="noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-soft"
                   >
-                    <span>Book This Course</span>
+                    <span>Book Now</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
                   <a

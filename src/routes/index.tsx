@@ -101,7 +101,8 @@ import {
   Stethoscope,
 } from "lucide-react";
 import { Navbar, Footer, WhatsAppFloat, BookNowFloat } from "./about";
-import { getApiUrl, resolveImageUrl } from "@/lib/utils";
+import { getWhatsAppUrl, getWhatsAppBookingUrl, getWhatsAppRetreatUrl, getWhatsAppEnrollUrl, getWhatsAppInquiryUrl } from "@/lib/whatsapp";
+import { getApiUrl, resolveImageUrl, bustCache } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -389,13 +390,13 @@ function Hero() {
           <div className="hidden lg:block lg:col-span-5 pointer-events-none" />
 
           {/* Right Column: Hero Content Cluster precisely replicating reference design */}
-          <div className="lg:col-span-7 flex flex-col items-center text-center animate-fade-up">
+          <div className="lg:col-span-7 flex flex-col items-center text-center animate-fade-up lg:pr-4">
             {/* Logo just above the headline in the hero section */}
-            <div className="mb-2 sm:mb-3 flex justify-center">
+            <div className="mb-1.5 sm:mb-2 flex justify-center">
               <img
                 src={logo}
                 alt="Dr. Vikram Yoga & Wellness Centre"
-                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:scale-105 transition-transform duration-300"
+                className="w-14 h-14 sm:w-[4.5rem] sm:h-[4.5rem] lg:w-20 lg:h-20 object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.25)] hover:scale-105 transition-transform duration-300"
               />
             </div>
 
@@ -409,41 +410,45 @@ function Hero() {
               Dr. Vikram
             </h1>
 
-            {/* Headline 2: Yoga & Wellness Centre (Bold, elegant green) */}
+            {/* Headline 2: Yoga & Wellness Centre — warm amber gold matching reference */}
             <p
-              className="font-display italic text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] xl:text-[3.5rem] font-extrabold tracking-normal mt-0.5 sm:mt-1 text-[#083d25]"
+              className="font-display italic text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] xl:text-[3.5rem] font-black tracking-normal mt-0.5 sm:mt-1"
               style={{
-                fontWeight: 800,
-                textShadow: "0 1px 3px rgba(255, 255, 255, 0.9), 0 0 16px rgba(255, 255, 255, 0.75)",
+                fontWeight: 900,
+                color: "#c8902e",
+                textShadow: "0 2px 6px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.9), 0 4px 16px rgba(0, 0, 0, 0.5)",
               }}
             >
               Yoga &amp; Wellness Centre
             </p>
 
-            {/* Tagline (Bold, clean white text for strong contrast) */}
+            {/* Tagline — logo green matching website branding */}
             <p
-              className="font-display text-xs sm:text-sm md:text-base lg:text-[1.05rem] xl:text-[1.15rem] font-bold text-white tracking-normal sm:tracking-wide mt-2 sm:mt-2.5 px-2 max-w-3xl xl:max-w-4xl leading-relaxed whitespace-normal sm:whitespace-nowrap"
+              className="font-display text-xs sm:text-sm md:text-base lg:text-[1.05rem] xl:text-[1.1rem] font-bold tracking-normal sm:tracking-wide mt-2 sm:mt-2.5 px-2 max-w-xs sm:max-w-3xl xl:max-w-4xl leading-snug sm:leading-relaxed sm:whitespace-nowrap"
               style={{
                 fontWeight: 700,
-                textShadow: "0 2px 8px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.75)",
+                color: "#083d25",
+                textShadow: "0 1px 4px rgba(255,255,255,0.8), 0 0 16px rgba(255,255,255,0.6)",
               }}
             >
-              Holistic Healing <span className="text-[#deb05e] mx-1 sm:mx-1.5 font-bold">&bull;</span> Therapeutic Wellness <span className="text-[#deb05e] mx-1 sm:mx-1.5 font-bold">&bull;</span> Transformative Retreat Experiences
+              Holistic Healing <span className="text-[#c8902e] mx-1 sm:mx-1.5 font-bold">&bull;</span> Therapeutic Wellness <span className="text-[#c8902e] mx-1 sm:mx-1.5 font-bold">&bull;</span> Transformative Retreat Experiences
             </p>
 
             {/* Divider: HEAL • HARMONIZE • TRANSFORM (Rich golden color) */}
             <div className="flex items-center justify-center gap-3 sm:gap-4 w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-3 sm:my-3.5 px-2">
-              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-r from-transparent via-[#deb05e] to-[#deb05e]" />
+              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-r from-transparent via-[#D4AF37] to-[#D4AF37]" />
               <span
-                className="font-display text-[0.72rem] sm:text-[0.8rem] md:text-[0.9rem] tracking-[0.24em] uppercase text-[#deb05e] font-extrabold text-center shrink-0 whitespace-nowrap"
+                className="font-display text-[0.72rem] sm:text-[0.8rem] md:text-[0.9rem] tracking-[0.24em] uppercase text-[#D4AF37] font-extrabold text-center shrink-0 whitespace-nowrap"
                 style={{
+                  color: "#D4AF37",
                   fontWeight: 800,
-                  textShadow: "0 2px 8px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.75)",
+                  filter: "brightness(1.15) contrast(1.1)",
+                  textShadow: "0 0 12px rgba(212, 175, 55, 0.4), 0 0 24px rgba(212, 175, 55, 0.2), 0 2px 6px rgba(0, 0, 0, 0.75)",
                 }}
               >
                 HEAL <span className="text-white mx-1 sm:mx-1.5 font-black">&bull;</span> HARMONIZE <span className="text-white mx-1 sm:mx-1.5 font-black">&bull;</span> TRANSFORM
               </span>
-              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-l from-transparent via-[#deb05e] to-[#deb05e]" />
+              <span className="h-[2px] flex-1 min-w-[20px] bg-gradient-to-l from-transparent via-[#D4AF37] to-[#D4AF37]" />
             </div>
 
             {/* 4 Action Pill Buttons in 2x2 Grid */}
@@ -464,13 +469,13 @@ function Hero() {
                 <ChevronRight className="w-4 h-4 text-[#deb05e] shrink-0 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
 
-              {/* Button 2: EXPLORE RETREATS (Warm Gold) */}
+              {/* Button 2: EXPLORE RETREATS — light cream/tan matching reference */}
               <Link
                 to="/retreats"
-                className="group flex items-center justify-between h-[48px] sm:h-[52px] lg:h-[54px] px-3 sm:px-3.5 rounded-full bg-[#deb05e] hover:bg-[#d4a34b] text-[#063b21] shadow-[0_4px_14px_rgba(222,176,94,0.35)] hover:shadow-[0_6px_20px_rgba(222,176,94,0.45)] transition-all duration-300 hover:scale-[1.02] border border-[#ecd299]"
+                className="group flex items-center justify-between h-[48px] sm:h-[52px] lg:h-[54px] px-3 sm:px-3.5 rounded-full bg-[#eeddb8] hover:bg-[#e8d3a8] text-[#063b21] shadow-[0_4px_14px_rgba(0,0,0,0.12)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.18)] transition-all duration-300 hover:scale-[1.02] border border-[#dcc98c]"
               >
                 <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#cf9f47]/60 border border-[#ba8336] flex items-center justify-center text-[#063b21] shrink-0 shadow-inner">
+                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#e0c990]/70 border border-[#c8a84a] flex items-center justify-center text-[#063b21] shrink-0 shadow-inner">
                     <Palmtree className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.2} />
                   </span>
                   <span className="font-sans font-bold text-[0.72rem] sm:text-[0.78rem] lg:text-[0.82rem] tracking-wider uppercase text-[#063b21] whitespace-nowrap">
@@ -1429,17 +1434,21 @@ function Classes() {
                 />
                 <div className="absolute inset-0 bg-emerald-deep/20 group-hover:bg-transparent transition-colors duration-500" />
               </div>
-              <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+              <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-display text-2xl text-cream">{c.t}</h3>
-                  <p className="mt-3 text-sm text-cream/70 leading-relaxed">{c.d}</p>
+                  <h3 className="font-display text-xl sm:text-2xl text-cream font-bold">{c.t}</h3>
+                  <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-cream/70 leading-relaxed font-semibold">{c.d}</p>
                 </div>
-                <div className="mt-6 pt-5 border-t border-cream/10 flex flex-col gap-3">
-                  <span className="text-[0.8rem] sm:text-sm tracking-[0.12em] text-cream font-bold uppercase">
-                    {c.time}
-                  </span>
+                <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-cream/10 flex flex-col gap-3">
+                  <div className="w-full">
+                    <span className="yoga-class-timing">
+                      {c.time}
+                    </span>
+                  </div>
                   <a
-                    href={`/apply?category=Yoga-Classes&course=${encodeURIComponent(c.t)}`}
+                    href={getWhatsAppBookingUrl(c.t, "Yoga Classes")}
+                    target="_blank"
+                    rel="noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-soft"
                   >
                     <span>Book Now</span>
@@ -1540,7 +1549,9 @@ function Therapies() {
                 Crafted treatments for body & soul.
               </h3>
               <a
-                href="/apply?category=Wellness-Therapies"
+                href={getWhatsAppBookingUrl("Wellness Therapy Consultation", "Wellness Therapies")}
+                target="_blank"
+                rel="noreferrer"
                 className="mt-6 inline-flex px-6 py-3 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold"
               >
                 Book a Therapy
@@ -1613,7 +1624,9 @@ function Retreats() {
           </div>
 
           <a
-            href="/apply?category=Retreat-Programs"
+            href={getWhatsAppRetreatUrl()}
+            target="_blank"
+            rel="noreferrer"
             className="mt-10 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold transform hover:scale-105 transition-all"
           >
             Reserve Your Retreat <ArrowRight className="w-3.5 h-3.5" />
@@ -1726,7 +1739,9 @@ function Courses() {
                   </div>
                   <div className="mt-8">
                     <a
-                      href="/apply"
+                      href={getWhatsAppBookingUrl(c.t, "Certification Courses")}
+                      target="_blank"
+                      rel="noreferrer"
                       className="block w-full text-center bg-[#E57624] hover:bg-[#D56B1E] text-white py-3 rounded-md text-sm font-semibold transition-colors"
                     >
                       Book Now
@@ -1748,13 +1763,17 @@ function Courses() {
 
         <div className="mt-12 flex flex-wrap justify-center gap-4">
           <a
-            href="/apply?category=Certification-Courses"
+            href={getWhatsAppEnrollUrl()}
+            target="_blank"
+            rel="noreferrer"
             className="px-7 py-3 bg-[#596057] text-white text-sm font-semibold hover:bg-opacity-90 transition-colors"
           >
             Register Course With Us
           </a>
           <a
-            href="/apply?category=Certification-Courses"
+            href={getWhatsAppInquiryUrl("Certification Courses")}
+            target="_blank"
+            rel="noreferrer"
             className="px-7 py-3 bg-[#E57624] text-white text-sm font-semibold hover:bg-opacity-90 transition-colors"
           >
             Have A Query For Us?
@@ -1868,13 +1887,17 @@ function OnlineSessions() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href="/apply?category=Yoga-Classes"
+                  href={getWhatsAppBookingUrl("Live Yoga Class", "Yoga Classes")}
+                  target="_blank"
+                  rel="noreferrer"
                   className="px-7 py-3.5 rounded-full bg-gold-gradient text-emerald-deep text-xs font-semibold tracking-[0.2em] uppercase shadow-gold"
                 >
                   Join Live Class
                 </a>
                 <a
-                  href="/apply?category=Yoga-Classes"
+                  href={getWhatsAppInquiryUrl("Yoga Classes")}
+                  target="_blank"
+                  rel="noreferrer"
                   className="px-7 py-3.5 rounded-full glass text-cream text-xs font-semibold tracking-[0.2em] uppercase"
                 >
                   Watch Library
@@ -2733,7 +2756,7 @@ function SocialFeed() {
   const [images, setImages] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(getApiUrl("social-images.php"))
+    fetch(bustCache(getApiUrl("social-images.php")))
       .then((res) => res.json())
       .then((res) => {
         setImages(res || []);
@@ -2859,7 +2882,7 @@ function ContactSection() {
               { Icon: Instagram, href: "https://www.instagram.com/dr.vikram_yoga_wellness?stkn=MTQ0YnhucG94cXJ1Nw==" },
               { Icon: Facebook, href: "#" },
               { Icon: Youtube, href: "#" },
-              { Icon: MessageCircle, href: "https://wa.me/918778639989" },
+              { Icon: MessageCircle, href: getWhatsAppUrl() },
             ].map(({ Icon, href }, i) => (
               <a
                 key={i}

@@ -110,6 +110,10 @@ function getEnvVar($key, $default = '') {
     return cleanEnvString($val);
 }
 
+function getWhatsAppNumber() {
+    return getEnvVar('WHATSAPP_NUMBER', '+91 8778639989');
+}
+
 function getDbConnection() {
     $envHost   = getEnvVar('DB_HOST', '');
     $envDbName = getEnvVar('DB_NAME', '');
@@ -286,6 +290,19 @@ function deletePhysicalFile(string $relativePath): void {
     if (empty($relativePath)) return;
     $clean = '/' . ltrim(str_replace('\\', '/', $relativePath), '/');
 
+    // Protect core seeded assets from deletion
+    $protectedPrefixes = [
+        '/gallery/retreat',
+        '/gallery/g-img',
+        '/gallery/extra-gallery',
+        '/uploads/social-img',
+    ];
+    foreach ($protectedPrefixes as $prefix) {
+        if (strpos($clean, $prefix) === 0) {
+            return; // Never delete seeded repository assets
+        }
+    }
+
     $apiDir = __DIR__;
     $parent = dirname($apiDir);
 
@@ -293,6 +310,11 @@ function deletePhysicalFile(string $relativePath): void {
         $parent . $clean,
         $parent . '/public' . $clean,
     ];
+
+    // For /gallery/... paths, also check public/gallery/
+    if (strpos($clean, '/gallery/') === 0) {
+        $candidates[] = $parent . '/public' . $clean;
+    }
 
     if (!empty($_SERVER['DOCUMENT_ROOT'])) {
         $doc = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']), '/');
